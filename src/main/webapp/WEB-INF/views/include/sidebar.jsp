@@ -20,12 +20,11 @@
 				<li><a href="index.html">Homepage</a></li>
 				<li><a href="generic.html">Generic</a></li>
 				<li><a href="elements.html">Elements</a></li>
-				<li><span class="opener">Submenu</span>
+				<li><span class="opener">나의 모임</span>
 					<ul>
-						<li><a href="#">Lorem Dolor</a></li>
-						<li><a href="#">Ipsum Adipiscing</a></li>
-						<li><a href="#">Tempus Magna</a></li>
-						<li><a href="#">Feugiat Veroeros</a></li>
+						<li><a href="group01.do">쿠키런킹덤모임</a></li>
+						<li><a href="#">매니저괴롭히는모임</a></li>
+						<li><a href="#">아시바메이플모임</a></li>
 					</ul></li>
 				<li><a href="#">Etiam Dolore</a></li>
 				<li><a href="#">Adipiscing</a></li>
