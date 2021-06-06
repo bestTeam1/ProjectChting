@@ -2,8 +2,10 @@ package com.team1.chting.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import com.team1.chting.dto.GroupDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -49,5 +51,10 @@ public class HomeController {
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index() {
 		return "index";
+	}
+
+	@RequestMapping(value = "group01.do", method = RequestMethod.GET)
+	public String groupMain() {
+		return "group/group";
 	}
 }
