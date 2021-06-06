@@ -21,5 +21,13 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @RequestMapping(value = "group01.do", method = RequestMethod.GET)
+    public String groupMain(Model model) {
 
+        List<GroupDto> newGroupList = boardService.newGroupList();
+
+        model.addAttribute("newGroupList", newGroupList);
+
+        return "group/group";
+    }
 }
