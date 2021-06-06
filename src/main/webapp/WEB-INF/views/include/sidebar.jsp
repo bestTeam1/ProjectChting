@@ -17,12 +17,11 @@
 				<h2>Menu</h2>
 			</header>
 			<ul>
-				<li><a href="index.html">Homepage</a></li>
-				<li><a href="generic.html">Generic</a></li>
-				<li><a href="elements.html">Elements</a></li>
+				<li><a href="index.html">ChTing</a></li>
+				<li><a href="groupRecommend.do">모임 추천</a></li>
 				<li><span class="opener">나의 모임</span>
 					<ul>
-						<li><a href="group01.do">쿠키런킹덤모임</a></li>
+						<li><a href="#">쿠키런킹덤모임</a></li>
 						<li><a href="#">매니저괴롭히는모임</a></li>
 						<li><a href="#">아시바메이플모임</a></li>
 					</ul></li>
