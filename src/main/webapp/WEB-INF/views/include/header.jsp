@@ -5,8 +5,6 @@
 
 <!-- Header -->
 <header id="header">
-	<a href="index.html" class="logo"><strong>Editorial</strong> by
-		HTML5 UP</a>
 	<ul class="icons">
 		<li><a href="#" class="icon brands fa-twitter"><span
 				class="label">Twitter</span></a></li>
