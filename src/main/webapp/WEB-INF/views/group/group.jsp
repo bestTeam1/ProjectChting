@@ -133,7 +133,7 @@ ${newGroupList}
     var swiper = new Swiper(".mySwiper", {
         slidesPerView : 3, //슬라이드 표시할 사진갯수
         spaceBetween: 30,
-        centeredSlides: true,
+        centeredSlides: false,
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
