@@ -53,8 +53,4 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "group01.do", method = RequestMethod.GET)
-	public String groupMain() {
-		return "group/group";
-	}
 }
