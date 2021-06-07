@@ -94,6 +94,11 @@ local.properties
 
 .idea/misc.xml
 
+###
+.idea/runConfigurations
+target/chting-1.0-SNAPSHOT/META-INF/MANIFEST.MF
+.idea/artifacts
+
 ### Java ###
 # Compiled class file
 *.class
