@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="ChtingDB" uuid="9b931ca3-ef6e-4da8-9663-3166a0178767">
+    <data-source source="LOCAL" name="DB" uuid="2e246f63-5fa3-410f-a6fd-e6c5f6a4f26d">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
-      <remarks>Oracle Cloud VM Server</remarks>
+      <remarks>DB</remarks>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://db.team1.space:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>

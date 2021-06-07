@@ -16,6 +16,23 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
     <style>
+
+        #searchButton {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+            background: #ffffff;
+            border-radius: 0.375em;
+            border: none;
+            border: solid 1px rgba(210, 215, 217, 0.75);
+            color: inherit;
+            display: block;
+            outline: 0;
+            padding: 0 1em;
+            text-decoration: none;
+        }
+
         html,
         body {
             position: relative;
@@ -64,14 +81,13 @@
 <body class="is-preload">
 ${newGroupList}
 
+<h3>모임 정보</h3>
 <c:forEach var="group" items="${newGroupList}">
     <ul>
         <li> ${group.group_name}</li>
         <li> ${group.opendate}</li>
     </ul>
 </c:forEach>
-
-
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -86,10 +102,15 @@ ${newGroupList}
                     <header>
                         <!-- Search -->
                         <section id="search" class="alt">
-                            <form method="post" action="#">
-                                <input type="text" name="query" id="query" placeholder="Search" />
+                            <form method="post" action="#" style="height: 50px; width:70%;">
+                                <select id="areaCategory"  style="width: 30%; float:left;">
+                                    <option value="전체">전체</option>
+                                </select>
+                                <input type="text" name="query" id="searchValue" placeholder="Search"  style="width: 50%; float:left; "/>
+                                <input type="button" id="searchButton" value="모임찾기" style="float: left"/>
                             </form>
                         </section>
+                        <section class="slide">
                         <h3>NEW</h3>
                         <!-- Swiper -->
                         <div class="swiper-container mySwiper" style="width: 1000px">
@@ -103,7 +124,8 @@ ${newGroupList}
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-pagination"></div>
                         </div>
-                        <section>
+                        </section>
+                        <section class="slide">
                             <h3>BEST</h3>
                             <!-- Swiper -->
                             <div class="swiper-container mySwiper" style="width: 1000px">
@@ -130,6 +152,7 @@ ${newGroupList}
 
 </body>
 <script type="text/javascript">
+    /* Swiper slide*/
     var swiper = new Swiper(".mySwiper", {
         slidesPerView : 3, //슬라이드 표시할 사진갯수
         spaceBetween: 30,
@@ -147,5 +170,35 @@ ${newGroupList}
             prevEl: ".swiper-button-prev",
         },
     });
+
+    //Area category DB 연동해서 넣기
+    $(document).ready(function(){
+        <c:forEach items="${areaList}" var="area">
+            (function () {
+                $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
+            })();
+        </c:forEach>
+    });
+
+    $(function(){
+        $('#searchButton').click(function(){
+            $.ajax({
+                url : "${pageContext.request.contextPath}/searchButton.do",
+                dataType : "text",
+                data : {
+                    category : $('#areaCategory').val(),
+                    search : $('#searchValue').val()
+                },
+                success : function(data){
+                    alert(data);
+                    $('.slide').empty();
+                },
+                error : function(request, status, error) {
+                    console.log(error)
+                }
+            });
+        });
+    });
+
 </script>
 </html>
