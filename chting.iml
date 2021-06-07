@@ -44,7 +44,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/runConfigurations" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/resources/properties" />
     </content>
-    <orderEntry type="jdk" jdkName="JavaSE-1.8" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.mariadb.jdbc:mariadb-java-client:2.7.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.7" level="project" />
