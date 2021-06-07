@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <!-- Sidebar -->
 <div id="sidebar">
 	<div class="inner">
@@ -17,15 +17,13 @@
 				<h2>Menu</h2>
 			</header>
 			<ul>
-				<li><a href="index.html">Homepage</a></li>
-				<li><a href="generic.html">Generic</a></li>
-				<li><a href="elements.html">Elements</a></li>
-				<li><span class="opener">Submenu</span>
+				<li><a href="index.do">ChTing</a></li>
+				<li><a href="groupRecommend.do">모임 추천</a></li>
+				<li><span class="opener">나의 모임</span>
 					<ul>
-						<li><a href="#">Lorem Dolor</a></li>
-						<li><a href="#">Ipsum Adipiscing</a></li>
-						<li><a href="#">Tempus Magna</a></li>
-						<li><a href="#">Feugiat Veroeros</a></li>
+						<li><a href="#">쿠키런킹덤모임</a></li>
+						<li><a href="#">매니저괴롭히는모임</a></li>
+						<li><a href="#">아시바메이플모임</a></li>
 					</ul></li>
 				<li><a href="#">Etiam Dolore</a></li>
 				<li><a href="#">Adipiscing</a></li>
@@ -96,8 +94,6 @@
 <script src="assets/js/main.js"></script>
 <!-- Jquery -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- underscore.js -->
-<script
-	src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
-	
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
