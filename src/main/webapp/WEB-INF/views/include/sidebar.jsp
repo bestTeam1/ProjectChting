@@ -17,7 +17,7 @@
 				<h2>Menu</h2>
 			</header>
 			<ul>
-				<li><a href="index.html">ChTing</a></li>
+				<li><a href="index.do">ChTing</a></li>
 				<li><a href="groupRecommend.do">모임 추천</a></li>
 				<li><span class="opener">나의 모임</span>
 					<ul>
