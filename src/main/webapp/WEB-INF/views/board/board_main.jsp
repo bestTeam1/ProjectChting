@@ -17,7 +17,11 @@
     <%--icon--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 
+
+
     <style>
+
+
         html,
         body {
             position: relative;
@@ -80,9 +84,8 @@
                 <div class="content">
                     <header>
 
-                        <h3>쿠키런킹덤 - 메인</h3>
                         <!-- Swiper -->
-                        <div class="swiper-container mySwiper" style="width: 1000px">
+                        <div class="swiper-container mySwiper" style="width: 900px">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <a href = "index.do" style="" >
@@ -104,9 +107,9 @@
 
 
             <div class="content" align="center">
-                <h3>
+
                 <p>쿠키런킹덤 모임 - 소개글</p>
-                </h3>
+
                 <table>
                     <tr>
                         <td style="text-align: center">안뇽하세요 쿠키런킹덤입니다.</td>
@@ -118,7 +121,9 @@
             <br>
             <br>
             <div style="text-align: center">
-                <button>탈퇴하기</button>
+                <form>
+                    <input id="" type="button" value="탈퇴하기">
+                </form>
            </div>
             <br>
             <br>
@@ -127,9 +132,9 @@
 
 
             <div class="content" align="center">
-                <h3>
+
                 <p>🚨주의사항🚨</p>
-                </h3>
+
                 <table>
                     <tr>
                         <td style="text-align: center">저희 쿠키런킹덤모임에서 이것만 지켜주세요 :)</td>

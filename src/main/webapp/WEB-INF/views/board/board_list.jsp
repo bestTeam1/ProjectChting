@@ -14,6 +14,7 @@
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 게시판</title>
     <style>
+
         html,
         body {
             position: relative;
@@ -75,7 +76,7 @@
             <section>
                 <div class="content">
                     <header>
-                        <h2>쿠키런킹덤 - 게시판리스트</h2>
+
 <table>
     <tr>
     <td>No.</td>
@@ -90,7 +91,9 @@
             </section>
 
             <div style="text-align: center">
-                <button type="button" onclick="location.href='board_write.jsp'">글쓰기</button>
+                <form>
+                    <input type="button" onclick="location.href='board_write.jsp'" value="글쓰기">
+                </form>
             </div>
 
         </div>
