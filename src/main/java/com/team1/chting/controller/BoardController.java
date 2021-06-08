@@ -24,9 +24,9 @@ public class BoardController {
     @RequestMapping(value = "groupRecommend.do", method = RequestMethod.GET)
     public String groupMain(Model model) {
 
-        List<GroupDto> newGroupList = boardService.newGroupList();
+        //List<GroupDto> newGroupList = boardService.newGroupList();
 
-        model.addAttribute("newGroupList", newGroupList);
+        //model.addAttribute("newGroupList", newGroupList);
 
         return "group/group";
     }
