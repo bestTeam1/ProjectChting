@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+	body, div, table, section, nav, li, input{
+		font-family: 'Jua', sans-serif;
+	}
+</style>
 <!-- Sidebar -->
 <div id="sidebar">
 	<div class="inner">
@@ -25,15 +31,33 @@
 						<li><a href="#">매니저괴롭히는모임</a></li>
 						<li><a href="#">아시바메이플모임</a></li>
 					</ul></li>
+
+				<li><span class="opener">쿠키런킹덤모임</span>
+					<ul>
+						<li><a href="board_main.do">메인</a></li>
+						<li><a href="board_list.do">게시판</a></li>
+						<li><a href="board_diary.do">일정</a></li>
+						<li><a href="board_chatting.do">채팅</a></li>
+						<li><a href="#">모임관리</a></li>
+					</ul></li>
+
+				<li><span class="opener">매니저괴롭히기모임</span>
+					<ul>
+						<li><a href="#">게시판</a></li>
+						<li><a href="#">일정</a></li>
+						<li><a href="#">채팅</a></li>
+						<li><a href="#">모임관리</a></li>
+					</ul></li>
+
+				<li><span class="opener">아시바메이플모임</span>
+					<ul>
+						<li><a href="#">게시판</a></li>
+						<li><a href="#">일정</a></li>
+						<li><a href="#">채팅</a></li>
+						<li><a href="#">모임관리</a></li>
+					</ul></li>
 				<li><a href="#">Etiam Dolore</a></li>
 				<li><a href="#">Adipiscing</a></li>
-				<li><span class="opener">Another Submenu</span>
-					<ul>
-						<li><a href="#">Lorem Dolor</a></li>
-						<li><a href="#">Ipsum Adipiscing</a></li>
-						<li><a href="#">Tempus Magna</a></li>
-						<li><a href="#">Feugiat Veroeros</a></li>
-					</ul></li>
 				<li><a href="#">Maximus Erat</a></li>
 				<li><a href="#">Sapien Mauris</a></li>
 				<li><a href="userinfo.do">마이페이지 테스트용</a></li>

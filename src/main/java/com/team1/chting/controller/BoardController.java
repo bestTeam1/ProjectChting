@@ -1,6 +1,7 @@
 package com.team1.chting.controller;
 
 import com.team1.chting.dao.GroupDao;
+import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.service.BoardService;
 import org.apache.ibatis.session.SqlSession;
@@ -24,10 +25,12 @@ public class BoardController {
     @RequestMapping(value = "groupRecommend.do", method = RequestMethod.GET)
     public String groupMain(Model model) {
 
+
         //List<GroupDto> newGroupList = boardService.newGroupList();
 
         //model.addAttribute("newGroupList", newGroupList);
 
         return "group/group";
     }
+
 }

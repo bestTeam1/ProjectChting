@@ -3,5 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.GroupDao">
+<!--상세보기-->
+    <select id="board_list" resultType="com.team1.chting.dto.GroupDto">
 
+    </select>
 </mapper>
