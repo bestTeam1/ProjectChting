@@ -21,7 +21,7 @@ public class OauthController {
     @GetMapping(value = "{socialLoginType}")
     public void socialLoginType(@PathVariable(name = "socialLoginType")SocialLoginType socialLoginType) {
         System.out.println(" >> 사용자에게서 SNS 로그인 요청을 받음 : " + socialLoginType);
-        log.info(" >> 사용자에게서 SNS 로그인 요청을 받음 : ", socialLoginType);
+        log.info(" >> 사용자에게서 SNS 로그인 요청을 받음 :: ", socialLoginType);
         oauthService.request(socialLoginType);
     }
 
