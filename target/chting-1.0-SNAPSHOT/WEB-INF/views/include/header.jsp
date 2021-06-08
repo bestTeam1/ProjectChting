@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+	body, div, table, section, nav, li, header, input{
+		font-family: 'Jua', sans-serif;
+	}
+</style>
+
 <!-- css -->
 <link rel="stylesheet" href="assets/css/main.css" />
 

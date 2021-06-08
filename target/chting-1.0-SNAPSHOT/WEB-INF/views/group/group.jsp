@@ -16,6 +16,23 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
     <style>
+
+        #searchButton {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+            background: #ffffff;
+            border-radius: 0.375em;
+            border: none;
+            border: solid 1px rgba(210, 215, 217, 0.75);
+            color: inherit;
+            display: block;
+            outline: 0;
+            padding: 0 1em;
+            text-decoration: none;
+        }
+
         html,
         body {
             position: relative;
