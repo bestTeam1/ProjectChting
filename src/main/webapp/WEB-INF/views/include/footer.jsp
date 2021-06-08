@@ -7,5 +7,6 @@
 			href="https://unsplash.com">Unsplash</a>. Design: <a
 			href="https://html5up.net">HTML5 UP</a>.
 	</p>
+	<a href="/auth/KAKAO">카카오 로그인 테스트</a>
 </footer>
 
