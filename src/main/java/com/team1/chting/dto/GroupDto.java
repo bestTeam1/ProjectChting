@@ -3,6 +3,9 @@ package com.team1.chting.dto;
 import java.sql.Date;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
 //모임
 @Data

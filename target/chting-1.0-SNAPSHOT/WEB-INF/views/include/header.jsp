@@ -6,6 +6,7 @@
 		font-family: 'Jua', sans-serif;
 	}
 </style>
+
 <!-- css -->
 <link rel="stylesheet" href="assets/css/main.css" />
 
