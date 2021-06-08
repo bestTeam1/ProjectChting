@@ -54,7 +54,7 @@
 				<li><a href="#">Adipiscing</a></li>
 				<li><a href="#">Maximus Erat</a></li>
 				<li><a href="#">Sapien Mauris</a></li>
-				<li><a href="#">Amet Lacinia</a></li>
+				<li><a href="userinfo.do">마이페이지 테스트용</a></li>
 			</ul>
 		</nav>
 
