@@ -91,8 +91,8 @@
             </section>
 
             <div style="text-align: center">
-                <form>
-                    <input type="button" onclick="location.href='board_write.jsp'" value="글쓰기">
+                <form action="board_write.do">
+                    <input type="submit" value="글쓰기">
                 </form>
             </div>
 
