@@ -17,9 +17,6 @@ import java.util.List;
 public class BoardController {
 
     @Autowired
-    private SqlSession sqlSession;
-
-    @Autowired
     private BoardService boardService;
 
     @RequestMapping(value = "groupRecommend.do", method = RequestMethod.GET)
@@ -33,5 +30,16 @@ public class BoardController {
 
         return "group/group";
     }
+
+    @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
+    public String groupMake(Model model) {
+
+        List<AreaDto> areaList = boardService.getAreaList();
+
+        model.addAttribute("areaList", areaList);
+
+        return "group/groupMake";
+    }
+
 
 }
