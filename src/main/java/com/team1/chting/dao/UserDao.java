@@ -14,4 +14,5 @@ public interface UserDao {
 
     //회원 가입한 모임 정보
     List<UserDto> userJoinGroup();
+
 }
