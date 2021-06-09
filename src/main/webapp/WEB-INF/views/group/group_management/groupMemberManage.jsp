@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>취팅 모임을 추천합니다!</title>
+    <title>모임 관리</title>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -76,63 +76,45 @@
         }
         a { text-decoration:none !important }
         a:hover { text-decoration:none !important }
+
+        th {
+            text-align: center;
+        }
+
     </style>
 </head>
 <body class="is-preload">
-<a href = "groupJoin.do"><h1>모임관리 임시</h1></a>
+<a href = "groupRecommend.do"><h1>모임추천으로 돌아가기</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
             <!-- Banner -->
-            <section>
-                <div class="content">
-                    <header>
-                        <!-- Search -->
-                        <section id="search" class="alt">
-                            <form method="post" action="#" style="height: 50px; width:70%;">
-                                <select id="areaCategory"  style="width: 30%; float:left;">
-                                    <option value="">전체</option>
-                                </select>
-                                <input type="text" name="query" id="searchValue" placeholder="Search"  style="width: 50%; float:left; "/>
-                                <input type="button" id="searchButton" value="모임찾기" style="float: left"/>
-                            </form>
-                        </section>
-                        <section class="slide">
-                        <h3>NEW</h3>
-                        <!-- Swiper -->
-                        <div class="swiper-container mySwiper" style="width: 1000px">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><a href = "index.do" style="" >모임 1<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 2<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 3<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 4<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                        </section>
-                        <section class="slide2">
-                            <h3>BEST</h3>
-                            <!-- Swiper -->
-                            <div class="swiper-container mySwiper" style="width: 1000px">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><a href = "index.do" >모임 1<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 2<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 3<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 4<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </section>
-                    </header>
-                </div>
+            <section id="main">
+                <h1 style="text-align: center">멤버탈퇴는 재가입이 가능합니다</h1>
+                <table style="text-align: center">
+                    <tr>
+                        <td>직책</td>
+                        <td>이름</td>
+                        <td>모임장 권한</td>
+                        <td>강퇴</td>
+                    </tr>
+
+                    <c:forEach var="plist" items="${postList}">
+                        <tr>
+                            <td>${plist.nickname}</td>
+                            <td>${plist.post_catename}</td>
+                            <td>${plist.subject}</td>
+                            <td>${plist.writedate}</td>
+                        </tr>
+                    </c:forEach>
+
+
+
+                </table>
             </section>
 
         </div>
