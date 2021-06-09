@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%--
+  Created by IntelliJ IDEA.
+  User: YeongHeo
+  Date: 2021/06/08
+  Time: 3:30 오후
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>취팅 모임을 추천합니다!</title>
+    <title>모임 만들기</title>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -16,23 +23,6 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
     <style>
-
-        #searchButton {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -ms-appearance: none;
-            appearance: none;
-            background: #ffffff;
-            border-radius: 0.375em;
-            border: none;
-            border: solid 1px rgba(210, 215, 217, 0.75);
-            color: inherit;
-            display: block;
-            outline: 0;
-            padding: 0 1em;
-            text-decoration: none;
-        }
-
         html,
         body {
             position: relative;
@@ -79,6 +69,15 @@
     </style>
 </head>
 <body class="is-preload">
+${newGroupList}
+
+<h3>모임 정보</h3>
+<c:forEach var="group" items="${newGroupList}">
+    <ul>
+        <li> ${group.group_name}</li>
+        <li> ${group.opendate}</li>
+    </ul>
+</c:forEach>
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -95,7 +94,7 @@
                         <section id="search" class="alt">
                             <form method="post" action="#" style="height: 50px; width:70%;">
                                 <select id="areaCategory"  style="width: 30%; float:left;">
-                                    <option value="">전체</option>
+                                    <option value="전체">전체</option>
                                 </select>
                                 <input type="text" name="query" id="searchValue" placeholder="Search"  style="width: 50%; float:left; "/>
                                 <input type="button" id="searchButton" value="모임찾기" style="float: left"/>
@@ -116,7 +115,7 @@
                             <div class="swiper-pagination"></div>
                         </div>
                         </section>
-                        <section class="slide2">
+                        <section class="slide">
                             <h3>BEST</h3>
                             <!-- Swiper -->
                             <div class="swiper-container mySwiper" style="width: 1000px">
@@ -162,68 +161,6 @@
         },
     });
 
-    //Area category DB 연동해서 넣기
-    $(document).ready(function(){
-        <c:forEach items="${areaList}" var="area">
-            (function () {
-                $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
-            })();
-        </c:forEach>
-    });
-
-
-    $(function(){
-        $('#searchButton').click(function(){
-            $.ajax({
-                url : "${pageContext.request.contextPath}/searchButton.do",
-                dataType : "json",
-                data : {
-                    category : $('#areaCategory').val(),
-                    search : $('#searchValue').val()
-                },
-                success : function(data){
-                    console.log(data);
-                    $('.slide').empty();
-                    var html = "";
-                    data.forEach(group => {
-                        html += '<div class="swiper-slide"><a href = "index.do" style="" >' +group.group_name+ '<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>';
-                    });
-                    $('.slide').append(
-                            '<h3>검색 결과</h3>'
-                        + '<div class="swiper-container mySwiper" style="width: 1000px">'
-                        + '<div class="swiper-wrapper">'
-                        +  html
-                        + '</div>'
-                        + '<div class="swiper-button-next"></div>'
-                        + '<div class="swiper-button-prev"></div>'
-                        + '<div class="swiper-pagination"></div>'
-                        + '</div>' );
-
-                    var swiper = new Swiper(".mySwiper", {
-                        slidesPerView : 3, //슬라이드 표시할 사진갯수
-                        spaceBetween: 30,
-                        centeredSlides: false,
-                        autoplay: {
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: ".swiper-pagination",
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: ".swiper-button-next",
-                            prevEl: ".swiper-button-prev",
-                        },
-                    });
-
-                },
-                error : function(request, status, error) {
-                    console.log(error)
-                }
-            });
-        });
-    });
 
 </script>
 </html>

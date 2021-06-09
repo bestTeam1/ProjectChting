@@ -89,7 +89,7 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <a href = "index.do" style="" >
-                                        쿠키런킹덤모임<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
+                                        조선 제1조 모임<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
                             </div>
 
                         </div>
@@ -97,6 +97,8 @@
                     </header>
                 </div>
             </section>
+
+            <%-- 회원리스트 아이콘 --%>
             <div style="text-align: center">
                 <p>
             회원 : <i class="fa fa-user" aria-hidden="true"></i>
@@ -108,18 +110,17 @@
 
             <div class="content" align="center">
 
-                <p>쿠키런킹덤 모임 - 소개글</p>
+                <p>조선 제1조 모임 - 소개글</p>
 
                 <table>
                     <tr>
-                        <td style="text-align: center">안뇽하세요 쿠키런킹덤입니다.</td>
+                        <td style="text-align: center">안뇽하세요 조선 제1조 입니다.</td>
                     </tr>
                 </table>
             </div>
             <br>
             <br>
-            <br>
-            <br>
+
             <div style="text-align: center">
                 <form>
                     <input id="" type="button" value="탈퇴하기">
@@ -127,8 +128,7 @@
            </div>
             <br>
             <br>
-            <br>
-            <br>
+
 
 
             <div class="content" align="center">
@@ -137,7 +137,7 @@
 
                 <table>
                     <tr>
-                        <td style="text-align: center">저희 쿠키런킹덤모임에서 이것만 지켜주세요 :)</td>
+                        <td style="text-align: center">저희 조선 제1조 모임에서 이것만 지켜주세요 :)</td>
                     </tr>
                 </table>
             </div>
