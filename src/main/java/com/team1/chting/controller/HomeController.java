@@ -24,23 +24,10 @@ public class HomeController {
 	private NoticeService noticeService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		List<NoticeDto> list = new ArrayList<NoticeDto>();
-		list = noticeService.recentlyNotice();
-		model.addAttribute("list",list);
-
-		return "index";
-	}
+	public String home() { return "index";}
 
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Model model) {
-		List<NoticeDto> list = new ArrayList<NoticeDto>();
-		list = noticeService.recentlyNotice();
-		model.addAttribute("list",list);
-
-
-		return "index";
-	}
+	public String index() { return "index"; }
 	
 	@RequestMapping(value = "elements.do", method = RequestMethod.GET)
 	public String elements() {
@@ -48,10 +35,6 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "generic.do", method = RequestMethod.GET)
-	public String generic() {
-		return "generic";
-	}
-	
-
+	public String generic() { return "generic"; }
 
 }
