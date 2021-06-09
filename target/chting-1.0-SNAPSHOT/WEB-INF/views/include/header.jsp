@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <style>
@@ -6,7 +7,6 @@
 		font-family: 'Jua', sans-serif;
 	}
 </style>
-
 <!-- css -->
 <link rel="stylesheet" href="assets/css/main.css" />
 
