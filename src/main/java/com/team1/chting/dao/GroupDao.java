@@ -17,4 +17,13 @@ public interface GroupDao {
     public void delete(String group_no);
     public List<GroupDto> listAll();
 
+
+    //비회원 -> 랜덤모임 10개
+    public List<GroupDto> randomGroup();
+
+    //회원 -> 지역기반 5개
+    public List<GroupDto> areaGroup(String first_area, String second_area);
+
+    //회원 -> 관심사기반 5개
+    public List<GroupDto> catecodeGroup(String userid);
 }

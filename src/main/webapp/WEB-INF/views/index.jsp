@@ -99,72 +99,15 @@
                 </div>
             </section>
 
-            <!-- Section -->
+            <!-- 추천모임 -->
+            <!-- 비회원 -> 랜덤모임 10개 -->
+            <!-- 회원 -> 지역 5개, 관심사 5개 -->
             <section>
                 <header class="major">
-                    <h2>Ipsum sed dolor</h2>
+                    <h2>추천모임</h2>
                 </header>
                 <div class="posts">
-                    <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt=""/></a>
-                        <h3>Interdum aenean</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic02.jpg" alt=""/></a>
-                        <h3>Nulla amet dolore</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic03.jpg" alt=""/></a>
-                        <h3>Tempus ullamcorper</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic04.jpg" alt=""/></a>
-                        <h3>Sed etiam facilis</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic05.jpg" alt=""/></a>
-                        <h3>Feugiat lorem aenean</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt=""/></a>
-                        <h3>Amet varius aliquam</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
+
                 </div>
             </section>
 
@@ -175,6 +118,42 @@
 </div>
 </body>
 <script type="text/javascript">
+    //로그인상태검사
+    let posts = $('.posts');
+    if(${empty pageContext.request.userPrincipal}) {
+        console.log("비로그인상태");
+        $.ajax({
+           url : "main/nologin",
+           data : {},
+           dataType : "json",
+           type : "get",
+           success : function(response){
+               console.log(response);
+               response.forEach(group => {
+                    console.log("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>");
+                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+               });
+           },
+           error : function(Http, status, error) {
+               console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+           }
+        });
+    } else {
+        console.log("로그인상태");
+        $.ajax({
+            url : "main/logined",
+            data : {},
+            dataType : "json",
+            type : "get",
+            success : function(response){
+                console.log(response);
+            },
+            error : function(Http, status, error) {
+                console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+            }
+        });
+    }
+
     var swiper = new Swiper(".mySwiper", {
         slidesPerView : 1, //슬라이드 표시할 사진갯수
         spaceBetween: 30,
