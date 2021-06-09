@@ -7,6 +7,7 @@ import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dto.GroupDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.team1.chting.dao.UserDao;
@@ -23,6 +24,7 @@ public class UserService {
     작성자 : 박주현
     작성일 : 2021-06-07
     */
+
     public List<UserDto> userInfoBasic(){
 
         UserDao userDao = sqlsession.getMapper(UserDao.class);
