@@ -50,8 +50,8 @@
         }
         .swiper-slide img {
             display: block;
-            width: 30%;
-            height: 30%;
+            width: 50%;
+            height: 100%;
             object-fit: cover;
         }
         a { text-decoration:none !important }
@@ -71,7 +71,7 @@
             <section id="banner">
 					<div class="content">
                         <!-- Swiper -->
-                        <div class="swiper-container mySwiper" style="width: 1000px">
+                        <div class="swiper-container mySwiper" style="width: 900px">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
                                 <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
