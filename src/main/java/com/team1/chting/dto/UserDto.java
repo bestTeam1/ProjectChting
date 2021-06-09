@@ -23,5 +23,6 @@ public class UserDto {
 	private String second_area_name;
 	private String group_name;
 	private String s_catename;
+	private int cnt;
 
 }
