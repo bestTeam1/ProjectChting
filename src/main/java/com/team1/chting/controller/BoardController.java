@@ -28,7 +28,7 @@ public class BoardController {
 
         return "group/group";
     }
-
+  
     @RequestMapping(value = "groupJoin.do", method = RequestMethod.GET)
     public String groupJoin(Model model) {
 
@@ -57,6 +57,16 @@ public class BoardController {
         return "group/group_management/groupDisband";
     }
 
+
+    @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
+    public String groupMake(Model model) {
+
+        List<AreaDto> areaList = boardService.getAreaList();
+
+        model.addAttribute("areaList", areaList);
+
+        return "group/groupMake";
+    }
 
 
 }
