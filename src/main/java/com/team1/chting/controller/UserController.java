@@ -31,7 +31,7 @@ public class UserController {
     작성일 : 2021-06-07
     */
     @RequestMapping(value = "userinfo.do", method = RequestMethod.GET)
-    public String userInfoMain(Model model) {
+    public String userInfo(Model model) {
 
         List<UserDto> userInfoBasic = userService.userInfoBasic();
         List<UserDto> userInterest = userService.userInterest();
