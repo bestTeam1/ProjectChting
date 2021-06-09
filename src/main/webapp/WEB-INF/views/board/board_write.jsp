@@ -57,6 +57,9 @@
         }
         a { text-decoration:none !important }
         a:hover { text-decoration:none !important }
+
+
+
     </style>
 </head>
 <body class="is-preload">
@@ -75,44 +78,49 @@
             <section>
                 <div class="content">
                     <header>
-                        <h2>쿠키런킹덤 - 글쓰기</h2>
+
+                        <%-- 카테고리 셀렉트  --%>
+                        <select name="category" style="width: 170px">
+                            <option value="">===카테고리===</option>
+                            <option value="학생">자유글</option>
+                            <option value="회사원">정모후기</option>
+                            <option value="기타">가입인사</option>
+                        </select>
+                        <br>
+
                         <form method="post" action="WriteAct">
                             <table>
                                 <tr>
                                     <td>
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td>글쓰기</td>
-                                            </tr>
-                                        </table>
                                         <table>
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td align="center">제목</td>
-                                                <td><input name="bbs_title" size="50" maxlength="100"></td>
+                                                <td style="vertical-align: middle">제목</td>
+                                                <td><input name="bbs_title" size="50" maxlength="100"type="text"
+                                                           class="form-control" name="subject" id="title"
+                                                           placeholder="제목을 입력해 주세요" onfocus="this.placeholder = ''"
+                                                           onblur="this.placeholder = '제목을 입력해 주세요'"></td>
+
                                                 <td>&nbsp;</td>
+
+
                                             </tr>
                                             <tr height="1">
                                                 <td colspan="4"></td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td align="center">내용</td>
-                                                <td><textarea name="bbs_content" cols="50" rows="13"></textarea></td>
+                                                <td style="vertical-align: middle">내용</td>
+                                                <td><textarea name="bbs_content" cols="50" rows="13"name="content" placeholder="내용을 입력해 주세요"
+                                                              onfocus="this.placeholder = ''"
+                                                              onblur="this.placeholder = '내용을 입력해 주세요'"></textarea></td>
                                                 <td>&nbsp;</td>
                                             </tr>
-                                            <tr height="1">
-                                                <td colspan="4"></td>
-                                            </tr>
-                                            <tr height="1">
-                                                <td colspan="4"></td>
-                                            </tr>
-                                            <tr align="center">
-                                                <td>&nbsp;</td>
-                                                <td colspan="2"><input type=button value="등록">
-                                                <td>&nbsp;</td>
-                                            </tr>
+
                                         </table>
+                                        <!-- 파일 선택 -->
+                                        <label class="form-label" for="customFile">첨부파일</label>
+                                        <input type="file" class="form-control" id="customFile" name="filename"/>
                                     </td>
                                 </tr>
                             </table>
@@ -121,12 +129,26 @@
                 </div>
             </section>
 
-            <div style="text-align: center">
-                <button>완료</button>
-            </div>
+<%--            <div style="display: flex">--%>
+<%--                <form action="board_write.do">--%>
+<%--                    <input type="submit" value="등록하기">--%>
+<%--                </form>--%>
+<%--                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
+<%--                <form action="board_list.do">--%>
+<%--                    <input type="submit" value="돌아가기">--%>
+<%--                </form>--%>
+<%--            </div>--%>
 
-            <div>
-                <button type="button" onclick="location.href='board_list.jsp'">돌아가기</button>
+        <%-- style="text-align: center; display: flex"--%>
+
+            <div style="display: flex">
+                <form action="board_write.do">
+                    <input type="submit" value="등록">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </form>
+                <form action="board_list.do">
+                    <input type="submit" value="목록">
+                </form>
             </div>
 
         </div>
