@@ -79,15 +79,6 @@
     </style>
 </head>
 <body class="is-preload">
-${newGroupList}
-
-<h3>모임 정보</h3>
-<c:forEach var="group" items="${newGroupList}">
-    <ul>
-        <li> ${group.group_name}</li>
-        <li> ${group.opendate}</li>
-    </ul>
-</c:forEach>
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -104,7 +95,7 @@ ${newGroupList}
                         <section id="search" class="alt">
                             <form method="post" action="#" style="height: 50px; width:70%;">
                                 <select id="areaCategory"  style="width: 30%; float:left;">
-                                    <option value="전체">전체</option>
+                                    <option value="">전체</option>
                                 </select>
                                 <input type="text" name="query" id="searchValue" placeholder="Search"  style="width: 50%; float:left; "/>
                                 <input type="button" id="searchButton" value="모임찾기" style="float: left"/>
@@ -125,7 +116,7 @@ ${newGroupList}
                             <div class="swiper-pagination"></div>
                         </div>
                         </section>
-                        <section class="slide">
+                        <section class="slide2">
                             <h3>BEST</h3>
                             <!-- Swiper -->
                             <div class="swiper-container mySwiper" style="width: 1000px">
@@ -180,18 +171,52 @@ ${newGroupList}
         </c:forEach>
     });
 
+
     $(function(){
         $('#searchButton').click(function(){
             $.ajax({
                 url : "${pageContext.request.contextPath}/searchButton.do",
-                dataType : "text",
+                dataType : "json",
                 data : {
                     category : $('#areaCategory').val(),
                     search : $('#searchValue').val()
                 },
                 success : function(data){
-                    alert(data);
+                    console.log(data);
                     $('.slide').empty();
+                    var html = "";
+                    data.forEach(group => {
+                        html += '<div class="swiper-slide"><a href = "index.do" style="" >' +group.group_name+ '<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>';
+                    });
+                    $('.slide').append(
+                            '<h3>검색 결과</h3>'
+                        + '<div class="swiper-container mySwiper" style="width: 1000px">'
+                        + '<div class="swiper-wrapper">'
+                        +  html
+                        + '</div>'
+                        + '<div class="swiper-button-next"></div>'
+                        + '<div class="swiper-button-prev"></div>'
+                        + '<div class="swiper-pagination"></div>'
+                        + '</div>' );
+
+                    var swiper = new Swiper(".mySwiper", {
+                        slidesPerView : 3, //슬라이드 표시할 사진갯수
+                        spaceBetween: 30,
+                        centeredSlides: false,
+                        autoplay: {
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        },
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                    });
+
                 },
                 error : function(request, status, error) {
                     console.log(error)
