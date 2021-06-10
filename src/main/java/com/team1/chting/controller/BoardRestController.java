@@ -39,10 +39,10 @@ public class BoardRestController {
 
         try {
             list = boardService.getGroupListBySearch(category, search);
+            int list_size = 0;
             for(GroupDto dto : list) {
                 //System.out.println(dto.toString());
             }
-            System.out.println("RestController실행됨");
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch(Exception e){
