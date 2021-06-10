@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.team1.chting.dto.GroupDto;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,10 @@ public class UserController {
     작성자 : 박주현
     작성일 : 2021-06-07
     */
-    @RequestMapping(value = "userinfo.do", method = RequestMethod.GET)
+    @RequestMapping(value = "myPage.do", method = RequestMethod.GET)
     public String userInfo(Model model) {
 
-        List<UserDto> userInfoBasic = userService.userInfoBasic();
+        UserDto userInfoBasic = userService.userInfoBasic();
         List<UserDto> userInterest = userService.userInterest();
         List<UserDto> userJoinGroup = userService.userJoinGroup();
 
