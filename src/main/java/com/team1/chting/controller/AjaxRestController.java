@@ -3,6 +3,9 @@ package com.team1.chting.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.GroupDto;
+
+import com.team1.chting.service.GroupService;
+import com.team1.chting.service.UserService;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.EventService;
@@ -12,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +28,9 @@ public class AjaxRestController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private UserService userService;
+  
     @Autowired
     private NoticeService noticeService;
 
@@ -74,6 +84,21 @@ public class AjaxRestController {
             return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
         }
     }
+
+    /*
+    회원 탈퇴
+    작성자 : 박주현
+    작성일 : 2021-06-09
+    */
+    @RequestMapping(value="delAcount.do",produces = "application/text; charset=utf8")
+    public void deleteAcount(@RequestParam("userid") String userid) {
+
+        System.out.println("deleteAcount ajax 들어옴");
+        System.out.println("userid : " +userid);
+
+        userService.delAcount(userid);
+    }
+
 
     //로그인 -> 지역모임 5개
     @RequestMapping(value="/main/loginedArea", method= RequestMethod.GET, produces = "application/json")
