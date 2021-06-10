@@ -4,6 +4,7 @@ import com.team1.chting.dto.GroupDto;
 
 import com.team1.chting.dto.PostDto;
 
+import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.annotations.Param;
 
 
