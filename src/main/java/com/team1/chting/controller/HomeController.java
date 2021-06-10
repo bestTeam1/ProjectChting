@@ -38,7 +38,6 @@ public class HomeController {
 		list = noticeService.recentlyNotice();
 		model.addAttribute("list",list);
 
-
 		return "index";
 	}
 	
