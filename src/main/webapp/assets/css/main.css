@@ -1500,7 +1500,6 @@ button,
   color: #acabfe !important;
   cursor: pointer;
   display: inline-block;
-  font-family: "Roboto Slab", serif;
   font-size: 0.8em;
   font-weight: 700;
   height: 3.5em;
@@ -2245,7 +2244,11 @@ button,
     margin-top: 0;
     padding-top: 0; }
 
-.circle {
+/*
+ 필요해서 추가한 css
+ 작성자 : 박주현
+ */
+.circle_interest {
   color : #eeeeee;
   background: plum;
   text-align: center;
@@ -2259,3 +2262,5 @@ button,
   position : relative;
   padding : 5px;
 }
+
+
