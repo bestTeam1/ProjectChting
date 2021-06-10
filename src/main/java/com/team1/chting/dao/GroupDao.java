@@ -1,22 +1,33 @@
 package com.team1.chting.dao;
 
 import com.team1.chting.dto.GroupDto;
+
+import com.team1.chting.dto.PostDto;
+
 import org.apache.ibatis.annotations.Param;
 
+
 import java.util.List;
+import java.util.Map;
 
 public interface GroupDao {
     // 게시글 작성
-    // 게시글 상세보기
-    // 게시글 수정
-    // 게시글 삭제
-    // 게시글 전체 목록
+    public void postWirte(PostDto postDto);
 
-    public void wirte(GroupDto gdto);
+    // 게시글 상세보기
     public GroupDto read(String group_no);
+
+    // 게시글 수정
     public void update(GroupDto gdto);
+
+    // 게시글 삭제
     public void delete(String group_no);
-    public List<GroupDto> listAll();
+
+    // 게시글 전체 목록
+    public List<PostDto> getPostList();
+
+    // 페이징 리스트?
+    public List<Map<String, Object>> postList(Criteria cri);
 
 
     //비회원 -> 랜덤모임 10개
