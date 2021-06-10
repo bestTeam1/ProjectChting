@@ -25,6 +25,7 @@
 			<ul>
 				<li><a href="index.do">ChTing</a></li>
 				<li><a href="groupRecommend.do">모임 추천</a></li>
+				<li><a href="groupMake.do">모임 만들기</a></li>
 <%--				<li><span class="opener">나의 모임</span>--%>
 <%--					<ul>--%>
 <%--						<li><a href="#">조선 제1조 모임</a></li>--%>
@@ -60,7 +61,7 @@
 <%--				<li><a href="#">Adipiscing</a></li>--%>
 <%--				<li><a href="#">Maximus Erat</a></li>--%>
 <%--				<li><a href="#">Sapien Mauris</a></li>--%>
-				<li><a href="userinfo.do">마이페이지 테스트용</a></li>
+				<li><a href="myPage.do">마이페이지 테스트용</a></li>
 			</ul>
 		</nav>
 
