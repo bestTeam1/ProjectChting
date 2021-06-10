@@ -49,6 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by pg.cnt desc
             limit 5
     </select>
+
+
     <select id="areaGroup" resultType="com.team1.chting.dto.GroupDto">
         select gi.group_no, gi.group_name, gi.group_img, gi.content
         from user_info u
