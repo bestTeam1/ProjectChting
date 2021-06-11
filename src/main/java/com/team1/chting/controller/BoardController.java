@@ -2,12 +2,14 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,7 +32,18 @@ public class BoardController {
     }
   
     @RequestMapping(value = "groupJoin.do", method = RequestMethod.GET)
-    public String groupJoin(Model model) {
+    public String groupJoin(@RequestParam("userid") String userid, Model model) {
+
+        //로그인한 유저가 속해있는
+        GroupDto adminGroup = boardService.getAdminGroup(userid);
+        String groupNo = adminGroup.getGroup_no();
+        if(groupNo == null) { //모임장으로 속해있는 모임이 없다면?
+            return "group/group_error/HasNoGroupError"; //모임장없음 에러페이지로 이동
+        }
+        List<UserDto> groupJoinRequest = boardService.getGroupJoinRequest(groupNo);
+
+        model.addAttribute("groupNo", groupNo);
+        model.addAttribute("groupJoinRequest", groupJoinRequest);
 
         return "group/group_management/groupJoin";
     }

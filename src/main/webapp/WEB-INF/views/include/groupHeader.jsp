@@ -13,7 +13,7 @@
 <!-- Header -->
 <header id="header">
 	<ul class="icons">
-		<li><a href="groupJoin.do"><span class="label">가입신청관리</span></a></li>
+		<li><a href="groupJoin.do?userid=testuser"><span class="label">가입신청관리</span></a></li>
 		<li><a id="groupMemberManage" href="groupMemberManage.do"><span class="label">멤버관리</span></a></li>
 		<li><a href="groupBlackListManage.do"><span class="label">블랙리스트</span></a></li>
 		<li><a href="groupDisband.do"><span class="label">모임해산</span></a></li>
