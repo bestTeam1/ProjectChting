@@ -52,6 +52,7 @@ public class BoardRestController {
             return new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
         }
     }
+
     @RequestMapping(value="joinAccept.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> joinAccept(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
         boardService.acceptMembers(requestList, groupNo);
@@ -70,4 +71,24 @@ public class BoardRestController {
         }
 
     }
+
+    @RequestMapping(value="joinDeny.do", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> joinDeny(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
+        boardService.deleteRequest(requestList, groupNo);
+        List<UserDto> list = null;
+
+        ObjectMapper objmap = new ObjectMapper();
+
+        String result = "";
+
+        try {
+            list = boardService.getGroupJoinRequest(groupNo);
+            result = objmap.writeValueAsString(list);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return  new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
+        }
+
+    }
+
 }

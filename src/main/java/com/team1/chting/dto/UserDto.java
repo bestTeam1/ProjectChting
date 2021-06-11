@@ -24,5 +24,5 @@ public class UserDto {
 	private String group_name;
 	private String s_catename;
 	private int cnt;
-
+	private int group_role_no;
 }

@@ -49,11 +49,14 @@ public class BoardController {
     }
 
     @RequestMapping(value = "groupMemberManage.do", method = RequestMethod.GET)
-    public String groupMemberManage(Model model) {
-/*
-        List<GroupDto> groupMemberList = boardService.getGroupMemberList();
+    public String groupMemberManage(@RequestParam("userid") String userid, Model model) {
 
-        model.addAttribute("groupMemberList", groupDtoList);*/
+        GroupDto adminGroup = boardService.getAdminGroup(userid);
+        String groupNo = adminGroup.getGroup_no();
+        List<UserDto> groupMemberList = boardService.getGroupMemberList(userid);
+
+        model.addAttribute("groupNo", groupNo);
+        model.addAttribute("groupMemberList", groupMemberList);
 
         return "group/group_management/groupMemberManage";
     }
