@@ -80,7 +80,6 @@
     </style>
 </head>
 <body class="is-preload">
-<a href = "groupRecommend.do"><h1>모임추천으로 돌아가기</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
