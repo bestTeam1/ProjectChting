@@ -27,17 +27,15 @@ public class GroupRestController {
     @RequestMapping(value="banishMember.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> banishMember (@RequestParam("banishList[]") List<String> banishList, @RequestParam("groupNo") String groupNo){
 
-        System.out.println(banishList);
-
-        //boardService.deleteRequest(requestList, groupNo);
-        List<UserDto> list = null;
+        boardService.banishMembers(banishList, groupNo);
 
         ObjectMapper objmap = new ObjectMapper();
 
+        List<UserDto> list = null;
         String result = "";
 
         try {
-            list = boardService.getGroupJoinRequest(groupNo);
+            list = boardService.getGroupMemberList(groupNo);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {

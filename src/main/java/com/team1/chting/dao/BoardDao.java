@@ -36,4 +36,7 @@ public interface BoardDao {
     //가입신청 삭제(가입승인or 가입거절 이후)
     public void deleteRequest(@Param("requestId") String requestId, @Param("groupNo") String groupNo);
 
+    //멤버 강퇴
+    public void banishMembers(@Param("requestId") String requestId, @Param("groupNo") String groupNo);
+
 }
