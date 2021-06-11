@@ -75,10 +75,11 @@ public class BoardService {
     }
 
     //GroupMember 가져오기
-    public List<UserDto> getGroupMemberList(String groupNo) {
+    public List<UserDto> getGroupMemberList(String userid) {
+        System.out.println("서비스 userid: " + userid);
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
-        List<UserDto> groupMemberList = boardDao.getGroupMemberList(groupNo);
+        List<UserDto> groupMemberList = boardDao.getGroupMemberList(userid);
 
         return groupMemberList;
     }
@@ -91,6 +92,21 @@ public class BoardService {
         try {
             for(int i = 0; i < requestList.size(); i++) {
                 boardDao.acceptMember(requestList.get(i),groupNo);
+                boardDao.deleteRequest(requestList.get(i),groupNo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean deleteRequest(List<String> requestList, String groupNo) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+
+        try {
+            for(int i = 0; i < requestList.size(); i++) {
                 boardDao.deleteRequest(requestList.get(i),groupNo);
             }
         } catch (Exception e) {
