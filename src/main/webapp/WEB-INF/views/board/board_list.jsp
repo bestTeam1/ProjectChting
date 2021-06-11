@@ -59,6 +59,8 @@
         }
         a { text-decoration:none !important }
         a:hover { text-decoration:none !important }
+
+
     </style>
 </head>
 <body class="is-preload">
@@ -77,7 +79,7 @@
                     <header>
 
 <table>
-    <tr>
+    <tr style="background-color: lavender; text-align: center">
     <td>No.</td>
     <td>이름</td>
     <td>카테고리</td>
@@ -86,11 +88,11 @@
     </tr>
 
     <c:forEach var="plist" items="${postList}">
-        <tr>
+        <tr style="text-align: center">
             <td>${plist.post_no}</td>
             <td>${plist.nickname}</td>
             <td>${plist.post_catename}</td>
-            <td>${plist.subject}</td>
+            <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a></td>
             <td>${plist.writedate}</td>
         </tr>
     </c:forEach>

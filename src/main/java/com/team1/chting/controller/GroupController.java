@@ -6,13 +6,12 @@ import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.service.GroupService;
 import com.team1.chting.utils.Criteria;
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,6 +23,8 @@ public class GroupController {
 
     @Autowired
     private GroupService groupservice;
+    @Autowired
+    private SqlSession sqlsession;
 
     // 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
@@ -54,9 +55,21 @@ public class GroupController {
 
     // 글쓰기 post
     @RequestMapping(value = "board_write.do", method = RequestMethod.POST)
-    public String groupWrite(PostDto postDto){
-        groupservice.postWrite(postDto);
-        return "redirect:postList";
+    public String insert (PostDto postDto) {
+
+       groupservice.insert(postDto);
+
+        return "redirect:board_list.do";
+    }
+
+    // 글 상세보기
+    @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
+    public String read (@RequestParam(value = "post_no", required = false) int post_no, Model model){
+//        PostDto postDto = groupservice.read(post_no);
+//        System.out.println(postDto);
+//        model.addAttribute("post", postDto );
+
+        return "board/board_detail";
     }
 
     // 일정
