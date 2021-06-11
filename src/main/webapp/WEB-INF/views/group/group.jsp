@@ -79,7 +79,9 @@
     </style>
 </head>
 <body class="is-preload">
-<a href = "groupJoin.do"><h1>모임관리 임시</h1></a>
+
+<!-- 로그인 기능 구현 전 임시로 이동하는 코드 , 로그인 구현 이후에는 로그인 정보를 담아서 가면됩니다. -->
+<a href = "groupJoin.do?userid=testuser"><h1>모임관리 임시</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
