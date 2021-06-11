@@ -36,8 +36,17 @@ public class GroupService {
 
 
     // 게시판 글쓰기
-    public void postWrite(PostDto postDto){
+    public void insert(PostDto postDto){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.insert(postDto);
+    }
 
+    // 게시판 상세보기
+    public PostDto read(int post_no){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.read(post_no);
+
+        return read(post_no);
     }
 
     public List<GroupDto> randomGroup() {
