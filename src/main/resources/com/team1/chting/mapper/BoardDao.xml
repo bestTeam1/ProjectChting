@@ -37,11 +37,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from group_join_request where userid = "${requestId}" and group_no = "${groupNo}"
     </delete>
 
-<!--
+
     <select id="getGroupMemberList" resultType="com.team1.chting.dto.UserDto">
-     select nickname, gender, content from user_info left join group_user_role gur on user_info.userid = gur.userid
-     where group_no = #{groupNo} and enabled = 1
-    </select>-->
+        select gur.userid, nickname, gender, content, gur.group_role_no from user_info left join group_user_role gur on user_info.userid = gur.userid
+                                                        left join group_role gr on gur.group_role_no = gr.group_role_no
+        where group_no = (select group_no from user_info left outer join group_user_role gur
+                                                                         on user_info.userid = gur.userid
+                          where gur.userid = "${userid}" and group_role_no = 1) and enabled = 1
+    </select>
+
 
 </mapper>
 
