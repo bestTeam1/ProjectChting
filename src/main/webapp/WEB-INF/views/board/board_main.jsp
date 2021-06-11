@@ -89,7 +89,10 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <a href = "index.do" style="" >
-                                        조선 제1조 모임<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
+                                      조선 제1조 모임
+                                        <br>
+                                        <br>
+                                        <img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
                             </div>
 
                         </div>
@@ -110,7 +113,7 @@
 
             <div class="content" align="center">
 
-                <p>조선 제1조 모임 - 소개글</p>
+                <p>👉조선 제1조 모임 - 소개글👈</p>
 
                 <table>
                     <tr>

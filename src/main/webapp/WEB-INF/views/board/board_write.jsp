@@ -7,10 +7,15 @@
 --%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
 
     <title>글쓰기</title>
@@ -64,15 +69,35 @@
 
 
     </style>
+
 </head>
 <body class="is-preload">
+<script type="text/javascript">
+    // swal("Here's the title!", "...and here's the text!");
+    function confirm() {
+        //e.preventDefault
 
+        var subject = $("#subject").val().trim();
+        var content =  $("#content").val().trim();
+        var post_catename = $("#post_catename").val().trim();
 
+        if(post_catename == "") {
+            swal("카테고리를 선택해주세요.");
+            return;
+        } else if(subject == "") {
+            swal("제목을 입력해주세요.");
+            return;
+        } else if(content == ""){
+            swal("내용을 선택해주세요.");
+            return;
+        }
 
+        $('#form').submit();
+    }
 
+</script>
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -82,68 +107,42 @@
                 <div class="content">
                     <header>
 
-                        <%-- 카테고리 셀렉트  --%>
-                        <select name="category" style="width: 170px">
-                            <option value="">===카테고리===</option>
-                            <option value="자유글">자유글</option>
-                            <option value="정모후기">정모후기</option>
-                            <option value="가입인사">가입인사</option>
-                            <option value="공지사항">공지사항</option>
-                        </select>
-                        <br>
+<%--action='<c:url value='/board/board_insert.do'/>'--%>
+    <form id="form" method="post" action='board_write.do'>
+                                <%-- 카테고리 셀렉트  --%>
+                                <select id="post_catename" name="post_catename" style="width: 170px; float: right">
+                                    <option value="">===카테고리===</option>
+                                    <option value="자유글">자유글</option>
+                                    <option value="정모후기">정모후기</option>
+                                    <option value="가입인사">가입인사</option>
+                                    <option value="공지사항">공지사항</option>
+                                </select>
+                                    <br><br>
 
-                        <form method="post" action="WriteAct">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td style="vertical-align: middle">제목</td>
-                                                <td><input name="bbs_title" size="50" maxlength="100"type="text"
-                                                           class="form-control" name="subject" id="title"
-                                                           placeholder="제목을 입력해 주세요" onfocus="this.placeholder = ''"
-                                                           onblur="this.placeholder = '제목을 입력해 주세요'"></td>
+<%--  <div>작성자<input type="text" name="writer" value="${modifyId}" readonly="readonly"></div>--%>
+        <div>제목<input type="text" id="subject" name="subject"
+                      placeholder="2~20자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = '2~20자 이내로 입력해주세요 :)'"></div>
+    <br><br>
+        <div>내용<textarea rows="5" cols="13" id="content" name="content" style="resize: none"
+                         placeholder="2~2000자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
+                         onblur="this.placeholder = '2~2000자 이내로 입력해주세요 :)'"></textarea>
+        </div>
+    <br><br>
+    <div><label class="form-label" for="customFile">첨부파일</label>
+        <input type="file" class="form-control" id="customFile" name="file"/></div>
+    <br><br>
 
-                                                <td>&nbsp;</td>
+    <div style="display: flex; justify-content: center">
+        <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="location.href='board_list.do'">목록</button>
+    </div>
+    </form>
 
-
-                                            </tr>
-                                            <tr height="1">
-                                                <td colspan="4"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td style="vertical-align: middle">내용</td>
-                                                <td><textarea cols="50" rows="13" name="content" placeholder="내용을 입력해 주세요"
-                                                              onfocus="this.placeholder = ''"
-                                                              onblur="this.placeholder = '내용을 입력해 주세요'"></textarea></td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-
-                                        </table>
-                                        <!-- 파일 선택 -->
-                                        <label class="form-label" for="customFile">첨부파일</label>
-                                        <input type="file" class="form-control" id="customFile" name="filename"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
                     </header>
                 </div>
             </section>
 
-
-
-            <div style="display: flex; justify-content: center;">
-                <form action="board_write.do">
-                    <input type="submit" value="등록">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </form>
-                <form action="board_list.do">
-                    <input type="submit" value="목록">
-                </form>
-            </div>
 
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
