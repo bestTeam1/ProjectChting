@@ -14,7 +14,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
-<h1>${groupMemberList}</h1>
+<p>${groupMemberList}</p>
 <body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
@@ -99,7 +99,7 @@
     }
 
     $(function(){
-        $('#banish  ').click(function(){
+        $('#banish').click(function(){
             var banishes = [];
             $('input[name=selectAgreement]:checked').each(function(){
                 var chk = $(this).val();
@@ -114,8 +114,8 @@
                     groupNo : $('#groupNo').val()
                 },
                 success : function(data){
-                    $('#joinRequestList').children().remove();
-                    $('#joinRequestList').append(
+                    $('#memberList').children().remove();
+                    $('#memberList').append(
                         '<tr style="background-color:lightgrey">'
                         + '<th style="text-align: center">이름</th>'
                         + '<th style="text-align: center">소개</th>'
@@ -127,27 +127,52 @@
                     console.log(Object.keys(data).length); // json갯수
                     var tableNum = 0;
                     $.each(data, function (index, item) {
-                        $('#joinRequestList').append(
+                        var position_no = "${item.group_role_no}";
+                        var position = "";
+                        var succeed = "";
+                        var checkbox = "";
+
+                        if(position_no == 1 ) {
+                            position = "모임장";
+                        } else if (position_no == 2) {
+                            position = "모임원";
+                            succeed = "<button>모임장위임</button>";
+                            checkbox ='<div class="col-6 col-12-small">'
+                                +'<input type="checkbox" id="selectAgreement'+ tableNum
+                                +'" name="selectAgreement" value="${item.userid}" >'
+                                + '<label for="selectAgreement'+ tableNum +'"></label>'
+                                + '</div>';
+                        }
+                        $('#memberList').append(
                             '<tr>'
-                            +'<td>'+ item.nickname +'</td>'
-                            +'<td>'+ item.content +'</td>'
-                            +'<td>'+ item.gender +'</td>'
                             +'<td>'
-                            +'<div class="col-6 col-12-small">'
-                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="'+ item.userid +'" >'
-                            +'<label for="selectAgreement'+ tableNum +'"></label>'
-                            +'</div>'
+                            + position
+                            +'</td>'
+                            +'<td>${item.nickname}</td>'
+                            +'<td>' + succeed +'</td>'
+                            +'<td>'
+                            + checkbox
                             +'</td>'
                             +'</tr>'
                         );
                         tableNum++;
                         Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: '가입이 승인되었습니다',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
+                            title: '정말입니까??',
+                            text: "이 결정은 되돌릴 수 없습니다. 정말로 멤버를 강퇴하시겠습니까?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '네 강퇴하겠습니다',
+                            cancelButtonText: '취소'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                    '추방되었습니다',
+                                    '해당 회원은 다시 가입신청 할 수 있습니다'
+                                )
+                            }
+                        })
                     });
                 },
                 error : function(request, status, error) {
