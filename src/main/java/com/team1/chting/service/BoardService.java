@@ -117,4 +117,18 @@ public class BoardService {
         return true;
     }
 
+    public void banishMembers(List<String> banishList, String groupNo) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+
+        try {
+            for(int i = 0; i < banishList.size(); i++) {
+                boardDao.banishMembers(banishList.get(i),groupNo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
