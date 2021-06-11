@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: joohyun
-  Date: 2021/06/07
-  Time: 3:21 오후
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
@@ -29,17 +22,14 @@
     <div id="main">
         <div class="inner">
         <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-
-            <c:set var="userinfo" value="${userInfoBasic}"/>
-
             <h3>MyPage</h3>
                 <article>
                     <div class="content align-center">
-                        <h3>${userinfo.nickname}</h3>
-                        <p>${userinfo.first_area_name} ${userinfo.second_area_name}</p>
+                        <h3>${userInfo.userInfoBasic.nickname}</h3>
+                        <p>${userInfo.userInfoBasic.first_area_name} ${userInfo.userInfoBasic.second_area_name}</p>
                         <hr>
                         <h3>자기소개</h3>
-                        <p>${userinfo.content}</p>
+                        <p>${userInfo.userInfoBasic.content}</p>
                         <hr>
                     </div>
                 </article>
@@ -47,7 +37,7 @@
                 <article>
                     <div class="content align-center">
                         <h3>관심사</h3>
-                            <c:forEach var="userInterest" items="${userInterest}">
+                            <c:forEach var="userInterest" items="${userInfo.userInterest}">
                                 <div class="circle_interest">
                                         ${userInterest.s_catename}
                                 </div>
@@ -59,13 +49,14 @@
                 <article>
                     <div class="content align-center">
                         <h3>가입한 모임</h3>
-                            <c:forEach var="userJoinGroup" items="${userJoinGroup}">
+                            <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
                                 ${userJoinGroup.group_name}
                             </c:forEach>
                     </div>
                 </article>
-            <input type="button" value="회원 정보 수정" id="edituserinfo">
+            <input type="button" value="회원 정보 수정" id="edituserinfo" onclick="location.href='userUpdate.do'">
             <input type="button" value="회원 탈퇴" id="delacount">
+
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
@@ -73,8 +64,8 @@
 </div>
 
 <script type="text/javascript">
-    const userid = "${userinfo.userid}";
-    const userGroupRole = "${userinfo.cnt}";
+    const userid = "${userInfo.userInfoBasic.userid}";
+    const userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
     const swal = Swal.mixin({
         customClass: {
