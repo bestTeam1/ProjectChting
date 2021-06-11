@@ -84,7 +84,6 @@
     </style>
 </head>
 <body class="is-preload">
-<a href = "groupRecommend.do"><h1>모임추천으로 돌아가기</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -125,103 +124,6 @@
 
 </body>
 <script type="text/javascript">
-    /* Swiper slide*/
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView : 3, //슬라이드 표시할 사진갯수
-        spaceBetween: 30,
-        centeredSlides: false,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-
-    //Area category DB 연동해서 넣기
-    $(document).ready(function(){
-        <c:forEach items="${areaList}" var="area">
-            (function () {
-                $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
-            })();
-        </c:forEach>
-    });
-
-
-    $(function(){
-        $('#searchButton').click(function(){
-            $.ajax({
-                url : "${pageContext.request.contextPath}/searchButton.do",
-                dataType : "json",
-                data : {
-                    category : $('#areaCategory').val(),
-                    search : $('#searchValue').val()
-                },
-                success : function(data){
-                    $('.slide').empty();
-                    var html = "";
-                    var length = 0;
-                    data.forEach(group => {
-                        html += '<div class="swiper-slide"><a href = "index.do" style="" >' +group.group_name+ '<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>';
-                        length++;
-                    });
-
-                    if(length > 3) {
-                        html += '</div>'
-                            + '<div class="swiper-button-next"></div>'
-                            + '<div class="swiper-button-prev"></div>'
-                            + '<div class="swiper-pagination"></div>';
-                            + '</div>'
-                    }
-
-                    var locationMessage = $('#areaCategory').val()
-
-                    if (locationMessage == "") {
-                        locationMessage = "전체지역의 검색결과"
-                    } else if (locationMessage == "언택트") {
-                        locationMessage = "언택트 검색결과"
-                    } else {
-                        locationMessage += " 지역의 검색결과"
-                    }
-
-                    $('.slide').append(
-                           '<h3>'+ locationMessage +'</h3>'
-                        + '<div class="swiper-container mySwiper" style="width: 1000px">'
-                        + '<div class="swiper-wrapper">'
-                        +  html
-                         );
-
-                    var swiper = new Swiper(".mySwiper", {
-                        slidesPerView : 3, //슬라이드 표시할 사진갯수
-                        spaceBetween: 30,
-                        centeredSlides: false,
-                        autoplay: {
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: ".swiper-pagination",
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: ".swiper-button-next",
-                            prevEl: ".swiper-button-prev",
-                        },
-                    });
-
-                },
-                error : function(request, status, error) {
-                    console.log(error)
-                }
-            });
-        });
-    });
 
 </script>
 </html>

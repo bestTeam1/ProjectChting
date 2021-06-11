@@ -10,81 +10,11 @@
           content="width=device-width, initial-scale=1, user-scalable=no" />
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- slider -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <!-- sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-
-        #searchButton {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -ms-appearance: none;
-            appearance: none;
-            background: #ffffff;
-            border-radius: 0.375em;
-            border: none;
-            border: solid 1px rgba(210, 215, 217, 0.75);
-            color: inherit;
-            display: block;
-            outline: 0;
-            padding: 0 1em;
-            text-decoration: none;
-        }
-
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-        }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
-
-        th {
-            text-align: center;
-        }
-
-    </style>
 </head>
 <body class="is-preload">
-<a href = "groupRecommend.do"><h1>모임추천으로 돌아가기</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -97,31 +27,20 @@
                 <h1 style="text-align: center">모임 가입신청을 관리하세요</h1>
                 <h2 style="text-align: center"></h2>
             </section>
-            <section>
+            <section id="table">
                 <h2>&#60; 가입신청 명단 &#62;</h2>
                 <p> 가입신청을 받아주거나 거절할 수 있습니다 </p>
-                <table style="text-align: center">
-                    <tr style="background-color:lightgrey">
-                        <th style="text-align: center">이름</th>
-                        <th style="text-align: center">소개</th>
-                        <th style="text-align: center">선택</th>
-                    </tr>
-                    <tr>
-                        <td>이승준</td>
-                        <td>안녕 날소개하지 내이름은 이승준 취미는 메디테이션</td>
-                        <td>
-                            <div class="col-6 col-12-small">
-                                <input type="checkbox" id="selectAgreement" name="selectAgreement">
-                                <label for="selectAgreement"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>김수연</td>
-                        <td>랩해 또 터털어</td>
-                        <td>대충 비트박스</td>
-                    </tr>
+                <table id="joinRequestList" style="text-align: center">
+
                 </table>
+                <input id="groupNo" type="hidden" value="${groupNo}">
+                <div class="col-6 col-12-small">
+                    <ul class="actions stacked">
+                        <li><a id="accept"  href="#" class="button fit">가입승인</a></li>
+                        <li><a id="refuse"  href="#" class="button primary fit">가입거절</a></li>
+                    </ul>
+                </div>
+
             </section>
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
@@ -131,99 +50,196 @@
 
 </body>
 <script type="text/javascript">
-    /* Swiper slide*/
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView : 3, //슬라이드 표시할 사진갯수
-        spaceBetween: 30,
-        centeredSlides: false,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
 
-    //Area category DB 연동해서 넣기
+    //Table에 회원정보 넣기
     $(document).ready(function(){
-        <c:forEach items="${areaList}" var="area">
-            (function () {
-                $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
-            })();
-        </c:forEach>
+        loadRequest();
     });
 
+    //가입신청 Table
+    function loadRequest() {
+        $('#joinRequestList').append(
+            '<tr style="background-color:lightgrey">'
+            + '<th style="text-align: center">이름</th>'
+            + '<th style="text-align: center">소개</th>'
+            + '<th style="text-align: center">성별</th>'
+            + '<th style="text-align: center">선택</th>'
+            + '</tr>'
+        );
+
+        var tableNum = 0;
+
+        <c:forEach items="${groupJoinRequest}" var="joinRequest">
+        (function () {
+            $('#joinRequestList').append(
+                '<tr>'
+                +'<td>${joinRequest.nickname}</td>'
+                +'<td>${joinRequest.content}</td>'
+                +'<td>${joinRequest.gender}</td>'
+                +'<td>'
+                +'<div class="col-6 col-12-small">'
+                +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="${joinRequest.userid}" >'
+                +'<label for="selectAgreement'+ tableNum +'"></label>'
+                +'</div>'
+                +'</td>'
+                +'</tr>'
+            );
+            tableNum++;
+        })();
+        </c:forEach>
+    }
 
     $(function(){
-        $('#searchButton').click(function(){
+        $('#accept').click(function(){
+            var requests = [];
+            $('input[name=selectAgreement]:checked').each(function(){
+                var chk = $(this).val();
+                requests.push(chk);
+            });
+            console.log(requests);
             $.ajax({
-                url : "${pageContext.request.contextPath}/searchButton.do",
+                url : "joinAccept.do",
+                dataType : "json",
+                data : {
+                    requestList : requests,
+                    groupNo : $('#groupNo').val()
+                },
+                success : function(data){
+                    $('#joinRequestList').children().remove();
+                    $('#joinRequestList').append(
+                        '<tr style="background-color:lightgrey">'
+                        + '<th style="text-align: center">이름</th>'
+                        + '<th style="text-align: center">소개</th>'
+                        + '<th style="text-align: center">성별</th>'
+                        + '<th style="text-align: center">선택</th>'
+                        + '</tr>'
+                    );
+
+                    console.log(Object.keys(data).length); // json갯수
+                    var tableNum = 0;
+                    $.each(data, function (index, item) {
+                        $('#joinRequestList').append(
+                            '<tr>'
+                            +'<td>'+ item.nickname +'</td>'
+                            +'<td>'+ item.content +'</td>'
+                            +'<td>'+ item.gender +'</td>'
+                            +'<td>'
+                            +'<div class="col-6 col-12-small">'
+                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="'+ item.userid +'" >'
+                            +'<label for="selectAgreement'+ tableNum +'"></label>'
+                            +'</div>'
+                            +'</td>'
+                            +'</tr>'
+                        );
+                        tableNum++;
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '가입이 승인되었습니다',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    });
+                    console.log(requests);
+                },
+                error : function(request, status, error) {
+                    console.log(error)
+                }
+            });
+        });
+    });
+
+    function acceptClickEvent() {
+        $('#accept').click(function(){
+            var requests = [];
+            $('input[name=selectAgreement]:checked').each(function(){
+                var chk = $(this).val();
+                requests.push(chk);
+            });
+            console.log(requests);
+            $.ajax({
+                url : "joinAccept.do",
+                dataType : "json",
+                data : {
+                    requestList : requests,
+                    groupNo : $('#groupNo').val()
+                },
+                success : function(data){
+                    $('#joinRequestList').children().remove();
+                    $('#joinRequestList').append(
+                        '<tr style="background-color:lightgrey">'
+                        + '<th style="text-align: center">이름</th>'
+                        + '<th style="text-align: center">소개</th>'
+                        + '<th style="text-align: center">성별</th>'
+                        + '<th style="text-align: center">선택</th>'
+                        + '</tr>'
+                    );
+
+                    console.log(Object.keys(data).length); // json갯수
+                    var tableNum = 0;
+                    $.each(data, function (index, item) {
+                        $('#joinRequestList').append(
+                            '<tr>'
+                            +'<td>'+ item.nickname +'</td>'
+                            +'<td>'+ item.content +'</td>'
+                            +'<td>'+ item.gender +'</td>'
+                            +'<td>'
+                            +'<div class="col-6 col-12-small">'
+                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="${joinRequest.userid}" >'
+                            +'<label for="selectAgreement'+ tableNum +'"></label>'
+                            +'</div>'
+                            +'</td>'
+                            +'</tr>'
+                        );
+                        tableNum++;
+                        console.log(item.nickname);
+                        console.log(item.content);
+                        console.log(item.gender);
+                    }) ;
+
+                    /*
+                    for(var request in data) {
+                        for(var requestInfo in data[request]) {
+                            console.log(data[request][requestInfo]);
+                        }
+                    }
+                    */
+                },
+                error : function(request, status, error) {
+                    console.log(error)
+                }
+            });
+        });
+    }
+
+    $(function(){
+        $('#refuse').click(function(){
+            var values = [];
+
+            values = $('input:checkbox[name="selectAgreement"]:checked').val();
+            //console.log(values);
+
+            $.ajax({
+                url : "joinRefuse.do",
                 dataType : "json",
                 data : {
                     category : $('#areaCategory').val(),
                     search : $('#searchValue').val()
                 },
                 success : function(data){
-                    $('.slide').empty();
-                    var html = "";
-                    var length = 0;
-                    data.forEach(group => {
-                        html += '<div class="swiper-slide"><a href = "index.do" style="" >' +group.group_name+ '<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>';
-                        length++;
-                    });
-
-                    if(length > 3) {
-                        html += '</div>'
-                            + '<div class="swiper-button-next"></div>'
-                            + '<div class="swiper-button-prev"></div>'
-                            + '<div class="swiper-pagination"></div>';
-                            + '</div>'
-                    }
-
-                    var locationMessage = $('#areaCategory').val()
-
-                    if (locationMessage == "") {
-                        locationMessage = "전체지역의 검색결과"
-                    } else if (locationMessage == "언택트") {
-                        locationMessage = "언택트 검색결과"
-                    } else {
-                        locationMessage += " 지역의 검색결과"
-                    }
-
-                    $('.slide').append(
-                           '<h3>'+ locationMessage +'</h3>'
-                        + '<div class="swiper-container mySwiper" style="width: 1000px">'
-                        + '<div class="swiper-wrapper">'
-                        +  html
-                         );
-
-                    var swiper = new Swiper(".mySwiper", {
-                        slidesPerView : 3, //슬라이드 표시할 사진갯수
-                        spaceBetween: 30,
-                        centeredSlides: false,
-                        autoplay: {
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        },
-                        pagination: {
-                            el: ".swiper-pagination",
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: ".swiper-button-next",
-                            prevEl: ".swiper-button-prev",
-                        },
-                    });
-
+                    $('#joinRequestList').children().remove();
+                    loadRequest();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '가입이 거절되었습니다',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
                 },
                 error : function(request, status, error) {
-                    console.log(error)
+
+                    console.log(error);
                 }
             });
         });
