@@ -59,7 +59,8 @@
     //가입신청 Table
     function loadRequest() {
         $('#joinRequestList').append(
-            '<tr style="background-color:lightgrey">'
+            '<tr style="background-color:' +
+            'lightgrey">'
             + '<th style="text-align: center">이름</th>'
             + '<th style="text-align: center">소개</th>'
             + '<th style="text-align: center">성별</th>'
@@ -149,8 +150,8 @@
         });
     });
 
-    function acceptClickEvent() {
-        $('#accept').click(function(){
+    $(function(){
+        $('#refuse').click(function(){
             var requests = [];
             $('input[name=selectAgreement]:checked').each(function(){
                 var chk = $(this).val();
@@ -158,7 +159,7 @@
             });
             console.log(requests);
             $.ajax({
-                url : "joinAccept.do",
+                url : "joinDeny.do",
                 dataType : "json",
                 data : {
                     requestList : requests,
@@ -175,7 +176,6 @@
                         + '</tr>'
                     );
 
-                    console.log(Object.keys(data).length); // json갯수
                     var tableNum = 0;
                     $.each(data, function (index, item) {
                         $('#joinRequestList').append(
@@ -185,61 +185,25 @@
                             +'<td>'+ item.gender +'</td>'
                             +'<td>'
                             +'<div class="col-6 col-12-small">'
-                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="${joinRequest.userid}" >'
+                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="' + item.userid + '" >'
                             +'<label for="selectAgreement'+ tableNum +'"></label>'
                             +'</div>'
                             +'</td>'
                             +'</tr>'
                         );
                         tableNum++;
-                        console.log(item.nickname);
-                        console.log(item.content);
-                        console.log(item.gender);
-                    }) ;
-
-                    /*
-                    for(var request in data) {
-                        for(var requestInfo in data[request]) {
-                            console.log(data[request][requestInfo]);
-                        }
-                    }
-                    */
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            iconColor : 'red',
+                            title: '가입이 거절되었습니다',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    });
                 },
                 error : function(request, status, error) {
                     console.log(error)
-                }
-            });
-        });
-    }
-
-    $(function(){
-        $('#refuse').click(function(){
-            var values = [];
-
-            values = $('input:checkbox[name="selectAgreement"]:checked').val();
-            //console.log(values);
-
-            $.ajax({
-                url : "joinRefuse.do",
-                dataType : "json",
-                data : {
-                    category : $('#areaCategory').val(),
-                    search : $('#searchValue').val()
-                },
-                success : function(data){
-                    $('#joinRequestList').children().remove();
-                    loadRequest();
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: '가입이 거절되었습니다',
-                        showConfirmButton: false,
-                        timer: 2500
-                    })
-                },
-                error : function(request, status, error) {
-
-                    console.log(error);
                 }
             });
         });
