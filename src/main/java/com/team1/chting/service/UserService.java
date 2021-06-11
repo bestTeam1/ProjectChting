@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.MyPageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -25,7 +26,6 @@ public class UserService {
     작성일 : 2021-06-07
     */
     public UserDto userInfoBasic() {
-
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         UserDto userDto = userDao.userInfoBasic();
 
@@ -33,7 +33,6 @@ public class UserService {
     }
 
     public List<UserDto> userInterest() {
-
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<UserDto> UserInterestList = userDao.userInterest();
 
@@ -41,12 +40,23 @@ public class UserService {
     }
 
     public List<UserDto> userJoinGroup() {
-
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<UserDto> UserJoinGroupList = userDao.userJoinGroup();
 
         return UserJoinGroupList;
     }
+
+    public MyPageInfo getMyPageInfo() {
+        MyPageInfo myPageInfo = new MyPageInfo();
+
+        myPageInfo.
+                setUserInfoBasic(userInfoBasic()).
+                setUserInterest(userInterest()).
+                setUserJoinGroup(userJoinGroup());
+
+        return myPageInfo;
+    }
+
 
     /*
     회원 탈퇴
