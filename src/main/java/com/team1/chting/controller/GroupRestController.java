@@ -25,7 +25,9 @@ public class GroupRestController {
     private BoardService boardService;
 
     @RequestMapping(value="banishMember.do", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> banishMember (@RequestParam("banishList[]") List<String> banishList, @RequestParam("groupNo") String groupNo){
+    public ResponseEntity<String> banishMember (@RequestParam("banishList[]") List<String> banishList,
+                                                @RequestParam("groupNo") String groupNo,
+                                                @RequestParam("userid") String userid){
 
         boardService.banishMembers(banishList, groupNo);
 
@@ -35,7 +37,7 @@ public class GroupRestController {
         String result = "";
 
         try {
-            list = boardService.getGroupMemberList(groupNo);
+            list = boardService.getGroupMemberList(userid);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
