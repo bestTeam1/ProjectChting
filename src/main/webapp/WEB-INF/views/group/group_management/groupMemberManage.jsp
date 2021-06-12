@@ -14,7 +14,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
-<p>${groupMemberList}</p>
 <body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
@@ -46,6 +45,7 @@
 
 </body>
 <script type="text/javascript">
+
     //Table에 회원정보 넣기
     $(document).ready(function(){
         memberList();
@@ -75,7 +75,7 @@
                 position = "모임장";
             } else if (position_no == 2) {
                 position = "모임원";
-                succeed = "<button>모임장위임</button>";
+                succeed = "<button class ='succeed' value='${member.userid}'>모임장위임</button>";
                 checkbox ='<div class="col-6 col-12-small">'
                     +'<input type="checkbox" id="selectAgreement'+ tableNum
                     +'" name="selectAgreement" value="${member.userid}" >'
@@ -100,6 +100,89 @@
     }
 
     $(function(){
+        //모임장위임 클릭
+        $('.succeed').click(function(event){
+            event.preventDefault();
+            Swal.fire({
+                title: '정말입니까??',
+                text: "이 결정은 되돌릴 수 없습니다. 정말로 모임장을 넘기시겠습니까?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '네 모임장 권한을 넘기겠습니다',
+                cancelButtonText: '취소'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url : "succeedGroupAdmin.do",
+                        dataType : "json",
+                        data : {
+                            adminUserid : $('#userid').val(),
+                            requestUserid : $(this).val(),
+                            groupNo : $('#groupNo').val()
+                        },
+                        success : function(data){
+                            console.log(data);
+                            $('#memberList').children().remove();
+                            $('#memberList').append(
+                                '<tr style="background-color:lightgrey">'
+                                + '<th style="text-align: center">이름</th>'
+                                + '<th style="text-align: center">소개</th>'
+                                + '<th style="text-align: center">성별</th>'
+                                + '<th style="text-align: center">선택</th>'
+                                + '</tr>'
+                            );
+
+                            console.log(Object.keys(data).length); // json갯수
+                            var tableNum = 0;
+
+                            $.each(data, function (index, item) {
+                                var position_no = item.group_role_no;
+                                var position = "";
+                                var succeed = "";
+                                var checkbox = "";
+
+                                if(position_no == 1 ) {
+                                    position = "모임장";
+                                } else if (position_no == 2) {
+                                    position = "모임원";
+                                    succeed = "<button class ='succeed' value=" + item.userid +">모임장위임</button>";
+                                    checkbox ='<div class="col-6 col-12-small">'
+                                        +'<input type="checkbox" id="selectAgreement'
+                                        + tableNum
+                                        +'" name="selectAgreement" value="' + item.userid + '" >'
+                                        + '<label for="selectAgreement'+ tableNum +'"></label>'
+                                        + '</div>';
+                                }
+                                $('#memberList').append(
+                                    '<tr>'
+                                    +'<td>'
+                                    + position
+                                    +'</td>'
+                                    +'<td>' + item.nickname + '</td>'
+                                    +'<td>' + succeed +'</td>'
+                                    +'<td>'
+                                    + checkbox
+                                    +'</td>'
+                                    +'</tr>'
+                                );
+                                tableNum++;
+                            });
+                        },
+                        error : function(request, status, error) {
+                            console.log(error)
+                        }
+                    });
+                    Swal.fire(
+                        '모임장이 위임되었습니다'
+                    )
+                }
+            })
+        });
+
+
+        //모임 강퇴 클릭
         $('#banish').click(function(event){
             event.preventDefault();
             Swal.fire({
@@ -152,7 +235,7 @@
                                     position = "모임장";
                                 } else if (position_no == 2) {
                                     position = "모임원";
-                                    succeed = "<button>모임장위임</button>";
+                                    succeed = "<button class ='succeed' value=" + item.userid +">모임장위임</button>";
                                     checkbox ='<div class="col-6 col-12-small">'
                                         +'<input type="checkbox" id="selectAgreement'
                                         + tableNum
