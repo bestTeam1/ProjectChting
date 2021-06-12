@@ -56,6 +56,7 @@ public class BoardController {
         List<UserDto> groupMemberList = boardService.getGroupMemberList(userid);
 
         model.addAttribute("groupNo", groupNo);
+        model.addAttribute("userid", userid);
         model.addAttribute("groupMemberList", groupMemberList);
 
         return "group/group_management/groupMemberManage";
