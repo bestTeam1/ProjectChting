@@ -91,7 +91,8 @@
     }
 
     $(function(){
-        $('#accept').click(function(){
+        $('#accept').click(function(event){
+            event.preventDefault();
             var requests = [];
             $('input[name=selectAgreement]:checked').each(function(){
                 var chk = $(this).val();
@@ -151,7 +152,8 @@
     });
 
     $(function(){
-        $('#refuse').click(function(){
+        $('#refuse').click(function(event){
+            event.preventDefault();
             var requests = [];
             $('input[name=selectAgreement]:checked').each(function(){
                 var chk = $(this).val();
@@ -185,7 +187,9 @@
                             +'<td>'+ item.gender +'</td>'
                             +'<td>'
                             +'<div class="col-6 col-12-small">'
-                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="' + item.userid + '" >'
+                            +'<input type="checkbox" id="selectAgreement'
+                            + tableNum
+                            +'" name="selectAgreement" value="' + item.userid + '" >'
                             +'<label for="selectAgreement'+ tableNum +'"></label>'
                             +'</div>'
                             +'</td>'
