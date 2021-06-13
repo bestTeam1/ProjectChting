@@ -53,15 +53,6 @@
 
     //가입신청 Table
     function memberList() {
-        $('#memberList').append(
-            '<tr style="background-color: lightgrey">'
-            + '<th style="text-align: center">직책</th>'
-            + '<th style="text-align: center">이름</th>'
-            + '<th style="text-align: center">권한</th>'
-            + '<th style="text-align: center">강퇴</th>'
-            + '</tr>'
-        );
-
         var tableNum = 0;
 
         <c:forEach items="${groupMemberList}" var="member">
@@ -79,24 +70,39 @@
                 checkbox ='<div class="col-6 col-12-small">'
                     +'<input type="checkbox" id="selectAgreement'+ tableNum
                     +'" name="selectAgreement" value="${member.userid}" >'
-                    + '<label for="selectAgreement'+ tableNum +'"></label>'
-                    + '</div>';
+                    + '<label for="selectAgreement'+ tableNum +'"></label>' + '</div>';
             }
-            $('#memberList').append(
-                '<tr>'
-                +'<td>'
-                + position
-                +'</td>'
-                +'<td>${member.nickname}</td>'
-                +'<td>' + succeed +'</td>'
-                +'<td>'
-                + checkbox
-                +'</td>'
-                +'</tr>'
-            );
+            if(position_no == 1) {
+                $('#memberList').prepend(
+                    '<tr>'
+                    +'<td>' + position +'</td>'
+                    +'<td>${member.nickname}</td>'
+                    +'<td>' + succeed +'</td>'
+                    +'<td>' + checkbox +'</td>'
+                    +'</tr>'
+                );
+            } else if (position_no == 2) {
+                $('#memberList').append(
+                    '<tr>'
+                    +'<td>' + position +'</td>'
+                    +'<td>${member.nickname}</td>'
+                    +'<td>' + succeed +'</td>'
+                    +'<td>' + checkbox +'</td>'
+                    +'</tr>'
+                );
+            }
             tableNum++;
         })();
         </c:forEach>
+
+        $('#memberList').prepend(
+            '<tr style="background-color: lightgrey">'
+            + '<th style="text-align: center">직책</th>'
+            + '<th style="text-align: center">이름</th>'
+            + '<th style="text-align: center">권한</th>'
+            + '<th style="text-align: center">강퇴</th>'
+            + '</tr>'
+        );
     }
 
     $(function(){
@@ -123,25 +129,35 @@
                             groupNo : $('#groupNo').val()
                         },
                         success : function(data){
-                            var timer = setInterval(function() {
-                                clearInterval(timer);
-                                window.location.href= data;
-                            }, 3000);
-                            Swal.fire(
-                                '모임장 권한을 위임했습니다!<br>자동으로 모임관리에서 나가집니다'
-                            )
+                            if(data == "false") {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: '모임장 위임을 할 수 없습니다..',
+                                    text: '해당 유저는 이미 모임장으로 속해있는 모임이 있습니다',
+                                    footer: '<a href="#">Why do I have this issue?</a>'
+                                })
+                            } else {
+                                    Swal.fire(
+                                        '모임장 권한을 위임했습니다!<br>자동으로 모임관리에서 나가집니다'
+                                    )
+                                var timer = setInterval(function() {
+                                    clearInterval(timer);
+                                    window.location.href= data;
+                                }, 3000);
+
+                            }
+
                         },
                         error : function(request, status, error) {
                             console.log(error)
                         }
                     });
-
                 }
             })
         });
 
 
-//모임 강퇴 클릭
+        //모임 강퇴 클릭
         $('#banish').click(function(event){
             event.preventDefault();
             Swal.fire({
@@ -172,14 +188,6 @@
                         success : function(data){
                             console.log(data);
                             $('#memberList').children().remove();
-                            $('#memberList').append(
-                                '<tr style="background-color:lightgrey">'
-                                + '<th style="text-align: center">이름</th>'
-                                + '<th style="text-align: center">소개</th>'
-                                + '<th style="text-align: center">성별</th>'
-                                + '<th style="text-align: center">선택</th>'
-                                + '</tr>'
-                            );
                             console.log(Object.keys(data).length); // json갯수
                             var tableNum = 0;
                             $.each(data, function (index, item) {
@@ -199,20 +207,35 @@
                                         + '<label for="selectAgreement'+ tableNum +'"></label>'
                                         + '</div>';
                                 }
-                                $('#memberList').append(
-                                    '<tr>'
-                                    +'<td>'
-                                    + position
-                                    +'</td>'
-                                    +'<td>' + item.nickname + '</td>'
-                                    +'<td>' + succeed +'</td>'
-                                    +'<td>'
-                                    + checkbox
-                                    +'</td>'
-                                    +'</tr>'
-                                );
+                                if(position_no == 1) {
+                                    $('#memberList').prepend(
+                                        '<tr>'
+                                        +'<td>' + position +'</td>'
+                                        +'<td>' + item.nickname + '</td>'
+                                        +'<td>' + succeed +'</td>'
+                                        +'<td>' + checkbox +'</td>'
+                                        +'</tr>'
+                                    );
+                                } else if (position_no == 2) {
+                                    $('#memberList').append(
+                                        '<tr>'
+                                        +'<td>' + position +'</td>'
+                                        +'<td>' + item.nickname + '</td>'
+                                        +'<td>' + succeed +'</td>'
+                                        +'<td>' + checkbox +'</td>'
+                                        +'</tr>'
+                                    );
+                                }
                                 tableNum++;
                             });
+                            $('#memberList').prepend(
+                                '<tr style="background-color:lightgrey">'
+                                + '<th style="text-align: center">이름</th>'
+                                + '<th style="text-align: center">소개</th>'
+                                + '<th style="text-align: center">성별</th>'
+                                + '<th style="text-align: center">선택</th>'
+                                + '</tr>'
+                            );
                         },
                         error : function(request, status, error) {
                             console.log(error)
