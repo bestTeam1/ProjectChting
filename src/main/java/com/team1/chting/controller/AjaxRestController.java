@@ -20,17 +20,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 public class AjaxRestController {
     @Autowired
     private GroupService groupService;
-
+  
     @Autowired
     private UserService userService;
-  
+
     @Autowired
     private NoticeService noticeService;
 
@@ -99,7 +98,6 @@ public class AjaxRestController {
         userService.delAcount(userid);
     }
 
-
     //로그인 -> 지역모임 5개
     @RequestMapping(value="/main/loginedArea", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> areaGroup(){
@@ -117,13 +115,29 @@ public class AjaxRestController {
     }
 
     //로그인 -> 관심사모임 5개
-    @RequestMapping(value="/main/loginedCatecode", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> catecodeGroup(){
+    @RequestMapping(value="/main/loginedCatecode/{userid}", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> catecodeGroup(@PathVariable String userid){
         List<GroupDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
         try {
             list = groupService.catecodeGroup("testuser");
+            result = objmap.writeValueAsString(list);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //사이드바, 로그인유저 -> 자신이 속한 그룹리스트
+    @RequestMapping(value="/side/groupList/{userid}", method=RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> userGroupList(@PathVariable String userid){
+        List<GroupDto> list = null;
+        ObjectMapper objmap = new ObjectMapper();
+        String result = "";
+        try {
+            list = groupService.userGroupList("testuser");
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {

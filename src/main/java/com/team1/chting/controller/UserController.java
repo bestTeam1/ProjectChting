@@ -1,14 +1,19 @@
 package com.team1.chting.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.MyPageInfo;
+import com.team1.chting.dto.MyPageInfo;
 import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,16 +39,22 @@ public class UserController {
     @RequestMapping(value = "myPage.do", method = RequestMethod.GET)
     public String userInfo(Model model) {
 
-        UserDto userInfoBasic = userService.userInfoBasic();
-        List<UserDto> userInterest = userService.userInterest();
-        List<UserDto> userJoinGroup = userService.userJoinGroup();
-
-        model.addAttribute("userInfoBasic", userInfoBasic);
-        model.addAttribute("userInterest", userInterest);
-        model.addAttribute("userJoinGroup", userJoinGroup);
+        model.addAttribute("userInfo", userService.getMyPageInfo());
 
         return "user/userinfo";
     }
 
+    /*
+    마이페이지 회원 정보 수정
+    작성자 : 박주현
+    작성일 : 2021-06-10
+    */
+    @RequestMapping(value = "userUpdate.do", method = RequestMethod.GET)
+    public String userUpdate(Model model) {
+
+        model.addAttribute("userInfo", userService.getMyPageInfo());
+
+        return "user/userUpdate";
+    }
 
 }

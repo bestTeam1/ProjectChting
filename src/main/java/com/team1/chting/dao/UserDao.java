@@ -15,6 +15,8 @@ public interface UserDao {
     //회원 가입한 모임 정보
     List<UserDto> userJoinGroup();
 
+    
+
     //회원 탈퇴
     int deleteAcount(String userid);
 }
