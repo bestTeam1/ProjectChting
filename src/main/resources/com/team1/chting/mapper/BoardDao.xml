@@ -13,13 +13,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getGroupListBySearch" resultType="com.team1.chting.dto.GroupDto">
-        select * from group_info left join area on group_info.area_code = area.area_code where area_name LIKE CONCAT('%',#{param1},'%') and group_name LIKE CONCAT('%',#{param2},'%')
+        select * from group_info left join area on group_info.area_code = area.area_code where area_name
+                        LIKE CONCAT('%',#{category},'%') and group_name LIKE CONCAT('%',#{search},'%') and enabled = 1
     </select>
+
 
     <select id="postByGroup_no" resultType="com.team1.chting.dto.PostDto">
         select pg.post_no, pg.userid, pc.post_catename as post_catecode , pg.subject, pg.writedate
         from post_group pg left join post_category pc ON pg.post_catecode = pc.post_catecode
         where pg.group_no = #{group_no}
     </select>
+
+    <select id="getAdminGroup" resultType="com.team1.chting.dto.GroupDto">
+        select group_no from user_info left join group_user_role gur on user_info.userid = gur.userid
+                                       left join group_role gr on gur.group_role_no = gr.group_role_no
+        where gur.group_role_no = 1 and user_info.userid = #{userid};
+    </select>
+
+    <select id="getGroupJoinRequest" resultType="com.team1.chting.dto.UserDto">
+        select gjr.userid, nickname, gender, content from user_info
+                            left join group_join_request gjr on user_info.userid = gjr.userid
+                            where group_no = #{groupNo} and enabled = 1;
+    </select>
+
+    <insert id="acceptMember">
+        insert into group_user_role (userid, group_no, group_role_no) values ("${requestId}", "${groupNo}", "2")
+    </insert>
+
+    <delete id="deleteRequest">
+        delete from group_join_request where userid = "${requestId}" and group_no = "${groupNo}"
+    </delete>
+
+
+    <select id="getGroupMemberList" resultType="com.team1.chting.dto.UserDto">
+        select gur.userid, nickname, gender, content, gur.group_role_no from user_info left join group_user_role gur on user_info.userid = gur.userid
+                                                        left join group_role gr on gur.group_role_no = gr.group_role_no
+        where group_no = (select group_no from user_info left outer join group_user_role gur
+                                                                         on user_info.userid = gur.userid
+                          where gur.userid = "${userid}" and group_role_no = 1) and enabled = 1
+    </select>
+
+    <delete id="banishMembers">
+        delete from group_user_role where userid = "${requestId}" and group_no = "${groupNo}";
+    </delete>
 </mapper>
 

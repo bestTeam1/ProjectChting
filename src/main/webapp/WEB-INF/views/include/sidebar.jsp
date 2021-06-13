@@ -10,7 +10,31 @@
 </style>
 <!-- Sidebar -->
 <div id="sidebar">
-    <div class="inner">
+
+	<div class="inner">
+
+		<!-- Search -->
+		<section id="search" class="alt">
+			<form method="post" action="#">
+				<input type="text" name="query" id="query" placeholder="Search" />
+			</form>
+		</section>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<header class="major">
+				<h2>Menu</h2>
+			</header>
+			<ul>
+				<li><a href="index.do">ChTing</a></li>
+				<li><a href="groupRecommend.do">모임 추천</a></li>
+				<li><a href="groupMake.do">모임 만들기</a></li>
+<%--				<li><span class="opener">나의 모임</span>--%>
+<%--					<ul>--%>
+<%--						<li><a href="#">조선 제1조 모임</a></li>--%>
+<%--						<li><a href="#">조선 제2조 모임</a></li>--%>
+<%--						<li><a href="#">조선 제3조 모임</a></li>--%>
+<%--					</ul></li>--%>
 
         <!-- Search -->
         <section id="search" class="alt">
@@ -38,30 +62,6 @@
                                     </ul>
                                 </li>--%>
         </nav>
-
-        <%--		<!-- Section -->--%>
-        <%--		<section>--%>
-        <%--			<div class="mini-posts">--%>
-        <%--				<article>--%>
-        <%--					<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>--%>
-        <%--					<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper--%>
-        <%--						dolore aliquam.</p>--%>
-        <%--				</article>--%>
-        <%--				<article>--%>
-        <%--					<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>--%>
-        <%--					<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper--%>
-        <%--						dolore aliquam.</p>--%>
-        <%--				</article>--%>
-        <%--				<article>--%>
-        <%--					<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>--%>
-        <%--					<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper--%>
-        <%--						dolore aliquam.</p>--%>
-        <%--				</article>--%>
-        <%--			</div>--%>
-        <%--			<ul class="actions">--%>
-        <%--				<li><a href="#" class="button">More</a></li>--%>
-        <%--			</ul>--%>
-        <%--		</section>--%>
 
         <!-- Section -->
         <%--		<section>--%>

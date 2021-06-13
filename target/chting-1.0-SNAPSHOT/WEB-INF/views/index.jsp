@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Editorial by HTML5 UP</title>
+    <title>Chting(취팅)</title>
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -72,11 +72,9 @@
 					<div class="content">
                         <!-- Swiper -->
                         <div class="swiper-container mySwiper" style="width: 900px">
-                            <div class="swiper-wrapper">
+                            <div class="swiper-wrapper" id="slider">
                                 <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
-                                <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
-                                <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
-                                <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
+
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -91,81 +89,24 @@
                     <h2>공지사항</h2>
                 </header>
                 <div class="features">
-                    <ul>
-                    <c:forEach var="item" items="${list}" begin="0" end="2">
-                        <a href="noticeDetail.do?notice_no=${item.notice_no}"><li>${item.subject}</li></a>
-                    </c:forEach>
+                    <ul id="noticeList">
+
                     </ul>
                 </div>
             </section>
 
-            <!-- Section -->
-            <section>
+            <!-- 추천모임 -->
+            <!-- 비회원 -> 랜덤모임 10개 -->
+            <!-- 회원 -> 지역 5개, 관심사 5개 -->
+            <section id="recommandGroup">
                 <header class="major">
-                    <h2>Ipsum sed dolor</h2>
+                    <h2>추천모임</h2>
                 </header>
+                <div id="title1"></div>
                 <div class="posts">
-                    <article>
-                        <a href="#" class="image"><img src="images/pic01.jpg" alt=""/></a>
-                        <h3>Interdum aenean</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic02.jpg" alt=""/></a>
-                        <h3>Nulla amet dolore</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic03.jpg" alt=""/></a>
-                        <h3>Tempus ullamcorper</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic04.jpg" alt=""/></a>
-                        <h3>Sed etiam facilis</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic05.jpg" alt=""/></a>
-                        <h3>Feugiat lorem aenean</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
-                    <article>
-                        <a href="#" class="image"><img src="images/pic06.jpg" alt=""/></a>
-                        <h3>Amet varius aliquam</h3>
-                        <p>Aenean ornare velit lacus, ac varius enim lorem
-                            ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed
-                            nulla amet lorem feugiat tempus aliquam.</p>
-                        <ul class="actions">
-                            <li><a href="#" class="button">More</a></li>
-                        </ul>
-                    </article>
+
                 </div>
+                <div id="title2"></div>
             </section>
 
         </div>
@@ -175,22 +116,107 @@
 </div>
 </body>
 <script type="text/javascript">
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView : 1, //슬라이드 표시할 사진갯수
-        spaceBetween: 30,
-        centeredSlides: false,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
+    //이벤트 슬라이드
+    let slider = $('#slider');
+    $.ajax({
+        url : "main/event",
+        data : {},
+        dataType:"json",
+        type:"get",
+        success : function(response) {
+            response.forEach(event => {
+                console.log(event);
+                slider.append("<div class='swiper-slide'><a href='eventDetail.do?event_no=" + event.event_no + "'><img src='" + event.event_img + "'></a></div>");
+            });
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView : 1, //슬라이드 표시할 사진갯수
+                spaceBetween: 30,
+                centeredSlides: false,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+        }
     });
+
+    //공지사항
+    let noticeList = $('#noticeList');
+    $.ajax({
+       url : "main/notice",
+       data : {},
+       dataType:"json",
+       type:"get",
+       success : function(response) {
+           response.forEach(notice => {
+              noticeList.append("<a href='noticeDetail.do?notice_no='" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
+           });
+       }
+    });
+
+
+    //추천모임
+    //로그인상태검사
+    let posts = $('.posts');
+    if(${empty pageContext.request.userPrincipal}) {
+        console.log("비로그인상태");
+        $.ajax({
+           url : "main/nologin",
+           data : {},
+           dataType : "json",
+           type : "get",
+           success : function(response){
+               response.forEach(group => {
+                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+               });
+           },
+           error : function(Http, status, error) {
+               console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+           }
+        });
+    } else {
+        console.log("로그인상태");
+        $('#title1').html("같은 지역 추천모임");
+        $('#title2').html("같은 관심사 추천모임");
+
+        $.ajax({
+            url : "main/loginedArea",
+            data : {},
+            dataType : "json",
+            type : "get",
+            success : function(response){
+                response.forEach(group => {
+                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                });
+            },
+            error : function(Http, status, error) {
+                console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+            }
+        });
+        $('#recommandGroup').append("<div class='posts' id='posts'></div>");
+        let posts2 = $('#posts');
+        $.ajax({
+            url : "main/loginedCatecode",
+            data : {},
+            dataType : "json",
+            type : "get",
+            success : function(response){
+                response.forEach(group => {
+                    posts2.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                });
+            },
+            error : function(Http, status, error) {
+                console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+            }
+        });
+    }
 </script>
 </html>

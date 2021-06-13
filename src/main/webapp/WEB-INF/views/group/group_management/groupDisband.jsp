@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>취팅 모임을 추천합니다!</title>
+    <title>모임 관리</title>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -76,67 +76,27 @@
         }
         a { text-decoration:none !important }
         a:hover { text-decoration:none !important }
+
     </style>
 </head>
 <body class="is-preload">
-
-<!-- 로그인 기능 구현 전 임시로 이동하는 코드 , 로그인 구현 이후에는 로그인 정보를 담아서 가면됩니다. -->
-<a href = "groupJoin.do?userid=testuser"><h1>모임관리 임시</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
             <!-- Banner -->
-            <section>
-                <div class="content">
-                    <header>
-                        <!-- Search -->
-                        <section id="search" class="alt">
-                            <form method="post" action="#" style="height: 50px; width:70%;">
-                                <select id="areaCategory"  style="width: 30%; float:left;">
-                                    <option value="">전체</option>
-                                </select>
-                                <input type="text" name="query" id="searchValue" placeholder="Search"  style="width: 50%; float:left; "/>
-                                <input type="button" id="searchButton" value="모임찾기" style="float: left"/>
-                            </form>
-                        </section>
-                        <section class="slide">
-                        <h3>NEW</h3>
-                        <!-- Swiper -->
-                        <div class="swiper-container mySwiper" style="width: 1000px">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><a href = "index.do" style="" >모임 1<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 2<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 3<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 4<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                        </section>
-                        <section class="slide2">
-                            <h3>BEST</h3>
-                            <!-- Swiper -->
-                            <div class="swiper-container mySwiper" style="width: 1000px">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><a href = "index.do" >모임 1<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 2<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 3<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 4<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </section>
-                    </header>
-                </div>
+            <section id="main">
+                <h1 style="text-align: center"> {이름} 모임을 해산하시겠습니까? </h1>
+                <h2 style="text-align: center"> !!! 한번 해산하면 되돌릴 수 없습니다 !!!</h2>
             </section>
-
+            <div style="display: flex; justify-content: center;">
+                <ul class="actions" style="text-align: center">
+                    <li><a href="#" class="button primary">해산하기</a></li>
+                </ul>
+            </div>
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>

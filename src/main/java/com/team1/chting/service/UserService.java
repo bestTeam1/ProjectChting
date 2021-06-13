@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.MyPageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -24,17 +25,14 @@ public class UserService {
     작성자 : 박주현
     작성일 : 2021-06-07
     */
-
-    public List<UserDto> userInfoBasic(){
-
+    public UserDto userInfoBasic() {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
-        List<UserDto> UserInfoBasicList = userDao.userInfoBasic();
+        UserDto userDto = userDao.userInfoBasic();
 
-        return UserInfoBasicList;
+        return userDto;
     }
 
     public List<UserDto> userInterest() {
-
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<UserDto> UserInterestList = userDao.userInterest();
 
@@ -42,10 +40,41 @@ public class UserService {
     }
 
     public List<UserDto> userJoinGroup() {
-
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<UserDto> UserJoinGroupList = userDao.userJoinGroup();
 
         return UserJoinGroupList;
     }
+
+    public MyPageInfo getMyPageInfo() {
+        MyPageInfo myPageInfo = new MyPageInfo();
+
+        myPageInfo.
+                setUserInfoBasic(userInfoBasic()).
+                setUserInterest(userInterest()).
+                setUserJoinGroup(userJoinGroup());
+
+        return myPageInfo;
+    }
+
+
+    /*
+    회원 탈퇴
+    작성자 : 박주현
+    작성일 : 2021-06-09
+    */
+    public void delAcount(String userid) {
+
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        int result = userDao.deleteAcount(userid);
+
+        if(result > 0){
+            System.out.println("회원 탈퇴 성공");
+        }else{
+            System.out.println("회원 탈퇴 실패");
+        }
+    }
+
+
+
 }
