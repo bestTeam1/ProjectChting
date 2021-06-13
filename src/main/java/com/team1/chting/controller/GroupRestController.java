@@ -51,19 +51,18 @@ public class GroupRestController {
                                                 @RequestParam("requestUserid") String requestUserid,
                                                 @RequestParam("groupNo") String groupNo){
 
-        boardService.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
+        //위임하려는 멤버가 이미 모임장인 모임이 있는지 체크
+        boolean check = boardService.duplicateGroupAdminCheck(requestUserid);
 
-
-        ObjectMapper objmap = new ObjectMapper();
-
-        String resultUrl = "http://localhost:8090/chting_war_exploded/board_main.do?group_no=" + groupNo ;
-
-        try {
+        if(check == true) { // 모임장인 모임이 이미있다(모임장 위임불가능 상태)
+            String alertMsg = "false";
+            return new ResponseEntity<String>(alertMsg,HttpStatus.OK);
+        } else { //위임장인 모임이 없다(모임장 위임 가능상태)
+            //모임장 위임
+            boardService.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
+            String resultUrl = "http://localhost:8090/chting_war_exploded/board_main.do?group_no=" + groupNo;
             return new ResponseEntity<String>(resultUrl, HttpStatus.OK);
-        } catch (Exception e) {
-            return  new ResponseEntity<String>(resultUrl, HttpStatus.BAD_GATEWAY);
         }
-
     }
 
 }
