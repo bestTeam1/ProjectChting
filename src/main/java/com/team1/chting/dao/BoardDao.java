@@ -2,6 +2,7 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
 
