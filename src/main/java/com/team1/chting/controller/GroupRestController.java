@@ -2,7 +2,7 @@ package com.team1.chting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team1.chting.dto.UserDto;
-import com.team1.chting.service.BoardService;
+import com.team1.chting.service.GroupAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GroupRestController {
 
     @Autowired
-    private BoardService boardService;
+    private GroupAdminService broupAdminService;
 
     //모임원 강퇴
     @RequestMapping(value="banishMember.do", method= RequestMethod.GET, produces = "application/json")
@@ -25,7 +25,7 @@ public class GroupRestController {
                                                 @RequestParam("groupNo") String groupNo,
                                                 @RequestParam("userid") String userid){
 
-        boardService.banishMembers(banishList, groupNo);
+        broupAdminService.banishMembers(banishList, groupNo);
 
         ObjectMapper objmap = new ObjectMapper();
 
@@ -33,7 +33,7 @@ public class GroupRestController {
         String result = "";
 
         try {
-            list = boardService.getGroupMemberList(userid);
+            list = broupAdminService.getGroupMemberList(userid);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -49,14 +49,14 @@ public class GroupRestController {
                                                 @RequestParam("groupNo") String groupNo){
 
         //위임하려는 멤버가 이미 모임장인 모임이 있는지 체크
-        boolean check = boardService.duplicateGroupAdminCheck(requestUserid);
+        boolean check = broupAdminService.duplicateGroupAdminCheck(requestUserid);
 
         if(check == true) { // 모임장인 모임이 이미있다(모임장 위임불가능 상태)
             String alertMsg = "false";
             return new ResponseEntity<String>(alertMsg,HttpStatus.OK);
         } else { //위임장인 모임이 없다(모임장 위임 가능상태)
             //모임장 위임
-            boardService.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
+            broupAdminService.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
             String resultUrl = "http://localhost:8090/chting_war_exploded/board_main.do?group_no=" + groupNo;
             return new ResponseEntity<String>(resultUrl, HttpStatus.OK);
         }
@@ -66,7 +66,7 @@ public class GroupRestController {
     //가입신청 승인
     @RequestMapping(value="joinAccept.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> joinAccept(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
-        boardService.acceptMembers(requestList, groupNo);
+        broupAdminService.acceptMembers(requestList, groupNo);
         List<UserDto> list = null;
 
         ObjectMapper objmap = new ObjectMapper();
@@ -74,7 +74,7 @@ public class GroupRestController {
         String result = "";
 
         try {
-            list = boardService.getGroupJoinRequest(groupNo);
+            list = broupAdminService.getGroupJoinRequest(groupNo);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -85,7 +85,7 @@ public class GroupRestController {
     //가입신청 거부
     @RequestMapping(value="joinDeny.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> joinDeny(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
-        boardService.deleteRequest(requestList, groupNo);
+        broupAdminService.deleteRequest(requestList, groupNo);
         List<UserDto> list = null;
 
         ObjectMapper objmap = new ObjectMapper();
@@ -93,7 +93,7 @@ public class GroupRestController {
         String result = "";
 
         try {
-            list = boardService.getGroupJoinRequest(groupNo);
+            list = broupAdminService.getGroupJoinRequest(groupNo);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
