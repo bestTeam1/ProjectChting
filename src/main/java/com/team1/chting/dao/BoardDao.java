@@ -43,5 +43,10 @@ public interface BoardDao {
 
     //멤버 강퇴
     public void banishMembers(@Param("requestId") String requestId, @Param("groupNo") String groupNo);
+  
+    //모임장권한위임
+    public void succeedGroupAdmin(@Param("adminUserid") String adminUserid,
+                                  @Param("requestUserid") String requestUserid,
+                                  @Param("groupNo") String groupNo);
 
 }
