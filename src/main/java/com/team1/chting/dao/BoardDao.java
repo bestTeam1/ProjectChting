@@ -49,4 +49,7 @@ public interface BoardDao {
                                   @Param("requestUserid") String requestUserid,
                                   @Param("groupNo") String groupNo);
 
+    //모임장 위임시 이미 모임장인 모임이 있는지 체크
+    public List<UserDto> duplicateGroupAdminCheck(@Param("userid") String userid);
+
 }
