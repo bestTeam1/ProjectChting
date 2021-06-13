@@ -21,7 +21,6 @@ public interface GroupDao {
     //비회원 -> 랜덤모임 10개
     public List<GroupDto> randomGroup();
 
-    public interface GroupDao {
     // 게시글 글쓰기
     public void insert(PostDto postDto);
 
