@@ -2,9 +2,10 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.access.method.P;
+
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public interface BoardDao {
 
     //BEST 추천 모임
     public List<GroupDto> getBestGroupList();
+
+    //게시판페이지 -> 그룹넘버를 이용한 검색
+    public List<PostDto> postByGroup_no(String Group_no);
 
     //모임검색
     public List<GroupDto> getGroupListBySearch(@Param("category") String category,@Param("search") String search);
@@ -39,7 +43,7 @@ public interface BoardDao {
 
     //멤버 강퇴
     public void banishMembers(@Param("requestId") String requestId, @Param("groupNo") String groupNo);
-
+  
     //모임장권한위임
     public void succeedGroupAdmin(@Param("adminUserid") String adminUserid,
                                   @Param("requestUserid") String requestUserid,
