@@ -116,73 +116,32 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         url : "succeedGroupAdmin.do",
-                        dataType : "json",
+                        dataType : "text",
                         data : {
                             adminUserid : $('#userid').val(),
                             requestUserid : $(this).val(),
                             groupNo : $('#groupNo').val()
                         },
                         success : function(data){
-                            console.log(data);
-                            $('#memberList').children().remove();
-                            $('#memberList').append(
-                                '<tr style="background-color:lightgrey">'
-                                + '<th style="text-align: center">이름</th>'
-                                + '<th style="text-align: center">소개</th>'
-                                + '<th style="text-align: center">성별</th>'
-                                + '<th style="text-align: center">선택</th>'
-                                + '</tr>'
-                            );
-
-                            console.log(Object.keys(data).length); // json갯수
-                            var tableNum = 0;
-
-                            $.each(data, function (index, item) {
-                                var position_no = item.group_role_no;
-                                var position = "";
-                                var succeed = "";
-                                var checkbox = "";
-
-                                if(position_no == 1 ) {
-                                    position = "모임장";
-                                } else if (position_no == 2) {
-                                    position = "모임원";
-                                    succeed = "<button class ='succeed' value=" + item.userid +">모임장위임</button>";
-                                    checkbox ='<div class="col-6 col-12-small">'
-                                        +'<input type="checkbox" id="selectAgreement'
-                                        + tableNum
-                                        +'" name="selectAgreement" value="' + item.userid + '" >'
-                                        + '<label for="selectAgreement'+ tableNum +'"></label>'
-                                        + '</div>';
-                                }
-                                $('#memberList').append(
-                                    '<tr>'
-                                    +'<td>'
-                                    + position
-                                    +'</td>'
-                                    +'<td>' + item.nickname + '</td>'
-                                    +'<td>' + succeed +'</td>'
-                                    +'<td>'
-                                    + checkbox
-                                    +'</td>'
-                                    +'</tr>'
-                                );
-                                tableNum++;
-                            });
+                            var timer = setInterval(function() {
+                                clearInterval(timer);
+                                window.location.href= data;
+                            }, 3000);
+                            Swal.fire(
+                                '모임장 권한을 위임했습니다!<br>자동으로 모임관리에서 나가집니다'
+                            )
                         },
                         error : function(request, status, error) {
                             console.log(error)
                         }
                     });
-                    Swal.fire(
-                        '모임장이 위임되었습니다'
-                    )
+
                 }
             })
         });
 
 
-        //모임 강퇴 클릭
+//모임 강퇴 클릭
         $('#banish').click(function(event){
             event.preventDefault();
             Swal.fire({
@@ -221,16 +180,13 @@
                                 + '<th style="text-align: center">선택</th>'
                                 + '</tr>'
                             );
-
                             console.log(Object.keys(data).length); // json갯수
                             var tableNum = 0;
-
                             $.each(data, function (index, item) {
                                 var position_no = item.group_role_no;
                                 var position = "";
                                 var succeed = "";
                                 var checkbox = "";
-
                                 if(position_no == 1 ) {
                                     position = "모임장";
                                 } else if (position_no == 2) {
