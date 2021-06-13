@@ -5,72 +5,32 @@
   Time: 2:42 오후
   To change this template use File | Settings | File Templates.
 --%>
-
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <html>
+
 <head>
-    <meta charset=UTF-8">
-    <title>내가 가입한 모임 - 일정</title>
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-        }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
-    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FullCalendar Example</title>
+    <link rel="stylesheet" href="vendor/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href='vendor/css/select2.min.css' />
+    <link rel="stylesheet" href='vendor/css/bootstrap-datetimepicker.min.css' />
+    <link rel="stylesheet" href="css/main.css">
+
+
 </head>
 <body class="is-preload">
-<link rel="stylesheet" href="assets/css/fullcalendar_main.css">
-
-
-
 <!-- Wrapper -->
 <%--<div id="wrapper">--%>
-<div>
+<div id="wrapper">
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
                 <div class="content">
@@ -78,6 +38,7 @@
                         <h2>쿠키런킹덤 - 일정표</h2>
                     </header>
                     <div class="container">
+
                         <!-- 일자 클릭시 메뉴오픈 -->
                         <div id="contextMenu" class="dropdown clearfix">
                             <ul class="dropdown-menu dropNewEvent" role="menu"
@@ -154,15 +115,25 @@
 
                     </div>
                     <!-- /.container -->
+
+
                 </div>
             </section>
-
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
+    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
-
+<script src="vendor/js/jquery.min.js"></script>
+<script src="vendor/js/bootstrap.min.js"></script>
+<script src="vendor/js/moment.min.js"></script>
+<script src="vendor/js/fullcalendar.min.js"></script>
+<script src="vendor/js/ko.js"></script>
+<script src="vendor/js/select2.min.js"></script>
+<script src="vendor/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/addEvent.js"></script>
+<script src="js/editEvent.js"></script>
+<script src="js/etcSetting.js"></script>
 </body>
-
 </html>
