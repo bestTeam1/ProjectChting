@@ -17,6 +17,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         LIKE CONCAT('%',#{category},'%') and group_name LIKE CONCAT('%',#{search},'%') and enabled = 1
     </select>
 
+
+    <select id="postByGroup_no" resultType="com.team1.chting.dto.PostDto">
+        select pg.post_no, pg.userid, pc.post_catename as post_catecode , pg.subject, pg.writedate
+        from post_group pg left join post_category pc ON pg.post_catecode = pc.post_catecode
+        where pg.group_no = #{group_no}
+    </select>
+
     <select id="getAdminGroup" resultType="com.team1.chting.dto.GroupDto">
         select group_no from user_info left join group_user_role gur on user_info.userid = gur.userid
                                        left join group_role gr on gur.group_role_no = gr.group_role_no
@@ -49,6 +56,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="banishMembers">
         delete from group_user_role where userid = "${requestId}" and group_no = "${groupNo}";
     </delete>
-
 </mapper>
 
