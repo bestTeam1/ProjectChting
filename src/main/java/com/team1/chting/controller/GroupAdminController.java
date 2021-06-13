@@ -58,10 +58,18 @@ public class GroupAdminController {
         return "group/group_management/groupBlackListManage";
     }
 
-    //모임관리(모임해산)
+    //모임관리(모임해산 페이지 이동)
     @RequestMapping(value = "groupDisband.do", method = RequestMethod.GET)
     public String groupDisband(@RequestParam("userid") String userid, Model model) {
-        
+
+        GroupDto groupDto = groupAdminService.getAdminGroup(userid);
+
+
+
+        groupAdminService.groupDisband(groupDto.getGroup_no());
+
+
+        groupAdminService.groupDisband(userid);
 
         return "group/group_management/groupDisband";
     }

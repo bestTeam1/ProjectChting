@@ -146,6 +146,17 @@ public class GroupAdminService {
         }
         return false;
     }
+    /*
+     자신이 모임장으로 있는 모임 해산
+     작성자 : 이승준
+     작성일 : 2021-06-14
+    */
+    public void groupDisband(String userid) {
+
+
+
+        return;
+    }
 
 
 }

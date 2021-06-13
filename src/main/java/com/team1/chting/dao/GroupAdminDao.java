@@ -34,4 +34,7 @@ public interface GroupAdminDao {
     //모임장 위임시 이미 모임장인 모임이 있는지 체크
     public List<UserDto> duplicateGroupAdminCheck(@Param("userid") String userid);
 
+    //모임 해산
+    public void groupDisband(@Param("userid") String userid);
+
 }
