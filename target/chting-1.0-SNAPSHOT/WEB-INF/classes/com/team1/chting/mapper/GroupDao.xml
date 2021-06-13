@@ -12,6 +12,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
     </select>
+  
+  <!--  글쓰기  -->
+    <insert id="insert" parameterType="com.team1.chting.dto.PostDto">
+        insert into post_group values (null,#{group_no},'testuser',
+                                       #{post_catecode},#{subject},#{content},
+                                       #{file},#{writedate})
+    </insert>
+
+<!-- 상세보기 -->
+    <select id="read" parameterType="int" resultType="com.team1.chting.dto.PostDto">
+        select *
+        from post_group
+        where post_no = #{post_no}
+    </select>
 
     <select id="randomGroup" resultType="com.team1.chting.dto.GroupDto">
        (SELECT group_no, group_name, group_img, content FROM group_info WHERE enabled = 1 LIMIT 10) order by rand();
@@ -43,5 +57,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by pg.cnt desc
             limit 5
     </select>
-
 </mapper>
