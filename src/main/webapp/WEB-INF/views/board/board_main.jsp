@@ -88,8 +88,7 @@
                         <div class="swiper-container mySwiper" style="width: 900px">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <a href = "index.do" style="" >
-                                        조선 제1조 모임<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
+                                    <a href = "#" style="" >${group.group_name}<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
                             </div>
 
                         </div>
@@ -101,7 +100,7 @@
             <%-- 회원리스트 아이콘 --%>
             <div style="text-align: center">
                 <p>
-            회원 : <i class="fa fa-user" aria-hidden="true"></i>
+            회원 : <i class="fa fa-user" aria-hidden="true"></i> ${group.join_user} 명
                 </p>
             </div>
             <br>
@@ -114,7 +113,7 @@
 
                 <table>
                     <tr>
-                        <td style="text-align: center">안뇽하세요 조선 제1조 입니다.</td>
+                        <td style="text-align: center">${group.content}</td>
                     </tr>
                 </table>
             </div>
