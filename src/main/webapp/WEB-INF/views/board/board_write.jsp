@@ -12,6 +12,9 @@
 <html>
 <head>
     <meta charset=UTF-8">
+
+    <title>글쓰기</title>
+
     <title>내가 가입한 모임 - 게시판</title>
     <style>
         html,
@@ -82,9 +85,10 @@
                         <%-- 카테고리 셀렉트  --%>
                         <select name="category" style="width: 170px">
                             <option value="">===카테고리===</option>
-                            <option value="학생">자유글</option>
-                            <option value="회사원">정모후기</option>
-                            <option value="기타">가입인사</option>
+                            <option value="자유글">자유글</option>
+                            <option value="정모후기">정모후기</option>
+                            <option value="가입인사">가입인사</option>
+                            <option value="공지사항">공지사항</option>
                         </select>
                         <br>
 
@@ -111,7 +115,7 @@
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td style="vertical-align: middle">내용</td>
-                                                <td><textarea name="bbs_content" cols="50" rows="13"name="content" placeholder="내용을 입력해 주세요"
+                                                <td><textarea cols="50" rows="13" name="content" placeholder="내용을 입력해 주세요"
                                                               onfocus="this.placeholder = ''"
                                                               onblur="this.placeholder = '내용을 입력해 주세요'"></textarea></td>
                                                 <td>&nbsp;</td>
@@ -129,19 +133,9 @@
                 </div>
             </section>
 
-<%--            <div style="display: flex">--%>
-<%--                <form action="board_write.do">--%>
-<%--                    <input type="submit" value="등록하기">--%>
-<%--                </form>--%>
-<%--                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
-<%--                <form action="board_list.do">--%>
-<%--                    <input type="submit" value="돌아가기">--%>
-<%--                </form>--%>
-<%--            </div>--%>
 
-        <%-- style="text-align: center; display: flex"--%>
 
-            <div style="display: flex">
+            <div style="display: flex; justify-content: center;">
                 <form action="board_write.do">
                     <input type="submit" value="등록">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
