@@ -110,7 +110,7 @@ public class BoardService {
 
         return true;
     }
-
+    //가입요청 삭제
     public boolean deleteRequest(List<String> requestList, String groupNo) {
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
 
@@ -126,6 +126,7 @@ public class BoardService {
         return true;
     }
 
+    //멤버강퇴
     public void banishMembers(List<String> banishList, String groupNo) {
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
 
@@ -138,4 +139,12 @@ public class BoardService {
         }
 
     }
+
+    //모임장 위임
+    public void succeedGroupAdmin(String adminUserid, String requestUserid, String groupNo) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        boardDao.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
+    }
+
+
 }
