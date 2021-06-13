@@ -4,6 +4,7 @@ import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import java.util.List;
 
@@ -38,5 +39,10 @@ public interface BoardDao {
 
     //멤버 강퇴
     public void banishMembers(@Param("requestId") String requestId, @Param("groupNo") String groupNo);
+
+    //모임장권한위임
+    public void succeedGroupAdmin(@Param("adminUserid") String adminUserid,
+                                  @Param("requestUserid") String requestUserid,
+                                  @Param("groupNo") String groupNo);
 
 }
