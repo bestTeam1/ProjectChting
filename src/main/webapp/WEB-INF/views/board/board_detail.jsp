@@ -124,6 +124,7 @@
             <section>
                 <div class="content">
                     <header>
+
                         <table class="table table-striped">
                             <select id="post_catename" name="post_catename" style="width: 170px; float: right">
                                 <option value="">===카테고리===</option>
@@ -132,16 +133,20 @@
                                 <option value="가입인사">가입인사</option>
                                 <option value="공지사항">공지사항</option>
                             </select>
+                        </table>
 
+                        <th width=50%  class="text-center danger">제목</th>
+                            <table>
                             <tr>
-                                <th width=30%  class="text-center danger">제목</th>
+                                <%-- 제목 --%>
                                 <td colspan="3" class="text-left">${plist.subject }</td>
                             </tr>
                             </table>
 
+                        <th>내용</th>
                         <table>
                             <tr>
-                                <th>내용</th>
+                                <%-- 내용 --%>
                                 <td colspan="4" class="text-left" valign="top" height=200>
                                     ${plist.content }
                                 </td>
@@ -150,8 +155,10 @@
 
                         <div style="display: flex; justify-content: center">
                             <input type="button" onclick="" value="수정"/> &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp;
                             <input type="button" onclick="" value="삭제"/> &nbsp;
-                            <button type="button" onclick="location.href='#'">목록</button>
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            <button type="button" onclick="location.href='board_list.do'">목록</button>
                         </div>
 
 <%--                <div style=“display:flex; justify-content: center;“>--%>
