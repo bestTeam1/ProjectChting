@@ -20,7 +20,11 @@ public class BoardService {
     @Autowired
     private SqlSession sqlsession;
 
-    //Area 정보 가져오기
+    /*
+    Area 정보 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-07
+    */
     public List<AreaDto> getAreaList() {
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -29,7 +33,11 @@ public class BoardService {
         return areaList;
     }
 
-    //New 모임 가져오기
+    /*
+    New 모임 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-07
+    */
     public List<GroupDto> newGroupList(){
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -37,7 +45,11 @@ public class BoardService {
 
         return newList;
     }
-    //Best 모임 가져오기
+    /*
+    Best 모임 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-07
+    */
     public List<GroupDto> bestGroupList(){
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -46,7 +58,11 @@ public class BoardService {
         return bestList;
     }
 
-    //Group 검색
+    /*
+    Group 검색
+    작성자 : 이승준
+    작성일 : 2021-06-07
+    */
     public List<GroupDto> getGroupListBySearch(String category, String search) {
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -63,7 +79,11 @@ public class BoardService {
         return postList;
     }
 
-    //모임장으로 있는 모임Number 가져오기
+    /*
+    모임장으로 있는 모임Number 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-08
+    */
     public GroupDto getAdminGroup(String userid) {
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -74,7 +94,11 @@ public class BoardService {
         return group;
     }
 
-    //Group 가입신청 목록 가져오기
+    /*
+    Group 가입신청 목록 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-09
+    */
     public List<UserDto> getGroupJoinRequest(String groupNo) {
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -83,7 +107,11 @@ public class BoardService {
         return groupJoinRequest;
     }
 
-    //GroupMember 가져오기
+    /*
+    Group 멤버 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-09
+    */
     public List<UserDto> getGroupMemberList(String userid) {
         System.out.println("서비스 userid: " + userid);
 
@@ -93,7 +121,11 @@ public class BoardService {
         return groupMemberList;
     }
 
-    //가입 승인
+    /*
+    가입 승인 Transaction
+    작성자 : 이승준
+    작성일 : 2021-06-09
+    */
     @Transactional
     public boolean acceptMembers(List<String> requestList, String groupNo) {
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
@@ -110,7 +142,11 @@ public class BoardService {
 
         return true;
     }
-    //가입요청 삭제
+    /*
+    모임가입 거절
+    작성자 : 이승준
+    작성일 : 2021-06-10
+    */
     public boolean deleteRequest(List<String> requestList, String groupNo) {
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
 
@@ -126,7 +162,11 @@ public class BoardService {
         return true;
     }
 
-    //멤버강퇴
+    /*
+    모임멤버 강퇴
+    작성자 : 이승준
+    작성일 : 2021-06-11
+    */
     public void banishMembers(List<String> banishList, String groupNo) {
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
 
@@ -140,10 +180,34 @@ public class BoardService {
 
     }
 
-    //모임장 위임
+    /*
+    모임장 위임
+    작성자 : 이승준
+    작성일 : 2021-06-12
+    */
     public void succeedGroupAdmin(String adminUserid, String requestUserid, String groupNo) {
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
         boardDao.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
+    }
+
+    /*
+    모임장 위임시 이미 모임장으로 있는 모임이 있는지 체크
+    작성자 : 이승준
+    작성일 : 2021-06-13
+    */
+    public boolean duplicateGroupAdminCheck(String userid) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        List<UserDto> checkList = boardDao.duplicateGroupAdminCheck(userid);
+
+
+        for(UserDto dto :checkList) {
+            //그룹권한중에 1(Admin)인것이 있으면
+            if(dto.getGroup_role_no() == 1){
+                System.out.println("it's true!!!!!!!!");
+                return true;
+            }
+        }
+        return false;
     }
 
 
