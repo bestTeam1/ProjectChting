@@ -2,7 +2,7 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.UserDto;
-import com.team1.chting.service.BoardService;
+import com.team1.chting.service.GroupAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +16,19 @@ import java.util.List;
 public class GroupAdminController {
 
     @Autowired
-    private BoardService boardService;
+    private GroupAdminService groupAdminService;
 
     //모임관리(가입신청관리 페이지 이동)
     @RequestMapping(value = "groupJoin.do", method = RequestMethod.GET)
     public String groupJoin(@RequestParam("userid") String userid, Model model) {
 
         //로그인한 유저가 속해있는
-        GroupDto adminGroup = boardService.getAdminGroup(userid);
+        GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
         if(groupNo == null) { //모임장으로 속해있는 모임이 없다면?
             return "group/group_error/HasNoGroupError"; //모임장없음 에러페이지로 이동
         }
-        List<UserDto> groupJoinRequest = boardService.getGroupJoinRequest(groupNo);
+        List<UserDto> groupJoinRequest = groupAdminService.getGroupJoinRequest(groupNo);
 
         model.addAttribute("groupNo", groupNo);
         model.addAttribute("groupJoinRequest", groupJoinRequest);
@@ -40,9 +40,9 @@ public class GroupAdminController {
     @RequestMapping(value = "groupMemberManage.do", method = RequestMethod.GET)
     public String groupMemberManage(@RequestParam("userid") String userid, Model model) {
 
-        GroupDto adminGroup = boardService.getAdminGroup(userid);
+        GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
-        List<UserDto> groupMemberList = boardService.getGroupMemberList(userid);
+        List<UserDto> groupMemberList = groupAdminService.getGroupMemberList(userid);
 
         model.addAttribute("groupNo", groupNo);
         model.addAttribute("userid", userid);
@@ -60,7 +60,8 @@ public class GroupAdminController {
 
     //모임관리(모임해산)
     @RequestMapping(value = "groupDisband.do", method = RequestMethod.GET)
-    public String groupDisband(Model model) {
+    public String groupDisband(@RequestParam("userid") String userid, Model model) {
+        
 
         return "group/group_management/groupDisband";
     }
