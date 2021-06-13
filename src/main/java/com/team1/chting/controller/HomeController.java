@@ -20,24 +20,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
+
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() { return "index";}
 
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index(Model model) {
-		List<NoticeDto> list = new ArrayList<NoticeDto>();
-		list = noticeService.recentlyNotice();
-		model.addAttribute("list",list);
-
-		return "index";
-	}
-
 	public String index() { return "index"; }
 	
 	@RequestMapping(value = "elements.do", method = RequestMethod.GET)
-	public String elements() {
-		return "elements";
-	}
+	public String elements() { return "elements"; }
 	
 	@RequestMapping(value = "generic.do", method = RequestMethod.GET)
 	public String generic() { return "generic"; }
