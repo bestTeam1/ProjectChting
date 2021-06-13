@@ -44,4 +44,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             limit 5
     </select>
 
+      <select id="userGroupList" resultType="com.team1.chting.dto.GroupDto">
+        select gi.group_no, gi.group_name
+        from user_info u
+                 left join group_user_role gur on u.userid = gur.userid
+                 left join group_info gi on gur.group_no = gi.group_no
+        where u.enabled = 1 and u.userid = #{userid}
+    </select>
+
+    <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
+        select gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
+        left join group_user_role gur on gi.group_no = gur.group_no
+        where gi.group_no = #{group_no}
+    </select>
 </mapper>
