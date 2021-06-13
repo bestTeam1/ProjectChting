@@ -45,4 +45,16 @@ public class GroupService {
         return list;
     }
 
+    public List<GroupDto> userGroupList(String userid) {
+        List<GroupDto> list = new ArrayList<GroupDto>();
+        GroupDao dao = sqlsession.getMapper(GroupDao.class);
+        list = dao.userGroupList(userid);
+        return list;
+    }
+
+    public GroupDto groupByGroup_no(String group_no) {
+        GroupDao dao = sqlsession.getMapper(GroupDao.class);
+        GroupDto dto = dao.groupByGroup_no(group_no);
+        return dto;
+    }
 }
