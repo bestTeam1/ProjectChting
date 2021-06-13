@@ -80,6 +80,8 @@
 </head>
 <body class="is-preload">
 
+<!-- 로그인 기능 구현 전 임시로 이동하는 코드 , 로그인 구현 이후에는 로그인 정보를 담아서 가면됩니다. -->
+<a href = "groupJoin.do?userid=testuser"><h1>모임관리 임시</h1></a>
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -182,22 +184,38 @@
                     search : $('#searchValue').val()
                 },
                 success : function(data){
-                    console.log(data);
                     $('.slide').empty();
                     var html = "";
+                    var length = 0;
                     data.forEach(group => {
                         html += '<div class="swiper-slide"><a href = "index.do" style="" >' +group.group_name+ '<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>';
+                        length++;
                     });
+
+                    if(length > 3) {
+                        html += '</div>'
+                            + '<div class="swiper-button-next"></div>'
+                            + '<div class="swiper-button-prev"></div>'
+                            + '<div class="swiper-pagination"></div>';
+                            + '</div>'
+                    }
+
+                    var locationMessage = $('#areaCategory').val()
+
+                    if (locationMessage == "") {
+                        locationMessage = "전체지역의 검색결과"
+                    } else if (locationMessage == "언택트") {
+                        locationMessage = "언택트 검색결과"
+                    } else {
+                        locationMessage += " 지역의 검색결과"
+                    }
+
                     $('.slide').append(
-                            '<h3>검색 결과</h3>'
+                           '<h3>'+ locationMessage +'</h3>'
                         + '<div class="swiper-container mySwiper" style="width: 1000px">'
                         + '<div class="swiper-wrapper">'
                         +  html
-                        + '</div>'
-                        + '<div class="swiper-button-next"></div>'
-                        + '<div class="swiper-button-prev"></div>'
-                        + '<div class="swiper-pagination"></div>'
-                        + '</div>' );
+                         );
 
                     var swiper = new Swiper(".mySwiper", {
                         slidesPerView : 3, //슬라이드 표시할 사진갯수

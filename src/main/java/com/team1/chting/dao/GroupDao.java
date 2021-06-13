@@ -1,8 +1,10 @@
 package com.team1.chting.dao;
 
+import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.GroupDto;
 import org.apache.ibatis.annotations.Param;
-
+import com.team1.chting.utils.Criteria;
+import java.util.Map;
 import java.util.List;
 
 public interface GroupDao {
@@ -33,4 +35,23 @@ public interface GroupDao {
 
     //그룹메인페이지 -> 그룹넘버를 이용한 그룹 검색
     public GroupDto groupByGroup_no(String group_no);
+  
+    // 게시글 작성
+    public void postWirte(PostDto postDto);
+
+    // 게시글 상세보기
+    public GroupDto read(String group_no);
+
+    // 게시글 수정
+    public void update(GroupDto gdto);
+
+    // 게시글 삭제
+    public void delete(String group_no);
+
+    // 게시글 전체 목록
+    public List<PostDto> getPostList();
+
+    // 페이징 리스트?
+    public List<Map<String, Object>> postList(Criteria cri);
+
 }

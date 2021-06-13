@@ -36,42 +36,20 @@
             margin: 0;
             padding: 0;
         }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-        }
+
         a { text-decoration:none !important }
         a:hover { text-decoration:none !important }
+
+        ul.a {
+
+        }
+
     </style>
 </head>
 <body class="is-preload">
 ${newGroupList}
 
-<h3>모임 정보</h3>
+<h3>모임 만들기</h3>
 <c:forEach var="group" items="${newGroupList}">
     <ul>
         <li> ${group.group_name}</li>
@@ -90,46 +68,61 @@ ${newGroupList}
             <section>
                 <div class="content">
                     <header>
-                        <!-- Search -->
-                        <section id="search" class="alt">
-                            <form method="post" action="#" style="height: 50px; width:70%;">
-                                <select id="areaCategory"  style="width: 30%; float:left;">
-                                    <option value="전체">전체</option>
-                                </select>
-                                <input type="text" name="query" id="searchValue" placeholder="Search"  style="width: 50%; float:left; "/>
-                                <input type="button" id="searchButton" value="모임찾기" style="float: left"/>
-                            </form>
-                        </section>
-                        <section class="slide">
-                        <h3>NEW</h3>
-                        <!-- Swiper -->
-                        <div class="swiper-container mySwiper" style="width: 1000px">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide"><a href = "index.do" style="" >모임 1<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 2<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 3<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                <div class="swiper-slide"><a href = "index.do" >모임 4<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                        </section>
-                        <section class="slide">
-                            <h3>BEST</h3>
-                            <!-- Swiper -->
-                            <div class="swiper-container mySwiper" style="width: 1000px">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><a href = "index.do" >모임 1<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 2<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 3<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                    <div class="swiper-slide"><a href = "index.do" >모임 4<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </section>
+
+                        <form method="post" action="WriteAct">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td style="vertical-align: middle">모임 이름</td>
+                                                <td><input name="bbs_title" size="50" maxlength="100"type="text"
+                                                           class="form-control" name="subject" id="title"
+                                                           placeholder="4 ~ 20자 이내로 기입해주세요 :)"
+                                                           onfocus="this.placeholder = ''"
+                                                           onblur="this.placeholder = '4 ~ 20자 이내로 기입해주세요 :)'"></td>
+                                            </tr>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="vertical-align: middle">모임 소개글</td>
+                                                <td><textarea name="bbs_content" cols="50" rows="13"name="content"
+                                                              placeholder="10 ~ 1000자 이내로 기입해주세요 :)"
+                                                              onfocus="this.placeholder = ''"
+                                                              onblur="this.placeholder = '10 ~ 1000자 이내로 기입해주세요 :)'"></textarea></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align: middle">모임 배경사진</td>
+                                                <td><input type="file" class="form-control" id="customFile" name="filename"/></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align: middle">지역</td>
+                                                <td>
+                                                    <select id="areaCategory"  style="width: 30%; float:left;">
+                                                    <option value="">선택</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align: middle">정원</td>
+                                                <td>
+                                                    <ol>
+                                                        <ul class="a">
+                                                            <li>최대 20명 모임원을 받을 수 있습니다.</li>
+                                                            <li>20명 초과를 원하시면 유료결제를 이용해 주세요.</li>
+                                                        </ul>
+                                                    </ol>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </header>
                 </div>
             </section>
@@ -142,23 +135,13 @@ ${newGroupList}
 
 </body>
 <script type="text/javascript">
-    /* Swiper slide*/
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView : 3, //슬라이드 표시할 사진갯수
-        spaceBetween: 30,
-        centeredSlides: false,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
+
+    $(document).ready(function(){
+        <c:forEach items="${areaList}" var="area">
+        (function () {
+            $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
+        })();
+        </c:forEach>
     });
 
 

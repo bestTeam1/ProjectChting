@@ -1,13 +1,17 @@
 package com.team1.chting.service;
 
+
 import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostDto;
+import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GroupService {
@@ -15,13 +19,25 @@ public class GroupService {
     @Autowired
     private SqlSession sqlsession;
 
+
+
 //    @Override
 //    public List<GroupDto> listAll() throws Exception{
 //        return sqlsession.selectList("board.listAll");
 //    }
 
-    public List<GroupDto> listAll() throws Exception{
-        return sqlsession.selectList("board.listAll");
+    // 내가가입한모임 - 게시글 리스트
+    public List<PostDto> getPostList(){
+        List<PostDto> postlist = new ArrayList<PostDto>();
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        postlist = groupDao.getPostList();
+        return postlist;
+    }
+
+
+    // 게시판 글쓰기
+    public void postWrite(PostDto postDto){
+
     }
 
     public List<GroupDto> randomGroup() {

@@ -24,6 +24,14 @@ public class HomeController {
 	public String home() { return "index";}
 
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
+	public String index(Model model) {
+		List<NoticeDto> list = new ArrayList<NoticeDto>();
+		list = noticeService.recentlyNotice();
+		model.addAttribute("list",list);
+
+		return "index";
+	}
+
 	public String index() { return "index"; }
 	
 	@RequestMapping(value = "elements.do", method = RequestMethod.GET)
