@@ -104,7 +104,13 @@
             type: "get",
             success: function (response) {
                 response.forEach(group => {
-                    sideList.append("<li><span class='opener active'>" + group.group_name + "</span><ul><li><a href='board_main.do?group_no=" +group.group_no+ "'>메인</a></li><li><a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li><a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li><a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li> <li><a href='groupJoin.do?group_no=" + group.group_no + "'>모임관리</a></li></ul></li>")
+                    sideList.append(
+                        "<li><span class='opener active'>" + group.group_name
+                        + "</span><ul><li><a href='board_main.do?group_no=" + group.group_no + "'>메인</a></li><li>" +
+                        "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
+                        "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
+                        "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li> <li>" +
+                        "<a href='groupJoin.do?userid=testuser'>모임관리</a></li></ul></li>")
                 });
             },
             error: function (Http, status, error) {
