@@ -104,59 +104,57 @@
             + '</tr>'
         );
     }
+    //모임장 위임 클릭
+    $(document).on("click", ".succeed", function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '정말입니까??',
+            text: "이 결정은 되돌릴 수 없습니다. 정말로 모임장을 넘기시겠습니까?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네 모임장 권한을 넘기겠습니다',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "succeedGroupAdmin.do",
+                    dataType: "text",
+                    data: {
+                        adminUserid: $('#userid').val(),
+                        requestUserid: $(this).val(),
+                        groupNo: $('#groupNo').val()
+                    },
+                    success: function (data) {
+                        if (data == "false") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '모임장 위임을 할 수 없습니다..',
+                                text: '해당 유저는 이미 모임장으로 속해있는 모임이 있습니다',
+                                footer: '<a href="#">Why do I have this issue?</a>'
+                            })
+                        } else {
+                            Swal.fire(
+                                '모임장 권한을 위임했습니다!<br>자동으로 모임관리에서 나가집니다'
+                            )
+                            var timer = setInterval(function () {
+                                clearInterval(timer);
+                                window.location.href = data;
+                            }, 3000);
+
+                        }
+
+                    },
+                    error: function (request, status, error) {
+                        console.log(error)
+                    }
+                });
+            }
+        })
+    });
 
     $(function(){
-        //모임장위임 클릭
-        $('.succeed').click(function(event){
-            event.preventDefault();
-            Swal.fire({
-                title: '정말입니까??',
-                text: "이 결정은 되돌릴 수 없습니다. 정말로 모임장을 넘기시겠습니까?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '네 모임장 권한을 넘기겠습니다',
-                cancelButtonText: '취소'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url : "succeedGroupAdmin.do",
-                        dataType : "text",
-                        data : {
-                            adminUserid : $('#userid').val(),
-                            requestUserid : $(this).val(),
-                            groupNo : $('#groupNo').val()
-                        },
-                        success : function(data){
-                            if(data == "false") {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: '모임장 위임을 할 수 없습니다..',
-                                    text: '해당 유저는 이미 모임장으로 속해있는 모임이 있습니다',
-                                    footer: '<a href="#">Why do I have this issue?</a>'
-                                })
-                            } else {
-                                    Swal.fire(
-                                        '모임장 권한을 위임했습니다!<br>자동으로 모임관리에서 나가집니다'
-                                    )
-                                var timer = setInterval(function() {
-                                    clearInterval(timer);
-                                    window.location.href= data;
-                                }, 3000);
-
-                            }
-
-                        },
-                        error : function(request, status, error) {
-                            console.log(error)
-                        }
-                    });
-                }
-            })
-        });
-
-
         //모임 강퇴 클릭
         $('#banish').click(function(event){
             event.preventDefault();
