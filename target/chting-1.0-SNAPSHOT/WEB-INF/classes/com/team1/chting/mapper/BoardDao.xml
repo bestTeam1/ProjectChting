@@ -47,8 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <delete id="banishMembers">
-        delete from group_user_role where userid = "${requestId}" and group_no = "${groupNo}";
+        delete from group_user_role where userid = "${requestId}" and group_no = "${groupNo}"
     </delete>
+
+    <update id="succeedGroupAdmin">
+        UPDATE group_user_role SET group_role_no = "1" where group_no = "${groupNo}" and userid = "${requestUserid}";
+        UPDATE group_user_role SET group_role_no = "2" where group_no = "${groupNo}" and userid = "${adminUserid}";
+    </update>
+
 
 </mapper>
 

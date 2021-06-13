@@ -4,7 +4,6 @@ import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.access.method.P;
 
 import java.util.List;
 
