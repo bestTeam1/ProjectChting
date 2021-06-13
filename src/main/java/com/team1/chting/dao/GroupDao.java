@@ -27,4 +27,10 @@ public interface GroupDao {
 
     //회원 -> 관심사기반 5개
     public List<GroupDto> catecodeGroup(String userid);
+
+    //로그인한 유저가 속한 그룹리스트
+    public List<GroupDto> userGroupList(String userid);
+
+    //그룹메인페이지 -> 그룹넘버를 이용한 그룹 검색
+    public GroupDto groupByGroup_no(String group_no);
 }
