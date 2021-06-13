@@ -7,7 +7,7 @@
 	}
 </style>
 <!-- Sidebar -->
-<div id="sidebar">
+<div id="sidebar" style="height: auto">
 	<div class="inner">
 
 		<!-- Search -->

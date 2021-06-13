@@ -21,6 +21,10 @@ public interface GroupDao {
     //비회원 -> 랜덤모임 10개
     public List<GroupDto> randomGroup();
 
+    public interface GroupDao {
+    // 게시글 글쓰기
+    public void insert(PostDto postDto);
+
     //회원 -> 지역기반 5개
     public List<GroupDto> areaGroup(@Param("first_area") String first_area,@Param("second_area") String second_area);
 
@@ -37,15 +41,17 @@ public interface GroupDao {
     public void postWirte(PostDto postDto);
 
     // 게시글 상세보기
-    public GroupDto read(String group_no);
+    // PostDto
+    public PostDto read(int post_no);
 
     // 게시글 수정
-    public void update(GroupDto gdto);
+    public void update(PostDto postDto);
 
     // 게시글 삭제
     public void delete(String group_no);
 
     // 게시글 전체 목록
+    // hash map?, arrayList?
     public List<PostDto> getPostList();
 
     // 페이징 리스트?
