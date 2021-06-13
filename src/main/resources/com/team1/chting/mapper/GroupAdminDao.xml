@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.chting.dao.GroupAdminDao">
+
+    <!-- 모임장으로 속해있는 모임 번호 -->
+    <select id="getAdminGroup" resultType="com.team1.chting.dto.GroupDto">
+        select group_no from user_info left join group_user_role gur on user_info.userid = gur.userid
+                                       left join group_role gr on gur.group_role_no = gr.group_role_no
+        where gur.group_role_no = 1 and user_info.userid = #{userid};
+    </select>
+
+    <!-- 모임 가입신청 리스트 -->
+    <select id="getGroupJoinRequest" resultType="com.team1.chting.dto.UserDto">
+        select gjr.userid, nickname, gender, content from user_info
+                            left join group_join_request gjr on user_info.userid = gjr.userid
+                            where group_no = #{groupNo} and enabled = 1;
+    </select>
+
+    <!-- 모임 가입승인 -->
+    <insert id="acceptMember">
+        insert into group_user_role (userid, group_no, group_role_no) values ("${requestId}", "${groupNo}", "2")
+    </insert>
+
+    <!-- 모임 가십신청 삭제 -->
+    <delete id="deleteRequest">
+        delete from group_join_request where userid = "${requestId}" and group_no = "${groupNo}"
+    </delete>
+
+    <!-- userid가 모임장으로 속한 그룹의 멤버리스트 -->
+    <select id="getGroupMemberList" resultType="com.team1.chting.dto.UserDto">
+        select gur.userid, nickname, gender, content, gur.group_role_no from user_info left join group_user_role gur on user_info.userid = gur.userid
+                                                        left join group_role gr on gur.group_role_no = gr.group_role_no
+        where group_no = (select group_no from user_info left outer join group_user_role gur
+                                                                         on user_info.userid = gur.userid
+                          where gur.userid = "${userid}" and group_role_no = 1) and enabled = 1
+    </select>
+    <!-- 멤버 추방 -->
+    <delete id="banishMembers">
+        delete from group_user_role where userid = "${requestId}" and group_no = "${groupNo}"
+    </delete>
+
+    <!-- 모임장 위임 -->
+    <update id="succeedGroupAdmin">
+        UPDATE group_user_role SET group_role_no = "1" where group_no = "${groupNo}" and userid = "${requestUserid}";
+        UPDATE group_user_role SET group_role_no = "2" where group_no = "${groupNo}" and userid = "${adminUserid}";
+    </update>
+
+    <!-- 모임장 위임시 이미 모임장인 모임이 있는지 체크 -->
+    <select id="duplicateGroupAdminCheck" resultType="com.team1.chting.dto.UserDto">
+        select group_role_no from group_user_role where userid = "${userid}"
+    </select>
+
+</mapper>
+
