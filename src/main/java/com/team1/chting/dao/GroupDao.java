@@ -15,9 +15,6 @@ public interface GroupDao {
     // 게시글 전체 목록
 
     public void wirte(GroupDto gdto);
-    public GroupDto read(String group_no);
-    public void update(GroupDto gdto);
-    public void delete(String group_no);
     public List<GroupDto> listAll();
 
 
