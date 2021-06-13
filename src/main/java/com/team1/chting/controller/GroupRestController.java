@@ -1,11 +1,8 @@
 package com.team1.chting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.BoardService;
-import com.team1.chting.service.GroupService;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +17,9 @@ import java.util.List;
 public class GroupRestController {
 
     @Autowired
-    private SqlSession sqlSession;
-
-    @Autowired
     private BoardService boardService;
 
+    //모임원 강퇴
     @RequestMapping(value="banishMember.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> banishMember (@RequestParam("banishList[]") List<String> banishList,
                                                 @RequestParam("groupNo") String groupNo,
@@ -46,6 +41,8 @@ public class GroupRestController {
         }
 
     }
+
+    //모임장 위임
     @RequestMapping(value="succeedGroupAdmin.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> banishMember (@RequestParam("adminUserid") String adminUserid,
                                                 @RequestParam("requestUserid") String requestUserid,
@@ -63,6 +60,46 @@ public class GroupRestController {
             String resultUrl = "http://localhost:8090/chting_war_exploded/board_main.do?group_no=" + groupNo;
             return new ResponseEntity<String>(resultUrl, HttpStatus.OK);
         }
+    }
+
+
+    //가입신청 승인
+    @RequestMapping(value="joinAccept.do", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> joinAccept(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
+        boardService.acceptMembers(requestList, groupNo);
+        List<UserDto> list = null;
+
+        ObjectMapper objmap = new ObjectMapper();
+
+        String result = "";
+
+        try {
+            list = boardService.getGroupJoinRequest(groupNo);
+            result = objmap.writeValueAsString(list);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return  new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
+        }
+
+    }
+    //가입신청 거부
+    @RequestMapping(value="joinDeny.do", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> joinDeny(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
+        boardService.deleteRequest(requestList, groupNo);
+        List<UserDto> list = null;
+
+        ObjectMapper objmap = new ObjectMapper();
+
+        String result = "";
+
+        try {
+            list = boardService.getGroupJoinRequest(groupNo);
+            result = objmap.writeValueAsString(list);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return  new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
+        }
+
     }
 
 }
