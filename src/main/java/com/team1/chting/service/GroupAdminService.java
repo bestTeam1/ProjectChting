@@ -127,6 +127,8 @@ public class GroupAdminService {
         groupAdminDao.succeedGroupAdmin(adminUserid, requestUserid, groupNo);
     }
 
+
+
     /*
     모임장 위임시 이미 모임장으로 있는 모임이 있는지 체크
     작성자 : 이승준
@@ -146,6 +148,32 @@ public class GroupAdminService {
         }
         return false;
     }
+
+    /*
+    자신이 모임장으로 있는 모임의 이름
+    작성자 : 이승준
+    작성일 : 2021-06-14
+    */
+    public GroupDto getAdminGroupName(String groupNo) {
+        GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
+        GroupDto groupDto = groupAdminDao.getAdminGroupName(groupNo);
+
+        return groupDto;
+    }
+
+    /*
+     자신이 모임장으로 있는 모임 해산
+     작성자 : 이승준
+     작성일 : 2021-06-14
+    */
+    public void groupDisbandOk(String groupNo) {
+        GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
+        groupAdminDao.groupDisbandOk(groupNo);
+
+
+        return;
+    }
+
 
 
 }
