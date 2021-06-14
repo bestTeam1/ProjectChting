@@ -35,6 +35,9 @@ public interface GroupAdminDao {
     public List<UserDto> duplicateGroupAdminCheck(@Param("userid") String userid);
 
     //모임 해산
-    public void groupDisband(@Param("userid") String userid);
+    public void groupDisbandOk(@Param("groupNo") String groupNo);
+
+    //자신이 모임장으로 있는 모임의 이름
+    public GroupDto getAdminGroupName(@Param("groupNo") String groupNo);
 
 }

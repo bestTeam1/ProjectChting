@@ -51,6 +51,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="duplicateGroupAdminCheck" resultType="com.team1.chting.dto.UserDto">
         select group_role_no from group_user_role where userid = "${userid}"
     </select>
+    <!-- 자신이 모임장으로 있는 모임의 이름 -->
+    <select id="getAdminGroupName" resultType="com.team1.chting.dto.GroupDto">
+        select group_name from group_info where group_no = "${groupNo}";
+    </select>
 
+    <!-- 자신이 모임장으로 있는 모임 해산 -->
+    <delete id="groupDisbandOk"
+    
 </mapper>
 

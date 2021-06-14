@@ -89,12 +89,12 @@
             <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
             <!-- Banner -->
             <section id="main">
-                <h1 style="text-align: center"> {이름} 모임을 해산하시겠습니까? </h1>
+                <h1 style="text-align: center"> ${groupName} 모임을 해산하시겠습니까? </h1>
                 <h2 style="text-align: center"> !!! 한번 해산하면 되돌릴 수 없습니다 !!!</h2>
             </section>
             <div style="display: flex; justify-content: center;">
                 <ul class="actions" style="text-align: center">
-                    <li><a href="#" class="button primary">해산하기</a></li>
+                    <li><a href="groupDisbandOk.do?userid=${userid}" class="button primary">해산하기</a></li>
                 </ul>
             </div>
         </div>
