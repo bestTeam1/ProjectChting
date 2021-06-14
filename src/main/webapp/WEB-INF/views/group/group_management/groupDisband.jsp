@@ -80,6 +80,7 @@
     </style>
 </head>
 <body class="is-preload">
+
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -89,12 +90,12 @@
             <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
             <!-- Banner -->
             <section id="main">
-                <h1 style="text-align: center"> {이름} 모임을 해산하시겠습니까? </h1>
+                <h1 style="text-align: center"> ${groupName} 모임을 해산하시겠습니까? </h1>
                 <h2 style="text-align: center"> !!! 한번 해산하면 되돌릴 수 없습니다 !!!</h2>
             </section>
             <div style="display: flex; justify-content: center;">
                 <ul class="actions" style="text-align: center">
-                    <li><a href="#" class="button primary">해산하기</a></li>
+                    <li><a href="groupDisbandOk.do?userid=${userid}" class="button primary">해산하기</a></li>
                 </ul>
             </div>
         </div>
@@ -127,9 +128,9 @@
     //Area category DB 연동해서 넣기
     $(document).ready(function(){
         <c:forEach items="${areaList}" var="area">
-            (function () {
-                $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
-            })();
+        (function () {
+            $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
+        })();
         </c:forEach>
     });
 
@@ -157,7 +158,7 @@
                             + '<div class="swiper-button-next"></div>'
                             + '<div class="swiper-button-prev"></div>'
                             + '<div class="swiper-pagination"></div>';
-                            + '</div>'
+                        + '</div>'
                     }
 
                     var locationMessage = $('#areaCategory').val()
@@ -171,11 +172,11 @@
                     }
 
                     $('.slide').append(
-                           '<h3>'+ locationMessage +'</h3>'
+                        '<h3>'+ locationMessage +'</h3>'
                         + '<div class="swiper-container mySwiper" style="width: 1000px">'
                         + '<div class="swiper-wrapper">'
                         +  html
-                         );
+                    );
 
                     var swiper = new Swiper(".mySwiper", {
                         slidesPerView : 3, //슬라이드 표시할 사진갯수
