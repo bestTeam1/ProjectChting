@@ -51,7 +51,7 @@ public interface GroupDao {
 
     // 게시글 전체 목록
     // hash map?, arrayList?
-    public List<PostDto> getPostList();
+    public List<PostDto> getPostList(String group_no);
 
     // 페이징 리스트?
     public List<Map<String, Object>> postList(Criteria cri);
