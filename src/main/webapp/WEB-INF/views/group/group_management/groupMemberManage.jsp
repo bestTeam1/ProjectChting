@@ -24,6 +24,8 @@
             <!-- Banner -->
             <section id="main">
                 <h1 style="text-align: center">멤버탈퇴는 재가입이 가능합니다</h1>
+            </section>
+            <section>
                 <table id="memberList" style="text-align: center">
 
                 </table>
@@ -34,9 +36,7 @@
                         <li><a id="banish"  href="#" class="button primary fit">모임에서 추방하기</a></li>
                     </ul>
                 </div>
-
             </section>
-
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
@@ -135,14 +135,12 @@
                                 footer: '<a href="#">Why do I have this issue?</a>'
                             })
                         } else {
-                            Swal.fire(
-                                '모임장 권한을 위임했습니다!<br>자동으로 모임관리에서 나가집니다'
-                            )
-                            var timer = setInterval(function () {
-                                clearInterval(timer);
+                            Swal.fire({
+                                title: '모임장 위임성공',
+                                text : '모임장 권한을 위임하여 모임관리 페이지에서 나가집니다'
+                            }).then((result) => {
                                 window.location.href = data;
-                            }, 3000);
-
+                            })
                         }
 
                     },
