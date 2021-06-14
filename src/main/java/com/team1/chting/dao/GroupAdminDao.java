@@ -25,7 +25,7 @@ public interface GroupAdminDao {
 
     //멤버 강퇴
     public void banishMembers(@Param("requestId") String requestId, @Param("groupNo") String groupNo);
-  
+
     //모임장권한위임
     public void succeedGroupAdmin(@Param("adminUserid") String adminUserid,
                                   @Param("requestUserid") String requestUserid,
@@ -33,5 +33,14 @@ public interface GroupAdminDao {
 
     //모임장 위임시 이미 모임장인 모임이 있는지 체크
     public List<UserDto> duplicateGroupAdminCheck(@Param("userid") String userid);
+
+    //모임 해산 part 1 : 모임 멤버 모두 강퇴
+    public void groupDisbandMembers(@Param("groupNo") String groupNo);
+
+    //모임 해산 part 1 : 모임 enabled 0
+    public void groupDisbandEnabled(@Param("groupNo") String groupNo);
+
+    //자신이 모임장으로 있는 모임의 이름
+    public GroupDto getAdminGroupName(@Param("groupNo") String groupNo);
 
 }
