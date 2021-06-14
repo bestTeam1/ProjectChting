@@ -58,12 +58,41 @@ public class GroupAdminController {
         return "group/group_management/groupBlackListManage";
     }
 
-    //모임관리(모임해산)
+    //모임관리(모임해산 페이지 이동)
     @RequestMapping(value = "groupDisband.do", method = RequestMethod.GET)
     public String groupDisband(@RequestParam("userid") String userid, Model model) {
-        
+
+        //유저가 모임장으로 있는 모임번호 가져오기위한 groupDto
+        GroupDto groupDto = groupAdminService.getAdminGroup(userid);
+        String groupNo = groupDto.getGroup_no();
+
+        if(groupNo == null) { //페이지 이동 시도시 모임장으로 속한 모임이 없다면 모임장없음 에러페이지로 이동
+            return "group/group_error/HasNoGroupError";
+        }
+
+        //모임 이름 가져오기 위한 groupDto
+        groupDto = groupAdminService.getAdminGroupName(groupNo);
+
+        model.addAttribute("groupName", groupDto.getGroup_name());
+        model.addAttribute("userid", userid);
 
         return "group/group_management/groupDisband";
     }
 
+    //모임관리(모임해산 기능)
+    @RequestMapping(value = "groupDisbandOk.do", method = RequestMethod.GET)
+    public String groupDisbandOk(@RequestParam("userid") String userid, Model model) {
+
+        System.out.println("groupDisbandOk userid : " + userid);
+
+        //유저가 모임장으로 있는 모임번호 가져오기위한 groupDto
+        GroupDto groupDto = groupAdminService.getAdminGroup(userid);
+        String groupNo = groupDto.getGroup_no();
+
+        System.out.println("groupNo : " + groupNo);
+
+        groupAdminService.groupDisbandOk(groupNo);
+
+        return "index";
+    }
 }
