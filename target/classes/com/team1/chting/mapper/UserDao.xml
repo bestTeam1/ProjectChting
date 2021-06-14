@@ -18,12 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectUserInterest" resultType="com.team1.chting.dto.UserDto">
-        select u.userid, ic.s_catename
+        select u.userid, ic.catename
         from user_info u
                  join user_interest ui on u.userid = ui.userid
-                 join interest_category ic on ui.s_catecode = ic.s_catecode
+                 join interest_category ic on ui.s_catecode = ic.catecode
         where u.userid = 'testuser'
-        order by ic.s_catename
+        order by ic.catename
     </select>
 
     <select id="selectUserJoinGroup" resultType="com.team1.chting.dto.UserDto">
@@ -42,13 +42,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <select id="selectInterestCategory" parameterType="java.util.List" resultType="com.team1.chting.dto.InterestCategoryDto" >
-        select s_catecode, s_catename, m_catecode, m_catename
+        select catecode, catename, parent_catecode, parent_catename
         from interest_category
         <where>
             <if test="list.size != 0">
-                m_catecode in
+                parent_catecode in
                     <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
-                        #{item.m_catecode}
+                        #{item.parent_catecode}
                     </foreach>
             </if>
         </where>
