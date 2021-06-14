@@ -15,7 +15,7 @@ public class GroupAdminService {
 
     @Autowired
     private SqlSession sqlsession;
-    
+
     /*
     모임장으로 있는 모임Number 가져오기
     작성자 : 이승준
@@ -25,6 +25,7 @@ public class GroupAdminService {
 
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
         GroupDto group = groupAdminDao.getAdminGroup(userid);
+
         if(group == null) { //모임장인 모임이 없으면??
             return new GroupDto(); // 빈 GroupDto 리턴
         }
@@ -50,7 +51,6 @@ public class GroupAdminService {
     작성일 : 2021-06-09
     */
     public List<UserDto> getGroupMemberList(String userid) {
-        System.out.println("서비스 userid: " + userid);
 
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
         List<UserDto> groupMemberList = groupAdminDao.getGroupMemberList(userid);
@@ -166,12 +166,11 @@ public class GroupAdminService {
      작성자 : 이승준
      작성일 : 2021-06-14
     */
+    @Transactional
     public void groupDisbandOk(String groupNo) {
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
-        groupAdminDao.groupDisbandOk(groupNo);
-
-
-        return;
+        groupAdminDao.groupDisbandMembers(groupNo);
+        groupAdminDao.groupDisbandEnabled(groupNo);
     }
 
 
