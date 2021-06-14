@@ -1,11 +1,13 @@
 package com.team1.chting.dto;
 import lombok.Data;
 
+import java.util.List;
+
 //관심사 카테고리
 @Data
 public class InterestCategoryDto {
-    private String s_catecode;
-    private String s_catename;
-    private String m_catecode;
-    private String m_catename;
+    private String catecode;
+    private String catename;
+    private String parent_catecode;
+    private String parent_catename;
 }
