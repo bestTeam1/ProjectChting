@@ -22,6 +22,8 @@
     <div id="main">
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+
+            <c:set var="userinfo" value="${userInfo.userInfoBasic}"></c:set>
                 <div class="content">
                     <header>
                         <form method="post" action="">
@@ -39,10 +41,10 @@
                                             </tr>
                                             <tr>
                                                 <td style="vertical-align: middle">자기소개</td>
-                                                <td><textarea style="resize: none;" name="bbs_content" cols="50" rows="5"name="content"
-                                                              placeholder="100자 이내로 기입해주세요 :)"
+                                                <td><textarea id="content" style="resize: none;" name="bbs_content" cols="50" rows="3"name="content"
+                                                              placeholder="${userinfo.content}"
                                                               onfocus="this.placeholder = ''"
-                                                              onblur="this.placeholder = '100자 이내로 기입해주세요 :)'"></textarea></td>
+                                                              onblur="this.placeholder = '${userinfo.content}'"></textarea></td>
                                             </tr>
 
                                             <tr>
@@ -51,12 +53,12 @@
                                                     <ol>
                                                         <ul class="a">
                                                             <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                                                                <div class="circle_interest">
+                                                                <div class="circle_user_interest">
                                                                         ${userInterest.s_catename}
                                                                 </div>
                                                             </c:forEach>
-                                                            <input type="button" class="button small" value="추가">
-
+                                                            <input type="button" class="button small" value="추가"
+                                                                   onclick="window.open('categoryChoice.do', 'categoryChoice', 'width=600, height=600, left=100, top=50');">
                                                         </ul>
                                                     </ol>
 
@@ -64,10 +66,23 @@
                                             </tr>
 
                                             <tr>
-                                                <td style="vertical-align: middle">지역</td>
+                                                <td style="vertical-align: middle">선호 지역 1</td>
                                                 <td>
-                                                    <select id="areaCategory"  style="width: 30%; float:left;">
-                                                        <option value="">선택</option>
+                                                    <select id="area1"  style="width: 30%; float:left;">
+                                                        <c:forEach var="area" items="${areaList}">
+                                                            <option value="" <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_name}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="vertical-align: middle">선호 지역 2</td>
+                                                <td>
+                                                    <select id="area2"  style="width: 30%; float:left;">
+                                                        <c:forEach var="area" items="${areaList}">
+                                                            <option value="" <c:if test="${userinfo.second_area_name == area.area_name}">selected</c:if>>${area.area_name}</option>
+                                                        </c:forEach>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -117,12 +132,26 @@
 
 <script type="text/javascript">
 
-    $().ready(function () {
-        <c:forEach items="${areaList}" var="area">
-        (function () {
-            $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
-        })();
-        </c:forEach>
+<%--  수정 안한 부분이 있으면 원래 값 그대로 다시 넣어주는 거 해야함   --%>
+
+    $(function () {
+        $('#area1').change(function () {
+            let updateArea1 = $("#area1 option:selected").text();
+            console.log(updateArea1);
+        })
+
+        $('#area2').change(function () {
+            let updateArea2 = $("#area2 option:selected").text();
+            console.log(updateArea2);
+        })
+
+        $('#content').change(function () {
+            let updateContent = $('#content').val();
+            console.log(updateContent);
+        })
+
+
+
     });
 
 </script>

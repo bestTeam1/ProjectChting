@@ -2248,9 +2248,9 @@ button,
  필요해서 추가한 css
  작성자 : 박주현
  */
-.circle_interest {
+.circle_user_interest {
   color : #eeeeee;
-  background: plum;
+  background : lightpink ;
   text-align: center;
   font-size : 15px;
   line-height: 30px;

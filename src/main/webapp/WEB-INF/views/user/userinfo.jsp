@@ -38,7 +38,7 @@
                     <div class="content align-center">
                         <h3>관심사</h3>
                             <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                                <div class="circle_interest">
+                                <div class="circle_user_interest">
                                         ${userInterest.s_catename}
                                 </div>
                             </c:forEach>
@@ -64,10 +64,10 @@
 </div>
 
 <script type="text/javascript">
-    const userid = "${userInfo.userInfoBasic.userid}";
-    const userGroupRole = "${userInfo.userInfoBasic.cnt}";
+    let userid = "${userInfo.userInfoBasic.userid}";
+    let userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
-    const swal = Swal.mixin({
+    let swal = Swal.mixin({
         customClass: {
             confirmButton: 'button',
             cancelButton: 'button'
@@ -78,9 +78,8 @@
     console.log(userid);
     console.log(userGroupRole); //값이 1이면 모임장 권한을 가진 모임이 있음
 
-    $().ready(function () {
+    $(function(){
         $("#delacount").click(function (){
-            console.log(userGroupRole);
 
             if (userGroupRole == '1') {
                 swal.fire ({
@@ -92,7 +91,7 @@
                     reverseButtons: true
                 }).then((result) => {
                     if(result.isConfirmed) {
-                        location.href="groupJoin.do"
+                        location.href="groupJoin.do?userid="+userid;
                     }
                 })
             }else {
