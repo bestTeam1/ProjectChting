@@ -65,10 +65,6 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	<filter-mapping>
-		<filter-name>CharacterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 
 	<!-- 에러 페이지 (404, 500) -->
 	<!--<error-page>
@@ -80,13 +76,19 @@
 		<location>/error/500error.jsp</location>
 	</error-page>-->
 
+
 	<!-- Spring security 설정  -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 </web-app>
