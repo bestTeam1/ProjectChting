@@ -39,7 +39,7 @@
                         <h3>관심사</h3>
                             <c:forEach var="userInterest" items="${userInfo.userInterest}">
                                 <div class="circle_user_interest">
-                                        ${userInterest.s_catename}
+                                        ${userInterest.catename}
                                 </div>
                             </c:forEach>
                         <hr>

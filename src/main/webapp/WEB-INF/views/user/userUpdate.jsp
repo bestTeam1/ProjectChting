@@ -4,6 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<head>
     <title>Editorial by HTML5 UP</title>
     <meta charset="utf-8"/>
     <meta name="viewport"
@@ -30,7 +31,6 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <table>
                                             <tr>
                                                 <td style="vertical-align: middle">프로필</td>
                                                 <td>
@@ -54,7 +54,7 @@
                                                         <ul class="a">
                                                             <c:forEach var="userInterest" items="${userInfo.userInterest}">
                                                                 <div class="circle_user_interest">
-                                                                        ${userInterest.s_catename}
+                                                                        ${userInterest.catename}
                                                                 </div>
                                                             </c:forEach>
                                                             <input type="button" class="button small" value="추가"
@@ -115,8 +115,6 @@
                                                     </ol>
                                                 </td>
                                             </tr>
-
-                                        </table>
                                     </td>
                                 </tr>
                             </table>
