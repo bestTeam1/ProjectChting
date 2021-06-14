@@ -3,5 +3,42 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.UserDao">
+    <select id="userInfoBasic" resultType="com.team1.chting.dto.UserDto">
+        select u.userid, u.nickname, a.area_name as first_area_name, b.area_name as second_area_name, u.content, gur.cnt
+        from user_info u
+                 join area a on u.first_area = a.area_code
+                 join area b on u.second_area = b.area_code
+                 left join (
+            select userid, count(group_role_no) as cnt
+            from group_user_role
+            where userid = 'testuser' and group_role_no = 1
+            group by group_role_no
+        )gur on u.userid = gur.userid
+        where u.userid = 'testuser'
+    </select>
+
+    <select id="userInterest" resultType="com.team1.chting.dto.UserDto">
+        select u.userid, ic.s_catename
+        from user_info u
+                 join user_interest ui on u.userid = ui.userid
+                 join interest_category ic on ui.s_catecode = ic.s_catecode
+        where u.userid = 'testuser'
+        order by ic.s_catename
+    </select>
+
+    <select id="userJoinGroup" resultType="com.team1.chting.dto.UserDto">
+        select u.userid, gi.group_name
+        from user_info u
+                 join group_user_role gur on u.userid = gur.userid
+                 join group_info gi on gur.group_no = gi.group_no
+        where u.userid = 'testuser'
+        order by gi.group_name
+    </select>
+
+    <update id="deleteAcount">
+        update user_info
+        set enabled = 0
+        where userid = 'testuser'
+    </update>
 
 </mapper>
