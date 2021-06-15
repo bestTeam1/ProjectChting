@@ -27,6 +27,14 @@ public class AdminService {
         return adminDao.listPageCri(cri);
     }
 
+    //공지사항 삭제하기
+    public void deleteAdminNotice(String noticeNo) {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        adminDao.deleteAdminNotice(noticeNo);
+
+    }
+
     //DB테이블에 있는 모든 글 개수 리턴
     public int pageCount() throws Exception {
 
