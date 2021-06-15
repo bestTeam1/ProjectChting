@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.chting.dao.AdminDao">
+    <!-- 페이지 정보를 10개씩 가져오기 -->
+    <select id="listPage" resultType="com.team1.chting.dto.NoticeDto">
+        select notice_no, ui.userid, subject, writedate, nickname
+        from notice left join user_info ui on notice.userid = ui.userid
+        order by notice_no desc, writedate desc limit ${page}, 10
+    </select>
+
+    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <select id="listPageCri" resultType="com.team1.chting.dto.NoticeDto">
+        select notice_no, ui.userid, subject, writedate, nickname
+        from notice left join user_info ui on notice.userid = ui.userid
+        order by notice_no desc, writedate desc
+        limit #{pageStart},#{pageSize}
+    </select>
+
+    <select id="pageCount" resultType="int">
+        select count(*) from notice
+    </select>
+
+    <select id="getNoticeDetail" resultType="com.team1.chting.dto.NoticeDto">
+        select notice_no, userid, subject, content, writedate from notice where notice_no = #{noticeNo}
+    </select>
+
+</mapper>
+
