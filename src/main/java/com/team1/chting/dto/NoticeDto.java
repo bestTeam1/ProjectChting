@@ -14,4 +14,5 @@ public class NoticeDto {
 	private String file;
 	private Date writedate;
 	private int enabled;
+	private String nickname;
 }
