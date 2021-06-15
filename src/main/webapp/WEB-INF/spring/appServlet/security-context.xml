@@ -45,8 +45,11 @@
 
 		<intercept-url pattern="/**" access="permitAll()"/>
 		<intercept-url pattern="/login**" access="authenticated"/>
-		<oauth2-login user-service-ref="customOAuth2UserService" oidc-user-service-ref="customOidcUserService"/>
+		<oauth2-login user-service-ref="customOAuth2UserService"
+					  oidc-user-service-ref="customOidcUserService"
+					  authentication-success-handler-ref="successHandler" user-authorities-mapper-ref=""/>
 		<logout logout-url="/logout" logout-success-url="/index.do"/>
+		<csrf disabled="true" />
 	</http>
 
 	<authentication-manager xmlns="http://www.springframework.org/schema/security">
