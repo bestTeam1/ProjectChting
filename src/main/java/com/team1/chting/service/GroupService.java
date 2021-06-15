@@ -27,10 +27,10 @@ public class GroupService {
 //    }
 
     // 내가가입한모임 - 게시글 리스트
-    public List<PostDto> getPostList(){
+    public List<PostDto> getPostList(String group_no){
         List<PostDto> postlist = new ArrayList<PostDto>();
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        postlist = groupDao.getPostList();
+        postlist = groupDao.getPostList(group_no);
         return postlist;
     }
 
