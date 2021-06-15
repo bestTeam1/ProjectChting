@@ -32,7 +32,6 @@ public class PageMaker {
 
     public void setTotalCount(int totalCount) { //변경
         this.totalCount = totalCount;
-        System.out.println("DB에서 총 글의 개수를 계산");
         //총 글의 개수를 가지고 왔을때 필요한 정보를 계산
         calcDate();
     }
@@ -44,7 +43,6 @@ public class PageMaker {
         if(endPage > tempEndPage) endPage = tempEndPage;
         prev = (startPage == 1? false:true);
         next = (endPage * cri.getPageSize() >= totalCount? false:true);
-        System.out.println("페이징처리정보 계산");
     }
 
     public int getStartPage() {
