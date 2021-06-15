@@ -2248,9 +2248,54 @@ button,
  필요해서 추가한 css
  작성자 : 박주현
  */
-.circle_interest {
+.circle_user_interest {
   color : #eeeeee;
-  background: plum;
+  background : lightpink ;
+  text-align: center;
+  font-size : 15px;
+  line-height: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 45%;
+  overflow: hidden;
+  display: inline-block;
+  position : relative;
+  padding : 5px;
+}
+
+.m_cate_choice {
+  color : #eeeeee;
+  background : #adadad;
+  text-align: center;
+  font-size : 15px;
+  line-height: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 45%;
+  overflow: hidden;
+  display: inline-block;
+  position : relative;
+  padding : 5px;
+}
+
+.s_cate_choice {
+  color : #eeeeee;
+  background : #1b6d85;
+  text-align: center;
+  font-size : 15px;
+  line-height: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 45%;
+  overflow: hidden;
+  display: inline-block;
+  position : relative;
+  padding : 5px;
+}
+
+.selected {
+  color : #eeeeee;
+  background : #7f888f;
   text-align: center;
   font-size : 15px;
   line-height: 30px;

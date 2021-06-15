@@ -22,7 +22,7 @@ public class UserDto {
 	private String first_area_name;
 	private String second_area_name;
 	private String group_name;
-	private String s_catename;
+	private String catename;
 	private int cnt;
 	private int group_role_no;
 }
