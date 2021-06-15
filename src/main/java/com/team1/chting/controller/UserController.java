@@ -1,9 +1,7 @@
 package com.team1.chting.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.security.Principal;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +12,10 @@ import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +57,24 @@ public class UserController {
         model.addAttribute("userInfo", userService.getMyPageInfo());
 
         return "user/userUpdate";
+    }
+
+    @RequestMapping(value = "signUp.do", method = RequestMethod.GET)
+    public String userSignUp(HttpServletRequest request, Model model) {
+
+        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) request.getUserPrincipal();
+        Map<String, Object> userData = token.getPrincipal().getAttributes();
+        Set<String> userDataSet = userData.keySet();
+        Iterator<String> Iter_userDataSet = userDataSet.iterator();
+
+        while (Iter_userDataSet.hasNext()) {
+            String next = Iter_userDataSet.next();
+            System.out.println("KEY : " + next);
+            model.addAttribute(next, userData.get(next));
+        }
+
+        model.addAttribute("data", request.getUserPrincipal());
+        return "sign/signUp";
     }
 
 }

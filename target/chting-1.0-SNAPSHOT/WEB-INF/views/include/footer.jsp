@@ -8,5 +8,6 @@
 			href="https://unsplash.com">Unsplash</a>. Design: <a
 			href="https://html5up.net">HTML5 UP</a>.
 	</p>
+	<p style="font-size: smaller">Principal : ${pageContext.request.userPrincipal}</p>
 </footer>
 
