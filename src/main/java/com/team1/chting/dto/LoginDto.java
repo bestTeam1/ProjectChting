@@ -5,6 +5,11 @@ import lombok.Data;
 
 @Data
 public class LoginDto {
+    /*
+    DB 회원가입 여부 확인
+    작성자 : 김수연
+    작성일 : 2021-06-14
+    */
     private String userid;
     private int enabled;
     private String role;
