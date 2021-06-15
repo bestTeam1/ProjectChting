@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AdminController {
@@ -43,14 +43,24 @@ public class AdminController {
 
     //공지사항 상세보기
     @RequestMapping(value = "adminNoticeDetail.do", method = RequestMethod.GET)
-    public String adminNoticeDetail(String noticeNo, Model model) {
+    public String adminNoticeDetail(String noticeNo, String page, Model model) {
 
         NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
-        System.out.println("noticeNo : " + noticeNo);
+
         model.addAttribute("detail", noticeDto);
+        model.addAttribute("page", page);
         System.out.println(noticeDto);
 
         return "admin/notice_detail";
+    }
+
+    //공지사항 삭제하기
+    @RequestMapping(value="adminNoticeDelete.do", method = RequestMethod.GET)
+    public String adminNoticeDelete(String noticeNo, String page, Model model) {
+        adminService.deleteAdminNotice(noticeNo);
+        String url = "adminNotice.do?page=" + page;
+
+        return "redirect:" + url;
     }
 
     @RequestMapping(value = "adminEvent.do", method = RequestMethod.GET)
@@ -82,6 +92,29 @@ public class AdminController {
         return "admin/pagingtest";
     }
 
+    //공지사항 수정하기 버튼 클릭
+    @RequestMapping(value = "adminNoticeModify.do", method = RequestMethod.GET)
+    public String adminNoticeModify(String noticeNo, Model model ) {
+        NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
+
+        model.addAttribute("detail", noticeDto);
+
+        return "admin/notice_modify";
+    }
+
+    //공지사항 수정하기 완료 버튼 클릭
+    @RequestMapping(value = "adminNoticeModifyOk.do", method = RequestMethod.POST)
+    public String adminNoticeModifyOk(HttpServletRequest httpServletRequest, Model model ) {
+
+        System.out.println(httpServletRequest.getParameter("subject"));
+        System.out.println(httpServletRequest.getParameter("content"));
+
+        //NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
+
+        //model.addAttribute("detail", noticeDto);
+
+        return "admin/notice_modify";
+    }
 
 
 }

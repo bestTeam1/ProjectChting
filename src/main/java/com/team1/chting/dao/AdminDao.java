@@ -15,6 +15,9 @@ public interface AdminDao {
     //공지사항에 있는 글정보를 확인
     public List<NoticeDto> listPage(@Param("page") int page) throws Exception;
 
+    //공지사항 삭제하기
+    public void deleteAdminNotice(@Param("noticeNo") String noticeNo);
+
     //페이징 처리하는 동작(Criteria 객체 사용)
     public List<NoticeDto> listPageCri(AdminCriteria cri) throws Exception;
 
