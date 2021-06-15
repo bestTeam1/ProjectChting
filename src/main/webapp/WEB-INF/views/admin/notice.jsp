@@ -44,8 +44,7 @@
                             <tr>
                                 <td>${i.notice_no}</td>
                                 <td>${i.nickname}</td>
-                                <!-- 공지상세보기 링크 수정 -->
-                                <td><a href="adminNoticeDetail.do?noticeNo=${i.notice_no}">${i.subject}</a></td>
+                                <td><a href="adminNoticeDetail.do?noticeNo=${i.notice_no}&page=${pm.cri.page}">${i.subject}</a></td>
                                 <td><fmt:formatDate value="${i.writedate}" pattern="yyyy-MM-dd (E) HH:mm" /></td>
                             </tr>
                         </c:forEach>
