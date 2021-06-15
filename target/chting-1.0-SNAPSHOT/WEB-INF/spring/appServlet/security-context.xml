@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:security="http://www.springframework.org/schema/security"
- xsi:schemaLocation="http://www.springframework.org/schema/beans 
-                                     http://www.springframework.org/schema/beans/spring-beans.xsd
-                                    http://www.springframework.org/schema/security 
-                                    http://www.springframework.org/schema/security/spring-security.xsd">
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://www.springframework.org/schema/security"
+		 xmlns:context="http://www.springframework.org/schema/context"
+		 xmlns:mvc="http://www.springframework.org/schema/mvc"
+		 xsi:schemaLocation="http://www.springframework.org/schema/security
+ 			https://www.springframework.org/schema/security/spring-security.xsd
+ 			http://www.springframework.org/schema/beans
+ 			https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<!--  
+	<!--
 	>>form-login 속성 정의하기
 	login-page : login form 페이지 URL
 	username-parameter : form id의 name 속성값 (email >> id)
@@ -21,32 +22,88 @@
 	만약 최종 로그인일시를 DB에 기록해야한다면 handler로 처리하는게 좋겠다.
 	res.sendRedirect 등으로 처리
 	authentication-failure-handler-ref : 로그인 실패 시 프로세스 정의, bean id 입력
-	
+
 	>> security:logout
 	logout-url : 로그아웃 처리할 URL (security가 알아서 만들기 때문에, 이 경로로 요청만 하면된다)
 	logout-success-url : 로그아웃 성공 시 이동 URL
 	success-handler-ref : 로그아웃 성공 시 프로세스 정의, bean id 입력
 	invalidate-session : 로그아웃 시 세션 삭제여부
-	
+
 	>>session-management
 	invalid-session-url : invalid session(세션 타임아웃 등) 일 때 이동 URL
 	max-sessions : 최대 허용 가능한 세션 수
 	expired-url : 중복 로그인 발생시 이동 URL (처음 접속한 세션이 invalidate가 되고 다음 요청시 invalid-session-url로 이동)
 	error-if-maximum-exceeded : max-sessions을 넘었을때 접속한 세션을 실패처리할지 여부 (expired-url와 얘중에 하나만 쓰면 될듯)
-	
-		-->
-	<security:http  auto-config="true">
-			<security:csrf   disabled="true" />
-			<security:intercept-url pattern="/customer/noticeDetail.htm"   access="hasRole('ROLE_USER')"/>
-			<security:intercept-url pattern="/customer/noticeReg.htm"      access="hasRole('ROLE_ADMIN')" />
-		</security:http>
-		<security:authentication-manager>
-				<security:authentication-provider>
-						<security:user-service>
-								<security:user name="hong"    password="1004"  authorities="ROLE_USER"/>
-								<security:user name="admin"  password="1004"  authorities="ROLE_ADMIN,ROLE_USER"/>
-						</security:user-service>
-				</security:authentication-provider>					
-		</security:authentication-manager>
-</beans>
 
+		-->
+
+	<context:component-scan base-package="com.team1.chting" />
+	<context:annotation-config />
+	<mvc:annotation-driven />
+
+	<http auto-config="true" >
+
+		<intercept-url pattern="/**" access="permitAll()"/>
+		<intercept-url pattern="/login**" access="authenticated"/>
+		<oauth2-login user-service-ref="customOAuth2UserService"
+					  oidc-user-service-ref="customOidcUserService"
+					  authentication-success-handler-ref="successHandler" user-authorities-mapper-ref=""/>
+		<logout logout-url="/logout" logout-success-url="/index.do"/>
+	</http>
+
+	<authentication-manager xmlns="http://www.springframework.org/schema/security">
+		<authentication-provider>
+			<user-service id="inMemoryUserDetailsManager">
+				<user name="admin" password="1004" authorities="IS_AUTHENTICATED_FULLY"></user>
+			</user-service>
+			<password-encoder ref="bCryptPasswordEncoder"></password-encoder>
+		</authentication-provider>
+
+	</authentication-manager>
+
+	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
+	<b:bean id="customOidcUserService" class="com.team1.chting.security.CustomOidcUserService" />
+	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
+
+	<b:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+
+	<client-registrations>
+		<client-registration registration-id="google-login"
+							 client-id="162635883964-np8pt0krgmagle2cokr83s14ke9ee4mq.apps.googleusercontent.com"
+							 client-secret="u6eqJ9NLyWP3ulxK6BLYdsBq"
+							 client-authentication-method="basic"
+							 authorization-grant-type="authorization_code"
+							 redirect-uri="{baseUrl}/login/oauth2/code/{registrationId}"
+							 scope=""
+							 client-name="Google"
+							 provider-id="google" />
+
+		<client-registration registration-id="kakao-login"
+							 client-id="b74ea6ac4d206b99a1c236e0f732f202"
+							 client-authentication-method="basic"
+							 authorization-grant-type="authorization_code"
+							 redirect-uri="{baseUrl}/login/oauth2/code/{registrationId}"
+							 client-name="Kakao"
+							 scope=""
+							 provider-id="kakao" />
+
+		<provider provider-id="google"
+				  authorization-uri="https://accounts.google.com/o/oauth2/v2/auth"
+				  token-uri="https://www.googleapis.com/oauth2/v4/token"
+				  user-info-uri="https://www.googleapis.com/oauth2/v3/userinfo"
+				  user-info-authentication-method="header"
+				  user-info-user-name-attribute="sub"
+				  jwk-set-uri="https://www.googleapis.com/oauth2/v3/certs" />
+
+		<provider provider-id="kakao"
+				  authorization-uri="https://kauth.kakao.com/oauth/authorize"
+				  token-uri="https://kauth.kakao.com/oauth/token"
+				  user-info-uri="https://kapi.kakao.com/v2/user/me"
+				  user-info-authentication-method="header"
+				  user-info-user-name-attribute="id"
+				  jwk-set-uri="https://kapi.kakao.com/v1/user/access_token_info" />
+
+	</client-registrations>
+
+</b:beans>

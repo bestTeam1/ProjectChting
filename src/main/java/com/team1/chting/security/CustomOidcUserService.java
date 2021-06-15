@@ -47,10 +47,13 @@ public class CustomOidcUserService implements OAuth2UserService<OidcUserRequest,
             httpSession.setAttribute("user", new SessionDto(loginDto));
         }
 
+        System.out.println("mapping: " + oidcUser.getIdToken());
+        System.out.println("mapping:2 :" + oidcUser.getIdToken().getClaims());
 
         return new DefaultOidcUser(
                 Collections.singleton(new SimpleGrantedAuthority(resultRole)),
                 oidcUser.getIdToken(),
-                oidcUser.getUserInfo());
+                oidcUser.getUserInfo(),
+                userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName());
     }
 }
