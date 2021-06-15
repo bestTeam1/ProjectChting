@@ -59,6 +59,15 @@ public class AdminService {
         return sqlsession.selectOne("pageCount");
     }
 
+    //공지사항 상세보기
+    public NoticeDto getNoticeDetail(String noticeNo) {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        NoticeDto noticeDto = adminDao.getNoticeDetail(noticeNo);
+
+        return noticeDto;
+    }
+
 
 
 }
