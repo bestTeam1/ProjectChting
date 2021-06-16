@@ -2,6 +2,7 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
+import com.team1.chting.dto.UserDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.parameters.P;
@@ -32,4 +33,6 @@ public interface AdminDao {
     public int adminNoticeModifyOk(@Param("subject") String subject,
                                    @Param("content") String content,
                                    @Param("noticeNo") String noticeNo);
+
+    public List<UserDto> getUserList();
 }

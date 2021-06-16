@@ -35,5 +35,9 @@
     <update id="adminNoticeModifyOk">
         update notice set subject = "${subject}", content = "${content}" where notice_no = #{noticeNo}
     </update>
+
+    <select id="getUserList" resultType="com.team1.chting.dto.UserDto">
+        select userid, nickname, gender, birth, profile_img, email, first_area, second_area, enabled, joindate from user_info;
+    </select>
 </mapper>
 

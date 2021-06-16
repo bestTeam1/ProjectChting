@@ -5,6 +5,7 @@ import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
+import com.team1.chting.dto.UserDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +90,13 @@ public class AdminService {
             System.out.println("isModified == 1 , Modify success");
             return true;
         } else { return false; }
+    }
+
+    public List<UserDto> getUserList() {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        List<UserDto> userList = adminDao.getUserList();
+
+        return userList;
     }
 }
