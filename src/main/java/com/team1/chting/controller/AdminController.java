@@ -49,7 +49,6 @@ public class AdminController {
 
         model.addAttribute("detail", noticeDto);
         model.addAttribute("page", page);
-        System.out.println(noticeDto);
 
         return "admin/notice_detail";
     }
@@ -94,9 +93,10 @@ public class AdminController {
 
     //공지사항 수정하기 버튼 클릭
     @RequestMapping(value = "adminNoticeModify.do", method = RequestMethod.GET)
-    public String adminNoticeModify(String noticeNo, Model model ) {
+    public String adminNoticeModify(String noticeNo, String page, Model model ) {
         NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
 
+        model.addAttribute("page", page);
         model.addAttribute("detail", noticeDto);
 
         return "admin/notice_modify";
@@ -106,14 +106,19 @@ public class AdminController {
     @RequestMapping(value = "adminNoticeModifyOk.do", method = RequestMethod.POST)
     public String adminNoticeModifyOk(HttpServletRequest httpServletRequest, Model model ) {
 
-        System.out.println(httpServletRequest.getParameter("subject"));
-        System.out.println(httpServletRequest.getParameter("content"));
 
-        //NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
+        String subject = httpServletRequest.getParameter("subject");
+        String content = httpServletRequest.getParameter("content");
+        String noticeNo = httpServletRequest.getParameter("noticeNo");
+        String page = httpServletRequest.getParameter("page");
 
-        //model.addAttribute("detail", noticeDto);
+        boolean isModified = adminService.adminNoticeModifyOk(subject, content, noticeNo);
 
-        return "admin/notice_modify";
+        if(isModified != true) {
+            System.out.println("공지사항 수정 실패");
+        }
+
+        return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
     }
 
 
