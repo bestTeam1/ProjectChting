@@ -19,9 +19,9 @@ public interface UserDao {
     //회원 탈퇴
     int deleteAcount(String userid);
 
-    //관심사
+    //관심사 선택
     List<InterestCategoryDto> selectInterestCategory(List<InterestCategoryDto> list);
 
-
-
+    //회원 정보 수정
+    int updateUser(UserDto userDto);
 }

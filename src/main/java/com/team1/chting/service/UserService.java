@@ -85,10 +85,23 @@ public class UserService {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<InterestCategoryDto> categoryList = userDao.selectInterestCategory(list);
 
-
         return categoryList;
 
     }
 
+    /*
+    회원 정보 수정
+    작성자 : 박주현
+    작성일 : 2021-06-16
+    */
+    public void updateUser(UserDto userDto) {
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        int result = userDao.updateUser(userDto);
 
+        if(result > 0){
+            System.out.println("정보 수정 성공");
+        }else{
+            System.out.println("정보 수정 실패");
+        }
+    }
 }
