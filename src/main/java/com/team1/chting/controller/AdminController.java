@@ -1,6 +1,8 @@
 package com.team1.chting.controller;
 
+import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
+import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.AdminService;
 import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.PageMaker;
@@ -9,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -69,9 +73,13 @@ public class AdminController {
         return "admin/event";
     }
 
+    //회원 관리 멤버 리스트 이동
     @RequestMapping(value = "adminUserManagement.do", method = RequestMethod.GET)
-    public String adminUserManagement(Model model) {
+    public String adminUserManage(Model model) {
 
+        List<UserDto> userList = adminService.getUserList();
+
+        model.addAttribute("userList", userList);
 
         return "admin/user_management";
     }
@@ -120,6 +128,7 @@ public class AdminController {
 
         return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
     }
+
 
 
 }
