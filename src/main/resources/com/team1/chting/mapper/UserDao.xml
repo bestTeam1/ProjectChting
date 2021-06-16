@@ -54,4 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
+    <update id="updateUser">
+        update user_info
+        set first_area = #{first_area}, second_area = #{second_area}, content = #{content}
+        where userid = #{userid}
+    </update>
+
 </mapper>
