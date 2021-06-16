@@ -13,31 +13,35 @@
 
 <!-- Header -->
 <header id="header">
-	<div id="tempDiv">
-		<p>userid : ${pageContext.request.userPrincipal.name}</p>
+	<div id="tempDiv" style="padding-left: 10px;">
+		<a href="${pageContext.request.contextPath}/index.do">
+			<img src="${pageContext.request.contextPath}/images/chting_logo.png" style="width: 27%;">
+		</a>
 	</div>
-	<ul class="icons">
+	<ul class="icons" style="padding-top: 1%; padding-right: 10px;">
 		<li>
 			<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')">
 				<a href="${pageContext.request.contextPath}/logout">
-					<div class="icon button small">로그아웃</div>
+					<div class="icon button">로그아웃</div>
 				</a>
 			</se:authorize>
 			<se:authorize access="!hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')">
 				<a href="${pageContext.request.contextPath}/login">
-					<div class="icon button small">로그인</div>
+					<div class="icon button">로그인</div>
 				</a>
 			</se:authorize>
 		</li>
-		<li><a href="#" class="icon brands fa-twitter"><span
-				class="label">Twitter</span></a></li>
-		<li><a href="#" class="icon brands fa-facebook-f"><span
-				class="label">Facebook</span></a></li>
-		<li><a href="#" class="icon brands fa-snapchat-ghost"><span
-				class="label">Snapchat</span></a></li>
-		<li><a href="#" class="icon brands fa-instagram"><span
-				class="label">Instagram</span></a></li>
-		<li><a href="#" class="icon brands fa-medium-m"><span
-				class="label">Medium</span></a></li>
+<%--		<li><a href="#" class="icon brands fa-twitter"><span--%>
+<%--				class="label">Twitter</span></a></li>--%>
+<%--		<li><a href="#" class="icon brands fa-facebook-f"><span--%>
+<%--				class="label">Facebook</span></a></li>--%>
+<%--		<li><a href="#" class="icon brands fa-snapchat-ghost"><span--%>
+<%--				class="label">Snapchat</span></a></li>--%>
+<%--		<li><a href="#" class="icon brands fa-instagram"><span--%>
+<%--				class="label">Instagram</span></a></li>--%>
+<%--		<li><a href="#" class="icon brands fa-medium-m"><span--%>
+<%--				class="label">Medium</span></a></li>--%>
 	</ul>
 </header>
+<a>$ {sessionScope.get("userData").userid} : ${sessionScope.get("userData").userid}</a>&emsp;|&emsp;
+<a>$ {sessionScope.get("userData").userrole} : ${sessionScope.get("userData").userrole}</a>
