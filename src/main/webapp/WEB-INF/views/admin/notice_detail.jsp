@@ -65,8 +65,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            <a href="testWrite.do">testWrite.do</a>
-
                             <div style="display: flex; justify-content: center">
                                 <input id="modify" type="button" value="수정"/> &nbsp;
                                 &nbsp; &nbsp; &nbsp; &nbsp;
