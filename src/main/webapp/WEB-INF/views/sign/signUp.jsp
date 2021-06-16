@@ -18,7 +18,11 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
-
+    <!-- DB Object -->
+    <c:set var="arealist" value="${requestScope.areaList}" />
+    <!-- Social Object -->
+    <c:set var="google_photo" value="${pageContext.request.getAttribute('picture')}" />
+    <c:set var="kakao_photo" value="${pageContext.request.getAttribute('properties').thumbnail_image}" />
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -31,15 +35,28 @@
                     <p style="font-size: smaller">data : ${pageContext.request.getAttribute("data")}</p>
                 </div>
             </header>
+            <c:set var="userinfo" value="${userInfo.userInfoBasic}" />
             <div class="content">
-                <form method="post" action="">
+                <form method="post" action="" enctype="multipart/form-data">
                     <div id="tableWrap" style="padding: 1%;">
                         <table>
                             <tr>
                                 <td style="vertical-align: middle">프로필</td>
-                                <td>
-                                    <img src="${pageContext.request.getAttribute("picture")}">
-                                    <img src="${pageContext.request.getAttribute("properties").thumbnail_image}">
+                                <td><br>
+                                    <c:choose>
+                                        <c:when test="${not empty google_photo}">
+                                            <img id="preview" src="${google_photo}" width="150" alt="프로필 이미지가 보여지는 영역">
+                                        </c:when>
+                                        <c:when test="${not empty kakao_photo}">
+                                            <img id="preview" src="${kakao_photo}" width="150" alt="프로필 이미지가 보여지는 영역">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img id="preview" src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
+                                                 width="150" alt="프로필 이미지가 보여지는 영역">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <hr>
+                                    <input type="file" id="fileName" name="fileName" class="fileName" accept="image/*">
                                 </td>
                             </tr>
 
@@ -58,12 +75,12 @@
                                     <ol>
                                         <ul class="a">
                                             <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                                                <div class="circle_interest">
-                                                        ${userInterest.s_catename}
+                                                <div class="circle_user_interest">
+                                                        ${userInterest.catename}
                                                 </div>
                                             </c:forEach>
-                                            <input type="button" class="button small" value="추가">
-
+                                            <input type="button" class="button small" value="추가"
+                                                   onclick="window.open('categoryChoice.do', 'categoryChoice', 'width=600, height=600, left=100, top=50');">
                                         </ul>
                                     </ol>
 
@@ -71,10 +88,25 @@
                             </tr>
 
                             <tr>
-                                <td style="vertical-align: middle">지역</td>
+                                <td style="vertical-align: middle">선호 지역 1</td>
                                 <td>
-                                    <select id="areaCategory" style="width: 30%; float:left;">
-                                        <option value="">선택</option>
+                                    <select id="area1" name="area1" style="width: 30%; float:left;" required>
+                                        <option value="" disabled selected> - 선택하세요 - </option>
+                                        <c:forEach var="area1" items="${areaList}">
+                                            <option value="${area1.code}">${area1.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="vertical-align: middle">선호 지역 2</td>
+                                <td>
+                                    <select id="area2" name="area2" style="width: 30%; float:left;">
+                                        <option value="" disabled selected> - 선택하세요 - </option>
+                                        <c:forEach var="area2" items="${areaList}">
+                                            <option value="${area2.code}">${area2.name}</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -100,12 +132,13 @@
 
 <script type="text/javascript">
 
-    $().ready(function () {
-        <c:forEach items="${areaList}" var="area">
-        (function () {
-            $('#areaCategory').append('<option value="${area.area_name}">${area.area_name}</option>');
-        })();
-        </c:forEach>
+    $(function () {
+        $('#content').change(function () {
+            let updateContent = $('#content').val();
+            console.log(updateContent);
+        })
+
+
 
     });
 
