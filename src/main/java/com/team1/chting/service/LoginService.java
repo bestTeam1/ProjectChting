@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class LoginService {
 
@@ -18,11 +21,16 @@ public class LoginService {
     작성일 : 2021-06-14
     */
     public LoginDto isUser(String userid) {
-
         LoginDao loginDao = sqlSession.getMapper(LoginDao.class);
         LoginDto loginDto = loginDao.isUser(userid);
 
         return loginDto;
+    }
+
+    public List<Map<String, String>> getAreaList() {
+        LoginDao loginDao = sqlSession.getMapper(LoginDao.class);
+        List<Map<String, String>> areaList = loginDao.getAreaList();
+        return areaList;
     }
 
 
