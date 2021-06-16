@@ -101,7 +101,7 @@
             cancelButtonText: '아니오'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href="adminNoticeModify.do?noticeNo=${detail.notice_no}"
+                window.location.href="adminNoticeModify.do?noticeNo=${detail.notice_no}&page=${page}"
             }
         })
     });

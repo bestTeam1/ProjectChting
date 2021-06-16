@@ -59,7 +59,7 @@
                 <div class="content">
                     <header>
 
-                        <form id="form" method="post" action='adminNoticeModify.do'>
+                        <form id="form" method="post" action='adminNoticeModifyOk.do'>
                             <div>제목<input type="text" id="subject" name="subject" value="${detail.subject}"></div>
                             <br><br>
                             <div>내용<textarea rows="5" cols="13" id="content" name="content"
@@ -73,9 +73,12 @@
 
                             <div style="display: flex; justify-content: center">
                                 <input type="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" onclick="location.href='board_list.do'">목록</button>
                             </div>
+                            <input type="hidden" value="${detail.notice_no}" name="noticeNo" >
+                            <input type="hidden" value="${page}" name="page" >
                         </form>
+
+                        <button type="button" onclick="location.href='board_list.do'">목록</button>
 
                     </header>
                 </div>
@@ -90,7 +93,6 @@
 
 </body>
 <script type="text/javascript">
-
 </script>
 
 </html>
