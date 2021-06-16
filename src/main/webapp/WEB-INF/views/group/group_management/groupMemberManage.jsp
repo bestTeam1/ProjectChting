@@ -51,7 +51,7 @@
         memberList();
     });
 
-    //가입신청 Table
+    //모임원 Table
     function memberList() {
         var tableNum = 0;
 
