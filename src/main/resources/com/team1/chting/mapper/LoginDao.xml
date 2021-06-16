@@ -4,10 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.LoginDao">
 
+    <resultMap id="areaList" type="java.util.Map">
+        <id column="area_code" property="code" />
+        <id column="area_name" property="name" />
+    </resultMap>
+
     <select id="isUser" parameterType="String" resultType="com.team1.chting.dto.LoginDto">
         select ui.userid as 'userid', ui.enabled as 'enabled', ur.user_role_name as 'role'
         from user_info ui left join user_role ur on ui.userid = ur.userid
         where ui.enabled = 1 and ui.userid= #{userid}
+    </select>
+
+    <select id="getAreaList" resultMap="areaList">
+        select area_code, area_name from area
     </select>
 
 </mapper>
