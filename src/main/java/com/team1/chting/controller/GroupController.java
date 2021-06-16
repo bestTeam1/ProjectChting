@@ -55,7 +55,7 @@ public class GroupController {
 
     // 글쓰기 post
     @RequestMapping(value = "board_write.do", method = RequestMethod.POST)
-    public String insert (PostDto postDto) {
+    public String insert (PostDto postDto, Model model) {
 
        groupservice.insert(postDto);
 

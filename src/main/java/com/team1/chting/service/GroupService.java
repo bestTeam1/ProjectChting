@@ -21,11 +21,6 @@ public class GroupService {
 
 
 
-//    @Override
-//    public List<GroupDto> listAll() throws Exception{
-//        return sqlsession.selectList("board.listAll");
-//    }
-
     // 내가가입한모임 - 게시글 리스트
     public List<PostDto> getPostList(){
         List<PostDto> postlist = new ArrayList<PostDto>();
