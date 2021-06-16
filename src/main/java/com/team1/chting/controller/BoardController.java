@@ -17,7 +17,12 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    //모임추천
+
+    /*
+      모임추천
+      만든이 : 이승준
+      작성일 : 2021-06-05
+     */
    @RequestMapping(value = "groupRecommend.do", method = RequestMethod.GET)
     public String groupMain(Model model) {
 
