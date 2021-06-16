@@ -18,7 +18,12 @@ public class GroupAdminController {
     @Autowired
     private GroupAdminService groupAdminService;
 
-    //모임관리(가입신청관리 페이지 이동)
+
+    /*
+      모임관리 첫페이지 모임가입신청 리스트
+      만든이 : 이승준
+      작성일 : 2021-06-10
+     */
     @RequestMapping(value = "groupJoin.do", method = RequestMethod.GET)
     public String groupJoin(@RequestParam("userid") String userid, Model model) {
 
@@ -36,7 +41,11 @@ public class GroupAdminController {
         return "group/group_management/groupJoin";
     }
 
-    //모임관리(멤버관리 페이지 이동)
+    /*
+      모임관리 멤버관리 페이지이동
+      만든이 : 이승준
+      작성일 : 2021-06-10
+     */
     @RequestMapping(value = "groupMemberManage.do", method = RequestMethod.GET)
     public String groupMemberManage(@RequestParam("userid") String userid, Model model) {
 
@@ -51,14 +60,22 @@ public class GroupAdminController {
         return "group/group_management/groupMemberManage";
     }
 
-    //모임관리(블랙리스트 페이지 이동)
+    /*
+      모임관리 블랙리스트 페이지이동
+      만든이 : 이승준
+      작성일 : 2021-06-10
+     */
     @RequestMapping(value = "groupBlackListManage.do", method = RequestMethod.GET)
     public String groupBlackListManage(Model model) {
 
         return "group/group_management/groupBlackListManage";
     }
 
-    //모임관리(모임해산 페이지 이동)
+    /*
+      모임관리 모임해산 페이지 이동
+      만든이 : 이승준
+      작성일 : 2021-06-11
+     */
     @RequestMapping(value = "groupDisband.do", method = RequestMethod.GET)
     public String groupDisband(@RequestParam("userid") String userid, Model model) {
 
@@ -79,7 +96,11 @@ public class GroupAdminController {
         return "group/group_management/groupDisband";
     }
 
-    //모임관리(모임해산 기능)
+    /*
+      모임관리 모임해산 기능
+      만든이 : 이승준
+      작성일 : 2021-06-11
+     */
     @RequestMapping(value = "groupDisbandOk.do", method = RequestMethod.GET)
     public String groupDisbandOk(@RequestParam("userid") String userid, Model model) {
 

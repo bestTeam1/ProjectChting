@@ -45,26 +45,29 @@
 
 		<intercept-url pattern="/**" access="permitAll()"/>
 		<intercept-url pattern="/login**" access="authenticated"/>
-		<oauth2-login user-service-ref="customOAuth2UserService" oidc-user-service-ref="customOidcUserService"/>
+
+		<form-login default-target-url="/index.do" />
+
+		<oauth2-login user-service-ref="customOAuth2UserService"
+					  oidc-user-service-ref="customOidcUserService"
+					  authentication-success-handler-ref="successHandler" user-authorities-mapper-ref=""/>
 		<logout logout-url="/logout" logout-success-url="/index.do"/>
+		<csrf disabled="true" />
 	</http>
 
 	<authentication-manager xmlns="http://www.springframework.org/schema/security">
 		<authentication-provider>
-			<user-service id="inMemoryUserDetailsManager">
-				<user name="admin" password="1004" authorities="IS_AUTHENTICATED_FULLY"></user>
+			<user-service id="detailsManager">
+				<user name="guest" password="{noop}1004" authorities="ROLE_GUEST"></user>
+				<user name="user" password="{noop}1004" authorities="ROLE_USER"></user>
+				<user name="admin" password="{noop}1004" authorities="ROLE_ADMIN"></user>
 			</user-service>
-			<password-encoder ref="bCryptPasswordEncoder"></password-encoder>
 		</authentication-provider>
-
 	</authentication-manager>
 
 	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
 	<b:bean id="customOidcUserService" class="com.team1.chting.security.CustomOidcUserService" />
 	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
-
-	<b:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-
 
 	<client-registrations>
 		<client-registration registration-id="google-login"
