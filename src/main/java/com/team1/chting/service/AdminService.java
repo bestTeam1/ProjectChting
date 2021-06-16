@@ -21,19 +21,11 @@ public class AdminService {
     private SqlSession sqlsession;
 
     //페이지처리한 글 목록
-    public List<NoticeDto> listCri(AdminCriteria cri) throws Exception {
+    public List<NoticeDto> listCriNotice(AdminCriteria cri) throws Exception {
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
 
-        return adminDao.listPageCri(cri);
-    }
-
-    //공지사항 삭제하기
-    public void deleteAdminNotice(String noticeNo) {
-
-        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-        adminDao.deleteAdminNotice(noticeNo);
-
+        return adminDao.listPageCriNotice(cri);
     }
 
     //DB테이블에 있는 모든 글 개수 리턴
@@ -44,28 +36,66 @@ public class AdminService {
         return adminDao.pageCount();
     }
 
-    //페이징
-    public List<NoticeDto> listPage(int page) throws Exception {
+    //공지페이징
+    public List<NoticeDto> listPageNotice(int page) throws Exception {
         //page가 0인경우 1로 바꿔서 처리
         if(page <= 0) {
             page = 1;
         }
         page = (page - 1) * 10;
 
-        return sqlsession.selectList("listPage", page);
+        return sqlsession.selectList("listPageNotice", page);
     }
 
-    //페이징 처리하는 동작(Criteria 객체 사용)
-    public List<NoticeDto> listPageCri(AdminCriteria cri) throws Exception {
-        System.out.println("AdminService : listPageCri 호출");
-
-        return sqlsession.selectList("listPageCri", cri);
+    //공지 페이징 처리하는 동작(Criteria 객체 사용)
+    public List<NoticeDto> listPageCriNotice(AdminCriteria cri) throws Exception {
+        return sqlsession.selectList("listPageCriNotice", cri);
     }
 
-    //DB테이블에 있는 모든 글 개수 계산 후 리턴
-    public int PageCount() throws Exception {
 
-        return sqlsession.selectOne("pageCount");
+    //DB테이블에 있는 모든 공지글 개수 계산 후 리턴
+    public int pageCountNotice() throws Exception {
+
+        return sqlsession.selectOne("pageCountNotice");
+    }
+
+    //페이지처리한 글 목록
+    public List<NoticeDto> listCriUser(AdminCriteria cri) throws Exception {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+
+        return adminDao.listPageCriUser(cri);
+    }
+
+    //유저 페이징
+    public List<NoticeDto> listPageUser(int page) throws Exception {
+        //page가 0인경우 1로 바꿔서 처리
+        if(page <= 0) {
+            page = 1;
+        }
+        page = (page - 1) * 10;
+
+        return sqlsession.selectList("listPageUser", page);
+    }
+
+    //유저 페이징 처리하는 동작(Criteria 객체 사용)
+    public List<UserDto> listPageCriUser(AdminCriteria cri) throws Exception {
+        return sqlsession.selectList("listPageCriUser", cri);
+    }
+
+    //DB테이블에 있는 모든 유저수 계산 후 리턴
+    public int pageCountUser() throws Exception {
+
+        return sqlsession.selectOne("pageCountUser");
+    }
+
+
+    //공지사항 삭제하기
+    public void deleteAdminNotice(String noticeNo) {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        adminDao.deleteAdminNotice(noticeNo);
+
     }
 
     //공지사항 상세보기
@@ -77,7 +107,7 @@ public class AdminService {
         return noticeDto;
     }
 
-
+    //공지사항 수정완료
     public boolean adminNoticeModifyOk(String subject, String content, String noticeNo) {
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
@@ -87,16 +117,9 @@ public class AdminService {
             System.out.println("isModified == 0 , Modify failed error");
             return false;
         } else if (isModified == 1) {
-            System.out.println("isModified == 1 , Modify success");
             return true;
         } else { return false; }
     }
 
-    public List<UserDto> getUserList() {
-
-        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-        List<UserDto> userList = adminDao.getUserList();
-
-        return userList;
-    }
 }
+
