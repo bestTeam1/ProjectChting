@@ -71,7 +71,6 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <hr>
-                                <p>아직 사진 업로드 시 회원가입은 되지 않음. 곧 이슈 수정 에정 사진업로드만 안하면 회원가입 가능</p>
                                 <input type="file" id="fileName" name="fileName" class="fileName"
                                        accept="image/*;capture=camera">
                                 <br><br>
@@ -181,15 +180,6 @@
     </div>
     <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
-<%-- userid=1760104288 &
-    email=ssyy%40kakao.com &
-    birth=2021-06-05 &
-    gender=female &
-    content=asdfasdf &
-    interest=003 &
-    area1=002 &
-    area2=070 &
-    siterule=agree --%>
 
 <script type="text/javascript">
     $(function () {
@@ -209,7 +199,7 @@
         $('#signUpBtn').on('click', (event)=>{
             event.preventDefault();
 
-            var frm = $('#signUpFrm')[0]
+            var frm = $('#signUpFrm')[0];
             var data = new FormData(frm);
 
             $('#signUpBtn').prop('disabled', true);
@@ -224,16 +214,21 @@
                 cache : false,
                 timeout : 60000,
                 success : function(data) {
-                    alert(data);
+                    Swal.fire(
+                        '회원가입 완료!',
+                        '다시 로그인을 진행 해주세요!',
+                        'success'
+                    );
                     location.href="${pageContext.request.contextPath}/logout";
                 },
                 error : function(e) {
-                    alert(e);
+                    Swal.fire(
+                        '오류 발생 Error',
+                        '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
+                        'error'
+                    );
                 }
             });
-
-
-
         });
     });
 

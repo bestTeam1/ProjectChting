@@ -32,7 +32,7 @@ public class LoginController {
         binder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, false));
     }
 
-    //회원가입 페이지 이동
+    //회원가입 페이지 이동 수연
     @RequestMapping(value = "signUp.do", method = RequestMethod.GET)
     public String signUpPage(HttpServletRequest request, Model model) {
 
@@ -55,6 +55,7 @@ public class LoginController {
         return "sign/signUp";
     }
 
+    //회원가입 비동기 처리 수연
     @ResponseBody
     @RequestMapping(value = "signUp.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity<String> signUpReg(SignUpDto signUpDto,
@@ -64,8 +65,8 @@ public class LoginController {
         try {
 
             int result = loginService.signUpReg(signUpDto, request, s_catecode);
-            System.out.println(result);
-            return new ResponseEntity<String>("SignUp Success", HttpStatus.OK);
+            //System.out.println(result);
+            return new ResponseEntity<String>("회원가입이 완료되었습니다. 다시 로그인 해주세요.", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("SignUp Failure", HttpStatus.BAD_REQUEST);
         }
