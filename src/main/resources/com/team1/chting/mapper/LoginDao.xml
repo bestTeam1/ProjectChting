@@ -9,6 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <id column="area_name" property="name" />
     </resultMap>
 
+    <resultMap id="tempInterestList" type="java.util.Map">
+        <id column="catecode" property="code" />
+        <id column="catename" property="name" />
+    </resultMap>
+
     <select id="isUser" parameterType="String" resultType="com.team1.chting.dto.LoginDto">
         select ui.userid as 'userid', ui.enabled as 'enabled', ur.user_role_name as 'role'
         from user_info ui left join user_role ur on ui.userid = ur.userid
@@ -18,6 +23,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAreaList" resultMap="areaList">
         select area_code, area_name from area
     </select>
+
+    <select id="tempInterestList" resultMap="tempInterestList">
+        select catecode, catename from interest_category
+    </select>
+    
+    <insert id="insertUser" parameterType="com.team1.chting.dto.SignUpDto">
+        insert into user_info (userid, nickname, gender, birth, profile_img, email, content, first_area, second_area, enabled)
+        values (#{userid}, #{nickname}, #{gender}, #{birth}, #{profile_img}, #{email}, #{content}, #{first_area}, #{second_area}, 1)
+    </insert>
+
+    <insert id="tempInterestInsert" parameterType="java.util.HashMap">
+        insert into user_interest (userid, s_catecode)
+        values (#{userid}, #{s_catecode})
+    </insert>
 
 </mapper>
 
