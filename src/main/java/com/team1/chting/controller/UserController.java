@@ -3,6 +3,7 @@ package com.team1.chting.controller;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.team1.chting.dto.*;
 import com.team1.chting.dto.MyPageInfo;
@@ -40,13 +41,14 @@ public class UserController {
     @RequestMapping(value = "myPage.do", method = RequestMethod.GET)
     public String userInfo(Model model) {
 
+
         model.addAttribute("userInfo", userService.getMyPageInfo());
 
         return "user/userinfo";
     }
 
     /*
-    마이페이지 회원 정보 수정 페이지
+    마이페이지 회원 정보 수정 페이지(GET)
     작성자 : 박주현
     작성일 : 2021-06-10
     */
@@ -58,7 +60,6 @@ public class UserController {
 
         return "user/userUpdate";
     }
-
 
     /*
     마이페이지 회원 정보 수정 - 관심사 선택
@@ -80,16 +81,12 @@ public class UserController {
         }else {
             for(int i = 0; i < catelist.size(); i++) {
                 InterestCategoryDto interestCategory = new InterestCategoryDto();
-                //System.out.println(catelist.get(i));
                 interestCategory.setParent_catecode(catelist.get(i));
 
-                //System.out.println("interestCategory:" +interestCategory);
                 list.add(interestCategory);
             }
         }
-
-        System.out.println("list :" +list);
-
+        //System.out.println("list :" +list);
         model.addAttribute("interestCategory", userService.getInterestCategory(list));
 
         return "user/interestCategory";
