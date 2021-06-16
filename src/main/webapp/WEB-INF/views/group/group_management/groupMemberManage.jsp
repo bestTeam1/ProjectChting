@@ -51,7 +51,7 @@
         memberList();
     });
 
-    //가입신청 Table
+    //모임원 Table
     function memberList() {
         var tableNum = 0;
 
@@ -172,7 +172,6 @@
                         var chk = $(this).val();
                         banishes.push(chk);
                     });
-                    console.log(banishes);
                     $.ajax({
                         url : "banishMember.do",
                         dataType : "json",
@@ -182,7 +181,6 @@
                             userid : $('#userid').val()
                         },
                         success : function(data){
-                            console.log(data);
                             $('#memberList').children().remove();
                             console.log(Object.keys(data).length); // json갯수
                             var tableNum = 0;

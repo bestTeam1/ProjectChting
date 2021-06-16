@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.chting.dao.AdminDao">
+    <!-- 페이지 정보를 10개씩 가져오기 -->
+    <select id="listPageNotice" resultType="com.team1.chting.dto.NoticeDto">
+        select notice_no, ui.userid, subject, writedate, nickname, file
+        from notice left join user_info ui on notice.userid = ui.userid
+        where notice.enabled = 1
+        order by notice_no desc, writedate desc limit ${page}, 10
+    </select>
+
+    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <select id="listPageCriNotice" resultType="com.team1.chting.dto.NoticeDto">
+        select notice_no, ui.userid, subject, writedate, nickname, file
+        from notice left join user_info ui on notice.userid = ui.userid
+        where notice.enabled = 1
+        order by notice_no desc, writedate desc
+        limit #{pageStart},#{pageSize}
+    </select>
+
+
+    <select id="pageCountNotice" resultType="int">
+        select count(*) from notice where enabled = 1
+    </select>
+
+    <select id="getNoticeDetail" resultType="com.team1.chting.dto.NoticeDto">
+        select notice_no, userid, subject, content, writedate from notice where notice_no = #{noticeNo}
+    </select>
+
+    <update id="deleteAdminNotice">
+        update notice set enabled = 0 where notice_no = #{noticeNo};
+    </update>
+
+    <update id="adminNoticeModifyOk">
+        update notice set subject = "${subject}", content = "${content}" where notice_no = #{noticeNo}
+    </update>
+
+    <!-- 회원 정보를 10개씩 가져오기 -->
+    <select id="listPageUser" resultType="com.team1.chting.dto.UserDto">
+        select userid, gender, nickname, email, a.area_name as first_area_name, a2.area_name as second_area_name,
+               enabled, joindate from user_info
+                   left join area a on user_info.first_area = a.area_code
+                   left join area a2 on user_info.second_area = a2.area_code
+                    order by joindate desc limit ${page}, 10;
+    </select>
+
+
+    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <select id="listPageCriUser" resultType="com.team1.chting.dto.UserDto">
+        select userid, gender, nickname, email, a.area_name as first_area_name, a2.area_name as second_area_name,
+               enabled, joindate from user_info
+                                          left join area a on user_info.first_area = a.area_code
+                                          left join area a2 on user_info.second_area = a2.area_code
+        order by joindate desc limit #{pageStart},#{pageSize};
+    </select>
+
+    <select id="pageCountUser" resultType="int">
+        select count(*) from user_info
+    </select>
+</mapper>
+

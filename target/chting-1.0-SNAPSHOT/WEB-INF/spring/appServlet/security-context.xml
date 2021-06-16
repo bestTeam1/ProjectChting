@@ -22,19 +22,16 @@
 	만약 최종 로그인일시를 DB에 기록해야한다면 handler로 처리하는게 좋겠다.
 	res.sendRedirect 등으로 처리
 	authentication-failure-handler-ref : 로그인 실패 시 프로세스 정의, bean id 입력
-
 	>> security:logout
 	logout-url : 로그아웃 처리할 URL (security가 알아서 만들기 때문에, 이 경로로 요청만 하면된다)
 	logout-success-url : 로그아웃 성공 시 이동 URL
 	success-handler-ref : 로그아웃 성공 시 프로세스 정의, bean id 입력
 	invalidate-session : 로그아웃 시 세션 삭제여부
-
 	>>session-management
 	invalid-session-url : invalid session(세션 타임아웃 등) 일 때 이동 URL
 	max-sessions : 최대 허용 가능한 세션 수
 	expired-url : 중복 로그인 발생시 이동 URL (처음 접속한 세션이 invalidate가 되고 다음 요청시 invalid-session-url로 이동)
 	error-if-maximum-exceeded : max-sessions을 넘었을때 접속한 세션을 실패처리할지 여부 (expired-url와 얘중에 하나만 쓰면 될듯)
-
 		-->
 
 	<context:component-scan base-package="com.team1.chting" />
@@ -45,26 +42,29 @@
 
 		<intercept-url pattern="/**" access="permitAll()"/>
 		<intercept-url pattern="/login**" access="authenticated"/>
-		<oauth2-login user-service-ref="customOAuth2UserService" oidc-user-service-ref="customOidcUserService"/>
+
+		<form-login default-target-url="/index.do" />
+
+		<oauth2-login user-service-ref="customOAuth2UserService"
+					  oidc-user-service-ref="customOidcUserService"
+					  authentication-success-handler-ref="successHandler" user-authorities-mapper-ref=""/>
 		<logout logout-url="/logout" logout-success-url="/index.do"/>
+		<csrf disabled="true" />
 	</http>
 
 	<authentication-manager xmlns="http://www.springframework.org/schema/security">
 		<authentication-provider>
-			<user-service id="inMemoryUserDetailsManager">
-				<user name="admin" password="1004" authorities="IS_AUTHENTICATED_FULLY"></user>
+			<user-service id="detailsManager">
+				<user name="guest" password="{noop}1004" authorities="ROLE_GUEST"></user>
+				<user name="user" password="{noop}1004" authorities="ROLE_USER"></user>
+				<user name="admin" password="{noop}1004" authorities="ROLE_ADMIN"></user>
 			</user-service>
-			<password-encoder ref="bCryptPasswordEncoder"></password-encoder>
 		</authentication-provider>
-
 	</authentication-manager>
 
 	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
 	<b:bean id="customOidcUserService" class="com.team1.chting.security.CustomOidcUserService" />
 	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
-
-	<b:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-
 
 	<client-registrations>
 		<client-registration registration-id="google-login"
