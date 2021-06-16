@@ -8,6 +8,7 @@ import com.team1.chting.dto.LoginDto;
 import com.team1.chting.dto.SessionDto;
 import com.team1.chting.dto.TestDto;
 import com.team1.chting.service.LoginService;
+import lombok.RequiredArgsConstructor;
 import net.minidev.json.parser.JSONParser;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,18 +28,12 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
+@RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    @Autowired
     private final LoginService loginService;
-    @Autowired
     private final HttpSession httpSession;
-
-    public CustomOAuth2UserService(LoginService loginService, HttpSession httpSession) {
-        this.loginService = loginService;
-        this.httpSession = httpSession;
-    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -54,11 +49,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         if(loginDto == null) {
             resultRole = "ROLE_GUEST";
         } else {
-            resultRole = "ROLE_USER";
-            httpSession.setAttribute("user", new SessionDto(loginDto));
+            resultRole = loginDto.getRole();
+            //httpSession.setAttribute("user", new SessionDto(loginDto));
         }
-
-        System.out.println("mapping: " + oAuth2User.getAttributes().toString());
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(resultRole)),
