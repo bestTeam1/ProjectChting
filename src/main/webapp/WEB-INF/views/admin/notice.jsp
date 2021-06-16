@@ -59,7 +59,7 @@
                                 <li><a href="adminNotice.do?page=${pm.startPage-1}">&laquo;</a></li>
                             </c:if>
                             <!-- 페이지블럭 -->
-                            <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
+                            <c:forEach var="idx" begin="${pm.startPage}" end="${pm.endPage}">
                                 <!-- 삼항연산자를 사용해서 class로 스타일적용  -->
                                 <li ${pm.cri.page == idx? 'class=active':''}>
                                     <a href="adminNotice.do?page=${idx }">${idx}</a>
