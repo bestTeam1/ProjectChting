@@ -43,7 +43,6 @@ public class LoginController {
 
         while (Iter_userDataSet.hasNext()) {
             String next = Iter_userDataSet.next();
-            System.out.println("KEY : " + next);
             model.addAttribute(next, userData.get(next));
         }
 
@@ -63,6 +62,7 @@ public class LoginController {
                                     @RequestParam(value = "siterule") String siterule,
                                     HttpServletRequest request) {
         try {
+
             int result = loginService.signUpReg(signUpDto, request, s_catecode);
             System.out.println(result);
             return new ResponseEntity<String>("SignUp Success", HttpStatus.OK);
