@@ -13,12 +13,12 @@
 
 <!-- Header -->
 <header id="header">
-	<div id="tempDiv" style="padding-left: 10px;">
+	<div id="tempDiv" style="padding-left: 7px;">
 		<a href="${pageContext.request.contextPath}/index.do">
-			<img src="${pageContext.request.contextPath}/images/chting_logo.png" style="width: 27%;">
+			<img src="${pageContext.request.contextPath}/images/chting_logo.png" id="chtingLogo">
 		</a>
 	</div>
-	<ul class="icons" style="padding-top: 1%; padding-right: 10px;">
+	<ul class="icons" style="padding-top: 0.25em; padding-right: 7px;">
 		<li>
 			<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')">
 				<a href="${pageContext.request.contextPath}/logout">
