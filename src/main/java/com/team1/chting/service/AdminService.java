@@ -77,5 +77,17 @@ public class AdminService {
     }
 
 
+    public boolean adminNoticeModifyOk(String subject, String content, String noticeNo) {
 
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int isModified =  adminDao.adminNoticeModifyOk(subject, content, noticeNo);
+
+        if (isModified == 0) {
+            System.out.println("isModified == 0 , Modify failed error");
+            return false;
+        } else if (isModified == 1) {
+            System.out.println("isModified == 1 , Modify success");
+            return true;
+        } else { return false; }
+    }
 }

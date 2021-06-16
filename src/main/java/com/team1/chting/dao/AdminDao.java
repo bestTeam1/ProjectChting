@@ -4,6 +4,7 @@ import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -24,6 +25,11 @@ public interface AdminDao {
     //DB 테이블에 있는 모든 글 개수 계산 후 리턴
     public int pageCount() throws Exception;
 
+    //공지사항 상세보기
     public NoticeDto getNoticeDetail(@Param("noticeNo") String noticeNo);
 
+    //공지사항 수정 및 체크 (0 = fail, 1 = success)
+    public int adminNoticeModifyOk(@Param("subject") String subject,
+                                   @Param("content") String content,
+                                   @Param("noticeNo") String noticeNo);
 }
