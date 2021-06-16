@@ -19,7 +19,11 @@ public class GroupRestController {
     @Autowired
     private GroupAdminService broupAdminService;
 
-    //모임원 강퇴
+    /*
+      모임관리 모임원강퇴
+      만든이 : 이승준
+      작성일 : 2021-06-12
+     */
     @RequestMapping(value="banishMember.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> banishMember (@RequestParam("banishList[]") List<String> banishList,
                                                 @RequestParam("groupNo") String groupNo,
@@ -42,7 +46,11 @@ public class GroupRestController {
 
     }
 
-    //모임장 위임
+    /*
+      모임관리 모임장위임
+      만든이 : 이승준
+      작성일 : 2021-06-12
+     */
     @RequestMapping(value="succeedGroupAdmin.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> banishMember (@RequestParam("adminUserid") String adminUserid,
                                                 @RequestParam("requestUserid") String requestUserid,
@@ -63,7 +71,11 @@ public class GroupRestController {
     }
 
 
-    //가입신청 승인
+    /*
+      모임관리 모임가입 승인
+      만든이 : 이승준
+      작성일 : 2021-06-12
+     */
     @RequestMapping(value="joinAccept.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> joinAccept(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
         broupAdminService.acceptMembers(requestList, groupNo);
@@ -82,7 +94,11 @@ public class GroupRestController {
         }
 
     }
-    //가입신청 거부
+    /*
+      모임관리 모임가입 거부
+      만든이 : 이승준
+      작성일 : 2021-06-12
+     */
     @RequestMapping(value="joinDeny.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> joinDeny(@RequestParam("requestList[]") List<String> requestList, @RequestParam("groupNo") String groupNo){
         broupAdminService.deleteRequest(requestList, groupNo);

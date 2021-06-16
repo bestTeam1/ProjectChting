@@ -23,7 +23,12 @@ public class BoardRestController {
     @Autowired
     private BoardService boardService;
 
-    //모임 검색
+
+    /*
+      모임검색
+      만든이 : 이승준
+      작성일 : 2021-06-08
+     */
     @RequestMapping(value="searchButton.do", method= RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> searchGroup(@RequestParam("category") String category, @RequestParam("search") String search){
 
