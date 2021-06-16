@@ -21,15 +21,18 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    //관리자 메인
+    //관리자 메인 (차트활용)
     @RequestMapping(value = "adminIndex.do", method = RequestMethod.GET)
     public String groupJoin(Model model) {
-
 
         return "admin/index";
     }
 
-    //공지사항 목록보기(PageMaker객체 사용)
+    /*
+      공지사항 목록보기(PageMaker객체 사용)
+      만든이 : 이승준
+      작성일 : 2021-06-15
+     */
     @RequestMapping(value = "adminNotice.do", method = RequestMethod.GET)
     public String listPageGET(AdminCriteria cri, Model model) throws Exception {
         model.addAttribute("boardList", adminService.listCriNotice(cri));
@@ -44,7 +47,12 @@ public class AdminController {
         return "admin/notice";
     }
 
-    //공지사항 상세보기
+    /*
+      공지사항 상세보기(PageMaker객체 사용)
+      만든이 : 이승준
+      작성일 : 2021-06-16
+
+     */
     @RequestMapping(value = "adminNoticeDetail.do", method = RequestMethod.GET)
     public String adminNoticeDetail(String noticeNo, String page, Model model) {
 
@@ -56,8 +64,12 @@ public class AdminController {
         return "admin/notice_detail";
     }
 
-    //공지사항 삭제하기
-    @RequestMapping(value="adminNoticeDelete.do", method = RequestMethod.GET)
+    /*
+      공지사항 삭제
+      만든이 : 이승준
+      작성일 : 2021-06-16
+     */
+    @RequestMapping(value = "adminNoticeDelete.do", method = RequestMethod.GET)
     public String adminNoticeDelete(String noticeNo, String page, Model model) {
         adminService.deleteAdminNotice(noticeNo);
         String url = "adminNotice.do?page=" + page;
@@ -72,7 +84,11 @@ public class AdminController {
         return "admin/event";
     }
 
-    //회원 관리 멤버 리스트 이동 (PageMaker 객체 사용)
+    /*
+      사이트 회원목록 페이징
+      만든이 : 이승준
+      작성일 : 2021-06-16
+     */
     @RequestMapping(value = "adminUserManagement.do", method = RequestMethod.GET)
     public String adminUserManage(AdminCriteria cri, Model model) throws Exception {
         model.addAttribute("userList", adminService.listCriUser(cri));
@@ -93,9 +109,13 @@ public class AdminController {
         return "admin/group_management";
     }
 
-    //공지사항 수정하기 버튼 클릭
+    /*
+      공지사항 수정 이동
+      만든이 : 이승준
+      작성일 : 2021-06-16
+     */
     @RequestMapping(value = "adminNoticeModify.do", method = RequestMethod.GET)
-    public String adminNoticeModify(String noticeNo, String page, Model model ) {
+    public String adminNoticeModify(String noticeNo, String page, Model model) {
         NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
 
         model.addAttribute("page", page);
@@ -104,9 +124,14 @@ public class AdminController {
         return "admin/notice_modify";
     }
 
-    //공지사항 수정하기 완료 버튼 클릭
+
+    /*
+      공지사항 수정 확인
+      만든이 : 이승준
+      작성일 : 2021-06-16
+     */
     @RequestMapping(value = "adminNoticeModifyOk.do", method = RequestMethod.POST)
-    public String adminNoticeModifyOk(HttpServletRequest httpServletRequest, Model model ) {
+    public String adminNoticeModifyOk(HttpServletRequest httpServletRequest, Model model) {
 
 
         String subject = httpServletRequest.getParameter("subject");
@@ -116,13 +141,12 @@ public class AdminController {
 
         boolean isModified = adminService.adminNoticeModifyOk(subject, content, noticeNo);
 
-        if(isModified != true) {
+        if (isModified != true) {
             System.out.println("공지사항 수정 실패");
         }
 
         return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
     }
-
 
 
 }
