@@ -1,14 +1,20 @@
 package com.team1.chting.controller;
 
+import com.team1.chting.dto.SignUpDto;
 import com.team1.chting.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -17,8 +23,18 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        StringTrimmerEditor stringTimmerEditor = new StringTrimmerEditor(true);
+        binder.registerCustomEditor(String.class, stringTimmerEditor);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, false));
+    }
+
+    //회원가입 페이지 이동
     @RequestMapping(value = "signUp.do", method = RequestMethod.GET)
-    public String userSignUp(HttpServletRequest request, Model model) {
+    public String signUpPage(HttpServletRequest request, Model model) {
 
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) request.getUserPrincipal();
         Map<String, Object> userData = token.getPrincipal().getAttributes();
@@ -33,6 +49,27 @@ public class LoginController {
 
         model.addAttribute("areaList", loginService.getAreaList());
         model.addAttribute("data", request.getUserPrincipal());
+        model.addAttribute("loginType", token.getAuthorizedClientRegistrationId());
+
+        model.addAttribute("interestList", loginService.tempInterestList());
+
         return "sign/signUp";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "signUp.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public ResponseEntity<String> signUpReg(SignUpDto signUpDto,
+                                    @RequestParam(value = "interest", defaultValue = "001") String s_catecode,
+                                    @RequestParam(value = "siterule") String siterule,
+                                    HttpServletRequest request) {
+        try {
+            int result = loginService.signUpReg(signUpDto, request, s_catecode);
+            System.out.println(result);
+            return new ResponseEntity<String>("SignUp Success", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("SignUp Failure", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }
