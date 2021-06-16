@@ -1,17 +1,16 @@
 package com.team1.chting.controller;
 
-import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.AdminService;
 import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.PageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -33,11 +32,11 @@ public class AdminController {
     //공지사항 목록보기(PageMaker객체 사용)
     @RequestMapping(value = "adminNotice.do", method = RequestMethod.GET)
     public String listPageGET(AdminCriteria cri, Model model) throws Exception {
-        model.addAttribute("boardList", adminService.listCri(cri));
+        model.addAttribute("boardList", adminService.listCriNotice(cri));
 
         PageMaker pm = new PageMaker();
         pm.setCri(cri);
-        pm.setTotalCount(adminService.pageCount()); //DB의 전체ROW수 입력
+        pm.setTotalCount(adminService.pageCountNotice()); //DB의 전체ROW수 입력
 
         // 뷰페이지로 전달
         model.addAttribute("pm", pm);
@@ -73,13 +72,16 @@ public class AdminController {
         return "admin/event";
     }
 
-    //회원 관리 멤버 리스트 이동
+    //회원 관리 멤버 리스트 이동 (PageMaker 객체 사용)
     @RequestMapping(value = "adminUserManagement.do", method = RequestMethod.GET)
-    public String adminUserManage(Model model) {
+    public String adminUserManage(AdminCriteria cri, Model model) throws Exception {
+        model.addAttribute("userList", adminService.listCriUser(cri));
 
-        List<UserDto> userList = adminService.getUserList();
+        PageMaker pm = new PageMaker();
+        pm.setCri(cri);
+        pm.setTotalCount(adminService.pageCountUser()); //DB의 전제 row수
 
-        model.addAttribute("userList", userList);
+        model.addAttribute("pm", pm);
 
         return "admin/user_management";
     }
@@ -89,14 +91,6 @@ public class AdminController {
 
 
         return "admin/group_management";
-    }
-
-    //페이징처리한 글목록
-    @RequestMapping(value = "testestsetste.do", method = RequestMethod.GET)
-    public String listCriGET(AdminCriteria cri, Model model) throws Exception {
-        model.addAttribute("boardList", adminService.listCri(cri));
-
-        return "admin/pagingtest";
     }
 
     //공지사항 수정하기 버튼 클릭
