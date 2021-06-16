@@ -4,8 +4,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<head>
     <title>Editorial by HTML5 UP</title>
+    <meta name="_csrf_header" content="${_csrf.headerName}">
+    <meta name="_csrf" content="${_csrf.token}">
+
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -41,10 +43,8 @@
                                             </tr>
                                             <tr>
                                                 <td style="vertical-align: middle">자기소개</td>
-                                                <td><textarea id="content" style="resize: none;" name="bbs_content" cols="50" rows="3"name="content"
-                                                              placeholder="${userinfo.content}"
-                                                              onfocus="this.placeholder = ''"
-                                                              onblur="this.placeholder = '${userinfo.content}'"></textarea></td>
+                                                <td><textarea id="content" style="resize: none;" name="content" cols="50" rows="3" name="content"
+                                                              >${userinfo.content}</textarea></td>
                                             </tr>
 
                                             <tr>
@@ -70,7 +70,7 @@
                                                 <td>
                                                     <select id="area1"  style="width: 30%; float:left;">
                                                         <c:forEach var="area" items="${areaList}">
-                                                            <option value="" <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_name}</option>
+                                                            <option value="" <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </td>
@@ -81,7 +81,7 @@
                                                 <td>
                                                     <select id="area2"  style="width: 30%; float:left;">
                                                         <c:forEach var="area" items="${areaList}">
-                                                            <option value="" <c:if test="${userinfo.second_area_name == area.area_name}">selected</c:if>>${area.area_name}</option>
+                                                            <option value="" <c:if test="${userinfo.second_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </td>
@@ -129,26 +129,76 @@
 </div>
 
 <script type="text/javascript">
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
 
-<%--  수정 안한 부분이 있으면 원래 값 그대로 다시 넣어주는 거 해야함   --%>
+    let userid = "${userInfo.userInfoBasic.userid}";
+
+    let swal = Swal.mixin({
+        customClass: {
+            confirmButton: 'button',
+            cancelButton: 'button'
+        },
+        buttonsStyling: false
+    })
 
     $(function () {
-        $('#area1').change(function () {
-            let updateArea1 = $("#area1 option:selected").text();
-            console.log(updateArea1);
-        })
-
-        $('#area2').change(function () {
-            let updateArea2 = $("#area2 option:selected").text();
-            console.log(updateArea2);
-        })
-
-        $('#content').change(function () {
+        $('#userUpdate').click(function () {
+            let area1Arr = $("#area1 option:selected").text().split(" ");
+            let area2Arr = $("#area2 option:selected").text().split(" ");
+            let area1 = area1Arr[0];
+            let area2 = area2Arr[0];
             let updateContent = $('#content').val();
+
+            let param = {"userid":userid, "first_area":area1, "second_area":area2, "content":updateContent}
+
+            console.log(area1);
+            console.log(area2);
             console.log(updateContent);
+            console.log(param);
+
+            swal.fire ({
+                title: "수정하시겠습니까?",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: '확인',
+                cancelButtonText: '취소',
+                reverseButtons: true
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    $.ajax({
+                        url : "userUpdate.do",
+                        dataType : "text",
+                        type : "POST",
+                        data: JSON.stringify(param),
+                        contentType: "application/json; charset=UTF-8",
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader(header, token);
+                        },
+                        success : function(data){
+                            swal.fire(
+                                '수정이 완료되었습니다.',
+                                'success', {
+                                    buttons : {
+                                        confirm : {
+                                            text : '확인',
+                                            value : true,
+                                            className : 'button'
+                                        }
+                                    }
+                                }).then((result) => {
+                                location.href="userUpdate.do"
+                            })
+                        },
+                        error : function(request, status, error) {
+                            console.log(error);
+                        }
+                    })
+                }
+            })
+
+
         })
-
-
 
     });
 
