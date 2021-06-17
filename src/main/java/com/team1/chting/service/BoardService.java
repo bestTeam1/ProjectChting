@@ -4,6 +4,7 @@ import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,12 @@ public class BoardService {
         return groupList;
     }
 
+    //Group 관심사
+    public List<UserDto> getGroupInterest() {
+
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        List<UserDto> groupInterest = boardDao.getGroupInterest();
+
+        return groupInterest;
+    }
 }

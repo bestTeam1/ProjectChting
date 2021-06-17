@@ -2,6 +2,7 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface BoardDao {
 
     //모임멤버 정보
     public List<GroupDto> getGroupMemberList();
+
+    //모임만들기 관심사 정보
+    public List<UserDto> getGroupInterest();
 }

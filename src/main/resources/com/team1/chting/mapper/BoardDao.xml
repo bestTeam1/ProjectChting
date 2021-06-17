@@ -15,5 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getGroupListBySearch" resultType="com.team1.chting.dto.GroupDto">
         select * from group_info left join area on group_info.area_code = area.area_code where area_name LIKE CONCAT('%',#{category},'%') and group_name LIKE CONCAT('%',#{search},'%') and enabled = 1
     </select>
+
+    <select id="getGroupInterest" resultType="com.team1.chting.dto.UserDto">
+        select * from interest_category;
+    </select>
 </mapper>
 
