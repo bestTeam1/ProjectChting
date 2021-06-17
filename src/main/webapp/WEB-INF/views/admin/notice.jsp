@@ -30,7 +30,6 @@
                 <h2 style="text-align: center"></h2>
             </section>
             <section>
-
                 <!-- 바디  -->
                 <div class="box-body">
                     <table class="table table-bodered" style="text-align: center">
