@@ -28,15 +28,15 @@
                 <li><a href="index.do">ChTing</a></li>
                 <li><a href="groupRecommend.do">모임 추천</a></li>
                 <li><a href="userinfo.do">마이페이지 테스트용</a></li>
-                <%--                <li><span class="opener">조선 제1조 모임</span>
+                                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
-                                        <li><a href="board_main.do?group_no=">메인</a></li>
-                                        <li><a href="board_list.do?group_no=">게시판</a></li>
-                                        <li><a href="board_diary.do?group_no=">일정</a></li>
-                                        <li><a href="board_chatting.do?group_no=">채팅</a></li>
-                                        <li><a href="groupJoin.do?group_no=">모임관리</a></li>
+                                        <li><a href="board_main.do?group_no=A0001">메인</a></li>
+                                        <li><a href="board_list.do?group_no=A0001">게시판</a></li>
+                                        <li><a href="board_diary.do?group_no=A0001">일정</a></li>
+                                        <li><a href="board_chatting.do?group_no=A0001">채팅</a></li>
+                                        <li><a href="groupJoin.do?group_no=A0001">모임관리</a></li>
                                     </ul>
-                                </li>--%>
+                                </li>
         </nav>
 
         <%--		<!-- Section -->--%>

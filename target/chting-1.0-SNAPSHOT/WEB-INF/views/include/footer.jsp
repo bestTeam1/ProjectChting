@@ -9,5 +9,6 @@
 			href="https://html5up.net">HTML5 UP</a>.
 	</p>
 	<p style="font-size: smaller">Principal : ${pageContext.request.userPrincipal}</p>
+	<a href="board_chatting.do?group_no=A0001">채팅경로</a>
 </footer>
 
