@@ -73,7 +73,6 @@ public class UserController {
     */
     @RequestMapping(value = "categoryChoice.do", method = RequestMethod.GET)
     public String categoryChoice(Model model,
-                                 @RequestParam("userid") String userid,
                                  @RequestParam(value="catelist", defaultValue = "")
                                          List<String> catelist) {
 
@@ -81,23 +80,17 @@ public class UserController {
 
         if (catelist.size() == 0) {
             InterestCategoryDto interestCategory = new InterestCategoryDto();
-            interestCategory.setUserid("");
             interestCategory.setParent_catecode("");
             list.add(interestCategory);
-            System.out.println("중분류 userid : " +userid);
-            System.out.println("중분류 list" +list);
         }else {
             for(int i = 0; i < catelist.size(); i++) {
                 InterestCategoryDto interestCategory = new InterestCategoryDto();
-                interestCategory.setUserid(userid);
                 interestCategory.setParent_catecode(catelist.get(i));
                 list.add(interestCategory);
-                System.out.println("소분류 userid : " +userid);
-                System.out.println("소분류 list" +list);
             }
         }
 
-        model.addAttribute("interestCategory", userService.getInterestCategory(list, userid));
+        model.addAttribute("interestCategory", userService.getInterestCategory(list));
 
         return "user/interestCategory";
     }
@@ -122,6 +115,7 @@ public class UserController {
 
             list.add(interestCategory);
         }
+        userService.deleteInterestCategory(userid);
         userService.updateInterestCategory(list);
 
         return "user/userUpdate";

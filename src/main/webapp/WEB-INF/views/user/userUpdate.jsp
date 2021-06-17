@@ -56,7 +56,7 @@
                                                                 </div>
                                                             </c:forEach>
                                                             <input type="button" class="button small" value="추가"
-                                                                   onclick="window.open('categoryChoice.do?userid='+${userInfo.userid}, 'categoryChoice', 'width=600, height=600, left=100, top=50');">
+                                                                   onclick="window.open('categoryChoice.do', 'categoryChoice', 'width=600, height=600, left=100, top=50');">
                                                         </ul>
                                                     </ol>
 
