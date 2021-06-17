@@ -202,12 +202,13 @@ public class AdminController {
         return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
     }
     @RequestMapping(value = "testModify.do", method = RequestMethod.POST)
-    public String testModify(HttpServletRequest httpServletRequest) {
+    public String testModify(HttpServletRequest httpServletRequest ) throws Exception {
 
         System.out.println(httpServletRequest.getParameter("subject"));
         System.out.println(httpServletRequest.getParameter("content"));
         System.out.println(httpServletRequest.getParameter("startdate"));
         System.out.println(httpServletRequest.getParameter("enddate"));
+        System.out.println(httpServletRequest.getReader().readLine());
         System.out.println(httpServletRequest.getParameter("eventNo"));
         System.out.println(httpServletRequest.getParameter("page"));
 
