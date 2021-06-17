@@ -78,32 +78,50 @@ public class UserService {
     작성자 : 박주현
     작성일 : 2021-06-11
     */
-    public List<InterestCategoryDto> getInterestCategory(List<InterestCategoryDto> list, String userid) {
+    public List<InterestCategoryDto> getInterestCategory(List<InterestCategoryDto> list) {
 
         InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
-        List<InterestCategoryDto> categoryList = categoryDao.selectInterestCategory(list,userid);
+        List<InterestCategoryDto> categoryList = categoryDao.selectInterestCategory(list);
 
         return categoryList;
 
     }
 
     /*
-    관심사 카테고리 선택하기 (선택한 관심사 UPDATE , 기존 관심사 DELETE)
+    관심사 카테고리 선택하기 (선택한 관심사 INSERT)
     작성자 : 박주현
     작성일 : 2021-06-17
     */
     public void updateInterestCategory(List<InterestCategoryDto> list) {
         InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
 
-        int result = categoryDao.updateInterestCategory(list);
+        int result = categoryDao.insertInterestCategory(list);
 
         if(result > 0){
-            System.out.println("관심사 업데이트 성공");
+            System.out.println("관심사 인서트 성공");
         }else{
-            System.out.println("관심사 업데이트 실패");
+            System.out.println("관심사 인서트 실패");
         }
 
     }
+
+    /*
+    관심사 카테고리 선택하기 (기존 관심사 DELETE)
+    작성자 : 박주현
+    작성일 : 2021-06-17
+    */
+    public void deleteInterestCategory(String userid) {
+        InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
+
+        int result = categoryDao.deleteInterestCategory(userid);
+
+        if(result > 0){
+            System.out.println("관심사 삭제 성공");
+        }else{
+            System.out.println("관심사 삭제 실패");
+        }
+    }
+
 
     /*
     회원 정보 수정
@@ -120,4 +138,5 @@ public class UserService {
             System.out.println("정보 수정 실패");
         }
     }
+
 }
