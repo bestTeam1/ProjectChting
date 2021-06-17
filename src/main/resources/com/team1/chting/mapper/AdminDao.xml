@@ -31,7 +31,7 @@
 
     <select id="getEventDetail" resultType="com.team1.chting.dto.EventDto">
         select event_no, subject, content, startdate, enddate, writedate, file, event_img, enabled
-        from event where event_no = 3;
+        from event where event_no = #{eventNo}
     </select>
 
     <update id="deleteAdminNotice">
@@ -54,7 +54,7 @@
     <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriEvent" resultType="com.team1.chting.dto.EventDto">
         select event_no, subject, startdate, enddate, writedate, file, event_img, enabled
-        from event order by startdate desc limit #{pageStart},#{pageSize}
+        from event order by event_no desc, enabled desc limit #{pageStart},#{pageSize}
     </select>
 
     <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->

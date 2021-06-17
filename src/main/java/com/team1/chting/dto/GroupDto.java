@@ -17,6 +17,8 @@ public class GroupDto {
 	private String content;
 	private String area_code;
 	private String s_catecode;
+	private String area_name;
+	private String parent_catename;
 	private int enabled;
 	private Date opendate;
 }
