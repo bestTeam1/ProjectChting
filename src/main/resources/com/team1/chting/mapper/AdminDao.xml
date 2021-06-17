@@ -86,5 +86,9 @@
     <select id="pageCountGroup" resultType="int">
         select count(*) from group_info
     </select>
+
+    <insert id="write" parameterType="com.team1.chting.dto.NoticeDto">
+        insert into notice (userid, subject, content, file, enabled) VALUES ('${userid}','${subject}','${content}','${file}', '1')
+    </insert>
 </mapper>
 

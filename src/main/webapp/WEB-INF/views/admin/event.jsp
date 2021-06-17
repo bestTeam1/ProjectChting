@@ -83,7 +83,11 @@
                         </ul>
                     </div>
                 </div>
+                <div style="display: flex; justify-content: center">
+                    <input id="Write" type="button" onclick="window.location.href='write.do?type=event'" value="글쓰기"/>
+                </div>
             </section>
+
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
