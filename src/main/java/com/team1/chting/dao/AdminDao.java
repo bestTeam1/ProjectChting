@@ -1,5 +1,6 @@
 package com.team1.chting.dao;
 
+import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.dto.UserDto;
@@ -20,11 +21,13 @@ public interface AdminDao {
     public List<NoticeDto> listPageCriNotice(AdminCriteria cri) throws Exception;
 
     //유저 페이징 처리하는 동작(Criteria 객체 사용)
+    public List<EventDto> listPageCriEvent(AdminCriteria cri) throws Exception;
+
+    //유저 페이징 처리하는 동작(Criteria 객체 사용)
     public List<NoticeDto> listPageCriUser(AdminCriteria cri) throws Exception;
 
-
-
-
+    //모임 페이징 처리하는 동작(Criteria 객체 사용)
+    public List<GroupDto> listPageCriGroup(AdminCriteria cri) throws Exception;
 
     //공지사항 삭제하기
     public void deleteAdminNotice(@Param("noticeNo") String noticeNo);
@@ -34,6 +37,9 @@ public interface AdminDao {
 
     //공지사항 상세보기
     public NoticeDto getNoticeDetail(@Param("noticeNo") String noticeNo);
+
+    //이벤트 상세보기
+    public EventDto getEventDetail(@Param("eventNo") String eventNo);
 
     //공지사항 수정 및 체크 (0 = fail, 1 = success)
     public int adminNoticeModifyOk(@Param("subject") String subject,
