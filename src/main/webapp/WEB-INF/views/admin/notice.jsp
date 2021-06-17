@@ -71,6 +71,9 @@
                         </ul>
                     </div>
                 </div>
+                <div style="display: flex; justify-content: center">
+                    <input id="Write" type="button" onclick="window.location.href='write.do?type=notice'" value="글쓰기"/>
+                </div>
 
                 <!-- 바디 끝 -->
             </section>

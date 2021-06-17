@@ -46,5 +46,8 @@ public interface AdminDao {
                                    @Param("content") String content,
                                    @Param("noticeNo") String noticeNo);
 
+    //글쓰기
+    public int write(NoticeDto noticeDto);
+
 
 }
