@@ -1,5 +1,6 @@
 package com.team1.chting.controller;
 
+import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.AdminService;
@@ -77,11 +78,37 @@ public class AdminController {
         return "redirect:" + url;
     }
 
+    /*
+      사이트 이벤트목록 페이징
+      만든이 : 이승준
+      작성일 : 2021-06-16
+    */
     @RequestMapping(value = "adminEvent.do", method = RequestMethod.GET)
-    public String adminEvent(Model model) {
+    public String adminEvent(AdminCriteria cri, Model model) throws Exception {
+        model.addAttribute("eventList", adminService.listCriEvent(cri));
 
+        PageMaker pm = new PageMaker();
+        pm.setCri(cri);
+        pm.setTotalCount(adminService.pageCountEvent()); //DB의 전제 row수
+
+        model.addAttribute("pm", pm);
 
         return "admin/event";
+    }
+
+    /*
+      사이트 이벤트 상세보기
+      만든이 : 이승준
+      작성일 : 2021-06-17
+    */
+    @RequestMapping(value = "adminEventDetail.do", method = RequestMethod.GET)
+    public String adminEventDetail(String eventNo, String page, Model model) throws Exception {
+        EventDto eventDto = adminService.getEventDetail(eventNo);
+
+        model.addAttribute("event", eventDto);
+        model.addAttribute("page", page);
+
+        return "admin/event_detail";
     }
 
     /*
@@ -101,10 +128,21 @@ public class AdminController {
 
         return "admin/user_management";
     }
+    /*
+      사이트 모임목록 페이징
+      만든이 : 이승준
+      작성일 : 2021-06-16
+    */
 
     @RequestMapping(value = "adminGroupManagement.do", method = RequestMethod.GET)
-    public String adminGroupManagement(Model model) {
+    public String adminGroupManagement(AdminCriteria cri, Model model)  throws Exception {
+        model.addAttribute("groupList", adminService.listCriGroup(cri));
 
+        PageMaker pm = new PageMaker();
+        pm.setCri(cri);
+        pm.setTotalCount(adminService.pageCountGroup()); //DB의 전제 row수
+
+        model.addAttribute("pm", pm);
 
         return "admin/group_management";
     }

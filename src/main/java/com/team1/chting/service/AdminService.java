@@ -2,10 +2,7 @@ package com.team1.chting.service;
 
 import com.team1.chting.dao.AdminDao;
 import com.team1.chting.dao.BoardDao;
-import com.team1.chting.dto.AreaDto;
-import com.team1.chting.dto.GroupDto;
-import com.team1.chting.dto.NoticeDto;
-import com.team1.chting.dto.UserDto;
+import com.team1.chting.dto.*;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,11 +57,27 @@ public class AdminService {
     }
 
     //페이지처리한 글 목록
+    public List<EventDto> listCriEvent(AdminCriteria cri) throws Exception {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+
+        return adminDao.listPageCriEvent(cri);
+    }
+
+    //페이지처리한 글 목록(공지)
     public List<NoticeDto> listCriUser(AdminCriteria cri) throws Exception {
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
 
         return adminDao.listPageCriUser(cri);
+    }
+
+    //페이지처리한 글 목록(모임)
+    public List<GroupDto> listCriGroup(AdminCriteria cri) throws Exception {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+
+        return adminDao.listPageCriGroup(cri);
     }
 
     //유저 페이징
@@ -84,9 +97,20 @@ public class AdminService {
     }
 
     //DB테이블에 있는 모든 유저수 계산 후 리턴
+    public int pageCountEvent() throws Exception {
+
+        return sqlsession.selectOne("pageCountEvent");
+    }
+    //DB테이블에 있는 모든 유저수 계산 후 리턴
     public int pageCountUser() throws Exception {
 
         return sqlsession.selectOne("pageCountUser");
+    }
+
+    //DB테이블에 있는 모든 유저수 계산 후 리턴
+    public int pageCountGroup() throws Exception {
+
+        return sqlsession.selectOne("pageCountGroup");
     }
 
 
@@ -106,6 +130,16 @@ public class AdminService {
 
         return noticeDto;
     }
+
+    //이벤트 상세보기
+    public EventDto getEventDetail(String eventNo) {
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        EventDto eventDto = adminDao.getEventDetail(eventNo);
+
+        return eventDto;
+    }
+
 
     //공지사항 수정완료
     public boolean adminNoticeModifyOk(String subject, String content, String noticeNo) {
