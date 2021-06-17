@@ -5,8 +5,6 @@
 <html>
 <head>
     <title>Editorial by HTML5 UP</title>
-    <meta name="_csrf_header" content="${_csrf.headerName}">
-    <meta name="_csrf" content="${_csrf.token}">
 
     <meta charset="utf-8"/>
     <meta name="viewport"
@@ -58,7 +56,7 @@
                                                                 </div>
                                                             </c:forEach>
                                                             <input type="button" class="button small" value="추가"
-                                                                   onclick="window.open('categoryChoice.do', 'categoryChoice', 'width=600, height=600, left=100, top=50');">
+                                                                   onclick="window.open('categoryChoice.do?userid='+${userInfo.userid}, 'categoryChoice', 'width=600, height=600, left=100, top=50');">
                                                         </ul>
                                                     </ol>
 
@@ -129,10 +127,8 @@
 </div>
 
 <script type="text/javascript">
-    var header = $("meta[name='_csrf_header']").attr('content');
-    var token = $("meta[name='_csrf']").attr('content');
-
-    let userid = "${userInfo.userInfoBasic.userid}";
+    let userid = ${sessionScope.get("userData").userid};
+    console.log(userid);
 
     let swal = Swal.mixin({
         customClass: {
@@ -167,14 +163,11 @@
             }).then((result) => {
                 if(result.isConfirmed) {
                     $.ajax({
-                        url : "userUpdate.do",
+                        url : "userUpdate.do?userid="+userid,
                         dataType : "text",
                         type : "POST",
                         data: JSON.stringify(param),
                         contentType: "application/json; charset=UTF-8",
-                        beforeSend: function(xhr){
-                            xhr.setRequestHeader(header, token);
-                        },
                         success : function(data){
                             swal.fire(
                                 '수정이 완료되었습니다.',
@@ -187,7 +180,7 @@
                                         }
                                     }
                                 }).then((result) => {
-                                location.href="userUpdate.do"
+                                location.href="userUpdate.do?userid="+userid
                             })
                         },
                         error : function(request, status, error) {
