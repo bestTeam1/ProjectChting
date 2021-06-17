@@ -59,9 +59,12 @@
                 <div class="content">
                     <header>
                         <!-- form -->
-                        <form id="form" method="post" action='testModify.do'>
+                        <form id="form" enctype="multipart/form-data" method="post" action='testModify.do'>
                             <div>제목<input type="text" id="subject" name="subject" value="${event.subject}"></div>
-                            <br><br>
+                            <br>이벤트기간
+                            <input type="date" id="startdate" name="startdate"> -
+                            <input type="date" id="enddate" name="enddate">
+                            <br>
                             <div>내용<textarea rows="5" cols="13" id="content" name="content"
                                              style="resize: none">${event.content}</textarea>
                             </div>
@@ -70,12 +73,13 @@
                                 <!-- file은 기본 value를 줄수가없음. null(파일을 바꾸지않음) 이면 file은 DB업데이트에서 제외? 시키는 로직으로 해야할듯함 -->
                                 <input type="file" class="form-control" id="customFile" name="file"/></div>
                             <br><br>
-                                <input type="date" id="startdate" name="startdate"> -
-                                <input type="date" id="enddate" name="enddate">
+
                             <div style="display: flex; justify-content: center">
                             </div>
+                            <div>
                             <input type="hidden" value="${event.event_no}" name="eventNo" >
                             <input type="hidden" value="${page}" name="page" >
+                            </div>
 
                             <input type="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </form>
