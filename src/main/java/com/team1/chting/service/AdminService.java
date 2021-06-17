@@ -7,7 +7,12 @@ import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 
 //취팅 사이트 관리자 Service
@@ -112,6 +117,33 @@ public class AdminService {
 
         return sqlsession.selectOne("pageCountGroup");
     }
+
+    public void write(NoticeDto noticeDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+        //if(noticeDto.getFile() != null) {
+            //CommonsMultipartFile file = noticeDto.getFileName();
+            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/profileimg");
+                String fpath = path + File.separator + fileName;
+
+                System.out.println("fpath : " + fpath);
+
+                if(!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                noticeDto.setFile(fileName);
+            }
+
+            AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+            int result = adminDao.write(noticeDto);
+
+            if (result < 1) {
+                System.out.println("db write error on write()");
+            }
+        }
+
 
 
     //공지사항 삭제하기
