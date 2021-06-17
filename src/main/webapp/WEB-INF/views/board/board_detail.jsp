@@ -1,27 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hyunsangjin
-  Date: 2021/06/07
-  Time: 2:42 오후
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 상세보기</title>
     <style>
-
         html,
         body {
             position: relative;
             height: 100%;
         }
+
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -30,161 +23,127 @@
             margin: 0;
             padding: 0;
         }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
+
+        a {
+            text-decoration: none !important
         }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
+
+        a:hover {
+            text-decoration: none !important
         }
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-        }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
 
 
     </style>
-    <script type="text/javascript" src="http://code.jquery.com/jquery.jas"></script>
-<%--    <script type="text/javascript">--%>
-<%--        let i=0;--%>
-<%--        $(function(){--%>
-<%--            $('.upBtn').click(function(){--%>
-<%--                $('.update').hide();--%>
-<%--                let no=$(this).attr("data-no");--%>
-<%--                if(i==0)--%>
-<%--                {--%>
-<%--                    $(this).text("취소");--%>
-<%--                    $('#reply_up'+no).show();--%>
-<%--                    i=1;--%>
-<%--                }--%>
-<%--                else--%>
-<%--                {--%>
-<%--                    $(this).text("수정");--%>
-<%--                    $('#reply_up'+no).hide();--%>
-<%--                    i=0;--%>
-<%--                }--%>
-<%--                // 대댓글 작성 공간--%>
-<%--                $('.comment_Insert_area').hide();--%>
-
-<%--                $('.bring_comment_tab').click(function(){				// bring_comment_tab 클릭시--%>
-<%--                    let no = $(this).attr('id')						// 변수 no는 클릭한 bring_comment_tab의 value값--%>
-<%--                    $('#comment_Insert_area' + no).toggle(); 			// #comment_Insert_area + no를 토글--%>
-<%--                });--%>
-
-<%--                // 댓글 수정 공간--%>
-<%--                $('.comment_Update_area').hide();--%>
-
-<%--                $('.bring_comment_update_tab').click(function(){				// bring_comment_tab 클릭시--%>
-<%--                    let no = $(this).attr('id')						// 변수 no는 클릭한 bring_comment_tab의 value값--%>
-<%--                    $('#comment_Update_area' + no).toggle(); 			// #comment_Insert_area + no를 토글--%>
-<%--                });--%>
-
-
-<%--                // 댓글 삭제 공간--%>
-<%--                $('.inputPwdComment').hide();--%>
-
-<%--                $('.deleteCommentButton').click(function(){				// bring_comment_tab 클릭시--%>
-<%--                    let comment_no = $(this).attr('id')								// 변수 no는 클릭한 bring_comment_tab의 value값--%>
-<%--                    $('#inputPwdComment' + comment_no).toggle(); 			// #comment_Insert_area + no를 토글--%>
-<%--                });--%>
-<%--            })--%>
-<%--        });--%>
-<%--    </script>--%>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="is-preload">
-
-
 <!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
                 <div class="content">
-                    <header>
-
-                        <table class="table table-striped">
-                            <select id="post_catename" name="post_catename" style="width: 170px; float: right">
-                                <option value="">===카테고리===</option>
-                                <option value="자유글">자유글</option>
-                                <option value="정모후기">정모후기</option>
-                                <option value="가입인사">가입인사</option>
-                                <option value="공지사항">공지사항</option>
-                            </select>
-                        </table>
-
-                        <th width=50%  class="text-center danger">제목</th>
-                            <table>
-                            <tr>
-                                <%-- 제목 --%>
-                                <td colspan="3" class="text-left">${plist.subject }</td>
-                            </tr>
-                            </table>
-
-                        <th>내용</th>
+                    <header id="detailBody">
+                        <h2 id="subject" style="vertical-align: text-bottom;">
+<%--                            <img src="http://drive.google.com/uc?export=view&id=1rNujOwPH73iMFcEA-gEQoWKlwPhXPGVz"--%>
+<%--                                 width="50px" height="50px"--%>
+<%--                                 style="display: inline-block; box-sizing: border-box;--%>
+<%--                                       margin-bottom:10px; margin-right: 10px; border-radius: 50%; vertical-align: middle;">--%>
+                            </span>
+                            ${plist.subject}
+                        </h2>
                         <table>
                             <tr>
-                                <%-- 내용 --%>
                                 <td colspan="4" class="text-left" valign="top" height=200>
-                                    ${plist.content }
+                                    ${plist.content}
                                 </td>
                             </tr>
                         </table>
-
                         <div style="display: flex; justify-content: center">
-                            <input type="button" onclick="" value="수정"/> &nbsp;
+                            <input id="update" type="button" value="수정"/> &nbsp;
                             &nbsp; &nbsp; &nbsp; &nbsp;
-                            <input type="button" onclick="" value="삭제"/> &nbsp;
+                            <input id="delete" type="button" value="삭제"/> &nbsp;
                             &nbsp; &nbsp; &nbsp; &nbsp;
-                            <button type="button" onclick="location.href='board_list.do'">목록</button>
+                            <input id="back" type="button" value="목록"/>
                         </div>
-
-<%--                <div style=“display:flex; justify-content: center;“>--%>
-
-<%--                    <button>--%>
-<%--                        <a href="update.do?no=${plist.post_no}" >수정</a>--%>
-<%--                    </button>--%>
-<%--                    &nbsp;&nbsp;--%>
-<%--                    <button>--%>
-<%--                        <a type="button" href="delete.do?no=${plist.post_no}" >삭제</a>--%>
-<%--                    </button>--%>
-<%--                    &nbsp;&nbsp;--%>
-<%--                    <button>--%>
-<%--                        <a type="button" href="board_list.do">목록</a>--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-
+                        <input type="hidden" name="group_no" value="${group_no}">
                     </header>
                 </div>
             </section>
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
+    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 </div>
 </body>
+<script type="text/javascript">
+
+    //수정 클릭
+    $(document).on("click", "#update", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: '게시글 수정',
+            text: '게시글을 수정하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href="board_update.do?post_no=${plist.post_no}"
+            }
+        })
+    });
+
+    //삭제 클릭
+    $(document).on("click", "#delete", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: '게시글 삭제',
+            text: '게시글을 삭제하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: '게시글 삭제',
+                    text : '게시글이 삭제되어 목록으로 돌아갑니다'
+                }).then((result) => {
+                    window.location.href= "board_delete.do?post_no=${plist.post_no}";
+                })
+
+            } else {
+                swal.fire({
+                    title: '삭제 취소',
+                    text : '삭제를 취소하셨습니다'
+                })
+            }
+        })
+    });
+    //목록 클릭
+    $(document).on("click", "#back", function (e) {
+        e.preventDefault();
+
+        window.location.href= "board_list.do?group_no=${plist.group_no}";
+    });
+</script>
 </html>
+
+
 

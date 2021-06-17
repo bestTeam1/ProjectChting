@@ -108,14 +108,14 @@
                     <header>
 
 <%--action='<c:url value='/board/board_insert.do'/>'--%>
-    <form id="form" method="post" action='board_write.do'>
+    <form id="form" method="post" action='board_write.do' enctype="multipart/form-data">
                                 <%-- 카테고리 셀렉트  --%>
-                                <select id="post_catename" name="post_catename" style="width: 170px; float: right">
+                                <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
                                     <option value="">===카테고리===</option>
-                                    <option value="자유글">자유글</option>
-                                    <option value="정모후기">정모후기</option>
-                                    <option value="가입인사">가입인사</option>
-                                    <option value="공지사항">공지사항</option>
+                                    <option value="A004">자유글</option>
+                                    <option value="A003">정모후기</option>
+                                    <option value="A002">가입인사</option>
+                                    <option value="A001">공지사항</option>
                                 </select>
                                     <br><br>
 
@@ -135,8 +135,10 @@
 
     <div style="display: flex; justify-content: center">
         <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" onclick="location.href='board_list.do'">목록</button>
+        <button type="button" onclick="location.href='board_list.do?group_no=${group_no}'">목록</button>
     </div>
+
+        <input type="hidden" name="group_no" value="${group_no}">
     </form>
 
                     </header>

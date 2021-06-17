@@ -1,8 +1,9 @@
 package com.team1.chting.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Data

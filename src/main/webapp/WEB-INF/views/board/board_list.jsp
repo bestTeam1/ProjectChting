@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -97,53 +96,16 @@
         </tr>
     </c:forEach>
 
-
-
 </table>
-
-
-<%--                        <tr>--%>
-<%--                            <!--페이징 처리 가운데 정렬  -->--%>
-<%--                            <td colspan="9" align="center">--%>
-
-<%--                                <!--이전 링크 -->--%>
-<%--                                <c:if test="${cpage > 1}">--%>
-<%--                        &lt;%&ndash; <a href="boardList.sj?type=humor_board&cp=${cpage-1}&ps=${pagesize}">이전</a>&ndash;%&gt;--%>
-<%--                                    <a href="board_list.do?"></a>--%>
-<%--                                </c:if>--%>
-
-
-
-<%--                                <!-- page 목록 나열하기 -->--%>
-<%--                                <c:forEach var="i" begin="1"--%>
-<%--                                           end="${pagecount}" step="1">--%>
-<%--                                    <c:choose>--%>
-<%--                                        <c:when test="${cpage==i}">--%>
-<%--                                            <font color="red">[${i}]</font>--%>
-<%--                                        </c:when>--%>
-<%--                                        <c:otherwise>--%>
-<%--                                            <a href="boardList.sj?type=humor_board&cp=${i}&ps=${pagesize}">[${i}]</a>--%>
-<%--                                        </c:otherwise>--%>
-<%--                                    </c:choose>--%>
-<%--                                </c:forEach>--%>
-
-
-<%--                                <!--다음 링크 -->--%>
-<%--                                <c:if test="${cpage < pagecount}">--%>
-<%--                                    <a href="boardList.sj?type=humor_board&cp=${cpage+1}&ps=${pagesize}">다음</a>--%>
-<%--                                </c:if>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
 
                     </header>
                 </div>
             </section>
 
             <div style="text-align: center">
-                <form action="board_write.do">
-                    <input type="submit" value="글쓰기">
-                </form>
+                <button onclick="location.href='board_write.do?group_no=${group_no}'">글쓰기</button>
             </div>
+            <br>
 
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />

@@ -44,9 +44,30 @@ public class GroupService {
     // 게시판 상세보기
     public PostDto read(int post_no){
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        groupDao.read(post_no);
+       // groupDao.read(post_no);
+        PostDto postDto = groupDao.read(post_no);
 
-        return read(post_no);
+        return postDto;
+    }
+
+    // 수정하기
+    public boolean updateOk(int post_no, String subject, String content, String file){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        int u = groupDao.update(post_no, subject, content, file);
+
+        if(u == 0){
+            return false;
+        }else if(u == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 삭제하기
+    public void delete(int post_no){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.delete(post_no);
     }
 
     public List<GroupDto> randomGroup() {
