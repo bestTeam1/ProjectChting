@@ -2,6 +2,7 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,11 @@ public class BoardController {
         return "group/group";
     }
 
-    //모임만들기
+    /*
+    모임 만들기
+    작성자 : 김영허
+    작성일 : 2021-06-09
+    */
     @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
     public String groupMake(Model model) {
 
@@ -46,5 +51,20 @@ public class BoardController {
         return "group/groupMake";
     }
 
+    /*
+    모임 관심사 팝업창 띄우기
+    작성자 : 김영허
+    작성일 : 2021-06-11
+    */
+
+    @RequestMapping(value = "groupMake_Popup.do", method = RequestMethod.GET)
+    public String groupMake_Popup(Model model) {
+
+        List<UserDto> groupInterest = boardService.getGroupInterest();
+
+        model.addAttribute("groupInterest", groupInterest);
+
+        return "group/groupMake_Popup";
+    }
 
 }
