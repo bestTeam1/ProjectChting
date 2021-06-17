@@ -51,17 +51,32 @@
             <section>
                 <div class="content">
                     <header id="detailBody">
+                        <section>
                             <h2 id="subject" style="vertical-align: text-bottom;">
                                 <img src="http://drive.google.com/uc?export=view&id=1rNujOwPH73iMFcEA-gEQoWKlwPhXPGVz"
                                      width="50px" height="50px"
                                      style="display: inline-block; box-sizing: border-box;
                                        margin-bottom:10px; margin-right: 10px; border-radius: 50%; vertical-align: middle;"></span>
+                                <c:choose>
+                                    <c:when test="${event.enabled eq 1}">
+                                        <td>(진행중)</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>(종료)</td>
+                                    </c:otherwise>
+                                </c:choose>
                                 ${event.subject}
                             </h2>
+                        </section>
+                        <section>
+                            <p>이벤트 시작일 : ${event.startdate}</p>
+                            <p>이벤트 종료일 : ${event.enddate}</p>
+                        </section>
+                        <section>
                             <table>
                                 <tr>
                                     <td colspan="4" class="text-left" valign="top" height=200>
-                                        ${event.content}
+                                    ${event.content}
                                     </td>
                                 </tr>
                             </table>
@@ -72,6 +87,7 @@
                                 &nbsp; &nbsp; &nbsp; &nbsp;
                                 <input id="back" type="button" value="목록"/>
                             </div>
+                        </section>
                     </header>
                 </div>
             </section>
@@ -99,7 +115,7 @@
             cancelButtonText: '아니오'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href="adminEventModify.do?eventNo=${detail.event_no}&page=${page}"
+                window.location.href = "adminEventModify.do?eventNo=${detail.event_no}&page=${page}"
             }
         })
     });
@@ -121,15 +137,15 @@
             if (result.isConfirmed) {
                 Swal.fire({
                     title: '이벤트 삭제',
-                    text : '이벤트가 삭제되어 목록으로 돌아갑니다'
+                    text: '이벤트가 삭제되어 목록으로 돌아갑니다'
                 }).then((result) => {
-                    window.location.href="adminEventDelete.do?eventNo=${detail.event_no}&page=${page}";
+                    window.location.href = "adminEventDelete.do?eventNo=${detail.event_no}&page=${page}";
                 })
 
             } else {
                 swal.fire({
                     title: '삭제 취소',
-                    text : '삭제를 취소하셨습니다'
+                    text: '삭제를 취소하셨습니다'
                 })
             }
         })
@@ -138,7 +154,7 @@
     $(document).on("click", "#back", function (e) {
         e.preventDefault();
 
-        window.location.href= "adminEvent.do?page=${page}";
+        window.location.href = "adminEvent.do?page=${page}";
     });
 </script>
 </html>

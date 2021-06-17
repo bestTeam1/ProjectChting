@@ -41,7 +41,17 @@
                         <c:forEach var="i" items="${eventList}">
                             <tr>
                                 <td>${i.event_no}</td>
-                                <td><a href="adminEventDetail.do?eventNo=${i.event_no}&page=${pm.cri.page}">${i.subject}</a></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${i.enabled eq 1}">
+                                            (진행중)
+                                        </c:when>
+                                        <c:otherwise>
+                                            (종료)
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <a href="adminEventDetail.do?eventNo=${i.event_no}&page=${pm.cri.page}">${i.subject}</a>
+                                </td>
                                 <td>${i.startdate}</td>
                                 <td>${i.enddate}</td>
                                 <td>${i.writedate}</td>
