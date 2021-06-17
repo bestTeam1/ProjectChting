@@ -17,7 +17,7 @@
         from notice left join user_info ui on notice.userid = ui.userid
         where notice.enabled = 1
         order by notice_no desc, writedate desc
-        limit #{pageStart},#{pageSize}
+            limit #{pageStart},#{pageSize}
     </select>
 
 
@@ -29,8 +29,13 @@
         select notice_no, userid, subject, content, writedate from notice where notice_no = #{noticeNo}
     </select>
 
+    <select id="getEventDetail" resultType="com.team1.chting.dto.EventDto">
+        select event_no, subject, content, startdate, enddate, writedate, file, event_img, enabled
+        from event where event_no = 3;
+    </select>
+
     <update id="deleteAdminNotice">
-        update notice set enabled = 0 where notice_no = #{noticeNo};
+        update notice set enabled = 0 where notice_no = #{noticeNo}
     </update>
 
     <update id="adminNoticeModifyOk">
@@ -41,11 +46,16 @@
     <select id="listPageUser" resultType="com.team1.chting.dto.UserDto">
         select userid, gender, nickname, email, a.area_name as first_area_name, a2.area_name as second_area_name,
                enabled, joindate from user_info
-                   left join area a on user_info.first_area = a.area_code
-                   left join area a2 on user_info.second_area = a2.area_code
-                    order by joindate desc limit ${page}, 10;
+                                          left join area a on user_info.first_area = a.area_code
+                                          left join area a2 on user_info.second_area = a2.area_code
+        order by joindate desc limit ${page}, 10
     </select>
 
+    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <select id="listPageCriEvent" resultType="com.team1.chting.dto.EventDto">
+        select event_no, subject, startdate, enddate, writedate, file, event_img, enabled
+        from event order by startdate desc limit #{pageStart},#{pageSize}
+    </select>
 
     <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriUser" resultType="com.team1.chting.dto.UserDto">
@@ -53,11 +63,28 @@
                enabled, joindate from user_info
                                           left join area a on user_info.first_area = a.area_code
                                           left join area a2 on user_info.second_area = a2.area_code
-        order by joindate desc limit #{pageStart},#{pageSize};
+        order by joindate desc limit #{pageStart},#{pageSize}
+    </select>
+
+    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <select id="listPageCriGroup" resultType="com.team1.chting.dto.GroupDto">
+        select group_no, group_name, group_img, area_name, parent_catename, opendate, enabled,
+               (select count (*) from group_user_role where group_info.group_no = group_user_role.group_no) as join_user
+        from group_info left join area a on group_info.area_code = a.area_code
+                        left join interest_category ic on group_info.s_catecode = ic.catecode
+        order by opendate desc limit #{pageStart},#{pageSize}
+    </select>
+
+    <select id="pageCountEvent" resultType="int">
+        select count(*) from event
     </select>
 
     <select id="pageCountUser" resultType="int">
         select count(*) from user_info
+    </select>
+
+    <select id="pageCountGroup" resultType="int">
+        select count(*) from group_info
     </select>
 </mapper>
 
