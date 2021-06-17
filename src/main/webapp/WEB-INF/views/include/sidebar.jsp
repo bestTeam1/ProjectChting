@@ -28,7 +28,7 @@
                 <li><a href="index.do">ChTing</a></li>
                 <li><a href="adminIndex.do">관리자</a></li>
                 <li><a href="groupRecommend.do">모임 추천</a></li>
-                <li><a href="myPage.do">마이페이지 테스트용</a></li>
+                <li><a href="myPage.do?userid=${sessionScope.get("userData").userid}">마이페이지</a></li>
                 <%--                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
                                         <li><a href="board_main.do?group_no=">메인</a></li>
