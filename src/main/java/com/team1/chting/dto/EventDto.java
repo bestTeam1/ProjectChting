@@ -1,6 +1,6 @@
 package com.team1.chting.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.Data;
 

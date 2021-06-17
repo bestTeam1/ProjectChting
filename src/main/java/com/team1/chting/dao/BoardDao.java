@@ -3,6 +3,7 @@ package com.team1.chting.dao;
 import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
+import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -24,4 +25,7 @@ public interface BoardDao {
 
     //모임검색
     public List<GroupDto> getGroupListBySearch(@Param("category") String category,@Param("search") String search);
+
+    //모임만들기 관심사 정보
+    public List<UserDto> getGroupInterest();
 }

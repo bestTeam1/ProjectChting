@@ -78,4 +78,13 @@ public class BoardService {
 
         return postList;
     }
+
+    //Group 관심사
+    public List<UserDto> getGroupInterest() {
+
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        List<UserDto> groupInterest = boardDao.getGroupInterest();
+
+        return groupInterest;
+    }
 }
