@@ -11,10 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  left join (
             select userid, count(group_role_no) as cnt
             from group_user_role
-            where userid = 'testuser' and group_role_no = 1
+            where userid = #{userid} and group_role_no = 1
             group by group_role_no
         )gur on u.userid = gur.userid
-        where u.userid = 'testuser'
+        where u.userid = #{userid}
     </select>
 
     <select id="selectUserInterest" resultType="com.team1.chting.dto.UserDto">
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from user_info u
                  join user_interest ui on u.userid = ui.userid
                  join interest_category ic on ui.s_catecode = ic.catecode
-        where u.userid = 'testuser'
+        where u.userid = #{userid}
         order by ic.catename
     </select>
 
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from user_info u
                  join group_user_role gur on u.userid = gur.userid
                  join group_info gi on gur.group_no = gi.group_no
-        where u.userid = 'testuser'
+        where u.userid = #{userid}
         order by gi.group_name
     </select>
 
@@ -41,18 +41,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where userid = #{userid}
     </update>
 
-    <select id="selectInterestCategory" parameterType="java.util.List" resultType="com.team1.chting.dto.InterestCategoryDto" >
-        select catecode, catename, parent_catecode, parent_catename
-        from interest_category
-        <where>
-            <if test="list.size != 0">
-                parent_catecode in
-                    <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
-                        #{item.parent_catecode}
-                    </foreach>
-            </if>
-        </where>
-    </select>
+    <update id="updateUser">
+        update user_info
+        set first_area = #{first_area}, second_area = #{second_area}, content = #{content}
+        where userid = #{userid}
+    </update>
 
     <update id="updateUser">
         update user_info

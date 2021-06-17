@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class MyPageInfo {
+
+    private String userid;
     private UserDto userInfoBasic;
     private List<UserDto> userInterest;
     private List<UserDto> userJoinGroup;
