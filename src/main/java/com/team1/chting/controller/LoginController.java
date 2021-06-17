@@ -1,6 +1,7 @@
 package com.team1.chting.controller;
 
 import com.team1.chting.dto.SignUpDto;
+import com.team1.chting.service.EmailService;
 import com.team1.chting.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,6 +23,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private EmailService emailService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -65,6 +69,7 @@ public class LoginController {
         try {
 
             int result = loginService.signUpReg(signUpDto, request, s_catecode);
+            emailService.sendMail(signUpDto.getEmail(), signUpDto.getNickname());
             //System.out.println(result);
             return new ResponseEntity<String>("회원가입이 완료되었습니다. 다시 로그인 해주세요.", HttpStatus.OK);
         } catch (Exception e) {
