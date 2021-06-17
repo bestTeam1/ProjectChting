@@ -39,10 +39,12 @@ public class UserController {
     작성일 : 2021-06-07
     */
     @RequestMapping(value = "myPage.do", method = RequestMethod.GET)
-    public String userInfo(Model model) {
+    public String userInfo(Model model, HttpServletRequest request) {
 
+        String userid = request.getParameter("userid");
+        //System.out.println("userid :" +userid);
 
-        model.addAttribute("userInfo", userService.getMyPageInfo());
+        model.addAttribute("userInfo", userService.getMyPageInfo(userid));
 
         return "user/userinfo";
     }
@@ -53,43 +55,78 @@ public class UserController {
     작성일 : 2021-06-10
     */
     @RequestMapping(value = "userUpdate.do", method = RequestMethod.GET)
-    public String userUpdate(Model model) {
+    public String updateUser(Model model, HttpServletRequest request) {
 
-        model.addAttribute("userInfo", userService.getMyPageInfo());
+        String userid = request.getParameter("userid");
+        System.out.println("userid :" +userid);
+
+        model.addAttribute("userInfo", userService.getMyPageInfo(userid));
         model.addAttribute("areaList", boardService.getAreaList());
 
         return "user/userUpdate";
     }
 
     /*
-    마이페이지 회원 정보 수정 - 관심사 선택
+    마이페이지 회원 정보 수정 - 관심사 (중분류)
     작성자 : 박주현
     작성일 : 2021-06-11
     */
     @RequestMapping(value = "categoryChoice.do", method = RequestMethod.GET)
     public String categoryChoice(Model model,
+                                 @RequestParam("userid") String userid,
                                  @RequestParam(value="catelist", defaultValue = "")
                                          List<String> catelist) {
 
-        //System.out.println("catelist : " +catelist);
         List<InterestCategoryDto> list = new ArrayList<>();
 
         if (catelist.size() == 0) {
             InterestCategoryDto interestCategory = new InterestCategoryDto();
+            interestCategory.setUserid("");
             interestCategory.setParent_catecode("");
             list.add(interestCategory);
+            System.out.println("중분류 userid : " +userid);
+            System.out.println("중분류 list" +list);
         }else {
             for(int i = 0; i < catelist.size(); i++) {
                 InterestCategoryDto interestCategory = new InterestCategoryDto();
+                interestCategory.setUserid(userid);
                 interestCategory.setParent_catecode(catelist.get(i));
-
                 list.add(interestCategory);
+                System.out.println("소분류 userid : " +userid);
+                System.out.println("소분류 list" +list);
             }
         }
-        //System.out.println("list :" +list);
-        model.addAttribute("interestCategory", userService.getInterestCategory(list));
+
+        model.addAttribute("interestCategory", userService.getInterestCategory(list, userid));
 
         return "user/interestCategory";
     }
+
+    /*
+    마이페이지 회원 정보 수정 - 관심사 (기존 관심사 DELETE / 새로운 관심사 INSERT)
+    작성자 : 박주현
+    작성일 : 2021-06-17
+    */
+    @RequestMapping(value = "categoryChoice.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+    public String updateCategory(Model model,
+                                 @RequestParam("userid") String userid,
+                                 @RequestParam(value="catelist", defaultValue = "")
+                                         List<String> catelist) {
+
+        List<InterestCategoryDto> list = new ArrayList<>();
+
+        for(int i = 0; i < catelist.size(); i++) {
+            InterestCategoryDto interestCategory = new InterestCategoryDto();
+            interestCategory.setCatecode(catelist.get(i));
+            interestCategory.setUserid(userid);
+
+            list.add(interestCategory);
+        }
+        userService.updateInterestCategory(list);
+
+        return "user/userUpdate";
+
+    }
+
 
 }
