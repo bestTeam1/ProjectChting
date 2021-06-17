@@ -1,13 +1,10 @@
 package com.team1.chting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team1.chting.dto.EventDto;
-import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.*;
 
 import com.team1.chting.service.GroupService;
 import com.team1.chting.service.UserService;
-import com.team1.chting.dto.NoticeDto;
-import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.EventService;
 import com.team1.chting.service.GroupService;
 import com.team1.chting.service.NoticeService;
@@ -21,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -105,7 +104,7 @@ public class AjaxRestController {
     작성일 : 2021-06-09
     */
     @RequestMapping(value = "userUpdate.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-    public String userUpdateTest(Model model,
+    public String updateUser(Model model,
                                  @RequestBody UserDto userDto) {
 
         System.out.println(userDto);
@@ -113,6 +112,7 @@ public class AjaxRestController {
 
         return "user/userUpdate";
     }
+
 
     //로그인 -> 지역모임 5개
     @RequestMapping(value="/main/loginedArea", method= RequestMethod.GET, produces = "application/json")
