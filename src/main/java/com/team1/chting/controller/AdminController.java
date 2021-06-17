@@ -112,6 +112,22 @@ public class AdminController {
     }
 
     /*
+      사이트 이벤트 수정 이동
+      만든이 : 이승준
+      작성일 : 2021-06-16
+     */
+    @RequestMapping(value = "adminEventModify.do", method = RequestMethod.GET)
+    public String adminEventModify(String eventNo, String page, Model model) {
+        EventDto eventDto = adminService.getEventDetail(eventNo);
+
+        model.addAttribute("event", eventDto);
+        model.addAttribute("page", page);
+
+        return "admin/event_modify";
+    }
+
+
+    /*
       사이트 회원목록 페이징
       만든이 : 이승준
       작성일 : 2021-06-16
@@ -185,6 +201,19 @@ public class AdminController {
 
         return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
     }
+    @RequestMapping(value = "testModify.do", method = RequestMethod.POST)
+    public String testModify(HttpServletRequest httpServletRequest) {
+
+        System.out.println(httpServletRequest.getParameter("subject"));
+        System.out.println(httpServletRequest.getParameter("content"));
+        System.out.println(httpServletRequest.getParameter("startdate"));
+        System.out.println(httpServletRequest.getParameter("enddate"));
+        System.out.println(httpServletRequest.getParameter("eventNo"));
+        System.out.println(httpServletRequest.getParameter("page"));
+
+        return "index";
+    }
+
 
 
 }
