@@ -2,16 +2,22 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.NoticeDto;
+import com.team1.chting.dto.SignUpDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.AdminService;
 import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.PageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -178,6 +184,44 @@ public class AdminController {
         return "admin/notice_modify";
     }
 
+    /*
+        글쓰기 페이지 이동
+        만든이 : 이승준
+        작성일 : 2021-06-17
+    */
+    @RequestMapping(value = "write.do", method = RequestMethod.GET)
+    public String write(String type, Model model){
+        model.addAttribute("type",type);
+        return "admin/admin_write";
+    }
+
+    /*
+       공지사항 글쓰기 (파일업로드 포함)
+       만든이 : 이승준
+       작성일 : 2021-06-18
+     */
+    @RequestMapping(value = "adminWriteOk.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public String adminWriteOk(AdminCriteria cri,
+                               NoticeDto noticeDto,
+                               Model model,
+                               HttpServletRequest httpServletRequest,
+                               @RequestParam("uploadFile") CommonsMultipartFile file) //dto와 file 이름이 같으면 400오류나서 임의로 가져옴
+                               throws Exception {
+
+
+        adminService.write(noticeDto, httpServletRequest, file);
+
+        model.addAttribute("boardList", adminService.listCriNotice(cri));
+
+        PageMaker pm = new PageMaker();
+        pm.setCri(cri);
+        pm.setTotalCount(adminService.pageCountNotice()); //DB의 전체ROW수 입력
+
+        // 뷰페이지로 전달
+        model.addAttribute("pm", pm);
+
+        return "admin/notice";
+    }
 
     /*
       공지사항 수정 확인
