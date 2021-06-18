@@ -136,16 +136,16 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: '이벤트 종료',
-                    text: '이벤트가 종료되었습니다'
+                    title: '이벤트 삭제',
+                    text: '이벤트가 삭제되어 목록으로 돌아갑니다'
                 }).then((result) => {
                     window.location.href="adminDeleteBoard.do?type=Event&num=${event.event_no}&page=${page}";
                 })
 
             } else {
                 swal.fire({
-                    title: '종료 취소',
-                    text: '종료를 취소하셨습니다'
+                    title: '삭제 취소',
+                    text: '삭제를 취소하셨습니다'
                 })
             }
         })

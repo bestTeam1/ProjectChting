@@ -120,57 +120,57 @@ public class AdminService {
 
     public void noticeWrite(NoticeDto noticeDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         //if(noticeDto.getFile() != null) {
-            //CommonsMultipartFile file = noticeDto.getFileName();
-            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
-                String fileName = file.getOriginalFilename();
-                fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1];
-                String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/notice");
-                String fpath = path + File.separator + fileName;
+        //CommonsMultipartFile file = noticeDto.getFileName();
+        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1];
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/notice");
+            String fpath = path + File.separator + fileName;
 
-                System.out.println("fpath : " + fpath);
+            System.out.println("fpath : " + fpath);
 
-                if(!fileName.equals("")) {
-                    FileOutputStream fs = new FileOutputStream(fpath);
-                    fs.write(file.getBytes());
-                    fs.close();
-                }
-                noticeDto.setFile(fileName);
+            if(!fileName.equals("")) {
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
             }
-
-            AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-            int result = adminDao.noticeWrite(noticeDto);
-
-            if (result < 1) {
-                System.out.println("db write error on write()");
-            }
+            noticeDto.setFile(fileName);
         }
 
-        public void eventWrite(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int result = adminDao.noticeWrite(noticeDto);
+
+        if (result < 1) {
+            System.out.println("db write error on write()");
+        }
+    }
+
+    public void eventWrite(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         //if(noticeDto.getFile() != null) {
-            //CommonsMultipartFile file = noticeDto.getFileName();
-            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
-                String fileName = file.getOriginalFilename();
-                fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
-                String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
-                String fpath = path + File.separator + fileName;
+        //CommonsMultipartFile file = noticeDto.getFileName();
+        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
+            String fpath = path + File.separator + fileName;
 
-                System.out.println("fpath : " + fpath);
+            System.out.println("fpath : " + fpath);
 
-                if(!fileName.equals("")) {
-                    FileOutputStream fs = new FileOutputStream(fpath);
-                    fs.write(file.getBytes());
-                    fs.close();
-                }
-                eventDto.setFile(fileName);
+            if(!fileName.equals("")) {
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
             }
-
-            AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-            int result = adminDao.eventWrite(eventDto);
-
-            if (result < 1) {
-                System.out.println("db write error on write()");
-            }
+            eventDto.setFile(fileName);
         }
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int result = adminDao.eventWrite(eventDto);
+
+        if (result < 1) {
+            System.out.println("db write error on write()");
+        }
+    }
 
 
 
