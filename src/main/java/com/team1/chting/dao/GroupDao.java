@@ -1,5 +1,6 @@
 package com.team1.chting.dao;
 
+import com.team1.chting.dto.InterestCategoryDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.GroupDto;
 import org.apache.ibatis.annotations.Param;
