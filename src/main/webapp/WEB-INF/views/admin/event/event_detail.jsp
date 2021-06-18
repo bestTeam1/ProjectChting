@@ -69,8 +69,8 @@
                             </h2>
                         </section>
                         <section>
-                            <p>이벤트 시작일 : ${event.startdate}</p>
-                            <p>이벤트 종료일 : ${event.enddate}</p>
+                            <p>이벤트 시작일 : <c:out value="${event.startdate}"/></p>
+                            <p>이벤트 종료일 : <c:out value="${event.enddate}"/></p>
                         </section>
                         <section>
                             <table>
@@ -120,13 +120,13 @@
         })
     });
 
-    //삭제 클릭
+    //이벤트 종료 클릭
     $(document).on("click", "#delete", function (e) {
         e.preventDefault();
 
         Swal.fire({
-            title: '이벤트 삭제',
-            text: '이벤트를 삭제하시겠습니까?',
+            title: '이벤트 종료',
+            text: '이벤트를 종료 하시겠습니까?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -136,16 +136,16 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: '이벤트 삭제',
-                    text: '이벤트가 삭제되어 목록으로 돌아갑니다'
+                    title: '이벤트 종료',
+                    text: '이벤트가 종료되었습니다'
                 }).then((result) => {
-                    window.location.href = "adminEventDelete.do?eventNo=${detail.event_no}&page=${page}";
+                    window.location.href="adminDeleteBoard.do?type=Event&num=${event.event_no}&page=${page}";
                 })
 
             } else {
                 swal.fire({
-                    title: '삭제 취소',
-                    text: '삭제를 취소하셨습니다'
+                    title: '종료 취소',
+                    text: '종료를 취소하셨습니다'
                 })
             }
         })
