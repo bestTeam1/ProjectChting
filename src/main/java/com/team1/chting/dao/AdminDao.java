@@ -29,8 +29,8 @@ public interface AdminDao {
     //모임 페이징 처리하는 동작(Criteria 객체 사용)
     public List<GroupDto> listPageCriGroup(AdminCriteria cri) throws Exception;
 
-    //공지사항 삭제하기
-    public void deleteAdminNotice(@Param("noticeNo") String noticeNo);
+    //삭제하기
+    public void adminDeleteBoard(@Param("type") String type, @Param("num") String num);
 
     //DB 테이블에 있는 모든 글 개수 계산 후 리턴
     public int pageCount() throws Exception;
@@ -46,8 +46,14 @@ public interface AdminDao {
                                    @Param("content") String content,
                                    @Param("noticeNo") String noticeNo);
 
-    //글쓰기
-    public int write(NoticeDto noticeDto);
+    //공지 글쓰기
+    public int noticeWrite(NoticeDto noticeDto);
+
+    //이벤트 글쓰기
+    public int eventWrite(EventDto eventDto);
+
+    //글쓰기 번호
+    public int getWriteNo(@Param("type") String type);
 
 
 }

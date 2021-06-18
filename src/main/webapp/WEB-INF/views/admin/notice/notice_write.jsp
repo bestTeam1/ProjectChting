@@ -13,54 +13,42 @@
     <title>글쓰기</title>
 
     <title>내가 가입한 모임 - 게시판</title>
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            text-decoration: none !important
-        }
-
-        a:hover {
-            text-decoration: none !important
-        }
-    </style>
 
 </head>
 <body class="is-preload">
 <script type="text/javascript">
-    // swal("Here's the title!", "...and here's the text!");
     function confirm() {
-        //e.preventDefault
 
         var subject = $("#subject").val().trim();
         var content = $("#content").val().trim();
-        var post_catename = $("#post_catename").val().trim();
 
         if (subject == "") {
             swal("제목을 입력해주세요.");
             return;
         } else if (content == "") {
-            swal("내용을 선택해주세요.");
+            swal("내용을 입력해주세요.");
             return;
         }
 
-        var form = document.createElement("form")
-
-
-        $('#form').submit();
+        Swal.fire({
+            title: '공지사항 작성',
+            text: "공지사항을 등록하시겠습니까?",
+            icon: '확인',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText : '취소',
+            confirmButtonText: '공지사항을 등록합니다'
+        }).then ((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: '등록 성공!',
+                    text : '공지사항을 등록했습니다!'
+                }).then((result) => {
+                    $('#form').submit();
+                })
+            }
+        })
     }
 
 </script>
@@ -72,26 +60,16 @@
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
+                <h1>${noticeNo}</h1>
                 <div class="content">
                     <header>
                         <%--action='<c:url value='/board/board_insert.do'/>'--%>
-                        <form id="form" method="post" action='adminWriteOk.do' enctype="multipart/form-data">
+                        <form id="form" method="post" action='noticeWriteOk.do' enctype="multipart/form-data">
                             <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}" >
-                            <%-- 카테고리 셀렉트  --%>
-                            <select id="post_catename" name="category" style="width: 170px; float: right">
-                                <c:choose>
-                                    <c:when test="${type eq 'notice'}">
-                                        <option selected value="notice">공지사항</option>
-                                        <option value="event">이벤트</option>
-                                    </c:when>
-                                    <c:when test="${type eq 'event'}">
-                                        <option value="notice">공지사항</option>
-                                        <option value selected="event">이벤트</option>
-                                    </c:when>
-                                </c:choose>
-                            </select>
+                            <input type="hidden" name="notice_no" value="${noticeNo}">
+                        <%-- 카테고리 셀렉트  --%>
                             <br><br>
-
+                            <h1>공지사항</h1>
                             <div>제목<input type="text" id="subject" name="subject"
                                           placeholder="2~20자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
                                           onblur="this.placeholder = '2~20자 이내로 입력해주세요 :)'"></div>

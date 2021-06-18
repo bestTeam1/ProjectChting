@@ -34,8 +34,8 @@
         from event where event_no = #{eventNo}
     </select>
 
-    <update id="deleteAdminNotice">
-        update notice set enabled = 0 where notice_no = #{noticeNo}
+    <update id="adminDeleteBoard">
+        update ${type} set enabled = 0 where ${type}_no = #{num}
     </update>
 
     <update id="adminNoticeModifyOk">
@@ -51,13 +51,13 @@
         order by joindate desc limit ${page}, 10
     </select>
 
-    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <!-- 이벤트 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriEvent" resultType="com.team1.chting.dto.EventDto">
         select event_no, subject, startdate, enddate, writedate, file, event_img, enabled
-        from event order by event_no desc, enabled desc limit #{pageStart},#{pageSize}
+        from event where enabled >= 0 order by event_no desc, enabled desc limit #{pageStart},#{pageSize}
     </select>
 
-    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <!-- 회원 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriUser" resultType="com.team1.chting.dto.UserDto">
         select userid, gender, nickname, email, a.area_name as first_area_name, a2.area_name as second_area_name,
                enabled, joindate from user_info
@@ -66,7 +66,7 @@
         order by joindate desc limit #{pageStart},#{pageSize}
     </select>
 
-    <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
+    <!-- 모임 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriGroup" resultType="com.team1.chting.dto.GroupDto">
         select group_no, group_name, group_img, area_name, parent_catename, opendate, enabled,
                (select count (*) from group_user_role where group_info.group_no = group_user_role.group_no) as join_user
@@ -75,20 +75,32 @@
         order by opendate desc limit #{pageStart},#{pageSize}
     </select>
 
+    <!-- 이벤트 row 갯수 -->
     <select id="pageCountEvent" resultType="int">
-        select count(*) from event
+        select count(*) from event where enabled >= 0
     </select>
 
+    <!-- 회원 row 갯수 -->
     <select id="pageCountUser" resultType="int">
         select count(*) from user_info
     </select>
 
+    <!-- 모임 row 갯수 -->
     <select id="pageCountGroup" resultType="int">
         select count(*) from group_info
     </select>
 
-    <insert id="write" parameterType="com.team1.chting.dto.NoticeDto">
+    <insert id="noticeWrite" parameterType="com.team1.chting.dto.NoticeDto">
         insert into notice (userid, subject, content, file, enabled) VALUES ('${userid}','${subject}','${content}','${file}', '1')
     </insert>
+
+    <insert id="eventWrite" parameterType="com.team1.chting.dto.EventDto">
+        insert into event (userid, subject, content, startdate, enddate, file, enabled) VALUES ('${userid}','${subject}','${content}', '${startdate}','${enddate}', '${file}', '1')
+    </insert>
+
+    <select id="getWriteNo" resultType="int">
+        select max(${type}_no) from ${type};
+    </select>
+
 </mapper>
 
