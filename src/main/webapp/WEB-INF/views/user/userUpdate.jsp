@@ -25,100 +25,93 @@
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 
             <c:set var="userinfo" value="${userInfo.userInfoBasic}"></c:set>
-                <div class="content">
-                    <header>
-                        <form method="post" action="">
-                            <table>
-                                <tr>
-                                    <td>
-                                            <tr>
-                                                <td style="vertical-align: middle">프로필</td>
-                                                <td>
-                                                    프로필 사진 불러와야 함
-                                                </td>
-                                            </tr>
+            <div class="content">
+                <table>
+                    <tr>
+                        <td style="vertical-align: middle">프로필</td>
+                        <td>
+                            프로필 사진 불러와야 함
+                        </td>
+                    </tr>
 
-                                            </tr>
-                                            <tr>
-                                                <td style="vertical-align: middle">자기소개</td>
-                                                <td><textarea id="content" style="resize: none;" name="content" cols="50" rows="3" name="content"
-                                                              >${userinfo.content}</textarea></td>
-                                            </tr>
+                    <tr>
+                        <td style="vertical-align: middle">자기소개</td>
+                        <td><textarea id="content" style="resize: none;" name="content" cols="50" rows="3"
+                                      name="content"
+                        >${userinfo.content}</textarea></td>
+                    </tr>
 
-                                            <tr>
-                                                <td style="vertical-align: middle">관심사</td>
-                                                <td>
-                                                    <ol>
-                                                        <ul class="a">
-                                                            <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                                                                <div class="circle_user_interest">
-                                                                        ${userInterest.catename}
-                                                                </div>
-                                                            </c:forEach>
-                                                            <input type="button" class="button small" value="추가"
-                                                                   onclick="window.open('categoryChoice.do', 'categoryChoice', 'width=600, height=600, left=100, top=50');">
-                                                        </ul>
-                                                    </ol>
+                    <tr>
+                        <td style="vertical-align: middle">관심사</td>
+                        <td>
+                            <ol>
+                                <ul class="a">
+                                    <c:forEach var="userInterest" items="${userInfo.userInterest}">
+                                        <div class="circle_user_interest">
+                                                ${userInterest.catename}
+                                        </div>
+                                    </c:forEach>
+                                    <input type="button" class="button small" value="변경"
+                                           onclick="window.open('userCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');">
+                                </ul>
+                            </ol>
+                        </td>
+                    </tr>
 
-                                                </td>
-                                            </tr>
+                    <tr>
+                        <td style="vertical-align: middle">선호 지역 1</td>
+                        <td>
+                            <select id="area1" style="width: 30%; float:left;">
+                                <c:forEach var="area" items="${areaList}">
+                                    <option value=""
+                                            <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
 
-                                            <tr>
-                                                <td style="vertical-align: middle">선호 지역 1</td>
-                                                <td>
-                                                    <select id="area1"  style="width: 30%; float:left;">
-                                                        <c:forEach var="area" items="${areaList}">
-                                                            <option value="" <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                    <tr>
+                        <td style="vertical-align: middle">선호 지역 2</td>
+                        <td>
+                            <select id="area2" style="width: 30%; float:left;">
+                                <c:forEach var="area" items="${areaList}">
+                                    <option value=""
+                                            <c:if test="${userinfo.second_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
 
-                                            <tr>
-                                                <td style="vertical-align: middle">선호 지역 2</td>
-                                                <td>
-                                                    <select id="area2"  style="width: 30%; float:left;">
-                                                        <c:forEach var="area" items="${areaList}">
-                                                            <option value="" <c:if test="${userinfo.second_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                    <tr>
+                        <td style="vertical-align: middle">가입한 모임</td>
+                        <td>
+                            <ol>
+                                <ul class="a">
+                                    <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
+                                        <li>
+                                                ${userJoinGroup.group_name}
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </ol>
+                        </td>
+                    </tr>
 
-                                            <tr>
-                                                <td style="vertical-align: middle">가입한 모임</td>
-                                                <td>
-                                                    <ol>
-                                                        <ul class="a">
-                                                            <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
-                                                            <li>
-                                                                ${userJoinGroup.group_name}
-                                                            </li>
-                                                            </c:forEach>
-                                                        </ul>
-                                                    </ol>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="vertical-align: middle">결제</td>
-                                                <td>
-                                                    <ol>
-                                                        <ul class="a">
-                                                            <li>최대 3개의 모임에만 참여 가능합니다.</li>
-                                                            <li>참여 개수를 늘리고 싶으시면 유료결제를 이용해 주세요. &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="button" class="button small" value="결제하기">
-                                                            </li>
-                                                        </ul>
-                                                    </ol>
-                                                </td>
-                                            </tr>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </header>
-                </div>
+                    <tr>
+                        <td style="vertical-align: middle">결제</td>
+                        <td>
+                            <ol>
+                                <ul class="a">
+                                    <li>최대 3개의 모임에만 참여 가능합니다.</li>
+                                    <li>참여 개수를 늘리고 싶으시면 유료결제를 이용해 주세요. &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="button" class="button small" value="결제하기">
+                                    </li>
+                                </ul>
+                            </ol>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <input type="button" value="수정 완료" id="userUpdate">
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
@@ -127,7 +120,7 @@
 </div>
 
 <script type="text/javascript">
-    let userid = ${sessionScope.get("userData").userid};
+    let userid = "${sessionScope.get("userData").userid}";
     console.log(userid);
 
     let swal = Swal.mixin({
@@ -136,7 +129,7 @@
             cancelButton: 'button'
         },
         buttonsStyling: false
-    })
+    });
 
     $(function () {
         $('#userUpdate').click(function () {
@@ -147,11 +140,6 @@
             let updateContent = $('#content').val();
 
             let param = {"userid":userid, "first_area":area1, "second_area":area2, "content":updateContent}
-
-            console.log(area1);
-            console.log(area2);
-            console.log(updateContent);
-            console.log(param);
 
             swal.fire ({
                 title: "수정하시겠습니까?",
@@ -189,7 +177,6 @@
                     })
                 }
             })
-
 
         })
 
