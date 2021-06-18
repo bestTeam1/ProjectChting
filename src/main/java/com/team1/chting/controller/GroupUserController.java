@@ -3,6 +3,7 @@ package com.team1.chting.controller;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.service.GroupService;
+import com.team1.chting.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,8 +19,9 @@ public class GroupUserController {
 
     @Autowired
     private GroupService groupservice;
+
     @Autowired
-    private SqlSession sqlsession;
+    private UserService userService;
 
     // 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
@@ -82,11 +84,10 @@ public class GroupUserController {
         model.addAttribute("group_name", group_name);
 
         Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName());
+        String userid = userService.selectNickname(authentication.getName());
+        System.out.println(userid);
+        model.addAttribute("userid", userid);
 
-        model.addAttribute("userid", authentication.getName());
         return "board/board_chatting";
     }
-
-
 }
