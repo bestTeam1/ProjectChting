@@ -2056,6 +2056,9 @@ button,
     -ms-flex: 1;
     flex: 1;
     margin-bottom: 0; }
+  #header #chtingLogo {
+    width: 27%;
+  }
   #header .logo {
     border-bottom: 0;
     color: inherit;
@@ -2068,12 +2071,15 @@ button,
       padding-top: 1.25em; } }
   @media screen and (max-width: 736px) {
     #header {
-      padding-top: 4.75em; }
-      #header .logo {
-        font-size: 1.25em;
-        margin: 0; }
+      padding-top: 3em; }
+      #header #chtingLogo {
+        width: 40%;
+      }
+      #header #tempDiv {
+        overflow: visible;
+        text-align: center;}
       #header .icons {
-        height: 5em;
+        height: 4.25em;
         line-height: 5em;
         position: absolute;
         right: -0.5em;

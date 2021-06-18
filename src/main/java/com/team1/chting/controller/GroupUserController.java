@@ -7,6 +7,8 @@ import com.team1.chting.service.GroupService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -139,8 +141,15 @@ public class GroupUserController {
     // 채팅
     @RequestMapping(value = "board_chatting.do", method = RequestMethod.GET)
     public String groupChatting(@RequestParam("group_no") String group_no, Model model){
+        String group_name = groupservice.groupByGroup_no(group_no).getGroup_name();
+        model.addAttribute("group_name", group_name);
 
+        Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
+
+        model.addAttribute("userid", authentication.getName());
         return "board/board_chatting";
     }
+
 
 }

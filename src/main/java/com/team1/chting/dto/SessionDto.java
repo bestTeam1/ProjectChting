@@ -1,10 +1,12 @@
 package com.team1.chting.dto;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
 import java.io.Serializable;
 
-@Getter
+@Data
 public class SessionDto implements Serializable {
     /*
     회원가입 유저 Session 추가

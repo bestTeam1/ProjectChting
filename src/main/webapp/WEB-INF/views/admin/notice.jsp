@@ -30,7 +30,6 @@
                 <h2 style="text-align: center"></h2>
             </section>
             <section>
-
                 <!-- 바디  -->
                 <div class="box-body">
                     <table class="table table-bodered" style="text-align: center">
@@ -59,7 +58,7 @@
                                 <li><a href="adminNotice.do?page=${pm.startPage-1}">&laquo;</a></li>
                             </c:if>
                             <!-- 페이지블럭 -->
-                            <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
+                            <c:forEach var="idx" begin="${pm.startPage}" end="${pm.endPage}">
                                 <!-- 삼항연산자를 사용해서 class로 스타일적용  -->
                                 <li ${pm.cri.page == idx? 'class=active':''}>
                                     <a href="adminNotice.do?page=${idx }">${idx}</a>
@@ -71,6 +70,9 @@
                             </c:if>
                         </ul>
                     </div>
+                </div>
+                <div style="display: flex; justify-content: center">
+                    <input id="Write" type="button" onclick="window.location.href='write.do?type=notice'" value="글쓰기"/>
                 </div>
 
                 <!-- 바디 끝 -->

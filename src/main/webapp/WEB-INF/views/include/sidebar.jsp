@@ -28,7 +28,7 @@
                 <li><a href="index.do">ChTing</a></li>
                 <li><a href="adminIndex.do">관리자</a></li>
                 <li><a href="groupRecommend.do">모임 추천</a></li>
-                <li><a href="myPage.do">마이페이지 테스트용</a></li>
+                <li><a href="myPage.do?userid=${sessionScope.get("userData").userid}">마이페이지</a></li>
                 <%--                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
                                         <li><a href="board_main.do?group_no=">메인</a></li>
@@ -91,6 +91,8 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+<%--  Sweet Alert2  --%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- jQuery Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />

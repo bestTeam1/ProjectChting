@@ -58,12 +58,15 @@
             <section>
                 <div class="content">
                     <header>
-
-                        <form id="form" method="post" action='adminNoticeModifyOk.do'>
-                            <div>제목<input type="text" id="subject" name="subject" value="${detail.subject}"></div>
-                            <br><br>
+                        <!-- form -->
+                        <form id="form" enctype="multipart/form-data" method="post" action='testModify.do'>
+                            <div>제목<input type="text" id="subject" name="subject" value="${event.subject}"></div>
+                            <br>이벤트기간
+                            <input type="date" id="startdate" name="startdate"> -
+                            <input type="date" id="enddate" name="enddate">
+                            <br>
                             <div>내용<textarea rows="5" cols="13" id="content" name="content"
-                                             style="resize: none">${detail.content}</textarea>
+                                             style="resize: none">${event.content}</textarea>
                             </div>
                             <br><br>
                             <div><label class="form-label" for="customFile">첨부파일</label>
@@ -72,13 +75,16 @@
                             <br><br>
 
                             <div style="display: flex; justify-content: center">
-                                <input type="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
-                            <input type="hidden" value="${detail.notice_no}" name="noticeNo" >
+                            <div>
+                            <input type="hidden" value="${event.event_no}" name="eventNo" >
                             <input type="hidden" value="${page}" name="page" >
+                            </div>
+
+                            <input type="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </form>
 
-                        <button type="button" onclick="location.href='adminNotice.do?page=${page}'">돌아가기</button>
+                        <button type="button" onclick="location.href='adminEvent.do?page=${page}'">목록</button>
 
                     </header>
                 </div>
@@ -93,6 +99,6 @@
 
 </body>
 <script type="text/javascript">
-</script>
 
+</script>
 </html>

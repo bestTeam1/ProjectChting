@@ -54,7 +54,7 @@
                             </c:forEach>
                     </div>
                 </article>
-            <input type="button" value="회원 정보 수정" id="edituserinfo" onclick="location.href='userUpdate.do'">
+            <input type="button" value="회원 정보 수정" id="updateUser" onclick="location.href='userUpdate.do?userid=${sessionScope.get("userData").userid}'">
             <input type="button" value="회원 탈퇴" id="delacount">
 
         </div>
@@ -64,7 +64,7 @@
 </div>
 
 <script type="text/javascript">
-    let userid = "${userInfo.userInfoBasic.userid}";
+    let userid = "${sessionScope.get("userData").userid}";
     let userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
     let swal = Swal.mixin({
@@ -106,7 +106,7 @@
                 }).then((result) => {
                     if(result.isConfirmed) {
                         $.ajax({
-                            url : "delAcount.do",
+                            url : "delAcount.do?=userid"+userid,
                             dataType : "text",
                             data : {
                                 userid : userid

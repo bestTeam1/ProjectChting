@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.chting.dao.InterestCategoryDao">
+
+    <select id="selectInterestCategory" parameterType="java.util.List" resultType="com.team1.chting.dto.InterestCategoryDto" >
+        select ic.catecode, ic.catename, ic.parent_catecode, ic.parent_catename
+        from interest_category ic
+        <where>
+            <if test="list.size != 0">
+                and parent_catecode in
+                <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+                    #{item.parent_catecode}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteInterestCategory">
+        delete from user_interest where userid = #{userid}
+    </delete>
+
+    <insert id="insertInterestCategory" >
+        insert into user_interest (userid, s_catecode)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userid}, #{item.catecode})
+        </foreach>
+
+    </insert>
+
+</mapper>
