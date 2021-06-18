@@ -98,6 +98,8 @@ local.properties
 .idea/runConfigurations
 target/chting-1.0-SNAPSHOT/META-INF/MANIFEST.MF
 .idea/artifacts
+target/
+.idea/libraries
 
 ### Java ###
 # Compiled class file
