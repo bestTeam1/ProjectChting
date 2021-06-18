@@ -52,6 +52,9 @@ public interface AdminDao {
     //이벤트 글쓰기
     public int eventWrite(EventDto eventDto);
 
+    //이벤트 수정
+    public int eventModify(EventDto eventDto);
+
     //이벤트 취소
     public int adminEventDisabled(@Param("eventNo") String eventNo);
 

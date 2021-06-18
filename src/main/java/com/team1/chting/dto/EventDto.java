@@ -16,5 +16,6 @@ public class EventDto {
 	private Date writedate;
 	private String file;
 	private String event_img;
+	private Date currentDate;
 	private int enabled;
 }

@@ -146,7 +146,7 @@ public class AdminService {
             System.out.println("db write error on write()");
         }
     }
-
+    //이벤트 글쓰기
     public void eventWrite(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         //if(noticeDto.getFile() != null) {
         //CommonsMultipartFile file = noticeDto.getFileName();
@@ -172,6 +172,33 @@ public class AdminService {
         if (result < 1) {
             System.out.println("db write error on write()");
         }
+    }
+    //이벤트 수정
+    public void eventModify(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
+            String fpath = path + File.separator + fileName;
+
+            System.out.println("fpath : " + fpath);
+
+            if(!fileName.equals("")) {
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
+            }
+            eventDto.setFile(fileName);
+        }
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int result = adminDao.eventModify(eventDto);
+
+        if (result < 1) {
+            System.out.println("db write error on write()");
+        }
+
+
     }
 
 
