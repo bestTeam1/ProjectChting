@@ -215,11 +215,11 @@ public class AdminController {
      */
     @RequestMapping(value = "noticeWriteOk.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public String noticeWriteOk(AdminCriteria cri,
-                               NoticeDto noticeDto,
-                               Model model,
-                               HttpServletRequest httpServletRequest,
-                               @RequestParam("uploadFile") CommonsMultipartFile file) //dto와 file 이름이 같으면 400오류나서 임의로 가져옴
-                               throws Exception {
+                                NoticeDto noticeDto,
+                                Model model,
+                                HttpServletRequest httpServletRequest,
+                                @RequestParam("uploadFile") CommonsMultipartFile file) //dto와 file 이름이 같으면 400오류나서 임의로 가져옴
+            throws Exception {
 
         adminService.noticeWrite(noticeDto, httpServletRequest, file); //파일업로드 포함한 글쓰기
 
@@ -245,7 +245,7 @@ public class AdminController {
                                Model model,
                                HttpServletRequest httpServletRequest,
                                @RequestParam("uploadFile") CommonsMultipartFile file) //dto와 file 이름이 같으면 400오류나서 임의로 가져옴
-                               throws Exception {
+            throws Exception {
 
         adminService.eventWrite(eventDto, httpServletRequest, file); //파일업로드 포함한 글쓰기
 

@@ -123,7 +123,7 @@
                     title: '공지 삭제',
                     text : '공지가 삭제되어 목록으로 돌아갑니다'
                 }).then((result) => {
-                    window.location.href="adminNoticeDelete.do?noticeNo=${detail.notice_no}&page=${page}";
+                    window.location.href="adminDeleteBoard.do?type=Notice&num=${detail.notice_no}&page=${page}";
                 })
 
             } else {

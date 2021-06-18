@@ -66,7 +66,7 @@
                     <div class="text-center">
                         <ul class="pagination" style="text-align: center">
                             <!-- 이전prev -->
-                            <c:if test="${pm.prev}">
+                            <c:if test="${pm.prev}">+
                                 <li><a href="adminEvent.do?page=${pm.startPage-1}">&laquo;</a></li>
                             </c:if>
                             <!-- 페이지블럭 -->
@@ -95,7 +95,5 @@
 </div>
 
 </body>
-<script type="text/javascript">
 
-</script>
 </html>
