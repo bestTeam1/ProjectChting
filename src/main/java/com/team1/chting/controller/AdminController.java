@@ -135,7 +135,6 @@ public class AdminController {
     public String adminEventModify(String eventNo, String page, Model model) {
 
         EventDto eventDto = adminService.getEventDetail(eventNo);
-        System.out.println("eventDto : " + eventDto);
 
         model.addAttribute("event", eventDto);
         model.addAttribute("page", page);
@@ -297,6 +296,23 @@ public class AdminController {
         }
 
         return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
+    }
+
+    /*
+      이벤트 수정 확인
+      만든이 : 이승준
+      작성일 : 2021-06-16
+     */
+    @RequestMapping(value = "adminEventModifyOk.do", method = RequestMethod.POST)
+    public String adminEventModifyOk(EventDto eventDto,
+                                     HttpServletRequest httpServletRequest,
+                                     @RequestParam("uploadFile") CommonsMultipartFile file,
+                                     Model model) throws Exception {
+        System.out.println(eventDto);
+        String page = httpServletRequest.getParameter("page");
+        adminService.eventModify(eventDto, httpServletRequest, file); //파일업로드 포함한 글쓰기
+
+        return "redirect:adminEventDetail.do?page=" + page + "&eventNo=" + eventDto.getEvent_no();
     }
 
 
