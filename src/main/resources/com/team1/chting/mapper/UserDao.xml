@@ -47,4 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where userid = #{userid}
     </update>
 
+    <select id="selectNickname" resultType="String">
+        select nickname from user_info where userid = #{userid};
+    </select>
+
 </mapper>

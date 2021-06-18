@@ -2,7 +2,9 @@ package com.team1.chting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team1.chting.dto.ChattingDto;
+import com.team1.chting.service.UserService;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
@@ -17,6 +19,9 @@ public class ChattingEchoHandler extends TextWebSocketHandler {
     // 객체 ==> 주소      Set 중복제거.
     //Set<WebSocketSession> clients = new HashSet<WebSocketSession>();
     List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
+
+    @Autowired
+    private UserService userService;
 /*
 
     @Override
@@ -75,13 +80,16 @@ public class ChattingEchoHandler extends TextWebSocketHandler {
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-        log.info(session.getPrincipal().getName() + " : " + message );
+        String userid = userService.selectNickname(session.getPrincipal().getName());
+
+        log.info(userid + " : " + message );
         ChattingDto dto = new ChattingDto();
         ObjectMapper mapper = new ObjectMapper();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String json = "";
 
-        dto.setUserid(session.getPrincipal().getName());
+        dto.setUserid(userid);
         dto.setMessage((String)message.getPayload());
         dto.setWriteDate(sdf.format(new Date()));
         json = mapper.writeValueAsString(dto);

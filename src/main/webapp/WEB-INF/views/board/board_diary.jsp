@@ -15,13 +15,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FullCalendar Example</title>
-    <link rel="stylesheet" href="vendor/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
-    <link rel="stylesheet" href='vendor/css/select2.min.css' />
-    <link rel="stylesheet" href='vendor/css/bootstrap-datetimepicker.min.css' />
-    <link rel="stylesheet" href="css/main.css">
-
-
+    <link rel="stylesheet" href="fullcalendar/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="fullcalendar/css/bootstrap.min.css">
+    <link rel="stylesheet" href='fullcalendar/css/select2.min.css' />
+    <link rel="stylesheet" href='fullcalendar/css/bootstrap-datetimepicker.min.css' />
+    <link rel="stylesheet" href="fullcalendar/css/main.css">
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -124,16 +122,16 @@
     </div>
     <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
-<script src="vendor/js/jquery.min.js"></script>
-<script src="vendor/js/bootstrap.min.js"></script>
-<script src="vendor/js/moment.min.js"></script>
-<script src="vendor/js/fullcalendar.min.js"></script>
-<script src="vendor/js/ko.js"></script>
-<script src="vendor/js/select2.min.js"></script>
-<script src="vendor/js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/addEvent.js"></script>
-<script src="js/editEvent.js"></script>
-<script src="js/etcSetting.js"></script>
+<script src="fullcalendar/js/jquery.min.js"></script>
+<script src="fullcalendar/js/bootstrap.min.js"></script>
+<script src="fullcalendar/js/moment.min.js"></script>
+<script src="fullcalendar/js/fullcalendar.min.js"></script>
+<script src="fullcalendar/js/ko.js"></script>
+<script src="fullcalendar/js/select2.min.js"></script>
+<script src="fullcalendar/js/bootstrap-datetimepicker.min.js"></script>
+<script src="fullcalendar/js/main.js"></script>
+<script src="fullcalendar/js/addEvent.js"></script>
+<script src="fullcalendar/js/editEvent.js"></script>
+<script src="fullcalendar/js/etcSetting.js"></script>
 </body>
 </html>
