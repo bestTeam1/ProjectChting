@@ -47,7 +47,7 @@
 
 </head>
 <body class="is-preload">
-
+<h1>${event}</h1>
 <!-- Wrapper -->
 <div id="wrapper">
     <!-- Main -->
