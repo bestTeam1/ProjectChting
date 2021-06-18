@@ -49,6 +49,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/runConfigurations" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/resources/properties" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/artifacts" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/libraries" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
