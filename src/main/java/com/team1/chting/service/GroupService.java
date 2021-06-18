@@ -1,8 +1,11 @@
 package com.team1.chting.service;
 
 
+import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
+import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.InterestCategoryDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
@@ -19,15 +22,13 @@ public class GroupService {
     @Autowired
     private SqlSession sqlsession;
 
-
-
 //    @Override
 //    public List<GroupDto> listAll() throws Exception{
 //        return sqlsession.selectList("board.listAll");
 //    }
 
     // 내가가입한모임 - 게시글 리스트
-    public List<PostDto> getPostList(String group_no){
+    public List<PostDto> getPostList(String group_no) {
         List<PostDto> postlist = new ArrayList<PostDto>();
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         postlist = groupDao.getPostList(group_no);
@@ -36,13 +37,13 @@ public class GroupService {
 
 
     // 게시판 글쓰기
-    public void insert(PostDto postDto){
+    public void insert(PostDto postDto) {
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         groupDao.insert(postDto);
     }
 
     // 게시판 상세보기
-    public PostDto read(int post_no){
+    public PostDto read(int post_no) {
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         groupDao.read(post_no);
 
@@ -59,7 +60,7 @@ public class GroupService {
     public List<GroupDto> areaGroup(String first_area, String second_area) {
         List<GroupDto> list = new ArrayList<GroupDto>();
         GroupDao dao = sqlsession.getMapper(GroupDao.class);
-        list = dao.areaGroup(first_area,second_area);
+        list = dao.areaGroup(first_area, second_area);
         return list;
     }
 
@@ -82,4 +83,6 @@ public class GroupService {
         GroupDto dto = dao.groupByGroup_no(group_no);
         return dto;
     }
+
 }
+
