@@ -139,4 +139,15 @@ public class UserService {
         }
     }
 
+    /*
+    유저 닉네임 정보
+    작성자 : 김명환
+    작성일 : 2021-06-18
+    */
+    public String selectNickname(String userid) {
+        UserDao userdao = sqlsession.getMapper(UserDao.class);
+        String result = userdao.selectNickname(userid);
+
+        return result;
+    }
 }
