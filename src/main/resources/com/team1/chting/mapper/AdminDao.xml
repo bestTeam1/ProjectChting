@@ -107,6 +107,16 @@
         insert into event (userid, subject, content, startdate, enddate, file, enabled) VALUES ('${userid}','${subject}','${content}', '${startdate}','${enddate}', '${file}', '1')
     </insert>
 
+    <!-- 이벤트 수정 -->
+    <update id="eventModify" parameterType="com.team1.chting.dto.EventDto">
+        update event set subject = "${subject}", content = "${content}", startdate = "${startdate}", enddate = "${enddate}", file = "${file}",
+        <choose>
+            <when test='enddate > currentDate'> enabled = 1 </when>
+            <otherwise> enabled = 0</otherwise>
+        </choose>
+        where event_no = #{event_no}
+    </update>
+
     <!-- 최신 글번호 가져오기 -->
     <select id="getWriteNo" resultType="int">
         select max(${type}_no) from ${type};

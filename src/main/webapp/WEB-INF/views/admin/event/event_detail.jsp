@@ -8,30 +8,6 @@
 <head>
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 상세보기</title>
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            text-decoration: none !important
-        }
-
-        a:hover {
-            text-decoration: none !important
-        }
-
 
     </style>
     <!-- jquery -->
@@ -42,7 +18,6 @@
 <body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -117,7 +92,7 @@
             cancelButtonText: '아니오'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "adminEventModify.do?eventNo=${detail.event_no}&page=${page}"
+                window.location.href = "adminEventModify.do?eventNo=${event.event_no}&page=${page}"
             }
         })
     });
