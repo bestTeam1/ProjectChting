@@ -31,7 +31,7 @@
     <div id="main">
         <div class="inner">
             <div class="content" id="content">
-                <p>중분류 선택 (최대 5개)</p>
+                <p>중분류 선택 (1개)</p>
                 <c:forEach var="category" items="${interestCategory}" varStatus="status">
                         <div class="m_cate_choice" id="${category.catecode}">
                             ${category.catename}
@@ -54,8 +54,8 @@
 
             $(this).toggleClass('selected');
 
-            if(mCount > 4) {
-                alert("중분류는 최대 5개까지 선택 가능합니다.");
+            if(mCount > 0) {
+                alert("1개의 중분류만 선택 가능합니다.");
                 $(this).removeClass('selected');
             }
         })
@@ -69,13 +69,13 @@
             //console.log(cateArr);
 
             if(mCateArr.length == 0) {
-                location.href = "userCategory.do"
-                alert("중분류는 최소 1개 이상 선택해야 합니다.");
+                location.href = "groupCategory.do"
+                alert("중분류를 선택해야 합니다.");
 
             }
 
             $.ajax ({
-                url : "userCategory.do",
+                url : "groupCategory.do",
                 traditional : true,
                 data : {
                     catelist : mCateArr
@@ -83,7 +83,7 @@
                 success : function(data) {
                     console.log("ajax 성공");
                     $('#content').html(data);
-                    $("p").text("소분류 선택 (최대 7개)");
+                    $("p").text("소분류 선택 (1개)");
                     $(".m_cate_choice").attr('class','s_cate_choice');
                     $("#next").remove();
                     $(".btnBox").append('<input type="button" class="button" value="선택 완료" id="done">');
@@ -101,8 +101,8 @@
 
             $(this).toggleClass('selected');
 
-            if(sCount > 6) {
-                alert("소분류는 최대 7개까지 선택 가능합니다.");
+            if(sCount > 0) {
+                alert("1개의 카테고리만 선택 가능합니다.");
                 $(this).removeClass('selected');
             }
         })
@@ -116,11 +116,11 @@
             console.log(sCateArr);
 
             if(sCateArr.length == 0) {
-                alert("소분류는 최소 1개 이상 선택해야 합니다.");
+                alert("1개의 카테고리를 반드시 선택해야 합니다.");
             }
 
             $.ajax({
-                url : "userCategory.do",
+                url : "groupCategory.do",
                 traditional : true,
                 type : "POST",
                 data : {
