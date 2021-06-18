@@ -61,6 +61,8 @@ public class AdminService {
         return sqlsession.selectOne("pageCountNotice");
     }
 
+
+
     //페이지처리한 글 목록
     public List<EventDto> listCriEvent(AdminCriteria cri) throws Exception {
 
@@ -198,6 +200,12 @@ public class AdminService {
         EventDto eventDto = adminDao.getEventDetail(eventNo);
 
         return eventDto;
+    }
+    //이벤트 취소
+    public int adminEventDisabled(String eventNo) {
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+
+        return adminDao.adminEventDisabled(eventNo);
     }
 
 

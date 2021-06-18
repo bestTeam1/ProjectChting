@@ -34,10 +34,17 @@
         from event where event_no = #{eventNo}
     </select>
 
+    <!-- 게시판 글 enabled = 0  -->
     <update id="adminDeleteBoard">
         update ${type} set enabled = 0 where ${type}_no = #{num}
     </update>
 
+    <!-- 이벤트 취소 enabled = -1 -->
+    <update id="adminEventDisabled">
+        update event set enabled = -1 where event_no = ${eventNo}
+    </update>
+
+    <!-- 공지사항 수정 -->
     <update id="adminNoticeModifyOk">
         update notice set subject = "${subject}", content = "${content}" where notice_no = #{noticeNo}
     </update>
@@ -90,14 +97,17 @@
         select count(*) from group_info
     </select>
 
+    <!-- 공지사항 글쓰기 -->
     <insert id="noticeWrite" parameterType="com.team1.chting.dto.NoticeDto">
         insert into notice (userid, subject, content, file, enabled) VALUES ('${userid}','${subject}','${content}','${file}', '1')
     </insert>
 
+    <!-- 이벤트 글쓰기 -->
     <insert id="eventWrite" parameterType="com.team1.chting.dto.EventDto">
         insert into event (userid, subject, content, startdate, enddate, file, enabled) VALUES ('${userid}','${subject}','${content}', '${startdate}','${enddate}', '${file}', '1')
     </insert>
 
+    <!-- 최신 글번호 가져오기 -->
     <select id="getWriteNo" resultType="int">
         select max(${type}_no) from ${type};
     </select>

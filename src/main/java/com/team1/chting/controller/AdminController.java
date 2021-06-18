@@ -110,6 +110,21 @@ public class AdminController {
 
         return "admin/event/event_detail";
     }
+    /*
+      사이트 이벤트 취소
+      만든이 : 이승준
+      작성일 : 2021-06-18
+    */
+    @RequestMapping(value = "adminEventDisabled.do", method = RequestMethod.GET)
+    public String adminEventDisabled(String eventNo, String page, Model model) {
+        int result = adminService.adminEventDisabled(eventNo);
+
+        if(result == 0) {
+            System.out.println("이벤트 취소 실패");
+        }
+
+        return "redirect:adminEvent.do?page="+page;
+    }
 
     /*
       사이트 이벤트 수정 이동

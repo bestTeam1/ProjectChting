@@ -83,7 +83,9 @@
                             <div style="display: flex; justify-content: center">
                                 <input id="modify" type="button" value="수정"/> &nbsp;
                                 &nbsp; &nbsp; &nbsp; &nbsp;
-                                <input id="delete" type="button" value="삭제"/> &nbsp;
+                                <input id="end" type="button" value="종료"/> &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp;
+                                <input id="disabled" type="button" value="취소"/> &nbsp;
                                 &nbsp; &nbsp; &nbsp; &nbsp;
                                 <input id="back" type="button" value="목록"/>
                             </div>
@@ -121,7 +123,7 @@
     });
 
     //이벤트 종료 클릭
-    $(document).on("click", "#delete", function (e) {
+    $(document).on("click", "#end", function (e) {
         e.preventDefault();
 
         Swal.fire({
@@ -146,6 +148,37 @@
                 swal.fire({
                     title: '삭제 취소',
                     text: '삭제를 취소하셨습니다'
+                })
+            }
+        })
+    });
+
+    //이벤트 취소 클릭
+    $(document).on("click", "#disabled", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: '이벤트 취소',
+            text: '이벤트를 취소 하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: '이벤트 취소',
+                    text: '이벤트가 취소되어 목록으로 돌아갑니다'
+                }).then((result) => {
+                    window.location.href="adminEventDisabled.do?eventNo=${event.event_no}&page=${page}";
+                })
+
+            } else {
+                swal.fire({
+                    title: '결정 취소',
+                    text: '이벤트를 취소하지 않습니다'
                 })
             }
         })
