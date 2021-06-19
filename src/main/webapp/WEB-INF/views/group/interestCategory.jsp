@@ -13,11 +13,12 @@
     <%--  J Query  --%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- css -->
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css"/>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-        body, div, table, section, nav, li, header, input{
+
+        body, div, table, section, nav, li, header, input {
             font-family: 'Jua', sans-serif;
         }
     </style>
@@ -33,9 +34,9 @@
             <div class="content" id="content">
                 <p>중분류 선택 (1개)</p>
                 <c:forEach var="category" items="${interestCategory}" varStatus="status">
-                        <div class="m_cate_choice" id="${category.catecode}">
+                    <div class="m_cate_choice" id="${category.catecode}">
                             ${category.catename}
-                        </div>
+                    </div>
                 </c:forEach>
                 <div class="btnBox">
                     <input type="button" class="button" value="다음" id="next">
@@ -44,103 +45,112 @@
         </div>
     </div>
 
-<script type="text/javascript">
-    $(function () {
-        let userid = "${sessionScope.get("userData").userid}";
+    <script type="text/javascript">
 
-        $('.m_cate_choice').click(function () {
-            let mCount = $('.selected').length;
-            console.log(mCount);
+        $(function () {
+            let userid = "${sessionScope.get("userData").userid}";
 
-            $(this).toggleClass('selected');
+            $('.m_cate_choice').click(function () {
+                let mCount = $('.selected').length;
+                console.log(mCount);
 
-            if(mCount > 0) {
-                alert("1개의 중분류만 선택 가능합니다.");
-                $(this).removeClass('selected');
-            }
-        })
+                $(this).toggleClass('selected');
 
-        $('#next').click(function () {
+                if (mCount > 0) {
+                    alert("1개의 중분류만 선택 가능합니다.");
+                    $(this).removeClass('selected');
+                }
+            })
 
-            let mCateArr = [];
-            $('.selected').each(function () {
-                mCateArr.push($(this).attr("id"));
-            });
-            //console.log(cateArr);
+            $('#next').click(function () {
 
-            if(mCateArr.length == 0) {
-                location.href = "groupCategory.do"
-                alert("중분류를 선택해야 합니다.");
+                let mCateArr = [];
+                $('.selected').each(function () {
+                    mCateArr.push($(this).attr("id"));
+                });
+                //console.log(cateArr);
 
-            }
+                if (mCateArr.length == 0) {
+                    location.href = "groupCategory.do"
+                    alert("중분류를 선택해야 합니다.");
 
-            $.ajax ({
-                url : "groupCategory.do",
-                traditional : true,
-                data : {
-                    catelist : mCateArr
-                },
-                success : function(data) {
-                    console.log("ajax 성공");
-                    $('#content').html(data);
-                    $("p").text("소분류 선택 (1개)");
-                    $(".m_cate_choice").attr('class','s_cate_choice');
-                    $("#next").remove();
-                    $(".btnBox").append('<input type="button" class="button" value="선택 완료" id="done">');
-                },
-                error : function(request, status, error) {
-                    console.log(error);
                 }
 
+                $.ajax({
+                    url: "groupCategory.do",
+                    traditional: true,
+                    data: {
+                        catelist: mCateArr
+                    },
+                    success: function (data) {
+                        console.log("ajax 성공");
+                        $('#content').html(data);
+                        $("p").text("소분류 선택 (1개)");
+                        $(".m_cate_choice").attr('class', 's_cate_choice');
+                        $("#next").remove();
+                        $(".btnBox").append('<input type="button" class="button" value="선택 완료" id="done">');
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
+
+                })
             })
-        })
 
-        $('.s_cate_choice').click(function () {
-            let sCount = $('.selected').length;
-            console.log(sCount);
+            $('.s_cate_choice').click(function () {
+                let sCount = $('.selected').length;
+                console.log(sCount);
 
-            $(this).toggleClass('selected');
+                $(this).toggleClass('selected');
 
-            if(sCount > 0) {
-                alert("1개의 카테고리만 선택 가능합니다.");
-                $(this).removeClass('selected');
-            }
-        })
+                if (sCount > 0) {
+                    alert("1개의 카테고리만 선택 가능합니다.");
+                    $(this).removeClass('selected');
+                }
+            })
 
-        $('#done').click(function () {
-            let sCateArr = [];
+            $('#done').click(function () {
+                let sCateCode = [];
+                let sCateName;
 
-            $('.selected').each(function () {
-                sCateArr.push($(this).attr("id"));
-            });
-            console.log(sCateArr);
+                $('.selected').each(function () {
+                    sCateCode.push($(this).attr("id"));
+                    sCateName = $(this).text().trim();
+                });
+                console.log(sCateCode);
+                console.log(sCateName);
 
-            if(sCateArr.length == 0) {
-                alert("1개의 카테고리를 반드시 선택해야 합니다.");
-            }
-
-            $.ajax({
-                url : "groupCategory.do",
-                traditional : true,
-                type : "POST",
-                data : {
-                    userid : userid,
-                    catelist : sCateArr
-                },
-                success : function(data) {
-                    console.log("ajax 성공");
-                    alert("관심사 선택이 완료되었습니다 ");
-                    close();
-                    opener.location.reload("userUpdate.do?userid="+userid);
-                },
-                error : function(request, status, error) {
-                    console.log(error);
+                if (sCateCode.length == 0) {
+                    alert("1개의 카테고리를 반드시 선택해야 합니다.");
                 }
 
-            })
-        })
-    })
+                $.ajax({
+                    url: "groupMake.do?userid="+userid,
+                    traditional: true,
+                    data: {
+                        userid: userid,
+                        catelist: sCateCode
+                    },
+                    success: function (data) {
+                        console.log("ajax 성공");
+                        alert("관심사 선택이 완료되었습니다 ");
+                        close();
+                        $("#interest", opener.document).val(sCateName);
+                        $("#catecode", opener.document).val(sCateCode);
+                    },
+                    error: function (request, status, error) {
+                        console.log(error);
+                    }
 
-</script>
+                });
+            });
+        });
+
+        // function sendChildValue(sCateArr){
+        //     opener.setChildValue(sCateArr);
+        // }
+
+
+    </script>
 </body>
 </html>

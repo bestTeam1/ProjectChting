@@ -57,4 +57,6 @@ public interface GroupDao {
     // 페이징 리스트?
     public List<Map<String, Object>> postList(Criteria cri);
 
+    //모임 생성
+    int insertGroup(GroupDto groupDto);
 }
