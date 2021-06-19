@@ -74,8 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertGroup" parameterType="com.team1.chting.dto.GroupDto">
-        insert into group_info (group_name, group_img, content, area_code, s_catecode)
-        values (#{group_name}, #{group_img}, #{content}, #{area_code}, #{s_catecode})
+        insert into group_info (userid, group_name, group_img, content, area_code, s_catecode)
+        values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_code}, #{s_catecode})
 
     </insert>
 

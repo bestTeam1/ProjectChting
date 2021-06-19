@@ -51,12 +51,10 @@ public class GroupController {
                               Model model,
                               HttpServletRequest request) throws Exception {
 
-        System.out.println(groupDto);
-
+        //System.out.println(groupDto);
         groupService.groupMake(groupDto, request);
 
-        //일단 인덱스
-        return "index";
+        return "group/group";
     }
 
     /*
