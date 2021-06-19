@@ -72,4 +72,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join group_user_role gur on gi.group_no = gur.group_no
         where gi.group_no = #{group_no}
     </select>
+
+    <insert id="insertGroup" parameterType="com.team1.chting.dto.GroupDto">
+        insert into group_info (group_name, group_img, content, area_code, s_catecode)
+        values (#{group_name}, #{group_img}, #{content}, #{area_code}, #{s_catecode})
+
+    </insert>
+
 </mapper>
