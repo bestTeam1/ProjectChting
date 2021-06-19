@@ -15,6 +15,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
+//관리자 권한 페이지에서 할수있는 작업들. 관리자 메인 통계 chart 부분은 ChartController에 할당
 @Controller
 public class AdminController {
 
@@ -24,6 +25,8 @@ public class AdminController {
     //관리자 메인 (차트활용)
     @RequestMapping(value = "adminIndex.do", method = RequestMethod.GET)
     public String groupJoin(Model model) {
+
+
 
         return "admin/index";
     }
