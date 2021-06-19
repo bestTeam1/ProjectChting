@@ -21,6 +21,7 @@ public class GroupDto {
 	private String area_name;
 	private String parent_catename;
 	private int enabled;
+	private int join_user;
 	private Date opendate;
 	private CommonsMultipartFile fileName;
 }
