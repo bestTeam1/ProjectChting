@@ -1,11 +1,8 @@
 package com.team1.chting.controller;
 
-import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.InterestCategoryDto;
-import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.BoardService;
-import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 import com.team1.chting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +23,21 @@ public class GroupController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupService groupService;
+
     /*
       모임 생성 페이지 이동
       만든이 : 박주현
       작성일 : 2021-06-18
     */
-    @RequestMapping(value = "groupMakeTest.do", method = RequestMethod.GET)
-    public String groupMakeTest(@RequestParam("userid") String userid, Model model) {
+    @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
+    public String groupMakeTest(@RequestParam("userid") String userid,
+                                Model model) {
 
         model.addAttribute("areaList", boardService.getAreaList());
 
-        return "group/groupMakeTest";
+        return "group/groupMake";
     }
 
 
@@ -45,12 +46,14 @@ public class GroupController {
       작성자 : 박주현
       작성일 : 2021-06-18
     */
-    @ResponseBody
-    @RequestMapping(value = "groupMakeTest.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public String insertGroup(@RequestBody GroupDto groupDto, Model model) {
+    @RequestMapping(value = "groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public String insertGroup(GroupDto groupDto,
+                              Model model,
+                              HttpServletRequest request) throws Exception {
 
         System.out.println(groupDto);
 
+        groupService.groupMake(groupDto, request);
 
         //일단 인덱스
         return "index";

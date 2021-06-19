@@ -1,17 +1,19 @@
 package com.team1.chting.service;
 
 
+import com.team1.chting.dao.AdminDao;
 import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
-import com.team1.chting.dto.AreaDto;
-import com.team1.chting.dto.GroupDto;
-import com.team1.chting.dto.InterestCategoryDto;
-import com.team1.chting.dto.PostDto;
+import com.team1.chting.dto.*;
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -84,5 +86,28 @@ public class GroupService {
         return dto;
     }
 
+    public void groupMake(GroupDto groupDto, HttpServletRequest request) throws Exception {
+
+        if(groupDto.getFileName() != null) {
+            CommonsMultipartFile file = groupDto.getFileName();
+            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                System.out.println(fileName);
+                fileName = groupDto.getUserid() + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = userid
+                String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
+                String fpath = path + File.separator + fileName;
+
+                if(!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                groupDto.setGroup_img(fileName);
+            }
+        }
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.insertGroup(groupDto);
+
+    }
 }
 
