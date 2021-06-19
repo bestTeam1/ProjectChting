@@ -36,35 +36,4 @@ public class BoardController {
         return "group/group";
     }
 
-    /*
-    모임 만들기
-    작성자 : 김영허
-    작성일 : 2021-06-09
-    */
-    @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
-    public String groupMake(Model model) {
-
-        List<AreaDto> areaList = boardService.getAreaList();
-
-        model.addAttribute("areaList", areaList);
-
-        return "group/groupMake";
-    }
-
-    /*
-    모임 관심사 팝업창 띄우기
-    작성자 : 김영허
-    작성일 : 2021-06-11
-    */
-
-    @RequestMapping(value = "groupMake_Popup.do", method = RequestMethod.GET)
-    public String groupMake_Popup(Model model) {
-
-        List<UserDto> groupInterest = boardService.getGroupInterest();
-
-        model.addAttribute("groupInterest", groupInterest);
-
-        return "group/groupMake_Popup";
-    }
-
 }
