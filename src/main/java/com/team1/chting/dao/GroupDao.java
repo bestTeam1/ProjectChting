@@ -59,4 +59,5 @@ public interface GroupDao {
 
     //모임 생성
     int insertGroup(GroupDto groupDto);
+
 }

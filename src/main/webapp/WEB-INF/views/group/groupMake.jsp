@@ -155,9 +155,12 @@
                 $('#groupMakeFrm').submit();
                 Swal.fire({
                     title: '모임 생성 완료!',
-                    text: '모임 관리 페이지로 이동합니다.'
+                    text: '모임 관리 페이지로 이동합니다.',
+                    confirmButtonText: '확인'
                 }).then((result) => {
-                    location.href = "groupJoin.do?userid=" + userid;
+                    if(result.isConfirmed) {
+                        location.href = "groupJoin.do?userid=" + userid;
+                    }
                 })
             }
         })

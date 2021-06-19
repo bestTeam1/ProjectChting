@@ -86,6 +86,7 @@ public class GroupService {
         return dto;
     }
 
+    //모임 생성 - 주현
     public void groupMake(GroupDto groupDto, HttpServletRequest request) throws Exception {
 
         if(groupDto.getFileName() != null) {
