@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.chting.dao.ChartDao">
+
+    <select id="getRatio" resultType="com.team1.chting.dto.chartdto.ChartRatioDto">
+        SELECT COUNT(CASE WHEN gender = "여" THEN 1 END) AS female,
+               COUNT(CASE WHEN gender = "남" THEN 1 END) AS male
+        FROM user_info
+    </select>
+
+    <select id="getRecentUser" resultType="com.team1.chting.dto.chartdto.ChartRecentUserDto">
+        SELECT COUNT(*) AS today,
+               COUNT(<![CDATA[ CASE WHEN joindate < '${now}' THEN 1 END]]>)AS oneDaysAgo,
+               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -1 DAY) THEN 1 END]]>)AS yesterday,
+               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -2 DAY) THEN 1 END]]>)AS twoDaysAgo,
+               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -3 DAY) THEN 1 END]]>)AS threeDaysAgo,
+               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -4 DAY) THEN 1 END]]>)AS fourDaysAgo,
+               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -5 DAY) THEN 1 END]]>)AS fiveDaysAgo,
+               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -6 DAY) THEN 1 END]]>)AS sixDaysAgo
+        from user_info;
+    </select>
+
+
+</mapper>
