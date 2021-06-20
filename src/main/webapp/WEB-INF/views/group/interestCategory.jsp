@@ -35,7 +35,7 @@
                 <p>중분류 선택 (1개)</p>
                 <c:forEach var="category" items="${interestCategory}" varStatus="status">
                     <div class="m_cate_choice" id="${category.catecode}">
-                            ${category.catename}
+                        <c:out value="${category.catename}"/>
                     </div>
                 </c:forEach>
                 <div class="btnBox">
@@ -125,17 +125,19 @@
                 }
 
                 $.ajax({
-                    url: "groupMake.do?userid="+userid,
+                    url: "groupMake.do?userid=" + userid,
                     traditional: true,
                     data: {
-                        userid: userid,
                         catelist: sCateCode
                     },
                     success: function (data) {
                         console.log("ajax 성공");
                         alert("관심사 선택이 완료되었습니다 ");
                         close();
-                        $("#interest", opener.document).val(sCateName);
+                        $("#interest", opener.document).html(sCateName);
+                        $("#interest", opener.document).css('margin','10px');
+                        $("#interestBtn", opener.document).val('변경');
+                        $("#interestBtn", opener.document).css('margin','5px');
                         $("#catecode", opener.document).val(sCateCode);
                     },
                     error: function (request, status, error) {
@@ -145,11 +147,6 @@
                 });
             });
         });
-
-        // function sendChildValue(sCateArr){
-        //     opener.setChildValue(sCateArr);
-        // }
-
 
     </script>
 </body>

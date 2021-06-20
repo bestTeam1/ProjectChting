@@ -25,6 +25,8 @@
                 <form id="groupMakeFrm" method="POST" action='groupMake.do' enctype="multipart/form-data">
                     <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
                     <input type="hidden" name="s_catecode" id="catecode" value="">
+                    <input type="hidden" name="groupNo" value="${groupNo}">
+
                     <table>
                         <tr>
                             <td style="vertical-align: middle">모임 이름</td>
@@ -35,6 +37,7 @@
                                           placeholder="4 ~ 20자 이내로 기입해주세요 :)"
                                           onfocus="this.placeholder = ''"
                                           onblur="this.placeholder = '4 ~ 20자 이내로 기입해주세요 :)'"></textarea>
+                                <h6 id="groupNameKeyUp"></h6>
                             </td>
                         </tr>
 
@@ -47,6 +50,7 @@
                                           placeholder="10 ~ 1000자 이내로 기입해주세요 :)"
                                           onfocus="this.placeholder = ''"
                                           onblur="this.placeholder = '10 ~ 1000자 이내로 기입해주세요 :)'"></textarea>
+                                <h6 id="contentKeyUp"></h6>
                             </td>
                         </tr>
 
@@ -72,9 +76,9 @@
                         <tr>
                             <td style="vertical-align: middle">관심사</td>
                             <td>
-                                <input type="button" class="button small" value="선택"
+                                <p style="float:left;" id="interest"></p>
+                                <input type="button" style="" id="interestBtn" class="button small" value="선택"
                                        onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');">
-                                <input type="text" id="interest" style="border:none; outline:none;" readonly>
                             </td>
                         </tr>
 
@@ -130,6 +134,38 @@
             };
         };
 
+        //모임 이름 keyUP
+        $('#group_name').keyup(function () {
+            let inputLength = $(this).val().length; //입력한 글자 수
+            let remain = 20 - inputLength; //20자에서 남은 글자수
+
+            $('#groupNameKeyUp').html(inputLength + '/20');
+
+            if (inputLength >= 1 && inputLength <= 3) {
+                $(this).css('color', 'red');
+            } else if (inputLength >= 4 && inputLength <= 20) {
+                $(this).css('color', 'grey');
+            } else if (remain < 1) {
+                Swal.fire('모임 이름은 20자 이내로 입력해 주세요 !')
+            }
+        })
+
+        //모임 소개글 keyUP
+        $('#content').keyup(function () {
+            let inputLength = $(this).val().length; //입력한 글자 수
+            let remain = 1000 - inputLength; //1000자에서 남은 글자수
+
+            $('#contentKeyUp').html(inputLength + '/1000');
+
+            if (inputLength >= 1 && inputLength <= 9) {
+                $(this).css('color', 'red');
+            } else if (inputLength >= 10 && inputLength <= 1000) {
+                $(this).css('color', 'grey');
+            } else if (remain < 1) {
+                Swal.fire('모임 소개글은 1000자 이내로 입력해 주세요 !')
+            }
+        })
+
         //로그인체크 (백단에서 못막았을 경우)
         let check = '${sessionScope.get("userData").userid}';
         if (check == null || check == "" || check == undefined) {
@@ -143,18 +179,26 @@
 
     });
 
+    //Form 전송
     function confirm() {
+        console.log($('#interest').val());
 
         if ($('#group_name').val().trim() == '') {
             Swal.fire('모임 이름을 입력해 주세요 !')
             return;
+        }else if ($('#group_name').val().length < 4) {
+            Swal.fire('모임 이름을 최소 4자 이상 입력해 주세요 !')
+            return;
         }else if ($('#content').val().trim() == '') {
             Swal.fire('모임 소개글을 입력해 주세요 !')
             return;
-        }else if ($('#area_code').val() == null) {
+        }else if ($('#content').val().length < 10) {
+            Swal.fire('모임 소개글을 최소 10자 이상 입력해 주세요 !')
+            return;
+        } else if ($('#area_code').val() == null) {
             Swal.fire('지역을 선택해 주세요 !')
             return;
-        }else if ($('#interest').val() == '') {
+        }else if ($('#catecode').val() == '') {
             Swal.fire('관심사를 선택해 주세요 !')
             return;
         }

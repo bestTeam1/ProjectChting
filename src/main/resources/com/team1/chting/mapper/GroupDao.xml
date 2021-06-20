@@ -62,8 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <select id="userGroupList" resultType="com.team1.chting.dto.GroupDto">
         select gi.group_no, gi.group_name
         from user_info u
-                 left join group_user_role gur on u.userid = gur.userid
-                 left join group_info gi on gur.group_no = gi.group_no
+            join group_user_role gur on u.userid = gur.userid
+            join group_info gi on gur.group_no = gi.group_no
         where u.enabled = 1 and u.userid = #{userid}
     </select>
 
@@ -78,5 +78,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_code}, #{s_catecode})
 
     </insert>
+
+    <select id="selectGroup" resultType="com.team1.chting.dto.GroupDto">
+        select group_no, userid, group_name, group_img, content, area_code, s_catecode, enabled, opendate
+        from group_info
+        order by group_no desc limit 1;
+    </select>
 
 </mapper>
