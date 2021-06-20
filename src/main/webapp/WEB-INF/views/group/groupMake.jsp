@@ -82,6 +82,7 @@
                             <td style="vertical-align: middle">지역</td>
                             <td>
                                 <select name="area_code" id="area_code" style="width: 30%; float:left;">
+                                    <option value="" selected disabled hidden>=== 선택 ===</option>
                                     <c:forEach items="${areaList}" var="area">
                                         <option value="${area.area_code}">${area.area_code} ${area.area_name}</option>
                                     </c:forEach>
@@ -113,8 +114,6 @@
 </div>
 
 <script type="text/javascript">
-    let userid = "${sessionScope.get("userData").userid}";
-    console.log(userid);
 
     $(function () {
         //모임 대표 이미지 프리뷰
@@ -131,15 +130,32 @@
             };
         };
 
+        //로그인체크 (백단에서 못막았을 경우)
+        let check = '${sessionScope.get("userData").userid}';
+        if (check == null || check == "" || check == undefined) {
+            Swal.fire({
+                title: '오류',
+                text: '로그인을 해주세요!!'
+            }).then(() => {
+                history.go(-1);
+            })
+        }
+
     });
 
     function confirm() {
 
         if ($('#group_name').val().trim() == '') {
-            Swal.fire('모임 이름을 입력해주세요 !')
+            Swal.fire('모임 이름을 입력해 주세요 !')
             return;
-        } else if ($('#content').val().trim() == '') {
-            Swal.fire('모임 소개글을 입력해주세요 !')
+        }else if ($('#content').val().trim() == '') {
+            Swal.fire('모임 소개글을 입력해 주세요 !')
+            return;
+        }else if ($('#area_code').val() == null) {
+            Swal.fire('지역을 선택해 주세요 !')
+            return;
+        }else if ($('#interest').val() == '') {
+            Swal.fire('관심사를 선택해 주세요 !')
             return;
         }
 
@@ -157,7 +173,7 @@
                     text: '모임 관리 페이지로 이동합니다.',
                     confirmButtonText: '화긴'
                 }).then((result) => {
-                    if(result.isConfirmed) {
+                    if (result.isConfirmed) {
                         $('#groupMakeFrm').submit();
                     }
                 })

@@ -50,18 +50,14 @@ public class GroupController {
     @RequestMapping(value = "groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public String insertGroup(GroupDto groupDto,
                               Model model,
-                              HttpServletRequest request,
-                              RedirectAttributes rttr) throws Exception {
+                              HttpServletRequest request
+                              ) throws Exception {
 
         //System.out.println(groupDto);
+        String userid = groupDto.getUserid();
         groupService.groupMake(groupDto, request);
 
-        String userid = groupDto.getUserid();
-        rttr.addFlashAttribute("userid", userid);
-
-
-
-        return "redirect:/groupJoin.do";
+        return "redirect:/groupJoin.do?userid="+userid;
     }
 
     /*
