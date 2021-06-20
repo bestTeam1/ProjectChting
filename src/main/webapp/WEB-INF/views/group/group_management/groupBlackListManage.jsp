@@ -14,74 +14,6 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- slider -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-
-    <style>
-
-        #searchButton {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -ms-appearance: none;
-            appearance: none;
-            background: #ffffff;
-            border-radius: 0.375em;
-            border: none;
-            border: solid 1px rgba(210, 215, 217, 0.75);
-            color: inherit;
-            display: block;
-            outline: 0;
-            padding: 0 1em;
-            text-decoration: none;
-        }
-
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-        }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
-
-        th {
-            text-align: center;
-        }
-
-    </style>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -93,19 +25,6 @@
             <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
             <!-- Banner -->
             <section id="main">
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
-                <h1>블랙리스트 임시페이지입니다</h1>
                 <h1>블랙리스트 임시페이지입니다</h1>
             </section>
         </div>

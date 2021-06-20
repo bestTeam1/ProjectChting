@@ -31,6 +31,14 @@
                 <li><a href="myPage.do?userid=${sessionScope.get("userData").userid}">마이페이지</a></li>
                 <li><a href="groupMake.do?userid=${sessionScope.get("userData").userid}">모임 생성</a></li>
 
+                <!-- 임시 모임관리 링크 -->
+                <li><a href="#" id="groupJoin">모임관리</a></li>
+
+                <!-- 임시 모임관리 링크 POST 전송할 form -->
+                <form style="display: none" action="" method="POST" id="groupJoinPost">
+                    <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}"/>
+                </form>
+
                 <%--                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
                                         <li><a href="board_main.do?group_no=">메인</a></li>
@@ -101,6 +109,13 @@
 <!-- underscore.js -->
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
 <script type="text/javascript">
+
+    //모임관리 링크 클릭시 POST 전송
+    $(document).on("click", "#groupJoin", function () {
+        $("#groupJoinPost").attr("action", "groupJoin.do");
+        $("#groupJoinPost").submit();
+    });
+
     let sideList = $('#sideList');
     if (!${not empty pageContext.request.userPrincipal}) {
         $.ajax({
@@ -124,4 +139,5 @@
             }
         });
     }
+
 </script>

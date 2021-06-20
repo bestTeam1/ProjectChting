@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,10 +25,17 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-10
      */
-    @RequestMapping(value = "groupJoin.do", method = RequestMethod.GET)
-    public String groupJoin(@RequestParam("userid") String userid, Model model) {
+    @RequestMapping(value = "groupJoin.do", method = RequestMethod.POST)
+    public String groupJoin(HttpServletRequest httpServletRequest, Model model) {
 
         //로그인한 유저가 속해있는
+        String userid = httpServletRequest.getParameter("userid");
+
+        //userid == null 이면 로그인 안한상태, front단에서 막았어야 하나 넘어온경우
+        if(userid.equals("") || userid == null) {
+            return "index"; //메인으로 돌려보냄
+        }
+
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
         if(groupNo == null) { //모임장으로 속해있는 모임이 없다면?
@@ -46,8 +54,10 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-10
      */
-    @RequestMapping(value = "groupMemberManage.do", method = RequestMethod.GET)
-    public String groupMemberManage(@RequestParam("userid") String userid, Model model) {
+    @RequestMapping(value = "groupMemberManage.do", method = RequestMethod.POST)
+    public String groupMemberManage(HttpServletRequest httpServletRequest, Model model) {
+
+        String userid = httpServletRequest.getParameter("userid");
 
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
@@ -65,8 +75,10 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-10
      */
-    @RequestMapping(value = "groupBlackListManage.do", method = RequestMethod.GET)
-    public String groupBlackListManage(Model model) {
+    @RequestMapping(value = "groupBlackListManage.do", method = RequestMethod.POST)
+    public String groupBlackListManage(HttpServletRequest httpServletRequest, Model model) {
+
+        String userid = httpServletRequest.getParameter("userid");
 
         return "group/group_management/groupBlackListManage";
     }
@@ -76,8 +88,10 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-11
      */
-    @RequestMapping(value = "groupDisband.do", method = RequestMethod.GET)
-    public String groupDisband(@RequestParam("userid") String userid, Model model) {
+    @RequestMapping(value = "groupDisband.do", method = RequestMethod.POST)
+    public String groupDisband(HttpServletRequest httpServletRequest, Model model) {
+
+        String userid = httpServletRequest.getParameter("userid");
 
         //유저가 모임장으로 있는 모임번호 가져오기위한 groupDto
         GroupDto groupDto = groupAdminService.getAdminGroup(userid);
@@ -101,18 +115,17 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-11
      */
-    @RequestMapping(value = "groupDisbandOk.do", method = RequestMethod.GET)
-    public String groupDisbandOk(@RequestParam("userid") String userid, Model model) {
+    @RequestMapping(value = "groupDisbandOk.do", method = RequestMethod.POST)
+    public String groupDisbandOk(HttpServletRequest httpServletRequest, Model model) {
 
-        System.out.println("groupDisbandOk userid : " + userid);
+        String userid = httpServletRequest.getParameter("userid");
 
         //유저가 모임장으로 있는 모임번호 가져오기위한 groupDto
         GroupDto groupDto = groupAdminService.getAdminGroup(userid);
         String groupNo = groupDto.getGroup_no();
 
-        System.out.println("groupNo : " + groupNo);
-
         groupAdminService.groupDisbandOk(groupNo);
+        System.out.println("모임해산ok??");
 
         return "index";
     }

@@ -56,7 +56,7 @@
         loadRequest();
     });
 
-    //가입신청 Table
+    //가입신청 Table 생성
     function loadRequest() {
         $('#joinRequestList').append(
             '<tr style="background-color:' +
@@ -90,50 +90,43 @@
         </c:forEach>
     }
 
+    //체크 후 가입승인 클릭 이벤트
     $(function(){
         $('#accept').click(function(event){
             event.preventDefault();
             var requests = [];
-            $('input[name=selectAgreement]:checked').each(function(){
+            $('input[name=selectAgreement]:checked').each(function(){ //체크한 정보 담기
                 var chk = $(this).val();
                 requests.push(chk);
             });
             console.log(requests);
-            $.ajax({
-                url : "joinAccept.do",
-                dataType : "json",
-                data : {
-                    requestList : requests,
-                    groupNo : $('#groupNo').val()
-                },
-                success : function(data){
-                    $('#joinRequestList').children().remove();
-                    $('#joinRequestList').append(
-                        '<tr style="background-color:lightgrey">'
-                        + '<th style="text-align: center">이름</th>'
-                        + '<th style="text-align: center">소개</th>'
-                        + '<th style="text-align: center">성별</th>'
-                        + '<th style="text-align: center">선택</th>'
-                        + '</tr>'
-                    );
 
-                    console.log(Object.keys(data).length); // json갯수
-                    var tableNum = 0;
-                    $.each(data, function (index, item) {
+            Swal.fire({
+                title: '가입 승인',
+                text: "가입을 승인하시겠습니까?",
+                icon: '경고',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '가입을 승인합니다'
+            }).then (() => {
+                $.ajax({
+                    url : "joinAccept.do",
+                    dataType : "json",
+                    data : {
+                        requestList : requests,
+                        groupNo : $('#groupNo').val()
+                    },
+                    success : function(data){
+                        $('#joinRequestList').children().remove();
                         $('#joinRequestList').append(
-                            '<tr>'
-                            +'<td>'+ item.nickname +'</td>'
-                            +'<td>'+ item.content +'</td>'
-                            +'<td>'+ item.gender +'</td>'
-                            +'<td>'
-                            +'<div class="col-6 col-12-small">'
-                            +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="'+ item.userid +'" >'
-                            +'<label for="selectAgreement'+ tableNum +'"></label>'
-                            +'</div>'
-                            +'</td>'
-                            +'</tr>'
+                            '<tr style="background-color:lightgrey">'
+                            + '<th style="text-align: center">이름</th>'
+                            + '<th style="text-align: center">소개</th>'
+                            + '<th style="text-align: center">성별</th>'
+                            + '<th style="text-align: center">선택</th>'
+                            + '</tr>'
                         );
-                        tableNum++;
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -141,16 +134,36 @@
                             showConfirmButton: false,
                             timer: 2500
                         });
-                    });
-                    console.log(requests);
-                },
-                error : function(request, status, error) {
-                    console.log(error)
-                }
+                        console.log(Object.keys(data).length); // json갯수
+                        var tableNum = 0;
+                        $.each(data, function (index, item) {
+                            $('#joinRequestList').append(
+                                '<tr>'
+                                +'<td>'+ item.nickname +'</td>'
+                                +'<td>'+ item.content +'</td>'
+                                +'<td>'+ item.gender +'</td>'
+                                +'<td>'
+                                +'<div class="col-6 col-12-small">'
+                                +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="'+ item.userid +'" >'
+                                +'<label for="selectAgreement'+ tableNum +'"></label>'
+                                +'</div>'
+                                +'</td>'
+                                +'</tr>'
+                            );
+                            tableNum++; //테이블 NUM으로 테이블 구분
+
+                        });
+                        console.log(requests);
+                    },
+                    error : function(request, status, error) {
+                        console.log(error)
+                    }
+                })
             });
         });
     });
 
+    //체크 후 가입거절절 클릭이벤트, 가입승인 이벤트와 로직은 동일
     $(function(){
         $('#refuse').click(function(event){
             event.preventDefault();
@@ -160,56 +173,68 @@
                 requests.push(chk);
             });
             console.log(requests);
-            $.ajax({
-                url : "joinDeny.do",
-                dataType : "json",
-                data : {
-                    requestList : requests,
-                    groupNo : $('#groupNo').val()
-                },
-                success : function(data){
-                    $('#joinRequestList').children().remove();
-                    $('#joinRequestList').append(
-                        '<tr style="background-color:lightgrey">'
-                        + '<th style="text-align: center">이름</th>'
-                        + '<th style="text-align: center">소개</th>'
-                        + '<th style="text-align: center">성별</th>'
-                        + '<th style="text-align: center">선택</th>'
-                        + '</tr>'
-                    );
 
-                    var tableNum = 0;
-                    $.each(data, function (index, item) {
+            Swal.fire({
+                title: '가입 거절',
+                text: "가입을 거절하시겠습니까?",
+                icon: '경고',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '가입을 거절합니다'
+            }).then (() => {
+                $.ajax({
+                    url: "joinDeny.do",
+                    dataType: "json",
+                    data: {
+                        requestList: requests,
+                        groupNo: $('#groupNo').val()
+                    },
+                    success: function (data) {
+                        $('#joinRequestList').children().remove();
                         $('#joinRequestList').append(
-                            '<tr>'
-                            +'<td>'+ item.nickname +'</td>'
-                            +'<td>'+ item.content +'</td>'
-                            +'<td>'+ item.gender +'</td>'
-                            +'<td>'
-                            +'<div class="col-6 col-12-small">'
-                            +'<input type="checkbox" id="selectAgreement'
-                            + tableNum
-                            +'" name="selectAgreement" value="' + item.userid + '" >'
-                            +'<label for="selectAgreement'+ tableNum +'"></label>'
-                            +'</div>'
-                            +'</td>'
-                            +'</tr>'
+                            '<tr style="background-color:lightgrey">'
+                            + '<th style="text-align: center">이름</th>'
+                            + '<th style="text-align: center">소개</th>'
+                            + '<th style="text-align: center">성별</th>'
+                            + '<th style="text-align: center">선택</th>'
+                            + '</tr>'
                         );
-                        tableNum++;
+
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            iconColor : 'red',
+                            iconColor: 'red',
                             title: '가입이 거절되었습니다',
                             showConfirmButton: false,
                             timer: 2500
                         });
-                    });
-                },
-                error : function(request, status, error) {
-                    console.log(error)
-                }
-            });
+
+                        var tableNum = 0;
+                        $.each(data, function (index, item) {
+                            $('#joinRequestList').append(
+                                '<tr>'
+                                + '<td>' + item.nickname + '</td>'
+                                + '<td>' + item.content + '</td>'
+                                + '<td>' + item.gender + '</td>'
+                                + '<td>'
+                                + '<div class="col-6 col-12-small">'
+                                + '<input type="checkbox" id="selectAgreement'
+                                + tableNum
+                                + '" name="selectAgreement" value="' + item.userid + '" >'
+                                + '<label for="selectAgreement' + tableNum + '"></label>'
+                                + '</div>'
+                                + '</td>'
+                                + '</tr>'
+                            );
+                            tableNum++;
+                        });
+                    },
+                    error: function (request, status, error) {
+                        console.log(error)
+                    }
+                })
+            })
         });
     });
 
