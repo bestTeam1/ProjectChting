@@ -44,7 +44,6 @@ public class ChartRestController {
     public ResponseEntity<String> ChartRecentUser() {
 
         ChartRecentUserDto chartRecentUserDto = chartService.getRecentUser();
-        System.out.println(chartRecentUserDto);
 
         ObjectMapper objmap = new ObjectMapper();
 
