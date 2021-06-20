@@ -11,6 +11,7 @@ import com.team1.chting.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,9 @@ public class AjaxRestController {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private UserService userService;
 
     //노출여부가 활성화된 이벤트
     @RequestMapping(value="/main/event", method=RequestMethod.GET, produces = "application/json")
@@ -82,13 +86,14 @@ public class AjaxRestController {
     }
 
     //로그인 -> 지역모임 5개
-    @RequestMapping(value="/main/loginedArea", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> areaGroup(){
+    @RequestMapping(value="/main/loginedArea/{userid}", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> areaGroup(@PathVariable String userid){
         List<GroupDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
+        UserDto userDto = userService.selectAreacode(userid);
         String result = "";
         try {
-            list = groupService.areaGroup("031", "002");
+            list = groupService.areaGroup(userDto.getFirst_area(),userDto.getSecond_area());
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -104,7 +109,7 @@ public class AjaxRestController {
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
         try {
-            list = groupService.catecodeGroup("testuser");
+            list = groupService.catecodeGroup(userid);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -120,7 +125,7 @@ public class AjaxRestController {
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
         try {
-            list = groupService.userGroupList("testuser");
+            list = groupService.userGroupList(userid);
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
