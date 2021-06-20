@@ -48,6 +48,7 @@
                                         <li><a href="groupJoin.do?group_no=">모임관리</a></li>
                                     </ul>
                                 </li>--%>
+            </ul>
         </nav>
 
         <%--		<!-- Section -->--%>
@@ -117,7 +118,7 @@
     });
 
     let sideList = $('#sideList');
-    if (!${not empty pageContext.request.userPrincipal}) {
+    if (${not empty pageContext.request.userPrincipal}) {
         $.ajax({
             url: "side/groupList/" + "${sessionScope.get("userData").userid}",
             data: {},
