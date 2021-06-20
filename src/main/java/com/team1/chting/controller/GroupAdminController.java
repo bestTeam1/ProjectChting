@@ -25,20 +25,16 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-10
      */
-    @RequestMapping(value = "groupJoin.do", method = RequestMethod.POST)
-    public String groupJoin(HttpServletRequest httpServletRequest, Model model) {
+    @RequestMapping(value = "groupJoin.do", method = RequestMethod.GET)
+    public String groupJoin(@RequestParam("userid") String userid, Model model) {
 
         //로그인한 유저가 속해있는
-        String userid = httpServletRequest.getParameter("userid");
-
-
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
         if(groupNo == null) { //모임장으로 속해있는 모임이 없다면?
             return "group/group_error/HasNoGroupError"; //모임장없음 에러페이지로 이동
         }
         List<UserDto> groupJoinRequest = groupAdminService.getGroupJoinRequest(groupNo);
-
         model.addAttribute("groupNo", groupNo);
         model.addAttribute("groupJoinRequest", groupJoinRequest);
 
