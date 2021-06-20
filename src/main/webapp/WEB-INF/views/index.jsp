@@ -125,7 +125,6 @@
         type:"get",
         success : function(response) {
             response.forEach(event => {
-                console.log(event);
                 slider.append("<div class='swiper-slide'><a href='eventDetail.do?event_no=" + event.event_no + "'><img src='" + event.event_img + "'></a></div>");
             });
             var swiper = new Swiper(".mySwiper", {
@@ -194,7 +193,6 @@
             type : "get",
             success : function(response){
                 response.forEach(group => {
-                    console.log(group);
                     posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
@@ -211,7 +209,6 @@
             type : "get",
             success : function(response){
                 response.forEach(group => {
-                    console.log(group);
                     posts2.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
