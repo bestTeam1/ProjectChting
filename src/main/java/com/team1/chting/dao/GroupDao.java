@@ -60,4 +60,9 @@ public interface GroupDao {
     //모임 생성
     int insertGroup(GroupDto groupDto);
 
+    //마지막 생성된 모임 가져오기
+    GroupDto selectGroup();
+
+
+
 }

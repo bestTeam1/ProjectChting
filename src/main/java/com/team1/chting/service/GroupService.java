@@ -4,6 +4,7 @@ package com.team1.chting.service;
 import com.team1.chting.dao.AdminDao;
 import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
+import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.*;
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
@@ -86,15 +87,20 @@ public class GroupService {
         return dto;
     }
 
-    //모임 생성 - 주현
-    public void groupMake(GroupDto groupDto, HttpServletRequest request) throws Exception {
+
+    /*
+      모임 생성
+      작성자 : 박주현
+      작성일 : 2021-06-20
+    */
+    public void groupMake(GroupDto groupDto, HttpServletRequest request, String groupNo) throws Exception {
 
         if(groupDto.getFileName() != null) {
             CommonsMultipartFile file = groupDto.getFileName();
             if(file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
                 System.out.println(fileName);
-                fileName = groupDto.getUserid() + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = userid
+                fileName = groupNo + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = group_name
                 String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
                 String fpath = path + File.separator + fileName;
 
@@ -110,5 +116,19 @@ public class GroupService {
         groupDao.insertGroup(groupDto);
 
     }
+
+    /*
+      최근 생선된 모임 정보
+      작성자 : 박주현
+      작성일 : 2021-06-20
+    */
+    public GroupDto groupBefore() {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        GroupDto groupDto = groupDao.selectGroup();
+
+        return groupDto;
+    }
+
+
 }
 
