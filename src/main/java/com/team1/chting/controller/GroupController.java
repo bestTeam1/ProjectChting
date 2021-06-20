@@ -2,6 +2,7 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.InterestCategoryDto;
+import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.BoardService;
 import com.team1.chting.service.GroupService;
 import com.team1.chting.service.UserService;
@@ -36,11 +37,28 @@ public class GroupController {
     public String groupMakeTest(@RequestParam("userid") String userid,
                                 Model model) {
 
+        UserDto userDto = userService.userInfoBasic(userid);
+        int groupAdmin = userDto.getCnt();
+
+        GroupDto groupDto = groupService.groupBefore();
+        String beforeGroupNo = groupDto.getGroup_no();
+
+        //직전에 생성된 모임 번호에 +1
+        String tmpNo1 = beforeGroupNo.substring(0,1); //B
+        int tmpNo2 = Integer.parseInt(beforeGroupNo.substring(1))+1; //0000+1
+        String tmpNo3 = String.format("%04d", tmpNo2);
+        String groupNo = tmpNo1.concat(tmpNo3);
+
+        //모임장으로 속해있는 그룹이 있다면
+        if (groupAdmin == 1) {
+            return "group/group_error/alreadyGroupError"; //에러페이지 이동
+        }
+
         model.addAttribute("areaList", boardService.getAreaList());
+        model.addAttribute("groupNo", groupNo);
 
         return "group/groupMake";
     }
-
 
     /*
       모임 생성 처리
@@ -49,13 +67,13 @@ public class GroupController {
     */
     @RequestMapping(value = "groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public String insertGroup(GroupDto groupDto,
-                              Model model,
+                              String groupNo,
                               HttpServletRequest request
                               ) throws Exception {
 
         //System.out.println(groupDto);
         String userid = groupDto.getUserid();
-        groupService.groupMake(groupDto, request);
+        groupService.groupMake(groupDto, request, groupNo);
 
         return "redirect:/groupJoin.do?userid="+userid;
     }
