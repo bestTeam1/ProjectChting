@@ -119,7 +119,7 @@
     let sideList = $('#sideList');
     if (!${not empty pageContext.request.userPrincipal}) {
         $.ajax({
-            url: "side/groupList/" + 1, //${userid}
+            url: "side/groupList/" + "${sessionScope.get("userData").userid}",
             data: {},
             dataType: "json",
             type: "get",
