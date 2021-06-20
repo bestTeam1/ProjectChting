@@ -48,7 +48,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <select id="selectNickname" resultType="String">
-        select nickname from user_info where userid = #{userid};
+        select nickname from user_info where userid = #{userid}
     </select>
 
+    <select id="selectAreacode" resultType="com.team1.chting.dto.UserDto">
+        select first_area, second_area
+        from user_info
+        where userid = #{userid}
+    </select>
 </mapper>
