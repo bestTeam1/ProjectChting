@@ -29,6 +29,7 @@ public class UserService {
 
         return userDto;
     }
+
     // 선택한 관심사 카테고리
     public List<UserDto> userInterest(String userid) {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
@@ -44,6 +45,7 @@ public class UserService {
 
         return UserJoinGroupList;
     }
+
     //위 3가지 한번에 myPageInfo 에 담기
     public MyPageInfo getMyPageInfo(String userid) {
         MyPageInfo myPageInfo = new MyPageInfo();
@@ -66,9 +68,9 @@ public class UserService {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         int result = userDao.deleteAcount(userid);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("회원 탈퇴 성공");
-        }else{
+        } else {
             System.out.println("회원 탈퇴 실패");
         }
     }
@@ -97,9 +99,9 @@ public class UserService {
 
         int result = categoryDao.insertInterestCategory(list);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("관심사 인서트 성공");
-        }else{
+        } else {
             System.out.println("관심사 인서트 실패");
         }
 
@@ -115,9 +117,9 @@ public class UserService {
 
         int result = categoryDao.deleteInterestCategory(userid);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("관심사 삭제 성공");
-        }else{
+        } else {
             System.out.println("관심사 삭제 실패");
         }
     }
@@ -132,9 +134,9 @@ public class UserService {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         int result = userDao.updateUser(userDto);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("정보 수정 성공");
-        }else{
+        } else {
             System.out.println("정보 수정 실패");
         }
     }
@@ -147,6 +149,18 @@ public class UserService {
     public String selectNickname(String userid) {
         UserDao userdao = sqlsession.getMapper(UserDao.class);
         String result = userdao.selectNickname(userid);
+
+        return result;
+    }
+
+    /*
+    유저 닉네임 정보
+    작성자 : 김명환
+    작성일 : 2021-06-18
+    */
+    public UserDto selectAreacode(String userid) {
+        UserDao userdao = sqlsession.getMapper(UserDao.class);
+        UserDto result = userdao.selectAreacode(userid);
 
         return result;
     }
