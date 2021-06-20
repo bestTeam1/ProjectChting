@@ -25,8 +25,20 @@
 </header>
 <script type="text/javascript">
 
-	//클릭버튼에따라서 action 속성 부여후 POST 전송
+	//로그인체크 (백단에서 못막았을 경우)
+	$(function(){
+		var check = '${sessionScope.get("userData").userid}';
+		if( check == null || check =="" || check == undefined ) {
+			Swal.fire({
+				title: '오류',
+				text : '로그인을 해주세요!!'
+			}).then(() => {
+				history.go(-1);
+			})
+		}
+	});
 
+	//클릭버튼에따라서 action 속성 부여후 POST 전송
 	$(document).on("click", "#groupJoin", function () {
 		$("#userid").attr("action", "groupJoin.do");
 		$("#userid").submit();
