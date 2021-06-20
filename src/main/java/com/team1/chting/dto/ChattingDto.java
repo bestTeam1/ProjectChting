@@ -10,4 +10,5 @@ public class ChattingDto {
 	private String userid;
 	private String message;
 	private String writeDate;
+	private String messageType;
 }
