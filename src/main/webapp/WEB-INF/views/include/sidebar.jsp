@@ -31,10 +31,6 @@
                 <li><a href="myPage.do?userid=${sessionScope.get("userData").userid}">마이페이지</a></li>
                 <li><a href="groupMake.do?userid=${sessionScope.get("userData").userid}">모임 생성</a></li>
 
-                <!-- 모임관리 링크 POST 전송할 form -->
-                <form style="display: none" action="" method="POST" id="groupJoinPost">
-                    <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}"/>
-                </form>
 
                 <%--                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
@@ -114,6 +110,8 @@
         $("#groupJoinPost").submit();
     });
 
+    var userid = '${sessionScope.get("userData").userid}';
+
     let sideList = $('#sideList');
     if (${not empty pageContext.request.userPrincipal}) {
         $.ajax({
@@ -129,7 +127,7 @@
                         "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
                         "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
                         "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li> <li>" +
-                        "<a href='#' id='groupJoin' >모임관리</a></li></ul></li>")
+                        "<a href='groupJoin.do?userid="+ userid + "'>모임관리</a></li></ul></li>")
                 });
             },
             error: function (Http, status, error) {
