@@ -24,4 +24,7 @@ public interface UserDao {
 
     //userid 로 유저의 nickname 정보
     String selectNickname(String userid);
+
+    //userid 로 유저의 지역정보
+    UserDto selectAreacode(String userid);
 }
