@@ -13,7 +13,7 @@
 <!-- Header -->
 <header id="header">
 	<ul class="icons">
-		<li><a id="groupJoin" href="#"><span class="label">가입신청관리</span></a></li>
+		<li><a id="groupJoin" href="groupJoin.do?userid=${sessionScope.get("userData").userid}"><span class="label">가입신청관리</span></a></li>
 		<li><a id="groupMemberManage" href="#"><span class="label">멤버관리</span></a></li>
 		<li><a id="groupBlackListManage" href="#"><span class="label">블랙리스트</span></a></li>
 		<li><a id="groupDisband" href="#"><span class="label">모임해산</span></a></li>
@@ -36,12 +36,6 @@
 				history.go(-1);
 			})
 		}
-	});
-
-	//클릭버튼에따라서 action 속성 부여후 POST 전송
-	$(document).on("click", "#groupJoin", function () {
-		$("#userid").attr("action", "groupJoin.do");
-		$("#userid").submit();
 	});
 
 	$(document).on("click", "#groupMemberManage", function () {
