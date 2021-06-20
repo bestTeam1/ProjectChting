@@ -31,10 +31,6 @@ public class GroupAdminController {
         //로그인한 유저가 속해있는
         String userid = httpServletRequest.getParameter("userid");
 
-        //userid == null 이면 로그인 안한상태, front단에서 막았어야 하나 넘어온경우
-        if(userid.equals("") || userid == null) {
-            return "index"; //메인으로 돌려보냄
-        }
 
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
