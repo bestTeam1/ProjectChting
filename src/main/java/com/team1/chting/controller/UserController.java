@@ -67,7 +67,7 @@ public class UserController {
     public String updateUser(Model model,
                              @RequestBody UserDto userDto) {
 
-        System.out.println(userDto);
+        System.out.println("userDto : " +userDto);
         userService.updateUser(userDto);
 
         return "user/userUpdate";
