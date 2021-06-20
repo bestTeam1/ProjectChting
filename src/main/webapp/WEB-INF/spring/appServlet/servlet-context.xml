@@ -36,6 +36,9 @@
 
     <websocket:handlers>
         <websocket:mapping handler="echoHandler" path="/chatting"/>
+        <websocket:handshake-interceptors>
+            <bean class="com.team1.chting.controller.ChattingHandshakeInterceptor" />
+        </websocket:handshake-interceptors>
         <websocket:sockjs></websocket:sockjs>
     </websocket:handlers>
 
