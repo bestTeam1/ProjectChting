@@ -31,8 +31,6 @@ public class ChartService {
 
         String now = today.format(time);
 
-        System.out.println("ChartService now : " + now);
-
         return chartDao.getRecentUser(now);
     }
 
