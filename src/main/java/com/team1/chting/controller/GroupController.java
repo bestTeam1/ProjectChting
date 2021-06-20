@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -49,14 +50,18 @@ public class GroupController {
     @RequestMapping(value = "groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public String insertGroup(GroupDto groupDto,
                               Model model,
-                              HttpServletRequest request) throws Exception {
+                              HttpServletRequest request,
+                              RedirectAttributes rttr) throws Exception {
 
-        System.out.println(groupDto);
-        String userid = groupDto.getUserid();
-
+        //System.out.println(groupDto);
         groupService.groupMake(groupDto, request);
 
-        return "redirect:/groupJoin.do?userid="+userid;
+        String userid = groupDto.getUserid();
+        rttr.addFlashAttribute("userid", userid);
+
+
+
+        return "redirect:/groupJoin.do";
     }
 
     /*
