@@ -23,7 +23,7 @@
             <!-- Banner -->
             <section id="main">
                 <h1 style="text-align: center">모임이 없습니다! 모임을 만들어주세요</h1>
-                <a href="groupMake.do">
+                <a href="groupMake.do?userid=${sessionScope.get("userData").userid}">
                         <h2 style="text-align: center">나의 모임 만들러 가기</h2>
                 </a>
             </section>
