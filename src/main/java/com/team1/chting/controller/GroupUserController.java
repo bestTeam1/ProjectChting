@@ -81,12 +81,12 @@ public class GroupUserController {
     @RequestMapping(value = "board_chatting.do", method = RequestMethod.GET)
     public String groupChatting(@RequestParam("group_no") String group_no, Model model){
         String group_name = groupservice.groupByGroup_no(group_no).getGroup_name();
-        model.addAttribute("group_name", group_name);
-
         Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
         String userid = userService.selectNickname(authentication.getName());
-        System.out.println(userid);
+
         model.addAttribute("userid", userid);
+        model.addAttribute("group_name", group_name);
+        model.addAttribute("group_no", group_no);
 
         return "board/board_chatting";
     }
