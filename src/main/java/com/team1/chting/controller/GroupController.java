@@ -51,10 +51,12 @@ public class GroupController {
                               Model model,
                               HttpServletRequest request) throws Exception {
 
-        //System.out.println(groupDto);
+        System.out.println(groupDto);
+        String userid = groupDto.getUserid();
+
         groupService.groupMake(groupDto, request);
 
-        return "group/group";
+        return "redirect:/groupJoin.do?userid="+userid;
     }
 
     /*
