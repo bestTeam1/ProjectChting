@@ -37,6 +37,10 @@
             <section>
 
             </section>
+            <!-- POST 방식으로 전송시키기 위한 form -->
+            <form style="display: none" action="groupDisbandOk.do" method="POST" id="groupDisbandOk">
+                <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}"/>
+            </form>
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
@@ -61,8 +65,9 @@
                 Swal.fire({
                     title: '모임 해산',
                     text : '모임이 해산되었습니다!'
-                }).then((result) => {
-                    window.location.href = "groupDisbandOk.do?userid=${userid}";
+                }).then(() => {
+                    console.log("hi")
+                    $("#groupDisbandOk").submit();
                 })
             }
         })
