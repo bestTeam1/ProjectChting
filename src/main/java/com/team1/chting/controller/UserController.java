@@ -137,7 +137,7 @@ public class UserController {
       작성자 : 박주현
       작성일 : 2021-06-09
     */
-    @RequestMapping(value="delAcount.do",produces = "application/text; charset=utf8")
+    @RequestMapping(value="delAcount.do", produces = "application/text; charset=utf8")
     public String deleteAcount(@RequestParam("userid") String userid) {
 
         System.out.println("deleteAcount ajax 들어옴");
