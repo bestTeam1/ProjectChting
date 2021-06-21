@@ -5,7 +5,11 @@ import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.PostReplyDto;
 import com.team1.chting.service.GroupService;
+
 import org.apache.commons.io.FilenameUtils;
+
+import com.team1.chting.service.UserService;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,8 +33,9 @@ public class GroupUserController {
 
     @Autowired
     private GroupService groupservice;
+
     @Autowired
-    private SqlSession sqlsession;
+    private UserService userService;
 
     // 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
@@ -125,14 +130,16 @@ public class GroupUserController {
     @RequestMapping(value = "board_chatting.do", method = RequestMethod.GET)
     public String groupChatting(@RequestParam("group_no") String group_no, Model model){
         String group_name = groupservice.groupByGroup_no(group_no).getGroup_name();
-        model.addAttribute("group_name", group_name);
-
         Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName());
+        String userid = userService.selectNickname(authentication.getName());
 
-        model.addAttribute("userid", authentication.getName());
+        model.addAttribute("userid", userid);
+        model.addAttribute("group_name", group_name);
+        model.addAttribute("group_no", group_no);
+
         return "board/board_chatting";
     }
+
 
     // 댓글등록
     @RequestMapping(value = "board_replyWrite.do")
@@ -177,5 +184,6 @@ public class GroupUserController {
         }
         return "success";
     }
+
 
 }

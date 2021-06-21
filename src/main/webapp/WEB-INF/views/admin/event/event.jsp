@@ -36,7 +36,6 @@
                             <th style="text-align: center">시작일</th>
                             <th style="text-align: center">종료일</th>
                             <th style="text-align: center">작성일</th>
-                            <th style="text-align: center">상태</th>
                         </tr>
                         <c:forEach var="i" items="${eventList}">
                             <tr>
@@ -55,7 +54,6 @@
                                 <td>${i.startdate}</td>
                                 <td>${i.enddate}</td>
                                 <td>${i.writedate}</td>
-                                <td>${i.enabled}</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -66,7 +64,7 @@
                     <div class="text-center">
                         <ul class="pagination" style="text-align: center">
                             <!-- 이전prev -->
-                            <c:if test="${pm.prev}">
+                            <c:if test="${pm.prev}">+
                                 <li><a href="adminEvent.do?page=${pm.startPage-1}">&laquo;</a></li>
                             </c:if>
                             <!-- 페이지블럭 -->
@@ -95,7 +93,5 @@
 </div>
 
 </body>
-<script type="text/javascript">
 
-</script>
 </html>

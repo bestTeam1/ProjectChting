@@ -61,6 +61,8 @@ public class AdminService {
         return sqlsession.selectOne("pageCountNotice");
     }
 
+
+
     //페이지처리한 글 목록
     public List<EventDto> listCriEvent(AdminCriteria cri) throws Exception {
 
@@ -118,39 +120,94 @@ public class AdminService {
         return sqlsession.selectOne("pageCountGroup");
     }
 
-    public void write(NoticeDto noticeDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+    public void noticeWrite(NoticeDto noticeDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         //if(noticeDto.getFile() != null) {
-            //CommonsMultipartFile file = noticeDto.getFileName();
-            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
-                String fileName = file.getOriginalFilename();
-                String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/profileimg");
-                String fpath = path + File.separator + fileName;
+        //CommonsMultipartFile file = noticeDto.getFileName();
+        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1];
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/notice");
+            String fpath = path + File.separator + fileName;
 
-                System.out.println("fpath : " + fpath);
+            System.out.println("fpath : " + fpath);
 
-                if(!fileName.equals("")) {
-                    FileOutputStream fs = new FileOutputStream(fpath);
-                    fs.write(file.getBytes());
-                    fs.close();
-                }
-                noticeDto.setFile(fileName);
+            if(!fileName.equals("")) {
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
             }
-
-            AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-            int result = adminDao.write(noticeDto);
-
-            if (result < 1) {
-                System.out.println("db write error on write()");
-            }
+            noticeDto.setFile(fileName);
         }
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int result = adminDao.noticeWrite(noticeDto);
+
+        if (result < 1) {
+            System.out.println("db write error on write()");
+        }
+    }
+    //이벤트 글쓰기
+    public void eventWrite(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+        //if(noticeDto.getFile() != null) {
+        //CommonsMultipartFile file = noticeDto.getFileName();
+        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
+            String fpath = path + File.separator + fileName;
+
+            System.out.println("fpath : " + fpath);
+
+            if(!fileName.equals("")) {
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
+            }
+            eventDto.setFile(fileName);
+        }
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int result = adminDao.eventWrite(eventDto);
+
+        if (result < 1) {
+            System.out.println("db write error on write()");
+        }
+    }
+    //이벤트 수정
+    public void eventModify(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            String fileName = file.getOriginalFilename();
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
+            String fpath = path + File.separator + fileName;
+
+            System.out.println("fpath : " + fpath);
+
+            if(!fileName.equals("")) {
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
+            }
+            eventDto.setFile(fileName);
+        }
+
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int result = adminDao.eventModify(eventDto);
+
+        if (result < 1) {
+            System.out.println("db write error on write()");
+        }
+
+
+    }
 
 
 
     //공지사항 삭제하기
-    public void deleteAdminNotice(String noticeNo) {
+    public void adminDeleteBoard(String type, String num) {
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-        adminDao.deleteAdminNotice(noticeNo);
+        adminDao.adminDeleteBoard(type, num);
 
     }
 
@@ -171,6 +228,12 @@ public class AdminService {
 
         return eventDto;
     }
+    //이벤트 취소
+    public int adminEventDisabled(String eventNo) {
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+
+        return adminDao.adminEventDisabled(eventNo);
+    }
 
 
     //공지사항 수정완료
@@ -185,6 +248,14 @@ public class AdminService {
         } else if (isModified == 1) {
             return true;
         } else { return false; }
+    }
+
+    //게시글 작성에 쓰일 번호
+    public int getWriteNo(String type) {
+        AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
+        int writeNo = adminDao.getWriteNo(type);
+
+        return writeNo + 1;
     }
 
 }

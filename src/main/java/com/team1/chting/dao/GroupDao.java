@@ -1,5 +1,6 @@
 package com.team1.chting.dao;
 
+import com.team1.chting.dto.InterestCategoryDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostReplyDto;
@@ -59,6 +60,7 @@ public interface GroupDao {
     // 페이징 리스트?
     public List<Map<String, Object>> postList(Criteria cri);
 
+
     // 댓글목록
    public List<PostReplyDto> getReply(int post_no);
     // 댓글입력
@@ -69,4 +71,14 @@ public interface GroupDao {
     public PostReplyDto replyUpdate(PostReplyDto postReplyDto);
     // 댓글삭제
     public int replyDelete(int reply_no);
+
+    //모임 생성
+    int insertGroup(GroupDto groupDto);
+
+    //마지막 생성된 모임 가져오기
+    GroupDto selectGroup();
+
+
+
+
 }
