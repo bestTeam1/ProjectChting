@@ -46,7 +46,7 @@ public class GroupController {
         //직전에 생성된 모임 번호에 +1
         String tmpNo1 = beforeGroupNo.substring(0,1); //B
         int tmpNo2 = Integer.parseInt(beforeGroupNo.substring(1))+1; //0000+1
-        String tmpNo3 = String.format("%04d", tmpNo2);
+        String tmpNo3 = String.format("%05d", tmpNo2);
         String groupNo = tmpNo1.concat(tmpNo3);
 
         //모임장으로 속해있는 그룹이 있다면
@@ -83,24 +83,13 @@ public class GroupController {
       작성일 : 2021-06-18
     */
     @RequestMapping(value = "groupCategory.do", method = RequestMethod.GET)
-    public String categoryChoice(Model model,
-                                 @RequestParam(value="catelist", defaultValue = "")
-                                         List<String> catelist) {
+    public String categoryChoice(Model model) {
 
         List<InterestCategoryDto> list = new ArrayList<>();
+        InterestCategoryDto interestCategory = new InterestCategoryDto();
+        list.add(interestCategory);
 
-        if (catelist.size() == 0) {
-            InterestCategoryDto interestCategory = new InterestCategoryDto();
-            interestCategory.setParent_catecode("");
-            list.add(interestCategory);
-        }else {
-            for(int i = 0; i < catelist.size(); i++) {
-                InterestCategoryDto interestCategory = new InterestCategoryDto();
-                interestCategory.setParent_catecode(catelist.get(i));
-                list.add(interestCategory);
-            }
-        }
-        model.addAttribute("interestCategory", userService.getInterestCategory(list));
+        model.addAttribute("interestCategory", userService.getInterestCategory());
 
         return "group/interestCategory";
     }

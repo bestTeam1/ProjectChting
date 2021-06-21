@@ -39,7 +39,7 @@
                                     <c:otherwise>
                                         <img id="preview"
                                              src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
-                                             width="130" alt="프로필 이미지">
+                                             style="width:130px; height:130px; border-radius:70%;" alt="프로필 이미지">
                                     </c:otherwise>
                                 </c:choose>
                                 <br><br>
@@ -58,17 +58,13 @@
                         <tr>
                             <td style="vertical-align: middle">관심사</td>
                             <td>
-                                <ol>
-                                    <ul class="a">
-                                        <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                                            <div class="circle_user_interest">
-                                                <c:out value="${userInterest.catename}"/>
-                                            </div>
-                                        </c:forEach>
-                                        <input type="button" class="button small" value="변경"
-                                               onclick="window.open('userCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');">
-                                    </ul>
-                                </ol>
+                                <c:forEach var="userInterest" items="${userInfo.userInterest}">
+                                    <div class="circle_user_interest">
+                                        <c:out value="${userInterest.catename}"/>
+                                    </div>
+                                </c:forEach>
+                                <input type="button" style="top: 20px;" class="button small" value="변경"
+                                       onclick="window.open('userCategory.do', '관심사 선택', 'width=600, height=400, left=100, top=50');">
                             </td>
                         </tr>
 
