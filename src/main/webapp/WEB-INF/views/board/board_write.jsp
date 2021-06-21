@@ -75,22 +75,23 @@
 <script type="text/javascript">
     // swal("Here's the title!", "...and here's the text!");
     function confirm() {
-        //e.preventDefault
+       // e.preventDefault
 
         var subject = $("#subject").val().trim();
         var content =  $("#content").val().trim();
         var post_catename = $("#post_catename").val().trim();
 
         if(post_catename == "") {
-            swal("카테고리를 선택해주세요.");
+            swal.fire("카테고리를 선택해주세요.");
             return;
         } else if(subject == "") {
-            swal("제목을 입력해주세요.");
+            swal.fire("제목을 입력해주세요.");
             return;
         } else if(content == ""){
-            swal("내용을 선택해주세요.");
+            swal.fire("내용을 선택해주세요.");
             return;
         }
+        var form = document.createElement("form")
 
         $('#form').submit();
     }
@@ -107,37 +108,40 @@
                 <div class="content">
                     <header>
 
-<%--action='<c:url value='/board/board_insert.do'/>'--%>
-    <form id="form" method="post" action='board_write.do'>
-                                <%-- 카테고리 셀렉트  --%>
-                                <select id="post_catename" name="post_catename" style="width: 170px; float: right">
-                                    <option value="">===카테고리===</option>
-                                    <option value="자유글">자유글</option>
-                                    <option value="정모후기">정모후기</option>
-                                    <option value="가입인사">가입인사</option>
-                                    <option value="공지사항">공지사항</option>
-                                </select>
-                                    <br><br>
+                        <%--action='<c:url value='/board/board_insert.do'/>'--%>
+                        <form id="form" method="post" action='board_write.do' enctype="multipart/form-data">
+                            <%-- 카테고리 셀렉트  --%>
+                            <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
+                                <option value="" selected disabled hidden>==카테고리==</option>
+                                <option value="A004">자유글</option>
+                                <option value="A003">정모후기</option>
+                                <option value="A002">가입인사</option>
+                                <option value="A001">공지사항</option>
+                            </select>
+                            <br><br>
 
-<%--  <div>작성자<input type="text" name="writer" value="${modifyId}" readonly="readonly"></div>--%>
-        <div>제목<input type="text" id="subject" name="subject"
-                      placeholder="2~20자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
-                      onblur="this.placeholder = '2~20자 이내로 입력해주세요 :)'"></div>
-    <br><br>
-        <div>내용<textarea rows="5" cols="13" id="content" name="content" style="resize: none"
-                         placeholder="2~2000자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
-                         onblur="this.placeholder = '2~2000자 이내로 입력해주세요 :)'"></textarea>
-        </div>
-    <br><br>
-    <div><label class="form-label" for="customFile">첨부파일</label>
-        <input type="file" class="form-control" id="customFile" name="file"/></div>
-    <br><br>
+                            <%--  <div>작성자<input type="text" name="writer" value="${modifyId}" readonly="readonly"></div>--%>
+                            <div>제목<input type="text" id="subject" name="subject"
+                                          placeholder="2~20자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
+                                          onblur="this.placeholder = '2~20자 이내로 입력해주세요 :)'"></div>
+                            <br><br>
+                            <div>내용<textarea rows="5" cols="13" id="content" name="content" style="resize: none"
+                                             placeholder="2~2000자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
+                                             onblur="this.placeholder = '2~2000자 이내로 입력해주세요 :)'"></textarea>
+                            </div>
+                            <br><br>
+<%--                            <div><label class="form-label" for="customFile">첨부파일</label>--%>
+<%--                                <input type="file" class="form-control" id="customFile" name="file"/></div>--%>
+                                <input type="file" id="fileName" name="uploadFile" class="fileName">
+                            <br><br>
 
-    <div style="display: flex; justify-content: center">
-        <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button" onclick="location.href='board_list.do'">목록</button>
-    </div>
-    </form>
+                            <div style="display: flex; justify-content: center">
+                                <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" onclick="location.href='board_list.do?group_no=${group_no}'">목록</button>
+                            </div>
+
+                            <input type="hidden" name="group_no" value="${group_no}">
+                        </form>
 
                     </header>
                 </div>

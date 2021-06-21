@@ -1,9 +1,9 @@
 package com.team1.chting.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Data
 public class PostDto {
@@ -17,6 +17,7 @@ public class PostDto {
 	private String content;
 	private String file;
 	private Date writedate;
+	private CommonsMultipartFile fileName;
 
 
 }
