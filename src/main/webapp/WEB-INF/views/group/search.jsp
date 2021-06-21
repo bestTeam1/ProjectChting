@@ -20,7 +20,28 @@
     <div class="banner-vertical-center-work container text-light d-flex justify-content-center align-items-center py-5 p-0">
         <div class="banner-content col-lg-8 col-12 m-lg-auto text-center">
             <h1 class="banner-heading h2 display-3 pb-1 semi-bold-600">Search</h1>
-            <h3 class="h4 pb-0 regular-400">"${search_keyword}"</h3>
+            <c:choose>
+                <c:when test="${not empty search_keyword}">
+                    <c:choose>
+                        <c:when test="${not empty search_category}">
+                            <h3 class="h4 pb-0 regular-400">"${search_category}"지역의 "${search_keyword}"검색 결과 입니다.</h3>
+                        </c:when>
+                        <c:otherwise>
+                            <h3 class="h4 pb-0 regular-400">"전체"지역의 "${search_keyword}"검색 결과 입니다.</h3>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${not empty search_category}">
+                            <h3 class="h4 pb-0 regular-400">"${search_category}"지역의 "전체"검색 결과 입니다.</h3>
+                        </c:when>
+                        <c:otherwise>
+                            <h3 class="h4 pb-0 regular-400">"전체"지역의 "전체"검색 결과 입니다.</h3>
+                        </c:otherwise>
+                    </c:choose>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>
@@ -146,7 +167,7 @@
             $('#resultList').css({
                 "min-height": "1200px"
             });
-        } else if(resultList.length < 3 && resultList.length != 0) {
+        } else if(resultList.length < 4 && resultList.length != 0) {
             $('#resultList').css({
                 "min-height": "600px"
             });

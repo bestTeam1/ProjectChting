@@ -126,6 +126,7 @@
         </div>
     </div>
 
+
 </footer>
 <!-- End Footer -->
 
@@ -145,6 +146,7 @@
 <script src="assets/js/prism.js"></script>
 <!-- underscore.js -->
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+
 <!-- Page Script -->
 <script>
     //window.load
@@ -166,5 +168,41 @@
             $(this).addClass("shadow");
             return false;
         });
+        openNav();
+
+        const shareBtnSelec = document.querySelector('#shareBtn');
+
+        shareBtnSelec.addEventListener('click', () => {
+            if(navigator.share){
+                navigator.share({
+                    title : 'Chting! :D',
+                    text : '취미 + Meeting, 새로운 곳에서 다양한 사람들을 만나보세요!',
+                    url : 'http://172.30.1.10:8090/chting_war_exploded/index_new.do'
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                })
+                .catch(err => {
+                    console.log(`Couldn't share because of`, err.message);
+                });
+            } else {
+                console.log('web share not supported');
+            }
+        });
+
     });
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+
+    const shareOpts = {
+        title : 'Chting! :D',
+        text : '취미 + Meeting, 새로운 곳에서 다양한 사람들을 만나보세요!',
+        url : 'http://172.30.1.10:8090/chting_war_exploded/index_new.do'
+    }
 </script>

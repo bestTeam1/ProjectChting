@@ -83,5 +83,4 @@ public class LoginService {
         return result1 + result2;
     }
 
-
 }

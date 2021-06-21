@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <!-- Select2 CSS -->
     <link href="assets/css/nice-select.css" rel="stylesheet"/>
+
 </head>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
@@ -41,15 +42,22 @@
             <div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
                 <div id="nav search" style="padding-right: 7%;">
                     <form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
-                        <div class="input-group input-group-navbar">
+                        <div class="input-group input-group-navbar justify-content-center">
                             <select name="category" class="form-control form-select-sm search" aria-label="Search">
                                 <option value="">전체</option>
                                 <c:forEach items="${applicationScope.appScope_areaList}" var="area">
-                                    <option value="${area.area_name}">${area.area_name}</option>
+                                    <c:choose>
+                                        <c:when test="${search_category != area.area_name}">
+                                            <option value="${area.area_name}">${area.area_name}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${area.area_name}" selected>${area.area_name}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
                             </select>
                             <input name="search" id="searchValue" type="search" class="form-control form-control-sm"
-                                   placeholder="Search…" aria-label="Search" style="width: 220px;"
+                                   placeholder="Search…" aria-label="Search"
                                    value="<c:out value="${search_keyword}"></c:out>">
                             <button id="searchButton" class="btn btn-sm btn-outline-secondary" type="submit"><i
                                     class="bx bx-search bx-sm"></i></button>
@@ -64,6 +72,7 @@
         </div>
     </div>
 </nav>
+<div class="text-sm-center ">
 <a>$ {sessionScope.get("userData").userid} : ${sessionScope.get("userData").userid}</a>&emsp;|&emsp;
 <a>$ {sessionScope.get("userData").userrole} : ${sessionScope.get("userData").userrole}</a>&emsp;
 <a href="index.html"><i class="bx bx-home bx-sm text-primary>"></i></a>
@@ -71,3 +80,4 @@
 <a href="work-single.html"><i class="bx bx-detail bx-sm text-primary>"></i></a>
 <a>|</a>
 <a href="${pageContext.request.contextPath}/myGroup.do"><i class="bx bx-user-plus bx-sm text-primary>"></i></a>
+</div>
