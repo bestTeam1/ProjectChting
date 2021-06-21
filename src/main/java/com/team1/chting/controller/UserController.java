@@ -54,6 +54,7 @@ public class UserController {
 
         model.addAttribute("userInfo", userService.getMyPageInfo(userid));
         model.addAttribute("areaList", boardService.getAreaList());
+        model.addAttribute("cateList", userService.getInterestCategory());
 
         return "user/userUpdate";
     }
@@ -80,25 +81,13 @@ public class UserController {
       작성일 : 2021-06-11
     */
     @RequestMapping(value = "userCategory.do", method = RequestMethod.GET)
-    public String categoryChoice(Model model,
-                                 @RequestParam(value="catelist", defaultValue = "")
-                                         List<String> catelist) {
+    public String categoryChoice(Model model) {
 
         List<InterestCategoryDto> list = new ArrayList<>();
+        InterestCategoryDto interestCategory = new InterestCategoryDto();
+        list.add(interestCategory);
 
-        if (catelist.size() == 0) {
-            InterestCategoryDto interestCategory = new InterestCategoryDto();
-            interestCategory.setParent_catecode("");
-            list.add(interestCategory);
-        }else {
-            for(int i = 0; i < catelist.size(); i++) {
-                InterestCategoryDto interestCategory = new InterestCategoryDto();
-                interestCategory.setParent_catecode(catelist.get(i));
-                list.add(interestCategory);
-            }
-        }
-
-        model.addAttribute("interestCategory", userService.getInterestCategory(list));
+        model.addAttribute("interestCategory", userService.getInterestCategory());
 
         return "user/interestCategory";
     }
@@ -111,8 +100,7 @@ public class UserController {
     @RequestMapping(value = "userCategory.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     public String updateCategory(Model model,
                                  @RequestParam("userid") String userid,
-                                 @RequestParam(value="catelist", defaultValue = "")
-                                         List<String> catelist) {
+                                 @RequestParam("catelist") List<String> catelist) {
 
         List<InterestCategoryDto> list = new ArrayList<>();
 
@@ -123,8 +111,8 @@ public class UserController {
 
             list.add(interestCategory);
         }
-        System.out.println("userid: " +userid);
-        System.out.println("list : " +list);
+        //System.out.println("userid: " +userid);
+        //System.out.println("list : " +list);
 
         userService.deleteInterestCategory(userid);
         userService.updateInterestCategory(list);

@@ -81,14 +81,14 @@ public class UserService {
     }
 
     /*
-    관심사 카테고리 선택하기 (중분류)
+    관심사 카테고리 선택하기
     작성자 : 박주현
     작성일 : 2021-06-11
     */
-    public List<InterestCategoryDto> getInterestCategory(List<InterestCategoryDto> list) {
+    public List<InterestCategoryDto> getInterestCategory() {
 
         InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
-        List<InterestCategoryDto> categoryList = categoryDao.selectInterestCategory(list);
+        List<InterestCategoryDto> categoryList = categoryDao.selectInterestCategory();
 
         return categoryList;
 
