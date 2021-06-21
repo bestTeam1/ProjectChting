@@ -76,7 +76,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertGroup" parameterType="com.team1.chting.dto.GroupDto">
         insert into group_info (userid, group_name, group_img, content, area_code, catecode)
         values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_code}, #{catecode})
-
     </insert>
 
     <select id="selectGroup" resultType="com.team1.chting.dto.GroupDto">

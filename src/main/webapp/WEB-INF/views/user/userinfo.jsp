@@ -17,18 +17,19 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <h3>MyPage</h3>
+            <c:set var="userInfoBasic" value="${userInfo.userInfoBasic}"></c:set>
             <article>
                 <div class="content align-center">
-                    <h3><c:out value="${userInfo.userInfoBasic.nickname}"/></h3>
+                    <h3><c:out value="${userInfoBasic.nickname}"/></h3>
                     <c:choose>
-                        <c:when test="${not empty profile_img}">
-                            <img id="preview" src="${profile_img}" width="130">
+                        <c:when test="${not empty userInfoBasic.profile_img}">
+                            <img id="preview" src="./upload/profileimg/${userInfoBasic.profile_img}"
+                                 style="width:130px; height:130px; border-radius:70%;">
                         </c:when>
                         <c:otherwise>
                             <img id="preview"
@@ -37,11 +38,11 @@
                         </c:otherwise>
                     </c:choose>
                     <br><br>
-                    <p><c:out value="${userInfo.userInfoBasic.first_area_name}"/> <c:out
-                            value="${userInfo.userInfoBasic.second_area_name}"/></p>
+                    <p><c:out value="${userInfoBasic.first_area_name}"/> <c:out
+                            value="${userInfoBasic.second_area_name}"/></p>
                     <hr>
                     <h3>자기소개</h3>
-                    <p><c:out value="${userInfo.userInfoBasic.content}"/></p>
+                    <p><c:out value="${userInfoBasic.content}"/></p>
                     <hr>
                 </div>
             </article>
@@ -69,7 +70,6 @@
             <input type="button" value="회원 정보 수정" id="updateUser"
                    onclick="location.href='userUpdate.do?userid=${sessionScope.get("userData").userid}'">
             <input type="button" value="회원 탈퇴" id="delacount">
-
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
@@ -77,7 +77,10 @@
 </div>
 
 <script type="text/javascript">
+    //값이 1이면 모임장 권한을 가진 모임이 있음
     let userGroupRole = "${userInfo.userInfoBasic.cnt}";
+
+    //console.log(userGroupRole);
 
     let swal = Swal.mixin({
         customClass: {
@@ -87,7 +90,6 @@
         buttonsStyling: false
     })
 
-    console.log(userGroupRole); //값이 1이면 모임장 권한을 가진 모임이 있음
 
     $(function () {
         $("#delacount").click(function () {
@@ -102,7 +104,8 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href = "groupJoin.do?userid=" + userid;
+                        //location.href = "groupJoin.do?userid=" + userid;
+                        location.href = "groupMemberManage.do?userid=" + userid;
                     }
                 })
             } else {

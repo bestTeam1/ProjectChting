@@ -63,14 +63,15 @@ public class UserController {
       작성자 : 박주현
       작성일 : 2021-06-09
     */
-    @RequestMapping(value = "userUpdate.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-    public String updateUser(Model model,
-                             @RequestBody UserDto userDto) {
+    @RequestMapping(value = "userUpdate.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public String updateUser(UserDto userDto,
+                             HttpServletRequest request) throws Exception {
 
         System.out.println("userDto : " +userDto);
-        userService.updateUser(userDto);
+        String userid = userDto.getUserid();
+        userService.updateUser(userDto, request);
 
-        return "user/userUpdate";
+        return "redirect:/myPage.do?userid="+userid;
     }
 
     /*
