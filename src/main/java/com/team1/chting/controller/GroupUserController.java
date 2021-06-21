@@ -56,11 +56,15 @@ public class GroupUserController {
 
         //모임원으로 있는 모임들 가져오기
         List<GroupDto> groupList = userService.getGroupList(userid);
-        System.out.println("길이를 알수있을까???");
-        int length = groupList.size(); //이걸로쓰세요
+        int length = groupList.size();
+
+        List<GroupDto> newGroupByCate = userService.getNewGroupByCate(userid);
+        List<GroupDto> bestGroupByCate = userService.getBestGroupByCate(userid);
 
         model.addAttribute("length", length);
         model.addAttribute("groupList", groupList);
+        model.addAttribute("newGroupList", newGroupByCate);
+        model.addAttribute("bestGroupList", bestGroupByCate);
 
         return "board/board_total";
     }
