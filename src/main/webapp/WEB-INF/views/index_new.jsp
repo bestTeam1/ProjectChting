@@ -71,7 +71,6 @@
             </ul>
         </div>
     </div>
-
 </section>
 
 <section class="container overflow-hidden py-5">
@@ -119,10 +118,10 @@
             </div>
             <div class="col-lg-7 col-12 text-light pt-2">
                 <h3 class="h4 light-300">찾으시는 모임이 없다구요?</h3>
-                <p class="light-300">걱정 마세요! 당신만의 모임을 만들어 커뮤니티를 구축하실수 있습니다!</p>
+                <p class="light-300">걱정 마세요! 당신만의 모임을 만들어 커뮤니티를 구축하실 수 있습니다!</p>
             </div>
             <div class="col-lg-3 col-12 pt-4">
-                <a href="#" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기</a>
+                <a href="groupMake.do?userid=${sessionScope.get("userData").userid}" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기</a>
             </div>
         </div>
     </div>
