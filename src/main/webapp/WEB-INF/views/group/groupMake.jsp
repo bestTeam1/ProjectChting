@@ -24,7 +24,7 @@
             <div class="content">
                 <form id="groupMakeFrm" method="POST" action='groupMake.do' enctype="multipart/form-data">
                     <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
-                    <input type="hidden" name="s_catecode" id="catecode" value="">
+                    <input type="hidden" name="catecode" id="catecode" value="">
                     <input type="hidden" name="groupNo" value="${groupNo}">
                     <table>
                         <tr>

@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <insert id="insertInterestCategory" >
-        insert into user_interest (userid, s_catecode)
+        insert into user_interest (userid, catecode)
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.userid}, #{item.catecode})
