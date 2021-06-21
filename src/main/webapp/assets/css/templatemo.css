@@ -55,12 +55,26 @@ p, a {font-weight: 400;}
   width: 88%;
 }
 
+#searchValue {
+  width: 220px;
+}
+
 /* header 62  */
 @media screen and (max-width: 991px) {
   #navbar_logo #logo_img {
     padding: 1%;
     width: 64%;
   }
+
+  #searchValue {
+    width: min-content;
+  }
+
+  .form-inline {
+    width: inherit;
+  }
+
+
 }
 
 /* Home */

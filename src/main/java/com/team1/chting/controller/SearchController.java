@@ -1,25 +1,18 @@
 package com.team1.chting.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.service.BoardService;
 import com.team1.chting.utils.AdminCriteria;
-import com.team1.chting.utils.Criteria;
 import com.team1.chting.utils.PageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -52,6 +45,8 @@ public class SearchController {
             e.printStackTrace();
         }
 
+
+        model.addAttribute("search_category", category);
         model.addAttribute("search_keyword",search);
         model.addAttribute("search_result", search_result);
         model.addAttribute("search_link", search_link);

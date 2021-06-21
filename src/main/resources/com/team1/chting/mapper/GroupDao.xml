@@ -12,6 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
         where pg.group_no = #{group_no}
+        limit #{pageSize} offset #{pageStart}
+    </select>
+
+    <select id="getPostListTotalCount" resultType="int">
+        select count(*)
+        from post_group pg
+                 left join post_category pc on pg.post_catecode = pc.post_catecode
+                 left join user_info ui on pg.userid = ui.userid
+        where pg.group_no = #{group_no}
     </select>
   
   <!--  글쓰기  -->

@@ -45,6 +45,8 @@ public class LoginController {
         Set<String> userDataSet = userData.keySet();
         Iterator<String> Iter_userDataSet = userDataSet.iterator();
 
+        //System.out.println("::::::::"+token.getAuthorizedClientRegistrationId());
+
         while (Iter_userDataSet.hasNext()) {
             String next = Iter_userDataSet.next();
             model.addAttribute(next, userData.get(next));

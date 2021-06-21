@@ -92,9 +92,7 @@
 
             <%-- 회원리스트 아이콘 --%>
             <div style="text-align: center">
-                <p>
-            회원 : <i class="fa fa-user" aria-hidden="true"></i> ${group.join_user} 명
-                </p>
+                <p>회원 : <i class="fa fa-user" aria-hidden="true"></i> ${group.join_user} 명</p>
             </div>
             <br>
             <br>

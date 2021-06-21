@@ -4,6 +4,7 @@ package com.team1.chting.service;
 import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
+import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,22 @@ public class GroupService {
     @Autowired
     private SqlSession sqlsession;
 
-
-
 //    @Override
 //    public List<GroupDto> listAll() throws Exception{
 //        return sqlsession.selectList("board.listAll");
 //    }
 
     // 내가가입한모임 - 게시글 리스트
-    public List<PostDto> getPostList(String group_no){
+    public List<PostDto> getPostList(String group_no, AdminCriteria cri){
         List<PostDto> postlist = new ArrayList<PostDto>();
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        postlist = groupDao.getPostList(group_no);
+        postlist = groupDao.getPostList(group_no, cri.getPageStart(), cri.getPageSize());
         return postlist;
+    }
+    // 게시글 리스트 카운트 수연
+    public int getPostListTotalCount(String group_no, AdminCriteria cri){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.getPostListTotalCount(group_no, cri.getPageStart(), cri.getPageSize());
     }
 
 
