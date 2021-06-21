@@ -26,7 +26,6 @@
                     <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
                     <input type="hidden" name="catecode" id="catecode" value="">
                     <input type="hidden" name="groupNo" value="${groupNo}">
-
                     <table>
                         <tr>
                             <td style="vertical-align: middle">모임 이름</td>
@@ -215,7 +214,7 @@
                 Swal.fire({
                     title: '모임 생성 완료!',
                     text: '모임 관리 페이지로 이동합니다.',
-                    confirmButtonText: '화긴'
+                    confirmButtonText: '확인'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#groupMakeFrm').submit();
