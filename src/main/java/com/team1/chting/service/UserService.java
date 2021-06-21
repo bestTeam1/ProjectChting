@@ -175,4 +175,31 @@ public class UserService {
         return groupList;
     }
 
+    /*
+    회원의 지역, 카테고리에 맞는 NEW 모임 리스트
+    작성자 : 이승준
+    작성일 : 2021-06-22
+    */
+    public List<GroupDto> getNewGroupByCate(String userid){
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        List<GroupDto> getNewGroupByCate = userDao.getNewGroupByCate(userid);
+
+        return getNewGroupByCate;
+    }
+
+
+    /*
+    회원의 지역, 카테고리에 맞는 BEST 모임 리스트
+    작성자 : 이승준
+    작성일 : 2021-06-22
+    */
+    public List<GroupDto> getBestGroupByCate(String userid){
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        List<GroupDto> getBestGroupByCate = userDao.getBestGroupByCate(userid);
+
+        return getBestGroupByCate;
+    }
+
+
+
 }

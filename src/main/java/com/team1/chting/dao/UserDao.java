@@ -32,4 +32,10 @@ public interface UserDao {
 
     //모임원으로 있는 그룹정보 가져오기
     public List<GroupDto> getGroupList(@Param("userid") String userid);
+
+    //회원의 지역, 카테고리에 맞는 NEW 모임 리스트
+    public List<GroupDto> getNewGroupByCate(@Param("userid") String userid);
+
+    //회원의 지역, 카테고리에 맞는 BEST 모임 리스트
+    public List<GroupDto> getBestGroupByCate(@Param("userid") String userid);
 }
