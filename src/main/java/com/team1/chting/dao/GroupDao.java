@@ -2,6 +2,7 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostReplyDto;
 import org.apache.ibatis.annotations.Param;
 import com.team1.chting.utils.Criteria;
 import java.util.Map;
@@ -21,9 +22,6 @@ public interface GroupDao {
     //비회원 -> 랜덤모임 10개
     public List<GroupDto> randomGroup();
 
-    // 게시글 글쓰기
-    public void insert(PostDto postDto);
-
     //회원 -> 지역기반 5개
     public List<GroupDto> areaGroup(@Param("first_area") String first_area,@Param("second_area") String second_area);
 
@@ -35,25 +33,40 @@ public interface GroupDao {
 
     //그룹메인페이지 -> 그룹넘버를 이용한 그룹 검색
     public GroupDto groupByGroup_no(String group_no);
-  
+
+
     // 게시글 작성
-    public void postWirte(PostDto postDto);
+    public void insert(PostDto postDto);
 
     // 게시글 상세보기
     // PostDto
-    public PostDto read(int post_no);
+    public PostDto read(@Param("post_no")int post_no);
 
     // 게시글 수정
-    public void update(PostDto postDto);
+    public int update(@Param("post_no") int post_no,
+                      @Param("subject") String subject,
+                      @Param("content") String content,
+                      @Param("file") String file);
+
 
     // 게시글 삭제
-    public void delete(String group_no);
+    public void delete(@Param("post_no") int post_no);
+
 
     // 게시글 전체 목록
-    // hash map?, arrayList?
-    public List<PostDto> getPostList(String group_no);
+    public List<PostDto> getPostList(@Param("group_no") String group_no);
 
     // 페이징 리스트?
     public List<Map<String, Object>> postList(Criteria cri);
 
+    // 댓글목록
+   public List<PostReplyDto> getReply(int post_no);
+    // 댓글입력
+    public int replyWrite(PostReplyDto postReplyDto);
+
+
+    // 댓글수정
+    public PostReplyDto replyUpdate(PostReplyDto postReplyDto);
+    // 댓글삭제
+    public int replyDelete(int reply_no);
 }
