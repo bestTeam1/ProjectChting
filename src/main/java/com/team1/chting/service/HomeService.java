@@ -25,11 +25,24 @@ public class HomeService {
     작성자 : 이승준
     작성일 : 2021-06-07
     */
-    public List<GroupDto> getNewGroupList(){
+    public List<GroupDto> getNewGroupList() {
 
         HomeDao homeDao = sqlsession.getMapper(HomeDao.class);
         List<GroupDto> newList = homeDao.getNewGroupList();
 
         return newList;
+    }
+
+    /*
+    Best 모임 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-07
+    */
+    public List<GroupDto> getBestGroupList() {
+
+        HomeDao homeDao = sqlsession.getMapper(HomeDao.class);
+        List<GroupDto> bestList = homeDao.getBestGroupList();
+
+        return bestList;
     }
 }

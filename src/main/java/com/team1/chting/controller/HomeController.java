@@ -24,6 +24,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -51,11 +52,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "index_new.do", method = RequestMethod.GET)
-	public String index_new(Model model) {
+	public String index_new(HttpSession session, Model model) {
+
 		List<GroupDto> newGroupList = homeService.getNewGroupList();
+		List<GroupDto> bestGroupList = homeService.getBestGroupList();
 
 
 		model.addAttribute("newGroupList", newGroupList);
+		model.addAttribute("bestGroupList", bestGroupList);
 
 		return "index_new";
 	}

@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ssyy
-  Date: 2021/06/18
-  Time: 4:32 오후
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,7 +8,6 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header_new.jsp" />
 <!-- Close Header / <head> -->
-<h1>${newGroupList}</h1>
 <!-- Start Banner Hero -->
 <div class="banner-wrapper bg-light">
     <div id="index_banner" class="banner-vertical-center-index container-fluid pt-5">
@@ -49,16 +43,16 @@
 <section class="service-wrapper py-3">
     <div class="container-fluid pb-3">
         <div class="row">
-            <h2 class="h2 text-center col-12 py-5 semi-bold-600">Services</h2>
+            <h2 class="h2 text-center col-12 py-5 semi-bold-600">Chting 모임</h2>
             <div class="service-header col-2 col-lg-3 text-end light-300">
                 <i class='bx bx-gift h3 mt-1'></i>
             </div>
             <div class="service-heading col-10 col-lg-9 text-start float-end light-300">
-                <h2 class="h3 pb-4 typo-space-line">Make Success for future</h2>
+                <h2 class="h3 pb-4 typo-space-line">Chting에는 다양한 모임들이 준비되어 있습니다</h2>
             </div>
         </div>
         <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
-            You are free to use this template for your commercial or business websites. You are not allowed to re-distribute this template ZIP file on any template collection websites. It is too easy to illegally copy and repost this template.
+            주로 활동하는 지역과 취미활동을 찾아보세요! <br>Chting에는 1200만명이 넘는 회원들로 이루어진 방대한 커뮤니티를 구축하고 있습니다
         </p>
     </div>
 
@@ -66,16 +60,13 @@
         <div class="col-md-12">
             <ul class="nav d-flex justify-content-center">
                 <li class="nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".project">All</a>
-                </li>
-                <li class="nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".graphic">Graphics</a>
+                    <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".project">ALL</a>
                 </li>
                 <li class="filter-btn nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".ui">UI/UX</a>
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".new">New</a>
                 </li>
-                <li class="nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".branding">Branding</a>
+                <li class="filter-btn nav-item mx-lg-4">
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".best">Best</a>
                 </li>
             </ul>
         </div>
@@ -86,109 +77,33 @@
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
 
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="service card-img" src="./assets/img/400400.png" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> 경기 / 반려동물 </span>
-                        <p class="card-text">반려동물을사랑하는사람들의모임</p>
+        <c:forEach var="i" items="${bestGroupList}">
+            <div class="col-xl-3 col-md-4 col-sm-6 all best project">
+                <a href="board_main.do?group_no=${i.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <img class="service card-img" src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}" alt="Card image">
+                    <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                        <div class="service-work-content text-left text-light">
+                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
+                            <p class="card-text">${i.group_name}<br><hr>${i.content}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
+                </a>
+            </div>
+        </c:forEach>
+        <c:forEach var="i" items="${newGroupList}">
+            <div class="col-xl-3 col-md-4 col-sm-6 all new project">
+                <a href="board_main.do?group_no=${i.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <img class="service card-img" src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}" alt="Card image">
+                    <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                        <div class="service-work-content text-left text-light">
+                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
+                            <p class="card-text">${i.group_name}<br><hr>${i.content}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </c:forEach>
 
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/testgif.gif" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Social Media</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
-
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project branding">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-03.jpg" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Marketing</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
-
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-04.jpg" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Graphic</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
-
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-05.jpg" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Digtal Marketing</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
-
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project branding">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-06.jpg" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Market Research</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
-
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project branding">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-07.jpg" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Business</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
-
-        <!-- Start Recent Work -->
-        <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic branding">
-            <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-08.jpg" alt="Card image">
-                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
-                    <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Branding</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
-                    </div>
-                </div>
-            </a>
-        </div><!-- End Recent Work -->
 
     </div>
 </section>
@@ -203,11 +118,11 @@
                 <i class='display-1 bx bxs-box bx-lg'></i>
             </div>
             <div class="col-lg-7 col-12 text-light pt-2">
-                <h3 class="h4 light-300">Great transformations successful</h3>
-                <p class="light-300">Quis ipsum suspendisse ultrices gravida.</p>
+                <h3 class="h4 light-300">찾으시는 모임이 없다구요?</h3>
+                <p class="light-300">걱정 마세요! 당신만의 모임을 만들어 커뮤니티를 구축하실수 있습니다!</p>
             </div>
             <div class="col-lg-3 col-12 pt-4">
-                <a href="#" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">View Our Work</a>
+                <a href="#" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기</a>
             </div>
         </div>
     </div>
