@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select u.userid, ic.catename
         from user_info u
                  join user_interest ui on u.userid = ui.userid
-                 join interest_category ic on ui.s_catecode = ic.catecode
+                 join interest_category ic on ui.catecode = ic.catecode
         where u.userid = #{userid}
         order by ic.catename
     </select>
