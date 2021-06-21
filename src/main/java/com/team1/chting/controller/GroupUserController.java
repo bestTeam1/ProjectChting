@@ -23,6 +23,12 @@ public class GroupUserController {
     @Autowired
     private UserService userService;
 
+    // 내 모임 페이지 수연
+    @RequestMapping(value = "myGroup.do", method = RequestMethod.GET)
+    public String groupMain() {
+        return "board/board_total";
+    }
+
     // 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
     public String groupMain(@RequestParam("group_no") String group_no, Model model){

@@ -14,6 +14,10 @@ public class AdminCriteria {
         return page;
     }
 
+    public void resetPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
     public void setPage(int page) {
         if(page <=0) {
             this.page = 1;

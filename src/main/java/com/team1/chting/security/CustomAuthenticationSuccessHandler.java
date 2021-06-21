@@ -44,6 +44,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        System.out.println("toString :: " + authentication.getAuthorities().toString());
 //        System.out.println((authentication.getPrincipal().getClass()));
 
+        
+
         String redirectURL = "/index.do";
 
         Collection<? extends GrantedAuthority> authList = authentication.getAuthorities();

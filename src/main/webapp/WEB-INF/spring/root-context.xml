@@ -116,11 +116,13 @@
 		</property>
 	</bean>
 
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+
 	<!-- JSON 데이터 VIEW -->
-	<bean id="jsonView" name="jsonView"
-		class="net.sf.json.spring.web.servlet.view.JsonView">
-		<property name="contentType"
-			value="application/json;charset=UTF-8" />
+	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
+		<property name="contentType" value="application/json;charset=UTF-8" />
 	</bean>
 
 	<!-- 메시지소스 -->

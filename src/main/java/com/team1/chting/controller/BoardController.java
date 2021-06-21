@@ -18,7 +18,6 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-
     /*
       모임추천
       만든이 : 이승준

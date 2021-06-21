@@ -20,6 +20,9 @@
 	</div>
 	<ul class="icons" style="padding-top: 0.25em; padding-right: 7px;">
 		<li>
+			<a href="${pageContext.request.contextPath}/index_new.do">디자인 개선</a>
+		</li>
+		<li>
 			<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')">
 				<a href="${pageContext.request.contextPath}/logout">
 					<div class="icon button">로그아웃</div>

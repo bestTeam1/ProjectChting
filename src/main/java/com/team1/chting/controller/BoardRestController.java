@@ -2,6 +2,8 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.service.BoardService;
+import com.team1.chting.utils.AdminCriteria;
+import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,12 +36,14 @@ public class BoardRestController {
 
         List<GroupDto> list = null;
 
+        AdminCriteria cri = new AdminCriteria();
+
         ObjectMapper objmap = new ObjectMapper();
 
         String result = "";
 
         try {
-            list = boardService.getGroupListBySearch(category, search);
+            list = boardService.getGroupListBySearch(category, search, cri);
             int list_size = 0;
             for(GroupDto dto : list) {
                 //System.out.println(dto.toString());

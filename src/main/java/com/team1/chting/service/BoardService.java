@@ -6,6 +6,8 @@ import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.UserDto;
+import com.team1.chting.utils.AdminCriteria;
+import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,12 +65,17 @@ public class BoardService {
     작성자 : 이승준
     작성일 : 2021-06-07
     */
-    public List<GroupDto> getGroupListBySearch(String category, String search) {
+    public List<GroupDto> getGroupListBySearch(String category, String search, AdminCriteria cri) {
 
         BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
-        List<GroupDto> groupList = boardDao.getGroupListBySearch(category, search);
+        List<GroupDto> groupList = boardDao.getGroupListBySearch(category, search, cri.getPageStart(), cri.getPageSize());
 
         return groupList;
+    }
+
+    public int getGroupListBySearchTotalCount(String category, String search) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        return boardDao.getGroupListBySearchTotalCount(category, search);
     }
 
     //게시판 리스트 검색
