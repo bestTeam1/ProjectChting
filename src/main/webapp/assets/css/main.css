@@ -2258,24 +2258,9 @@ button,
   color : #eeeeee;
   background : lightpink ;
   text-align: center;
+  top: 5px;
   font-size : 15px;
   line-height: 30px;
-  display: inline-block;
-  margin-right: 10px;
-  border-radius: 45%;
-  overflow: hidden;
-  display: inline-block;
-  position : relative;
-  padding : 5px;
-}
-
-.m_cate_choice {
-  color : #eeeeee;
-  background : #adadad;
-  text-align: center;
-  font-size : 15px;
-  line-height: 30px;
-  display: inline-block;
   margin-right: 10px;
   border-radius: 45%;
   overflow: hidden;
@@ -2286,7 +2271,7 @@ button,
 
 .cate_choice {
   color : #eeeeee;
-  background : #1b6d85;
+  background : #3d4449;
   text-align: center;
   font-size : 15px;
   line-height: 30px;
