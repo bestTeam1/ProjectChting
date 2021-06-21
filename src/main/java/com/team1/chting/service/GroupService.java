@@ -4,8 +4,14 @@ package com.team1.chting.service;
 import com.team1.chting.dao.AdminDao;
 import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
+
+import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostDto;
+import com.team1.chting.dto.PostReplyDto;
+
 import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.*;
+
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +31,7 @@ public class GroupService {
     @Autowired
     private SqlSession sqlsession;
 
-//    @Override
-//    public List<GroupDto> listAll() throws Exception{
-//        return sqlsession.selectList("board.listAll");
-//    }
+
 
     // 내가가입한모임 - 게시글 리스트
     public List<PostDto> getPostList(String group_no) {
@@ -38,20 +41,54 @@ public class GroupService {
         return postlist;
     }
 
-
     // 게시판 글쓰기
-    public void insert(PostDto postDto) {
-        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        groupDao.insert(postDto);
-    }
+
+    public void insert(PostDto postDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception{
+        if(file != null && file.getSize() > 0 && !file.isEmpty()){
+            String fileName = file.getOriginalFilename();
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/boardimg");
+            String fpath = path + File.separator + fileName;
+
+            if(!fileName.equals("")){
+                FileOutputStream fs = new FileOutputStream(fpath);
+                fs.write(file.getBytes());
+                fs.close();
+            }
+            postDto.setFile(fileName);
+        }
+
+
+ 
 
     // 게시판 상세보기
     public PostDto read(int post_no) {
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        groupDao.read(post_no);
+        // groupDao.read(post_no);
+        PostDto postDto = groupDao.read(post_no);
 
-        return read(post_no);
+        return postDto;
     }
+
+    // 수정하기
+    public boolean updateOk(int post_no, String subject, String content, String file){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        int u = groupDao.update(post_no, subject, content, file);
+
+        if(u == 0){
+            return false;
+        }else if(u == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 삭제하기
+    public void delete(int post_no){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.delete(post_no);
+    }
+
 
     public List<GroupDto> randomGroup() {
         List<GroupDto> list = new ArrayList<GroupDto>();
@@ -85,6 +122,36 @@ public class GroupService {
         GroupDao dao = sqlsession.getMapper(GroupDao.class);
         GroupDto dto = dao.groupByGroup_no(group_no);
         return dto;
+    }
+
+/*
+      댓글 
+      작성자 : 현상진
+      작성일 : 2021-06-21
+    */
+    // 댓글 등록
+    public int replyWrite(PostReplyDto postReplyDto){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.replyWrite(postReplyDto);
+    }
+
+    // 댓글 목록
+    public List<PostReplyDto> getReply(int post_no){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        List<PostReplyDto> result = groupDao.getReply(post_no);
+        return result;
+    }
+
+    // 댓글 삭제
+    public int replyDelete(int reply_no){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.replyDelete(reply_no);
+    }
+
+    // 댓글 수정
+    public PostReplyDto replyUpdate(PostReplyDto postReplyDto){
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.replyUpdate(postReplyDto);
     }
 
 
@@ -128,6 +195,7 @@ public class GroupService {
 
         return groupDto;
     }
+
 
 
 }
