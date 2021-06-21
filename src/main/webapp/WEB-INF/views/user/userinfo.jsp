@@ -19,8 +19,8 @@
     <div class="pt-5 pb-3 d-lg-flex align-items-center gx-5">
         <div class="col-lg-3">
             <h2 class="h2 py-5 typo-space-line">MyPage</h2>
-            <li class="h6"><c:out value="${userInfoBasic.birth}"/></li>
-            <li class="h6"><c:out value="${userInfoBasic.email}"/></li>
+            <p>&#9989;&nbsp;<c:out value="${userInfoBasic.birth}"/></p>
+            <p>&#9989;&nbsp;<c:out value="${userInfoBasic.email}"/></p>
         </div>
         <div class="col-lg-9 row">
             <div class="team-member col-md-4">
@@ -38,6 +38,16 @@
                     <h2 class="h3 text-center"><c:out value="${userInfoBasic.nickname}"/></h2>
                     <h6 class="h7 text-center"><c:out value="${userInfoBasic.content}"/></h6>
                 </ul>
+            </div>
+            <div class="team-member col-md-4">
+            </div>
+            <div class="team-member col-md-4">
+                <input type="button" style="" id="updateUser"
+                       class="btn rounded-pill px-4 btn-outline-primary light-300" value="정보 수정"
+                       onclick="location.href='userUpdate.do?userid=${sessionScope.get("userData").userid}'"/>&nbsp;&nbsp;
+
+                <input type="button" class="btn rounded-pill px-4 btn-outline-primary light-300"
+                       value="회원 탈퇴" id="delacount">
             </div>
         </div>
     </div>
@@ -97,13 +107,72 @@
     </div>
     <hr>
     <!-- End Service -->
-
-
     <!-- Start Footer / Script -->
     <jsp:include page="/WEB-INF/views/include/footer_new.jsp"/>
     <!-- End Footer / Script -->
     <script type="text/javascript">
+        //값이 1이면 모임장 권한을 가진 모임이 있음
+        let userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
+        $(function () {
+            $("#delacount").click(function () {
+
+                if (userGroupRole == '1') {
+                    Swal.fire({
+                        text: "모임장 권한을 가지고 있는 모임이 있어 권한 위임 또는 모임 해산 후 탈퇴가 가능합니다.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '모임 관리 페이지로 이동',
+                        cancelButtonText: '취소',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $("#userid").attr("action", "groupMemberManage.do");
+                            $("#userid").submit();
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        title: "정말 탈퇴하시겠습니까?",
+                        text: "계정 복구가 불가합니다.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: '네, 탈퇴할게요!',
+                        cancelButtonText: '취소',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "delAcount.do?=userid" + userid,
+                                dataType: "text",
+                                data: {
+                                    userid: userid
+                                },
+                                success: function (data) {
+                                    Swal.fire(
+                                        '탈퇴 완료되었습니다.',
+                                        '메인 페이지로 이동합니다.',
+                                        'success', {
+                                            buttons: {
+                                                confirm: {
+                                                    text: '확인',
+                                                    value: true,
+                                                    className: 'button'
+                                                }
+                                            }
+                                        }).then((result) => {
+                                        location.href = "index.do"
+                                    })
+                                },
+                                error: function (request, status, error) {
+                                    console.log(error);
+                                }
+                            })
+                        }
+                    })
+                }
+            });
+        });
 
     </script>
 </body>
