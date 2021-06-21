@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.chting.dao.HomeDao">
+
+    <select id="getNewGroupList" resultType="com.team1.chting.dto.GroupDto">
+        select group_name, area_name, group_img
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+        where enabled = 1
+        order by opendate desc
+            limit 8
+    </select>
+
+
+</mapper>
+

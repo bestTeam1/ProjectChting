@@ -13,7 +13,7 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header_new.jsp" />
 <!-- Close Header / <head> -->
-
+<h1>${newGroupList}</h1>
 <!-- Start Banner Hero -->
 <div class="banner-wrapper bg-light">
     <div id="index_banner" class="banner-vertical-center-index container-fluid pt-5">
@@ -89,11 +89,11 @@
         <!-- Start Recent Work -->
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
             <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="service card-img" src="./assets/img/services-01.jpg" alt="Card image">
+                <img class="service card-img" src="./assets/img/400400.png" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
-                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">UI/UX design</span>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
+                        <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> 경기 / 반려동물 </span>
+                        <p class="card-text">반려동물을사랑하는사람들의모임</p>
                     </div>
                 </div>
             </a>
@@ -102,7 +102,7 @@
         <!-- Start Recent Work -->
         <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
             <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="card-img" src="./assets/img/services-02.jpg" alt="Card image">
+                <img class="card-img" src="./assets/img/testgif.gif" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
                         <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">Social Media</span>
