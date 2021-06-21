@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.GroupDao">
 
-<!-- group_no, group_name, group_img, join_user, content, area_code, s_catecode, enabled, opendate -->
-<!--상세보기-->
+    <!-- group_no, group_name, group_img, join_user, content, area_code, s_catecode, enabled, opendate -->
+    <!--리스트-->
     <select id="getPostList" resultType="com.team1.chting.dto.PostDto">
         select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
         where pg.group_no = #{group_no}
+        order by post_no desc, writedate desc
     </select>
-  
-  <!--  글쓰기  -->
+
+    <!--  글쓰기  -->
     <insert id="insert" parameterType="com.team1.chting.dto.PostDto">
-        insert into post_group values (null,#{group_no},'testuser',
-                                       #{post_catecode},#{subject},#{content},
-                                       #{file},#{writedate})
+        insert into post_group(group_no,userid,post_catecode,subject,content,file)
+        values ('${group_no}','testuser','${post_catecode}','${subject}','${content}','${file}')
     </insert>
 
-<!-- 상세보기 -->
+    <!-- 상세보기 -->
     <select id="read" parameterType="int" resultType="com.team1.chting.dto.PostDto">
         select *
         from post_group
         where post_no = #{post_no}
     </select>
 
+    <!--  삭제하기  -->
+    <delete id="delete" parameterType="int">
+        delete
+        from post_group
+        where post_no = #{post_no}
+    </delete>
+
+    <!--  수정하기  -->
+    <update id="update">
+        update post_group set subject = '${subject}', content = '${content}', file = '${file}' where post_no = #{post_no}
+    </update>
+
+
     <select id="randomGroup" resultType="com.team1.chting.dto.GroupDto">
-       (SELECT group_no, group_name, group_img, content FROM group_info WHERE enabled = 1 LIMIT 10) order by rand();
+        (SELECT group_no, group_name, group_img, content FROM group_info WHERE enabled = 1 LIMIT 10) order by rand();
     </select>
 
     <select id="catecodeGroup" resultType="com.team1.chting.dto.GroupDto">
@@ -59,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             limit 5
     </select>
 
-      <select id="userGroupList" resultType="com.team1.chting.dto.GroupDto">
+    <select id="userGroupList" resultType="com.team1.chting.dto.GroupDto">
         select gi.group_no, gi.group_name
         from user_info u
                  left join group_user_role gur on u.userid = gur.userid
@@ -69,7 +82,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
         select gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
-        left join group_user_role gur on gi.group_no = gur.group_no
+                                                                                                left join group_user_role gur on gi.group_no = gur.group_no
         where gi.group_no = #{group_no}
     </select>
+
+<!--댓글등록-->
+        <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
+            insert into post_reply(post_no, userid, content)
+            values ('${post_no}','${userid}','${content}')
+        </insert>
+
+<!--  댓글목록  -->
+    <select id="getReply" parameterType="int" resultType="com.team1.chting.dto.PostReplyDto">
+        select reply_no, post_no, userid, content from post_reply
+        where post_no=${post_no} order by desc
+    </select>
+
+<!--  댓글삭제  -->
+    <delete id="replyDelete" parameterType="int">
+        delete from post_reply where reply_no=#{reply_no}
+    </delete>
+
+<!--  댓글수정  -->
+    <update id="replyUpdate" parameterType="com.team1.chting.dto.PostReplyDto">
+        update post_reply set content=#{content} where reply_no=${reply_no}
+    </update>
 </mapper>
