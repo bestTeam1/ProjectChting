@@ -37,6 +37,13 @@ public class GroupUserController {
     @Autowired
     private UserService userService;
 
+
+    /*
+      게시판
+      작성자 : 현상진
+      작성일 : 2021-06-18
+    */
+
     // 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
     public String groupMain(@RequestParam("group_no") String group_no, Model model){
@@ -140,6 +147,11 @@ public class GroupUserController {
         return "board/board_chatting";
     }
 
+    /*
+      댓글
+      작성자 : 현상진
+      작성일 : 2021-06-21
+    */
 
     // 댓글등록
     @RequestMapping(value = "board_replyWrite.do")
