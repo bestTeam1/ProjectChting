@@ -51,4 +51,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select nickname from user_info where userid = #{userid};
     </select>
 
+    <!-- 모임장으로 속한 그룹 정보 -->
+    <select id="getAdminGroup" resultType="com.team1.chting.dto.GroupDto">
+        select group_no, group_name, group_img, catename, area_name, content
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
+        where enabled = 1 and group_no = #{groupNo}
+    </select>
+    <!-- 모임원으로 속한 그룹정보 -->
+    <select id="getGroupList" resultType="com.team1.chting.dto.GroupDto">
+        select gur.group_no, group_name, group_img, catename, area_name, content
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
+                 left join group_user_role gur on group_info.group_no = gur.group_no
+        where enabled = 1 and group_role_no = "2" and gur.userid = #{userid}
+    </select>
+
 </mapper>

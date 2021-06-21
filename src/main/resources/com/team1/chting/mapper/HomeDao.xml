@@ -7,8 +7,8 @@
     <select id="getNewGroupList" resultType="com.team1.chting.dto.GroupDto">
         select group_no, group_name, group_img, catename, area_name, content
         from group_info
-                 left join area a on group_info.area_code = a.area_code
-                 left join interest_category ic on group_info.catecode = ic.catecode
+            left join area a on group_info.area_code = a.area_code
+            left join interest_category ic on group_info.catecode = ic.catecode
         where enabled = 1
         order by opendate desc limit 8
     </select>
