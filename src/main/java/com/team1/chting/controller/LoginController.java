@@ -63,12 +63,12 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = "signUp.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity<String> signUpReg(SignUpDto signUpDto,
-                                    @RequestParam(value = "interest", defaultValue = "001") String s_catecode,
+                                    @RequestParam(value = "interest", defaultValue = "001") String catecode,
                                     @RequestParam(value = "siterule") String siterule,
                                     HttpServletRequest request) {
         try {
 
-            int result = loginService.signUpReg(signUpDto, request, s_catecode);
+            int result = loginService.signUpReg(signUpDto, request, catecode);
             emailService.sendMail(signUpDto.getEmail(), signUpDto.getNickname());
             //System.out.println(result);
             return new ResponseEntity<String>("회원가입이 완료되었습니다. 다시 로그인 해주세요.", HttpStatus.OK);

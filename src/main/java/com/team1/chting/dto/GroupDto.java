@@ -17,7 +17,7 @@ public class GroupDto {
 	private String group_img;
 	private String content;
 	private String area_code;
-	private String s_catecode;
+	private String catecode;
 	private String area_name;
 	private String parent_catename;
 	private int enabled;
