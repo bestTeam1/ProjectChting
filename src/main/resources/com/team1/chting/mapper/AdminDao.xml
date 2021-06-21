@@ -78,7 +78,7 @@
         select group_no, group_name, group_img, area_name, parent_catename, opendate, enabled,
                (select count (*) from group_user_role where group_info.group_no = group_user_role.group_no) as join_user
         from group_info left join area a on group_info.area_code = a.area_code
-                        left join interest_category ic on group_info.s_catecode = ic.catecode
+                        left join interest_category ic on group_info.catecode = ic.catecode
         order by opendate desc limit #{pageStart},#{pageSize}
     </select>
 

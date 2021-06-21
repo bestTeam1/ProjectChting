@@ -34,8 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <insert id="tempInterestInsert" parameterType="java.util.HashMap">
-        insert into user_interest (userid, s_catecode)
-        values (#{userid}, #{s_catecode})
+        insert into user_interest (userid, catecode)
+        values (#{userid}, #{catecode})
     </insert>
 
 </mapper>
