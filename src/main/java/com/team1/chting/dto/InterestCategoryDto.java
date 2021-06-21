@@ -9,6 +9,4 @@ public class InterestCategoryDto {
     private String userid;
     private String catecode;
     private String catename;
-    private String parent_catecode;
-    private String parent_catename;
 }
