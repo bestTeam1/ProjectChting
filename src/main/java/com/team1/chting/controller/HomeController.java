@@ -10,6 +10,7 @@ import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.service.BoardService;
+import com.team1.chting.service.HomeService;
 import com.team1.chting.service.NoticeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,9 @@ public class HomeController {
 	private BoardService boardService;
 
 	@Autowired
+	private HomeService homeService;
+
+	@Autowired
 	private ServletContext application;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -41,10 +45,18 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index() { return "index"; }
+	public String index() {
+
+		return "index";
+	}
 
 	@RequestMapping(value = "index_new.do", method = RequestMethod.GET)
-	public String index_new() {
+	public String index_new(Model model) {
+		List<GroupDto> newGroupList = homeService.getNewGroupList();
+
+
+		model.addAttribute("newGroupList", newGroupList);
+
 		return "index_new";
 	}
 	
