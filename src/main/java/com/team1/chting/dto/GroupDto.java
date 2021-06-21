@@ -16,9 +16,10 @@ public class GroupDto {
 	private int join_user;
 	private String content;
 	private String area_code;
-	private String s_catecode;
+	private String catecode;
 	private String area_name;
-	private String parent_catename;
+	private String catename;
 	private int enabled;
 	private Date opendate;
+
 }
