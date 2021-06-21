@@ -10,6 +10,7 @@ import com.team1.chting.dto.AreaDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
 import com.team1.chting.service.BoardService;
+import com.team1.chting.service.HomeService;
 import com.team1.chting.service.NoticeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -30,6 +32,9 @@ public class HomeController {
 
 	@Autowired
 	private BoardService boardService;
+
+	@Autowired
+	private HomeService homeService;
 
 	@Autowired
 	private ServletContext application;
@@ -41,10 +46,21 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String index() { return "index"; }
+	public String index() {
+
+		return "index";
+	}
 
 	@RequestMapping(value = "index_new.do", method = RequestMethod.GET)
-	public String index_new() {
+	public String index_new(HttpSession session, Model model) {
+
+		List<GroupDto> newGroupList = homeService.getNewGroupList();
+		List<GroupDto> bestGroupList = homeService.getBestGroupList();
+
+
+		model.addAttribute("newGroupList", newGroupList);
+		model.addAttribute("bestGroupList", bestGroupList);
+
 		return "index_new";
 	}
 	

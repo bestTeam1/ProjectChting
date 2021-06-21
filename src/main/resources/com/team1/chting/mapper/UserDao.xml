@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.UserDao">
     <select id="selectUserInfo" resultType="com.team1.chting.dto.UserDto">
-        select u.userid, u.nickname, a.area_name as first_area_name, b.area_name as second_area_name, u.content, gur.cnt
+        select u.userid, u.nickname, u.profile_img, a.area_name as first_area_name, b.area_name as second_area_name, u.content, gur.cnt,
+               u.gender, u.birth, u.email
         from user_info u
                  join area a on u.first_area = a.area_code
                  join area b on u.second_area = b.area_code
@@ -21,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select u.userid, ic.catename
         from user_info u
                  join user_interest ui on u.userid = ui.userid
-                 join interest_category ic on ui.s_catecode = ic.catecode
+                 join interest_category ic on ui.catecode = ic.catecode
         where u.userid = #{userid}
         order by ic.catename
     </select>
@@ -43,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <update id="updateUser">
         update user_info
-        set first_area = #{first_area}, second_area = #{second_area}, content = #{content}
+        set first_area = #{first_area}, second_area = #{second_area}, content = #{content}, profile_img = #{profile_img}
         where userid = #{userid}
     </update>
 
@@ -51,4 +52,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select nickname from user_info where userid = #{userid};
     </select>
 
+    <!-- 모임장으로 속한 그룹 정보 -->
+    <select id="getAdminGroup" resultType="com.team1.chting.dto.GroupDto">
+        select group_no, group_name, group_img, catename, area_name, content
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
+        where enabled = 1 and group_no = #{groupNo}
+    </select>
+    <!-- 모임원으로 속한 그룹정보 -->
+    <select id="getGroupList" resultType="com.team1.chting.dto.GroupDto">
+        select gur.group_no, group_name, group_img, catename, area_name, content
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
+                 left join group_user_role gur on group_info.group_no = gur.group_no
+        where enabled = 1 and group_role_no = "2" and gur.userid = #{userid}
+    </select>
+    <!-- 유저의 지역과 카테고리에 맞는 NEW 모임 리스트 -->
+    <select id="getNewGroupByCate" resultType="com.team1.chting.dto.GroupDto">
+        select distinct group_name, group_img, gi.content, area_name, gi.group_no, catename
+        from user_info u
+                 join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
+                 left join (select distinct ui.userid, gi.group_no
+                            from user_interest ui
+                                     join group_info gi on ui.catecode = gi.catecode
+        )uint on gi.group_no = uint.group_no
+                 left join area a on gi.area_code = a.area_code
+                 left join interest_category ic on gi.catecode = ic.catecode
+        where gi.enabled = 1 and u.userid = #{userid}
+        order by gi.opendate desc limit 8
+    </select>
+    <!-- 유저의 지역과 카테고리에 맞는 BEST 모임 리스트 -->
+    <select id="getBestGroupByCate" resultType="com.team1.chting.dto.GroupDto">
+        select distinct group_name, group_img, gi.content, area_name, gi.group_no, catename
+        from user_info u
+                 join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
+                 left join (select distinct ui.userid, gi.group_no
+                            from user_interest ui
+                                     join group_info gi on ui.catecode = gi.catecode
+        )uint on gi.group_no = uint.group_no
+
+                 left join area a on gi.area_code = a.area_code
+                 left join interest_category ic on gi.catecode = ic.catecode
+                 left join (select group_no, count(post_no)as cnt from post_group)pg on gi.group_no = pg.group_no
+        where gi.enabled = 1 and u.userid = #{userid}
+        order by pg.cnt desc limit 8
+    </select>
 </mapper>

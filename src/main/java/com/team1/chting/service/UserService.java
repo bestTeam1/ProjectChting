@@ -2,6 +2,7 @@ package com.team1.chting.service;
 
 import com.team1.chting.dao.InterestCategoryDao;
 import com.team1.chting.dao.UserDao;
+import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.InterestCategoryDto;
 import com.team1.chting.dto.MyPageInfo;
 import com.team1.chting.dto.UserDto;
@@ -150,4 +151,55 @@ public class UserService {
 
         return result;
     }
+
+    /*
+    모임장인 모임정보 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-21
+    */
+    public GroupDto getAdminGroup(String groupNo) {
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        GroupDto groupDto = userDao.getAdminGroup(groupNo);
+
+        return groupDto;
+    }
+    /*
+    모임원으로 있는 모임정보 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-21
+    */
+    public List<GroupDto> getGroupList(String userid) {
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        List<GroupDto> groupList = userDao.getGroupList(userid);
+
+        return groupList;
+    }
+
+    /*
+    회원의 지역, 카테고리에 맞는 NEW 모임 리스트
+    작성자 : 이승준
+    작성일 : 2021-06-22
+    */
+    public List<GroupDto> getNewGroupByCate(String userid){
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        List<GroupDto> getNewGroupByCate = userDao.getNewGroupByCate(userid);
+
+        return getNewGroupByCate;
+    }
+
+
+    /*
+    회원의 지역, 카테고리에 맞는 BEST 모임 리스트
+    작성자 : 이승준
+    작성일 : 2021-06-22
+    */
+    public List<GroupDto> getBestGroupByCate(String userid){
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        List<GroupDto> getBestGroupByCate = userDao.getBestGroupByCate(userid);
+
+        return getBestGroupByCate;
+    }
+
+
+
 }

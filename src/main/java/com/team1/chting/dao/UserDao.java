@@ -2,8 +2,10 @@ package com.team1.chting.dao;
 
 import java.util.List;
 
+import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.InterestCategoryDto;
 import com.team1.chting.dto.UserDto;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {
 
@@ -24,4 +26,16 @@ public interface UserDao {
 
     //userid 로 유저의 nickname 정보
     String selectNickname(String userid);
+
+    //모임장그룹정보 가져오기
+    public GroupDto getAdminGroup(@Param("groupNo") String groupNo);
+
+    //모임원으로 있는 그룹정보 가져오기
+    public List<GroupDto> getGroupList(@Param("userid") String userid);
+
+    //회원의 지역, 카테고리에 맞는 NEW 모임 리스트
+    public List<GroupDto> getNewGroupByCate(@Param("userid") String userid);
+
+    //회원의 지역, 카테고리에 맞는 BEST 모임 리스트
+    public List<GroupDto> getBestGroupByCate(@Param("userid") String userid);
 }

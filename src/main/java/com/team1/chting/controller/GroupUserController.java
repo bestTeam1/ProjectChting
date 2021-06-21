@@ -2,6 +2,9 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
+import com.team1.chting.dto.SessionDto;
+import com.team1.chting.dto.UserDto;
+import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 import com.team1.chting.service.UserService;
 import com.team1.chting.utils.AdminCriteria;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,9 +31,44 @@ public class GroupUserController {
     @Autowired
     private UserService userService;
 
-    // 내 모임 페이지 수연
+    @Autowired
+    private GroupAdminService groupAdminService;
+
+    // 내 모임 페이지
     @RequestMapping(value = "myGroup.do", method = RequestMethod.GET)
-    public String groupMain() {
+    public String groupMain(HttpServletRequest httpServletRequest, Model model) {
+
+        //로그인한 세션의 userid
+        HttpSession session = httpServletRequest.getSession();
+        SessionDto sessionDto = (SessionDto)session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
+        System.out.println(userid);
+
+        //세션에 userid가 없다면 - 비로그인
+        if(userid == null || userid.equals("")) {
+            return "error/login_error.jsp";
+        }
+
+        //모임장으로 있는 모임의 모임번호 가져오기
+        GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
+        String groupNo = groupAdminDto.getGroup_no();
+
+        GroupDto groupDto = userService.getAdminGroup(groupNo);
+        model.addAttribute("adminGroup", groupDto);
+
+        //모임원으로 있는 모임들 가져오기
+        List<GroupDto> groupList = userService.getGroupList(userid);
+        int length = groupList.size();
+
+        List<GroupDto> newGroupByCate = userService.getNewGroupByCate(userid);
+        List<GroupDto> bestGroupByCate = userService.getBestGroupByCate(userid);
+
+        model.addAttribute("length", length);
+        model.addAttribute("groupList", groupList);
+        model.addAttribute("newGroupList", newGroupByCate);
+        model.addAttribute("bestGroupList", bestGroupByCate);
+
         return "board/board_total";
     }
 
