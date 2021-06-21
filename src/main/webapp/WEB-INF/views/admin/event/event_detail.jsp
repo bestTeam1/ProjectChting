@@ -8,30 +8,6 @@
 <head>
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 상세보기</title>
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            text-decoration: none !important
-        }
-
-        a:hover {
-            text-decoration: none !important
-        }
-
 
     </style>
     <!-- jquery -->
@@ -42,7 +18,6 @@
 <body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -69,8 +44,8 @@
                             </h2>
                         </section>
                         <section>
-                            <p>이벤트 시작일 : ${event.startdate}</p>
-                            <p>이벤트 종료일 : ${event.enddate}</p>
+                            <p>이벤트 시작일 : <c:out value="${event.startdate}"/></p>
+                            <p>이벤트 종료일 : <c:out value="${event.enddate}"/></p>
                         </section>
                         <section>
                             <table>
@@ -83,7 +58,9 @@
                             <div style="display: flex; justify-content: center">
                                 <input id="modify" type="button" value="수정"/> &nbsp;
                                 &nbsp; &nbsp; &nbsp; &nbsp;
-                                <input id="delete" type="button" value="삭제"/> &nbsp;
+                                <input id="end" type="button" value="종료"/> &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp;
+                                <input id="disabled" type="button" value="취소"/> &nbsp;
                                 &nbsp; &nbsp; &nbsp; &nbsp;
                                 <input id="back" type="button" value="목록"/>
                             </div>
@@ -115,18 +92,18 @@
             cancelButtonText: '아니오'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "adminEventModify.do?eventNo=${detail.event_no}&page=${page}"
+                window.location.href = "adminEventModify.do?eventNo=${event.event_no}&page=${page}"
             }
         })
     });
 
-    //삭제 클릭
-    $(document).on("click", "#delete", function (e) {
+    //이벤트 종료 클릭
+    $(document).on("click", "#end", function (e) {
         e.preventDefault();
 
         Swal.fire({
-            title: '이벤트 삭제',
-            text: '이벤트를 삭제하시겠습니까?',
+            title: '이벤트 종료',
+            text: '이벤트를 종료 하시겠습니까?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -139,13 +116,44 @@
                     title: '이벤트 삭제',
                     text: '이벤트가 삭제되어 목록으로 돌아갑니다'
                 }).then((result) => {
-                    window.location.href = "adminEventDelete.do?eventNo=${detail.event_no}&page=${page}";
+                    window.location.href="adminDeleteBoard.do?type=Event&num=${event.event_no}&page=${page}";
                 })
 
             } else {
                 swal.fire({
                     title: '삭제 취소',
                     text: '삭제를 취소하셨습니다'
+                })
+            }
+        })
+    });
+
+    //이벤트 취소 클릭
+    $(document).on("click", "#disabled", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: '이벤트 취소',
+            text: '이벤트를 취소 하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: '이벤트 취소',
+                    text: '이벤트가 취소되어 목록으로 돌아갑니다'
+                }).then((result) => {
+                    window.location.href="adminEventDisabled.do?eventNo=${event.event_no}&page=${page}";
+                })
+
+            } else {
+                swal.fire({
+                    title: '결정 취소',
+                    text: '이벤트를 취소하지 않습니다'
                 })
             }
         })

@@ -100,6 +100,7 @@ target/chting-1.0-SNAPSHOT/META-INF/MANIFEST.MF
 .idea/artifacts
 target/
 .idea/libraries
+src/main/webapp/WEB-INF/classes/
 
 ### Java ###
 # Compiled class file

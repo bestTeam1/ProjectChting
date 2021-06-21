@@ -92,9 +92,9 @@
                                 <span style="color: red;"> *</span></td>
                             <td>
                                 <br>
-                                <input type="radio" id="male" name="gender" value="male">
+                                <input type="radio" id="male" name="gender" value="남성">
                                 <label for="male">남자</label>
-                                <input type="radio" id="female" name="gender" value="female">
+                                <input type="radio" id="female" name="gender" value="여성">
                                 <label for="female">여자</label>
 
                             </td>

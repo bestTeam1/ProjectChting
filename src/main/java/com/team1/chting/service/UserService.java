@@ -1,5 +1,6 @@
 package com.team1.chting.service;
 
+import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dao.InterestCategoryDao;
 import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.InterestCategoryDto;
@@ -8,7 +9,11 @@ import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Service
@@ -29,6 +34,7 @@ public class UserService {
 
         return userDto;
     }
+
     // 선택한 관심사 카테고리
     public List<UserDto> userInterest(String userid) {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
@@ -44,6 +50,7 @@ public class UserService {
 
         return UserJoinGroupList;
     }
+
     //위 3가지 한번에 myPageInfo 에 담기
     public MyPageInfo getMyPageInfo(String userid) {
         MyPageInfo myPageInfo = new MyPageInfo();
@@ -66,9 +73,9 @@ public class UserService {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         int result = userDao.deleteAcount(userid);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("회원 탈퇴 성공");
-        }else{
+        } else {
             System.out.println("회원 탈퇴 실패");
         }
     }
@@ -97,9 +104,9 @@ public class UserService {
 
         int result = categoryDao.insertInterestCategory(list);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("관심사 인서트 성공");
-        }else{
+        } else {
             System.out.println("관심사 인서트 실패");
         }
 
@@ -115,9 +122,9 @@ public class UserService {
 
         int result = categoryDao.deleteInterestCategory(userid);
 
-        if(result > 0){
+        if (result > 0) {
             System.out.println("관심사 삭제 성공");
-        }else{
+        } else {
             System.out.println("관심사 삭제 실패");
         }
     }
@@ -128,15 +135,50 @@ public class UserService {
     작성자 : 박주현
     작성일 : 2021-06-16
     */
-    public void updateUser(UserDto userDto) {
-        UserDao userDao = sqlsession.getMapper(UserDao.class);
-        int result = userDao.updateUser(userDto);
+    public void updateUser(UserDto userDto, HttpServletRequest request) throws Exception  {
 
-        if(result > 0){
-            System.out.println("정보 수정 성공");
-        }else{
-            System.out.println("정보 수정 실패");
+        if(userDto.getFileName() != null) {
+            CommonsMultipartFile file = userDto.getFileName();
+            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                //System.out.println(fileName);
+                fileName = userDto.getUserid() + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = userid
+                String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
+                String fpath = path + File.separator + fileName;
+
+                if(!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                userDto.setProfile_img(fileName);
+            }
         }
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        userDao.updateUser(userDto);
     }
 
+    /*
+    유저 닉네임 정보
+    작성자 : 김명환
+    작성일 : 2021-06-18
+    */
+    public String selectNickname(String userid) {
+        UserDao userdao = sqlsession.getMapper(UserDao.class);
+        String result = userdao.selectNickname(userid);
+
+        return result;
+    }
+
+    /*
+    유저 닉네임 정보
+    작성자 : 김명환
+    작성일 : 2021-06-18
+    */
+    public UserDto selectAreacode(String userid) {
+        UserDao userdao = sqlsession.getMapper(UserDao.class);
+        UserDto result = userdao.selectAreacode(userid);
+
+        return result;
+    }
 }

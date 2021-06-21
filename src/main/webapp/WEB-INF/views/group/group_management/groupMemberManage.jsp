@@ -45,6 +45,18 @@
 
 </body>
 <script type="text/javascript">
+    //로그인체크 (백단에서 못막았을 경우)
+    $(function(){
+        var check = '${sessionScope.get("userData").userid}';
+        if( check == null || check =="" || check == undefined ) {
+            Swal.fire({
+                title: '오류',
+                text : '로그인을 해주세요!!'
+            }).then(() => {
+                history.go(-1);
+            })
+        }
+    });
 
     //Table에 회원정보 넣기
     $(document).ready(function(){
