@@ -85,7 +85,7 @@
                         console.log("ajax 성공");
                         $('#content').html(data);
                         $("p").text("소분류 선택 (최대 7개)");
-                        $(".m_cate_choice").attr('class', 's_cate_choice');
+                        $(".m_cate_choice").attr('class', 'cate_choice');
                         $("#next").remove();
                         $(".btnBox").append('<input type="button" class="button" value="선택 완료" id="done">');
                     },
@@ -96,7 +96,7 @@
                 })
             })
 
-            $('.s_cate_choice').click(function () {
+            $('.cate_choice').click(function () {
                 let sCount = $('.selected').length;
                 console.log(sCount);
 
