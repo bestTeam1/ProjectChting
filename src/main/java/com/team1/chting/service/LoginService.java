@@ -50,7 +50,7 @@ public class LoginService {
     }
 
     @Transactional
-    public int signUpReg(SignUpDto signUpDto, HttpServletRequest request, String s_catecode) throws Exception {
+    public int signUpReg(SignUpDto signUpDto, HttpServletRequest request, String catecode) throws Exception {
         int result1 = 0;
         int result2 = 0;
         if(signUpDto.getFileName() != null) {
@@ -72,7 +72,7 @@ public class LoginService {
         }
         HashMap<String, String>tempInterest = new HashMap<>();
         tempInterest.put("userid", signUpDto.getUserid());
-        tempInterest.put("s_catecode", s_catecode);
+        tempInterest.put("catecode", catecode);
 
         LoginDao loginDao = sqlSession.getMapper(LoginDao.class);
         try {

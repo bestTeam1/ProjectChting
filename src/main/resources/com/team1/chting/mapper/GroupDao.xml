@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.GroupDao">
 
-<!-- group_no, group_name, group_img, join_user, content, area_code, s_catecode, enabled, opendate -->
+<!-- group_no, group_name, group_img, join_user, content, area_code, catecode, enabled, opendate -->
 <!--상세보기-->
     <select id="getPostList" resultType="com.team1.chting.dto.PostDto">
         select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate
@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select gi.group_no, gi.group_name, gi.group_img, gi.content
         from user_info u
                  left join user_interest ui on #{userid} = ui.userid
-                 join group_info gi on ui.s_catecode = gi.s_catecode
+                 join group_info gi on ui.catecode = gi.catecode
                  left join (
             select group_no, count(post_no)as cnt
             from post_group
@@ -74,12 +74,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertGroup" parameterType="com.team1.chting.dto.GroupDto">
-        insert into group_info (userid, group_name, group_img, content, area_code, s_catecode)
-        values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_code}, #{s_catecode})
+        insert into group_info (userid, group_name, group_img, content, area_code, catecode)
+        values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_code}, #{catecode})
     </insert>
 
     <select id="selectGroup" resultType="com.team1.chting.dto.GroupDto">
-        select group_no, userid, group_name, group_img, content, area_code, s_catecode, enabled, opendate
+        select group_no, userid, group_name, group_img, content, area_code, catecode, enabled, opendate
         from group_info
         order by group_no desc limit 1;
     </select>
