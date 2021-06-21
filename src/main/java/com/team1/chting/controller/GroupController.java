@@ -68,8 +68,7 @@ public class GroupController {
     @RequestMapping(value = "groupMake.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public String insertGroup(GroupDto groupDto,
                               String groupNo,
-                              HttpServletRequest request
-                              ) throws Exception {
+                              HttpServletRequest request) throws Exception {
 
         //System.out.println(groupDto);
         String userid = groupDto.getUserid();
