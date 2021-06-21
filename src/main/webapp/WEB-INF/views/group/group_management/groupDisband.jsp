@@ -37,6 +37,10 @@
             <section>
 
             </section>
+            <!-- POST 방식으로 전송시키기 위한 form -->
+            <form style="display: none" action="groupDisbandOk.do" method="POST" id="groupDisbandOk">
+                <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}"/>
+            </form>
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
@@ -45,6 +49,19 @@
 
 </body>
 <script type="text/javascript">
+    //로그인체크 (백단에서 못막았을 경우)
+    $(function(){
+        var check = '${sessionScope.get("userData").userid}';
+        if( check == null || check =="" || check == undefined ) {
+            Swal.fire({
+                title: '오류',
+                text : '로그인을 해주세요!!'
+            }).then(() => {
+                history.go(-1);
+            })
+        }
+    });
+
     //모임 해산 클릭이벤트
     $(document).on("click", "#disband", function (e) {
         e.preventDefault();
@@ -61,8 +78,9 @@
                 Swal.fire({
                     title: '모임 해산',
                     text : '모임이 해산되었습니다!'
-                }).then((result) => {
-                    window.location.href = "groupDisbandOk.do?userid=${userid}";
+                }).then(() => {
+                    console.log("hi")
+                    $("#groupDisbandOk").submit();
                 })
             }
         })

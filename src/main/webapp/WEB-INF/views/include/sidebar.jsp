@@ -29,6 +29,9 @@
                 <li><a href="adminIndex.do">관리자</a></li>
                 <li><a href="groupRecommend.do">모임 추천</a></li>
                 <li><a href="myPage.do?userid=${sessionScope.get("userData").userid}">마이페이지</a></li>
+                <li><a href="groupMake.do?userid=${sessionScope.get("userData").userid}">모임 생성</a></li>
+
+
                 <%--                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
                                         <li><a href="board_main.do?group_no=">메인</a></li>
@@ -38,6 +41,7 @@
                                         <li><a href="groupJoin.do?group_no=">모임관리</a></li>
                                     </ul>
                                 </li>--%>
+            </ul>
         </nav>
 
         <%--		<!-- Section -->--%>
@@ -99,10 +103,19 @@
 <!-- underscore.js -->
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
 <script type="text/javascript">
+
+    //모임관리 링크 클릭시 POST 전송
+    $(document).on("click", "#groupJoin", function () {
+        $("#groupJoinPost").attr("action", "groupJoin.do");
+        $("#groupJoinPost").submit();
+    });
+
+    var userid = '${sessionScope.get("userData").userid}';
+
     let sideList = $('#sideList');
-    if (!${not empty pageContext.request.userPrincipal}) {
+    if (${not empty pageContext.request.userPrincipal}) {
         $.ajax({
-            url: "side/groupList/" + 1, //${userid}
+            url: "side/groupList/" + "${sessionScope.get("userData").userid}",
             data: {},
             dataType: "json",
             type: "get",
@@ -114,7 +127,7 @@
                         "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
                         "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
                         "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li> <li>" +
-                        "<a href='groupJoin.do?userid=testuser'>모임관리</a></li></ul></li>")
+                        "<a href='groupJoin.do?userid="+ userid + "'>모임관리</a></li></ul></li>")
                 });
             },
             error: function (Http, status, error) {
@@ -122,4 +135,5 @@
             }
         });
     }
+
 </script>

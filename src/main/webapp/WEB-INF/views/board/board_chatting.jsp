@@ -327,16 +327,6 @@
             background-image: url(https://i.imgur.com/qKia58V.png);
         }
 
-        @-webikt-keyframes pulse {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 0.5;
-            }
-        }
-
         ::-webkit-scrollbar {
             min-width: 12px;
             width: 12px;
@@ -443,7 +433,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
 
-    var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting');
+    var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting?group_no=${group_no}');
     sock.onmessage = onMessage;
     sock.onclose = onClose;
     sock.onopen = onOpen;
@@ -453,6 +443,8 @@
         var sessionId = null;
         var message = null;
         var date = null;
+        var group_no = null;
+        var messageType= null;
         /*
         var arr = data.split(':');
 
@@ -466,39 +458,48 @@
         sessionId = arr[0];
         message = arr[1];*/
         var json = JSON.parse(data);
+        console.log(json);
 
         var cur_session = '${userid}';
         sessionId = json.userid;
         message = json.message;
         date = json.writeDate;
+        group_no = json.group_no;
+        messageType = json.messageType;
 
-        if (sessionId == cur_session) {
-            var str = "<li class='self'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
-            $("#chattingArea").append(str);
+        if('${group_no}' == group_no) {
+            if(messageType == 'chat') {
+                if (sessionId == cur_session) {
+                    var str = "<li class='self'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
+                    $("#chattingArea").append(str);
 
-        } else {
-            var str = "<li class='other'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
-            $("#chattingArea").append(str);
+                } else {
+                    var str = "<li class='other'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
+                    $("#chattingArea").append(str);
 
+                }
+            } else if(messageType == 'enter') {
+                var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + sessionId + " 님이 입장하셨습니다." + "-" + "</div>";
+                $("#chattingArea").append(str);
+
+            } else if(messageType == 'leave') {
+                var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + sessionId + " 님이 퇴장하셨습니다." + "-" + "</div>";
+                $("#chattingArea").append(str);
+
+            }
         }
     }
 
     function onClose(evt) {
-        var user = '${userid}';
-        var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + user + " 님이 퇴장하셨습니다." + "-" + "</div>";
-
-        $('#chattingArea').append(str);
+        sock.send(JSON.stringify({message : '', messageType : 'leave', userid : '${userid}', group_no : '${group_no}'}));
     }
 
     function onOpen(evt) {
-        var user = '${userid}';
-        var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + user + " 님이 입장하셨습니다." + "-" + "</div>";
-
-        $('#chattingArea').append(str);
+        sock.send(JSON.stringify({message : '', messageType : 'enter', userid : '${userid}', group_no : '${group_no}'}));
     }
 
     function sendMessage() {
-        sock.send($('#msg').val());
+        sock.send(JSON.stringify({message : $('#msg').val(), messageType : 'chat', userid : '${userid}', group_no : '${group_no}'}));
     }
 
     $('#button-send').on("click", function (e) {

@@ -1,10 +1,17 @@
 package com.team1.chting.service;
 
 
+import com.team1.chting.dao.AdminDao;
+import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
+
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.PostReplyDto;
+
+import com.team1.chting.dao.UserDao;
+import com.team1.chting.dto.*;
+
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +34,7 @@ public class GroupService {
 
 
     // 내가가입한모임 - 게시글 리스트
-    public List<PostDto> getPostList(String group_no){
+    public List<PostDto> getPostList(String group_no) {
         List<PostDto> postlist = new ArrayList<PostDto>();
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         postlist = groupDao.getPostList(group_no);
@@ -35,6 +42,7 @@ public class GroupService {
     }
 
     // 게시판 글쓰기
+
     public void insert(PostDto postDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception{
         if(file != null && file.getSize() > 0 && !file.isEmpty()){
             String fileName = file.getOriginalFilename();
@@ -49,13 +57,11 @@ public class GroupService {
             postDto.setFile(fileName);
         }
 
-        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        groupDao.insert(postDto);
 
-    }
+ 
 
     // 게시판 상세보기
-    public PostDto read(int post_no){
+    public PostDto read(int post_no) {
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         // groupDao.read(post_no);
         PostDto postDto = groupDao.read(post_no);
@@ -94,7 +100,7 @@ public class GroupService {
     public List<GroupDto> areaGroup(String first_area, String second_area) {
         List<GroupDto> list = new ArrayList<GroupDto>();
         GroupDao dao = sqlsession.getMapper(GroupDao.class);
-        list = dao.areaGroup(first_area,second_area);
+        list = dao.areaGroup(first_area, second_area);
         return list;
     }
 
@@ -118,6 +124,11 @@ public class GroupService {
         return dto;
     }
 
+/*
+      댓글 
+      작성자 : 현상진
+      작성일 : 2021-06-21
+    */
     // 댓글 등록
     public int replyWrite(PostReplyDto postReplyDto){
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
@@ -142,4 +153,50 @@ public class GroupService {
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         return groupDao.replyUpdate(postReplyDto);
     }
+
+
+    /*
+      모임 생성
+      작성자 : 박주현
+      작성일 : 2021-06-20
+    */
+    public void groupMake(GroupDto groupDto, HttpServletRequest request, String groupNo) throws Exception {
+
+        if(groupDto.getFileName() != null) {
+            CommonsMultipartFile file = groupDto.getFileName();
+            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                System.out.println(fileName);
+                fileName = groupNo + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = group_name
+                String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
+                String fpath = path + File.separator + fileName;
+
+                if(!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                groupDto.setGroup_img(fileName);
+            }
+        }
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.insertGroup(groupDto);
+
+    }
+
+    /*
+      최근 생선된 모임 정보
+      작성자 : 박주현
+      작성일 : 2021-06-20
+    */
+    public GroupDto groupBefore() {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        GroupDto groupDto = groupDao.selectGroup();
+
+        return groupDto;
+    }
+
+
+
 }
+

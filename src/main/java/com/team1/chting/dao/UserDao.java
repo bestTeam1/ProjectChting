@@ -22,4 +22,9 @@ public interface UserDao {
     //회원 정보 수정
     int updateUser(UserDto userDto);
 
+    //userid 로 유저의 nickname 정보
+    String selectNickname(String userid);
+
+    //userid 로 유저의 지역정보
+    UserDto selectAreacode(String userid);
 }

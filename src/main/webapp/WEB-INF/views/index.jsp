@@ -125,7 +125,6 @@
         type:"get",
         success : function(response) {
             response.forEach(event => {
-                console.log(event);
                 slider.append("<div class='swiper-slide'><a href='eventDetail.do?event_no=" + event.event_no + "'><img src='" + event.event_img + "'></a></div>");
             });
             var swiper = new Swiper(".mySwiper", {
@@ -188,7 +187,7 @@
         $('#title2').html("같은 관심사 추천모임");
 
         $.ajax({
-            url : "main/loginedArea",
+            url : "main/loginedArea/" + "${sessionScope.get("userData").userid}",
             data : {},
             dataType : "json",
             type : "get",
@@ -204,7 +203,7 @@
         $('#recommandGroup').append("<div class='posts' id='posts'></div>");
         let posts2 = $('#posts');
         $.ajax({
-            url : "main/loginedCatecode",
+            url : "main/loginedCatecode/" + "${sessionScope.get("userData").userid}",
             data : {},
             dataType : "json",
             type : "get",
