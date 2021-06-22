@@ -201,7 +201,7 @@
     }
 
     function out() {
-        if(authority == '2') {
+        if(authority == '1') {
             Swal.fire({
                 title: "모임장 권한을 가지고 게십니다.",
                 text: "탈퇴하시려면 모임장 권한을 양도하고 탈퇴해주세요.",
