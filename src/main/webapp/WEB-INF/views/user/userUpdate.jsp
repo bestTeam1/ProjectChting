@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
@@ -22,6 +23,7 @@
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <c:set var="userInfoBasic" value="${userInfo.userInfoBasic}"></c:set>
+            <c:set var="imgSrc" value="${userInfoBasic.profile_img}"/>
             <div class="content">
                 <form id="userUpdateFrm" method="POST" action='userUpdate.do' enctype="multipart/form-data">
                     <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
@@ -32,14 +34,13 @@
                             <td style="vertical-align: middle">프로필</td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${not empty userInfoBasic.profile_img}">
-                                        <img id="preview" src="./upload/profileimg/${userInfoBasic.profile_img}"
+                                    <c:when test="${fn:startsWith(imgSrc, 'http')}">
+                                        <img id="preview" src="${userInfoBasic.profile_img}"
                                              style="width:130px; height:130px; border-radius:70%;">
                                     </c:when>
                                     <c:otherwise>
-                                        <img id="preview"
-                                             src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
-                                             style="width:130px; height:130px; border-radius:70%;" alt="프로필 이미지">
+                                        <img id="preview" src="./upload/profileimg/${userInfoBasic.profile_img}"
+                                             style="width:130px; height:130px; border-radius:70%;">
                                     </c:otherwise>
                                 </c:choose>
                                 <br><br>

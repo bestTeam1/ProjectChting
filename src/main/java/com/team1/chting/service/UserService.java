@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class UserService {
@@ -73,11 +74,7 @@ public class UserService {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         int result = userDao.deleteAcount(userid);
 
-        if (result > 0) {
-            System.out.println("회원 탈퇴 성공");
-        } else {
-            System.out.println("회원 탈퇴 실패");
-        }
+        System.out.println("회원 탈퇴 result : " +result);
     }
 
     /*
@@ -141,8 +138,8 @@ public class UserService {
             CommonsMultipartFile file = userDto.getFileName();
             if(file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
-                //System.out.println(fileName);
-                fileName = userDto.getUserid() + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = userid
+                //프로필이미지 이름 = userid.확장자
+                fileName = userDto.getUserid() + "." + fileName.split("\\.")[1].toLowerCase();
                 String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
                 String fpath = path + File.separator + fileName;
 
