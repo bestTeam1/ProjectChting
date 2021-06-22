@@ -8,36 +8,6 @@
 <head>
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 상세보기</title>
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            text-decoration: none !important
-        }
-
-        a:hover {
-            text-decoration: none !important
-        }
-
-
-    </style>
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -121,7 +91,7 @@
                     data: {
                         post_no : '${plist.post_no}'
                     },
-                    type: "delete",
+                    type: "get",
                     success: function (response) {
                         Swal.fire({
                             title: '게시글 삭제',

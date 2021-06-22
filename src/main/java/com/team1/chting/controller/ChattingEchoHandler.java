@@ -55,7 +55,9 @@ public class ChattingEchoHandler extends TextWebSocketHandler {
     // 클라이언트 접속 종료 후
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        String userid = userService.selectNickname(session.getPrincipal().getName());
+        groupChattingList.remove((String)session.getAttributes().get("group_no"), userid);
         sessionList.remove(session);
-        log.info(session.getPrincipal().getName() + "님이 퇴장하셨습니다");
+        log.info(userid+ "님이 퇴장하셨습니다");
     }
 }
