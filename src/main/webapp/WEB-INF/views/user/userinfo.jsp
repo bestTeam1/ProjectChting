@@ -64,7 +64,7 @@
             </div>
 
             <input type="button" value="회원 정보 수정" id="updateUser"
-                   onclick="location.href='userUpdate.do?userid=${sessionScope.get("userData").userid}'">
+                   onclick="location.href='userUpdate.do'">
             <input type="button" value="회원 탈퇴" id="delacount">
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
@@ -76,22 +76,11 @@
     //값이 1이면 모임장 권한을 가진 모임이 있음
     let userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
-    //console.log(userGroupRole);
-
-    let swal = Swal.mixin({
-        customClass: {
-            confirmButton: 'button',
-            cancelButton: 'button'
-        },
-        buttonsStyling: false
-    })
-
-
     $(function () {
         $("#delacount").click(function () {
 
             if (userGroupRole == '1') {
-                swal.fire({
+                Swal.fire({
                     text: "모임장 권한을 가지고 있는 모임이 있어 권한 위임 또는 모임 해산 후 탈퇴가 가능합니다.",
                     icon: 'warning',
                     showCancelButton: true,
@@ -104,7 +93,7 @@
                     }
                 })
             } else {
-                swal.fire({
+                Swal.fire({
                     title: "정말 탈퇴하시겠습니까?",
                     text: "계정 복구가 불가합니다.",
                     icon: 'warning',
@@ -121,7 +110,7 @@
                                 userid: userid
                             },
                             success: function (data) {
-                                swal.fire(
+                                Swal.fire(
                                     '탈퇴 완료되었습니다.',
                                     '메인 페이지로 이동합니다.',
                                     'success', {
