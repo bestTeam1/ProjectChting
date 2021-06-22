@@ -269,116 +269,11 @@
             color: #ddd;
             font-family: FontAwesome;
             display: inline-block;
-            margin-right: 4px;
         }
 
-        emoji {
-            display: inline-block;
-            height: 18px;
-            width: 18px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            margin-top: -7px;
-            margin-right: 2px;
-            transform: translate3d(0px, 3px, 0px);
-        }
-
-        emoji.please {
-            background-image: url(https://imgur.com/ftowh0s.png);
-        }
-
-        emoji.lmao {
-            background-image: url(https://i.imgur.com/MllSy5N.png);
-        }
-
-        emoji.happy {
-            background-image: url(https://imgur.com/5WUpcPZ.png);
-        }
-
-        emoji.pizza {
-            background-image: url(https://imgur.com/voEvJld.png);
-        }
-
-        emoji.cryalot {
-            background-image: url(https://i.imgur.com/UUrRRo6.png);
-        }
-
-        emoji.books {
-            background-image: url(https://i.imgur.com/UjZLf1R.png);
-        }
-
-        emoji.moai {
-            background-image: url(https://imgur.com/uSpaYy8.png);
-        }
-
-        emoji.suffocated {
-            background-image: url(https://i.imgur.com/jfTyB5F.png);
-        }
-
-        emoji.scream {
-            background-image: url(https://i.imgur.com/tOLNJgg.png);
-        }
-
-        emoji.hearth_blue {
-            background-image: url(https://i.imgur.com/gR9juts.png);
-        }
-
-        emoji.funny {
-            background-image: url(https://i.imgur.com/qKia58V.png);
-        }
-
-        ::-webkit-scrollbar {
-            min-width: 12px;
-            width: 12px;
-            max-width: 12px;
-            min-height: 12px;
-            height: 12px;
-            max-height: 12px;
-            background: #e5e5e5;
-            box-shadow: inset 0px 50px 0px rgba(82, 179, 217, 0.9), inset 0px -52px 0px #fafafa;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #bbb;
-            border: 1px solid black;
-            border-radius: 100px;
-            border: solid 3px #e5e5e5;
-            box-shadow: inset 0px 0px 3px #999;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            border: 1px solid black;
-            background: #b0b0b0;
-            box-shadow: inset 0px 0px 3px #888;
-        }
-
-        ::-webkit-scrollbar-thumb:active {
-            background: #aaa;
-            box-shadow: inset 0px 0px 3px #7f7f7f;
-        }
-
-        ::-webkit-scrollbar-button {
-            display: block;
-            height: 26px;
-        }
-
-        /* T Y P E */
-
-        .emojis {
-            display: block;
-            bottom: 8px;
-            left: 7px;
-            width: 34px;
-            height: 34px;
-            background-image: url(https://i.imgur.com/5WUpcPZ.png);
-            background-repeat: no-repeat;
-            background-size: cover;
-            z-index: 100;
-            cursor: pointer;
-        }
-
-        .emojis:active {
-            opacity: 0.9;
+        #chattingArea {
+            height: 500px;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -432,7 +327,6 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
-
     var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting?group_no=${group_no}');
     sock.onmessage = onMessage;
     sock.onclose = onClose;
@@ -445,18 +339,7 @@
         var date = null;
         var group_no = null;
         var messageType= null;
-        /*
-        var arr = data.split(':');
 
-        for(var i = 0; i < arr.length; i++) {
-            console.log('arr[' + i + ']:' + arr[i]);
-        }
-
-        var cur_session = '${userid}';
-        console.log("cur_session : " + cur_session);
-
-        sessionId = arr[0];
-        message = arr[1];*/
         var json = JSON.parse(data);
         console.log(json);
 
@@ -471,20 +354,20 @@
             if(messageType == 'chat') {
                 if (sessionId == cur_session) {
                     var str = "<li class='self'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
-                    $("#chattingArea").append(str);
+                    $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
                 } else {
                     var str = "<li class='other'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
-                    $("#chattingArea").append(str);
+                    $("#chattingArea").append(str).stop().animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
                 }
             } else if(messageType == 'enter') {
                 var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + sessionId + " 님이 입장하셨습니다." + "-" + "</div>";
-                $("#chattingArea").append(str);
+                $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
             } else if(messageType == 'leave') {
                 var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + sessionId + " 님이 퇴장하셨습니다." + "-" + "</div>";
-                $("#chattingArea").append(str);
+                $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
             }
         }

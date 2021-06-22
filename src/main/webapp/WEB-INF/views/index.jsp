@@ -209,7 +209,7 @@
             type : "get",
             success : function(response){
                 response.forEach(group => {
-                    posts2.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='groupDetail.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                    posts2.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
             error : function(Http, status, error) {
