@@ -12,6 +12,8 @@ import com.team1.chting.service.UserService;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -92,12 +94,7 @@ public class GroupUserController {
         return "board/board_detail";
     }
 
-    // 글 삭제하기
-    @RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
-    public String delete(@RequestParam("post_no") int post_no, Model model){
-        groupservice.delete(post_no);
-        return "board/board_list";
-    }
+
 
     // 글 수정하기
     @RequestMapping(value = "board_update.do", method = RequestMethod.GET)
@@ -110,21 +107,17 @@ public class GroupUserController {
     }
 
     // 글 수정 post
-    @RequestMapping(value = "board_updateOk.do", method = RequestMethod.POST)
-    public String updateOk(HttpServletRequest httpServletRequest, Model model){
-        int post_no = Integer.parseInt(httpServletRequest.getParameter("post_no"));
-        String subject = httpServletRequest.getParameter("subject");
-        String content = httpServletRequest.getParameter("content");
-        String file = httpServletRequest.getParameter("file");
-
-        boolean u = groupservice.updateOk(post_no, subject, content, file);
+    @RequestMapping(value = "board_update.do", method = RequestMethod.POST)
+    public String updateOk(PostDto postDto, Model model, HttpServletRequest httpServletRequest,
+                                           @RequestParam("uploadFile")CommonsMultipartFile file) throws Exception{
+        boolean u = groupservice.updateOk(postDto, file, httpServletRequest);
 
         if (u != true){
             System.out.println("게시판 수정 실패");
         }
-        return "redirect:board_detail.do?post_no=" + post_no;
-    }
 
+        return "redirect:board_detail.do?post_no=" + postDto.getPost_no();
+    }
 
     // 일정
     @RequestMapping(value = "board_diary.do", method = RequestMethod.GET)

@@ -56,6 +56,8 @@ public class GroupService {
             }
             postDto.setFile(fileName);
         }
+        GroupDao dao = sqlsession.getMapper(GroupDao.class);
+        dao.insert(postDto);
     }
 
         // 게시판 상세보기
@@ -68,13 +70,25 @@ public class GroupService {
         }
 
         // 수정하기
-        public boolean updateOk ( int post_no, String subject, String content, String file){
-            GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-            int u = groupDao.update(post_no, subject, content, file);
+        public boolean updateOk (PostDto dto, CommonsMultipartFile file, HttpServletRequest httpServletRequest) throws Exception{
+            if (file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/boardimg");
+                String fpath = path + File.separator + fileName;
 
-            if (u == 0) {
-                return false;
-            } else if (u == 1) {
+                if (!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                dto.setFile(fileName);
+            }
+            System.out.println(dto.toString());
+
+            GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+            int u = groupDao.update(dto);
+
+            if (u > 0) {
                 return true;
             } else {
                 return false;
@@ -86,8 +100,6 @@ public class GroupService {
             GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
             groupDao.delete(post_no);
         }
-
-
 
         public List<GroupDto> randomGroup () {
             List<GroupDto> list = new ArrayList<GroupDto>();
