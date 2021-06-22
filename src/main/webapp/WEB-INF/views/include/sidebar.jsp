@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
@@ -28,9 +29,10 @@
                 <li><a href="index.do">ChTing</a></li>
                 <li><a href="adminIndex.do">관리자</a></li>
                 <li><a href="groupRecommend.do">모임 추천</a></li>
-                <li><a href="myPage.do?userid=${sessionScope.get("userData").userid}">마이페이지</a></li>
-                <li><a href="groupMake.do?userid=${sessionScope.get("userData").userid}">모임 생성</a></li>
-
+                <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                    <li><a href="myPage.do">마이페이지</a></li>
+                    <li><a href="groupMake.do">모임 생성</a></li>
+                </se:authorize>
 
                 <%--                <li><span class="opener">조선 제1조 모임</span>
                                     <ul>
