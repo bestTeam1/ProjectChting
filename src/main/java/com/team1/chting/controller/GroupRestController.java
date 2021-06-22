@@ -1,10 +1,13 @@
 package com.team1.chting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nimbusds.oauth2.sdk.util.date.SimpleDate;
 import com.team1.chting.dto.PostDto;
+import com.team1.chting.dto.PostReplyDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
+import com.team1.chting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
@@ -23,6 +28,8 @@ public class GroupRestController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private UserService userService;
     /*
       모임관리 모임원강퇴
       만든이 : 이승준
@@ -123,10 +130,40 @@ public class GroupRestController {
     }
 
     // 글 삭제하기
-    @RequestMapping(value = "board_delete.do", method = RequestMethod.DELETE)
+    @RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
     public ResponseEntity<String> delete(@RequestParam("post_no") String post_no){
         groupService.delete(Integer.parseInt(post_no));
         return new ResponseEntity<String>("", HttpStatus.OK);
+    }
+
+    /*
+      댓글
+      작성자 : 현상진
+      작성일 : 2021-06-21
+    */
+    // 댓글목록
+    @RequestMapping(value = "board_replyList.do", method = RequestMethod.GET)
+    public List<PostReplyDto> reply_List(@RequestParam String post_no){
+        List<PostReplyDto> list = groupService.getReply(Integer.parseInt(post_no));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(PostReplyDto dto : list) {
+            dto.setFormatdate(format.format(dto.getWritedate()));
+            dto.setUserid(userService.selectNickname(dto.getUserid()));
+        }
+        return list;
+    }
+
+    //댓글등록
+    @RequestMapping(value = "board_replyWrite.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+    public ResponseEntity<String> replyInsert(@RequestBody PostReplyDto postReplyDto){
+        System.out.println(postReplyDto.toString());
+        try {
+            groupService.replyWrite(postReplyDto);
+            return new ResponseEntity<String>("", HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<String>("", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

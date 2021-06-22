@@ -1,6 +1,6 @@
 package com.team1.chting.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -12,4 +12,5 @@ public class PostReplyDto {
 	private String userid;
 	private String content;
 	private Date writedate;
+	private String formatdate;
 }

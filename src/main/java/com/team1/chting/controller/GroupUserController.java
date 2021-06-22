@@ -140,34 +140,6 @@ public class GroupUserController {
         return "board/board_chatting";
     }
 
-    /*
-      댓글
-      작성자 : 현상진
-      작성일 : 2021-06-21
-    */
-
-    // 댓글등록
-    @RequestMapping(value = "board_replyWrite.do")
-    @ResponseBody
-    public String replyInsert(@ModelAttribute("postReplyDto") PostReplyDto postReplyDto, HttpSession httpSession){
-        String userid = (String)httpSession.getAttribute("userid");
-
-        try {
-            postReplyDto.setContent(userid);
-            groupservice.replyWrite(postReplyDto);
-        }catch (Exception e){
-            e.getStackTrace();
-        }
-        return "success";
-    }
-
-    // 댓글목록
-    @RequestMapping(value = "board_replyList.do", method = RequestMethod.GET)
-    @ResponseBody
-    public List<PostReplyDto> reply_List(@RequestParam int post_no){
-        List<PostReplyDto> list = groupservice.getReply(post_no);
-        return list;
-    }
 
     // 댓글삭제
     @RequestMapping(value = "board_replyDelete.do")
