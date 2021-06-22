@@ -9,6 +9,7 @@ import com.team1.chting.dto.*;
 import com.team1.chting.utils.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -129,6 +130,35 @@ public class GroupService {
         return groupDto;
     }
 
+
+    public String selectGroupRoleNo(String userid, String group_no) {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        String result = groupDao.selectGroupRoleNo(userid, group_no);
+
+        return result;
+    }
+
+    public int insertGroupJoinRequest(JoinRequestDto dto){
+        int result = 0;
+        try {
+            GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+            result = groupDao.insertGroupJoinRequest(dto);
+            return result;
+        } catch(DataIntegrityViolationException e) {
+            result = -1;
+            return result;
+        } catch(Exception e) {
+            return result;
+        }
+    }
+
+    public int deleteGroupUserRole(GroupUserRoleDto dto) {
+        int result = 0;
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        result = groupDao.deleteGroupUserRole(dto);
+
+        return result;
+    }
 
 }
 
