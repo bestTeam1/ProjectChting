@@ -32,15 +32,13 @@
     <div id="main">
         <div class="inner">
             <div class="content" id="content">
-                <p>중분류 선택 (1개)</p>
+                <br><p>관심사를 선택하세요. 모임의 관심사는 1개 선택 가능합니다.</p>
                 <c:forEach var="category" items="${interestCategory}" varStatus="status">
-                    <div class="m_cate_choice" id="${category.catecode}">
+                    <div class="cate_choice" id="${category.catecode}">
                         <c:out value="${category.catename}"/>
                     </div>
                 </c:forEach>
-                <div class="btnBox">
-                    <input type="button" class="button" value="다음" id="next">
-                </div>
+                <br><br><input type="button" class="button" value="선택 완료" id="done">
             </div>
         </div>
     </div>
@@ -50,101 +48,39 @@
         $(function () {
             let userid = "${sessionScope.get("userData").userid}";
 
-            $('.m_cate_choice').click(function () {
-                let mCount = $('.selected').length;
-                console.log(mCount);
-
-                $(this).toggleClass('selected');
-
-                if (mCount > 0) {
-                    alert("1개의 중분류만 선택 가능합니다.");
-                    $(this).removeClass('selected');
-                }
-            })
-
-            $('#next').click(function () {
-
-                let mCateArr = [];
-                $('.selected').each(function () {
-                    mCateArr.push($(this).attr("id"));
-                });
-                //console.log(cateArr);
-
-                if (mCateArr.length == 0) {
-                    location.href = "groupCategory.do"
-                    alert("중분류를 선택해야 합니다.");
-
-                }
-
-                $.ajax({
-                    url: "groupCategory.do",
-                    traditional: true,
-                    data: {
-                        catelist: mCateArr
-                    },
-                    success: function (data) {
-                        console.log("ajax 성공");
-                        $('#content').html(data);
-                        $("p").text("소분류 선택 (1개)");
-                        $(".m_cate_choice").attr('class', 'cate_choice');
-                        $("#next").remove();
-                        $(".btnBox").append('<input type="button" class="button" value="선택 완료" id="done">');
-                    },
-                    error: function (request, status, error) {
-                        console.log(error);
-                    }
-
-                })
-            })
-
             $('.cate_choice').click(function () {
-                let sCount = $('.selected').length;
-                console.log(sCount);
+                let count = $('.selected').length;
+                console.log(count);
 
                 $(this).toggleClass('selected');
 
-                if (sCount > 0) {
-                    alert("1개의 카테고리만 선택 가능합니다.");
+                if (count > 0) {
+                    alert("모임의 관심사는 1개만 선택 가능합니다.");
                     $(this).removeClass('selected');
                 }
             })
 
             $('#done').click(function () {
-                let sCateCode = [];
-                let sCateName;
+                let cateCode;
+                let cateName;
 
                 $('.selected').each(function () {
-                    sCateCode.push($(this).attr("id"));
-                    sCateName = $(this).text().trim();
+                    cateCode = $(this).attr("id");
+                    cateName = $(this).text().trim();
                 });
-                console.log(sCateCode);
-                console.log(sCateName);
 
-                if (sCateCode.length == 0) {
-                    alert("1개의 카테고리를 반드시 선택해야 합니다.");
+                if (cateCode.length == 0) {
+                    alert("1개의 관심사를 반드시 선택해야 합니다.");
+                }else {
+                    alert("관심사 선택이 완료되었습니다 ");
+                    close();
+                    $("#interest", opener.document).html(cateName);
+                    $("#interest", opener.document).css('margin','10px');
+                    $("#interestBtn", opener.document).val('변경');
+                    $("#interestBtn", opener.document).css('margin','5px');
+                    $("#catecode", opener.document).val(cateCode);
                 }
 
-                $.ajax({
-                    url: "groupMake.do?userid=" + userid,
-                    traditional: true,
-                    data: {
-                        catelist: sCateCode
-                    },
-                    success: function (data) {
-                        console.log("ajax 성공");
-                        alert("관심사 선택이 완료되었습니다 ");
-                        close();
-                        $("#interest", opener.document).html(sCateName);
-                        $("#interest", opener.document).css('margin','10px');
-                        $("#interestBtn", opener.document).val('변경');
-                        $("#interestBtn", opener.document).css('margin','5px');
-                        $("#catecode", opener.document).val(sCateCode);
-                    },
-                    error: function (request, status, error) {
-                        console.log(error);
-                    }
-
-                });
             });
         });
 

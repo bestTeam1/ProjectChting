@@ -42,7 +42,7 @@
                                 <td><a href="board_main.do?group_no=${i.group_no}">${i.group_name}</a></td>
                                 <td>${i.join_user}</td>
                                 <td>${i.area_name}</td>
-                                <td>${i.parent_catename}</td>
+                                <td>${i.catename}</td>
                                 <c:choose>
                                     <c:when test="${i.enabled eq 1}"><td>활동중</td></c:when>
                                     <c:otherwise><td>활동정지</td></c:otherwise>
