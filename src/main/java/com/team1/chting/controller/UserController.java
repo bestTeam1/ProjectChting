@@ -11,6 +11,8 @@ import com.team1.chting.service.BoardService;
 import net.sf.json.JSONArray;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,11 @@ public class UserController {
       작성일 : 2021-06-07
     */
     @RequestMapping(value = "myPage.do", method = RequestMethod.GET)
-    public String userInfo(Model model, @RequestParam("userid") String userid) {
+    public String userInfo(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
 
         model.addAttribute("userInfo", userService.getMyPageInfo(userid));
 
@@ -50,7 +56,11 @@ public class UserController {
       작성일 : 2021-06-10
     */
     @RequestMapping(value = "userUpdate.do", method = RequestMethod.GET)
-    public String userInfoEdit(Model model, @RequestParam("userid") String userid) {
+    public String userInfoEdit(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
 
         model.addAttribute("userInfo", userService.getMyPageInfo(userid));
         model.addAttribute("areaList", boardService.getAreaList());
@@ -99,8 +109,12 @@ public class UserController {
     */
     @RequestMapping(value = "userCategory.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     public String updateCategory(Model model,
-                                 @RequestParam("userid") String userid,
+                                 HttpServletRequest request,
                                  @RequestParam("catelist") List<String> catelist) {
+
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
 
         List<InterestCategoryDto> list = new ArrayList<>();
 
