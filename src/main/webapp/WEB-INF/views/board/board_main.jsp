@@ -113,10 +113,7 @@
             <br>
             <br>
 
-            <div style="text-align: center">
-                <form>
-                    <input id="" type="button" value="탈퇴하기">
-                </form>
+            <div id="buttonArea" style="text-align: center">
            </div>
             <br>
             <br>
@@ -141,5 +138,116 @@
 </div>
 
 </body>
+<script type="text/javascript">
+    var buttonArea = $('#buttonArea');
+    var userid = '${sessionScope.get("userData").userid}';
+    var authority = '';
+    $.ajax({
+        url: "group/main",
+        data: {
+            userid: userid,
+            group_no: '${group.group_no}'
+        },
+        type: "get",
+        success: function (response) {
+            authority = response;
+            if (response == '1') { //모임원유저
+                buttonArea.append("<button onclick='out()'>탈퇴하기</button>");
+            } else if (response == '2') { //모임장유저
+                buttonArea.append("<button onclick='out()'>탈퇴하기</button>");
+            } else { //비로그인유저, 모임미가입유저
+                buttonArea.append("<button onclick='join()'>가입하기</button>");
+            }
+        },
+        error: function (Http, status, error) {
+            console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+        }
+    });
 
+    function join() {
+        if (userid == '') {
+            Swal.fire({
+                title: "비로그인 유저입니다.",
+                text: "로그인 후 가입을 진행해주세요.",
+                icon: "error",
+                buttons: '확인'
+            }).then((value) => {
+                if (value) {
+                    location.href = 'login';
+                }
+            });
+        } else {
+            let json = {"userid": userid, "group_no": '${group.group_no}'}
+            $.ajax({
+                url: "group/insert",
+                dataType: "text",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=UTF-8",
+                success: function (response) {
+                    if (response == "success") {
+                        sweetAlert("그룹가입신청이 완료되었습니다.", "모임장이 신청을 수락할 때까지 기다려주세요!", response);
+                    } else if(response == "warning"){
+                        sweetAlert("이미 그룹가입신청이 되어있습니다.", "모임장이 신청을 수락할 때까지 기다려주세요!", response);
+                    }
+                },
+                error: function (Http, status, error) {
+                    console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+                    sweetAlert("그룹가입신청에 실패했습니다.", "그룹가입신청을 다시 확인해주세요.", "error");
+                }
+            });
+
+        }
+    }
+
+    function out() {
+        if(authority == '2') {
+            Swal.fire({
+                title: "모임장 권한을 가지고 게십니다.",
+                text: "탈퇴하시려면 모임장 권한을 양도하고 탈퇴해주세요.",
+                icon: "error",
+                buttons: '확인'
+            }).then((value) => {
+                if (value) {
+                    location.href = 'groupMemberManage.do?userid=' + userid;
+                }
+            });
+        } else {
+            let json = {"userid": userid, "group_no": '${group.group_no}'}
+            $.ajax({
+                url: "group/insert",
+                dataType: "text",
+                type: "DELETE",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=UTF-8",
+                success: function (response) {
+                    Swal.fire({
+                        title: "모임에서 탈퇴되었습니다.",
+                        text: "모임에 대한 권한이 사라집니다.",
+                        icon: response,
+                        buttons: '확인'
+                    }).then((value) => {
+                        if (value) {
+                            location.href ='index.do';
+                        }
+                    });
+                },
+                error: function (Http, status, error) {
+                    console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+                    sweetAlert("모임탈퇴에 실패하셨습니다.", "다시 확인해주세요.", "error");
+                }
+            });
+        }
+    }
+
+    function sweetAlert(title, text, icon) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            buttons: '확인'
+        })
+    }
+
+</script>
 </html>

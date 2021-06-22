@@ -99,7 +99,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- jQuery Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
 <!-- underscore.js -->
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
 <script type="text/javascript">
@@ -111,8 +111,9 @@
     });
 
     var userid = '${sessionScope.get("userData").userid}';
-
+    let authority_ = '';
     let sideList = $('#sideList');
+
     if (${not empty pageContext.request.userPrincipal}) {
         $.ajax({
             url: "side/groupList/" + "${sessionScope.get("userData").userid}",
@@ -121,19 +122,42 @@
             type: "get",
             success: function (response) {
                 response.forEach(group => {
-                    sideList.append(
-                        "<li><span class='opener active'>" + group.group_name
-                        + "</span><ul><li><a href='board_main.do?group_no=" + group.group_no + "'>메인</a></li><li>" +
-                        "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
-                        "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
-                        "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li> <li>" +
-                        "<a href='groupJoin.do?userid="+ userid + "'>모임관리</a></li></ul></li>")
+                    $.ajax({
+                        url: "side/authority",
+                        data: {
+                            userid: userid,
+                            group_no: group.group_no
+                        },
+                        type: "get",
+                        success: function (response) {
+                            authority_ = response;
+                        },
+                        error: function (Http, status, error) {
+                            console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+                        }
+                    }).then(() => {
+                        var str = "<li><span class='opener active'>" + group.group_name
+                            + "</span><ul><li><a href='board_main.do?group_no=" + group.group_no + "'>메인</a></li><li>" +
+                            "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
+                            "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
+                            "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li>"
+
+                        if (authority_ == '2') {
+                            str += " <li><a href='groupJoin.do?userid=" + userid + "'>모임관리</a></li>";
+                        }
+
+                        str += "</ul></li>";
+
+                        sideList.append(str);
+                    });
                 });
             },
             error: function (Http, status, error) {
                 console.log("Http : " + Http + ", status : " + status + ", error : " + error);
             }
         });
+    } else {
+
     }
 
 </script>

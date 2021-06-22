@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
+        select gi.group_no, gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
         left join group_user_role gur on gi.group_no = gur.group_no
         where gi.group_no = #{group_no}
     </select>
@@ -85,4 +85,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by group_no desc limit 1;
     </select>
 
+    <select id="selectGroupRoleNo" resultType="String">
+        select group_role_no
+        from group_user_role
+        where userid = #{userid} AND group_no = #{group_no}
+    </select>
+
+    <insert id="insertGroupJoinRequest" parameterType="com.team1.chting.dto.JoinRequestDto">
+        insert into group_join_request(userid, group_no) values(#{userid}, #{group_no});
+    </insert>
+
+    <delete id="deleteGroupUserRole" parameterType="com.team1.chting.dto.GroupUserRoleDto">
+        delete from group_user_role where group_no = #{group_no} and userid = #{userid};
+    </delete>
 </mapper>
