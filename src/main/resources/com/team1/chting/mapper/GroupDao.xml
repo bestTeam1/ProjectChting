@@ -94,18 +94,18 @@
     </select>
 
 
-    <!--댓글등록-->
-    <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
-        insert into post_reply(post_no, userid, content)
-        values ('${post_no}', '${userid}', '${content}')
-    </insert>
+<!--댓글등록-->
+        <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
+            insert into post_reply(post_no, userid, content)
+            values (#{post_no},#{userid},#{content})
+        </insert>
+
 
     <!--  댓글목록  -->
     <select id="getReply" parameterType="int" resultType="com.team1.chting.dto.PostReplyDto">
-        select reply_no, post_no, userid, content
-        from post_reply
-        where post_no = ${post_no}
-        order by desc
+        select reply_no, post_no, userid, content, writedate from post_reply
+        where post_no= #{post_no}
+        order by writedate desc
     </select>
 
     <!--  댓글삭제  -->
