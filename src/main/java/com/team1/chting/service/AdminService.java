@@ -125,7 +125,7 @@ public class AdminService {
         //CommonsMultipartFile file = noticeDto.getFileName();
         if(file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1];
+            fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1].toLowerCase();;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/notice");
             String fpath = path + File.separator + fileName;
 
@@ -152,7 +152,7 @@ public class AdminService {
         //CommonsMultipartFile file = noticeDto.getFileName();
         if(file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1].toLowerCase();;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
             String fpath = path + File.separator + fileName;
 
@@ -177,7 +177,7 @@ public class AdminService {
     public void eventModify(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         if(file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1];
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1].toLowerCase();;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
             String fpath = path + File.separator + fileName;
 

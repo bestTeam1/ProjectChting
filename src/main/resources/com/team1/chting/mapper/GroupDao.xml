@@ -7,7 +7,7 @@
 
     <!-- group_no, group_name, group_img, join_user, content, area_code, s_catecode, enabled, opendate -->
 
-<!--상세보기-->
+    <!--상세보기-->
     <select id="getPostList" resultType="com.team1.chting.dto.PostDto">
         select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate
         from post_group pg
@@ -19,8 +19,8 @@
 
     <!--  글쓰기  -->
     <insert id="insert" parameterType="com.team1.chting.dto.PostDto">
-        insert into post_group(group_no,userid,post_catecode,subject,content,file)
-        values (#{group_no},#{userid},#{post_catecode},#{subject},#{content},#{file})
+        insert into post_group(group_no, userid, post_catecode, subject, content, file)
+        values (#{group_no}, #{userid}, #{post_catecode}, #{subject}, #{content}, #{file})
     </insert>
 
     <!-- 상세보기 -->
@@ -39,7 +39,12 @@
 
     <!--  수정하기  -->
     <update id="update" parameterType="com.team1.chting.dto.PostDto">
-        update post_group set subject = #{subject}, content = #{content}, file = #{file}, post_catecode = #{post_catecode} where post_no = #{post_no}
+        update post_group
+        set subject       = #{subject},
+            content       = #{content},
+            file          = #{file},
+            post_catecode = #{post_catecode}
+        where post_no = #{post_no}
     </update>
 
 
@@ -53,12 +58,11 @@
                  left join user_interest ui on #{userid} = ui.userid
                  join group_info gi on ui.catecode = gi.catecode
                  left join (
-            select group_no, count(post_no)as cnt
+            select group_no, count(post_no) as cnt
             from post_group
             group by group_no
-        )pg on gi.group_no = pg.group_no
-        order by pg.cnt desc
-            limit 5
+        ) pg on gi.group_no = pg.group_no
+        order by pg.cnt desc limit 5
     </select>
 
     <select id="areaGroup" resultType="com.team1.chting.dto.GroupDto">
@@ -66,51 +70,59 @@
         from user_info u
                  left join group_info gi on #{first_area} = gi.area_code or #{second_area} = gi.area_code
                  left join (
-            select group_no, count(post_no)as cnt
+            select group_no, count(post_no) as cnt
             from post_group
             group by group_no
-        )pg on gi.group_no = pg.group_no
-        order by pg.cnt desc
-            limit 5
+        ) pg on gi.group_no = pg.group_no
+        order by pg.cnt desc limit 5
     </select>
 
     <select id="userGroupList" resultType="com.team1.chting.dto.GroupDto">
         select gi.group_no, gi.group_name
         from user_info u
-            join group_user_role gur on u.userid = gur.userid
-            join group_info gi on gur.group_no = gi.group_no
-        where u.enabled = 1 and u.userid = #{userid}
+                 join group_user_role gur on u.userid = gur.userid
+                 join group_info gi on gur.group_no = gi.group_no
+        where u.enabled = 1
+          and u.userid = #{userid}
     </select>
 
     <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
-                                                                                                left join group_user_role gur on gi.group_no = gur.group_no
+        select gi.group_no, gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user
+        from group_info gi
+                 left join group_user_role gur on gi.group_no = gur.group_no
         where gi.group_no = #{group_no}
     </select>
 
 
-<!--댓글등록-->
-        <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
-            insert into post_reply(post_no, userid, content)
-            values ('${post_no}','${userid}','${content}')
-        </insert>
+    <!--댓글등록-->
+    <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
+        insert into post_reply(post_no, userid, content)
+        values ('${post_no}', '${userid}', '${content}')
+    </insert>
 
-<!--  댓글목록  -->
+    <!--  댓글목록  -->
     <select id="getReply" parameterType="int" resultType="com.team1.chting.dto.PostReplyDto">
-        select reply_no, post_no, userid, content from post_reply
-        where post_no=${post_no} order by desc
+        select reply_no, post_no, userid, content
+        from post_reply
+        where post_no = ${post_no}
+        order by desc
     </select>
 
-<!--  댓글삭제  -->
+    <!--  댓글삭제  -->
     <delete id="replyDelete" parameterType="int">
-        delete from post_reply where reply_no=#{reply_no}
+        delete
+        from post_reply
+        where reply_no = #{reply_no}
     </delete>
 
-<!--  댓글수정  -->
+    <!--  댓글수정  -->
     <update id="replyUpdate" parameterType="com.team1.chting.dto.PostReplyDto">
-        update post_reply set content=#{content} where reply_no=${reply_no}
+        update post_reply
+        set content=#{content}
+        where reply_no = ${reply_no}
     </update>
 
+    <!-- 모임 생성  -->
     <insert id="insertGroup" parameterType="com.team1.chting.dto.GroupDto">
         insert into group_info (userid, group_name, group_img, content, area_code, catecode)
         values (#{userid}, #{group_name}, #{group_img}, #{content}, #{area_code}, #{catecode})
@@ -118,7 +130,15 @@
     </insert>
 
     <select id="selectGroup" resultType="com.team1.chting.dto.GroupDto">
-        select group_no, userid, group_name, group_img, content, area_code, catecode, enabled, opendate
+        select group_no,
+               userid,
+               group_name,
+               group_img,
+               content,
+               area_code,
+               catecode,
+               enabled,
+               opendate
         from group_info
         order by group_no desc limit 1;
     </select>
@@ -126,14 +146,19 @@
     <select id="selectGroupRoleNo" resultType="String">
         select group_role_no
         from group_user_role
-        where userid = #{userid} AND group_no = #{group_no}
+        where userid = #{userid}
+          AND group_no = #{group_no}
     </select>
 
     <insert id="insertGroupJoinRequest" parameterType="com.team1.chting.dto.JoinRequestDto">
-        insert into group_join_request(userid, group_no) values(#{userid}, #{group_no});
+        insert into group_join_request(userid, group_no)
+        values (#{userid}, #{group_no});
     </insert>
 
     <delete id="deleteGroupUserRole" parameterType="com.team1.chting.dto.GroupUserRoleDto">
-        delete from group_user_role where group_no = #{group_no} and userid = #{userid};
+        delete
+        from group_user_role
+        where group_no = #{group_no}
+          and userid = #{userid};
     </delete>
 </mapper>
