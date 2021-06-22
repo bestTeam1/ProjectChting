@@ -133,4 +133,52 @@ public class AjaxRestController {
             return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
         }
     }
+
+
+    @RequestMapping(value = "/group/main", method = RequestMethod.GET)
+    public ResponseEntity<String> selectGroupRoleNo(@RequestParam("userid") String userid, @RequestParam("group_no") String group_no) {
+        String result = "";
+        try {
+            result = groupService.selectGroupRoleNo(userid, group_no);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/side/authority", method = RequestMethod.GET)
+    public ResponseEntity<String> sideGroupRoleNo(@RequestParam("userid") String userid, @RequestParam("group_no") String group_no) {
+        String result = "";
+        try {
+            result = groupService.selectGroupRoleNo(userid, group_no);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/group/insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+    public ResponseEntity<String> insertGroupJoinRequest(@RequestBody JoinRequestDto dto) {
+        int result = groupService.insertGroupJoinRequest(dto);
+        if(result > 0) {
+            return new ResponseEntity<String>("success", HttpStatus.OK);
+        } else if(result == -1) {
+            return new ResponseEntity<String>("warning", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("error", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/group/insert", method = RequestMethod.DELETE, produces = "application/text; charset=utf8")
+    public ResponseEntity<String> deleteGroupUserRole(@RequestBody GroupUserRoleDto dto) {
+        int result = groupService.deleteGroupUserRole(dto);
+
+        if(result > 0) {
+            return new ResponseEntity<String>("success", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("error", HttpStatus.BAD_REQUEST);
+        }
+    }
 }

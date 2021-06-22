@@ -1,10 +1,10 @@
 package com.team1.chting.dao;
 
-import com.team1.chting.dto.InterestCategoryDto;
-import com.team1.chting.dto.PostDto;
-import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.*;
 import org.apache.ibatis.annotations.Param;
 import com.team1.chting.utils.Criteria;
+import org.springframework.dao.DataIntegrityViolationException;
+
 import java.util.Map;
 import java.util.List;
 
@@ -58,11 +58,17 @@ public interface GroupDao {
     public List<Map<String, Object>> postList(Criteria cri);
 
     //모임 생성
-    int insertGroup(GroupDto groupDto);
+    public int insertGroup(GroupDto groupDto);
 
     //마지막 생성된 모임 가져오기
-    GroupDto selectGroup();
+    public GroupDto selectGroup();
 
+    //유저아이디, 그룹번호로 그룹권한체크
+    public String selectGroupRoleNo(@Param("userid") String userid, @Param("group_no") String group_no);
 
+    //그룹가입요청 인서트
+    public int insertGroupJoinRequest(JoinRequestDto dto);
+
+    public int deleteGroupUserRole(GroupUserRoleDto dto);
 
 }
