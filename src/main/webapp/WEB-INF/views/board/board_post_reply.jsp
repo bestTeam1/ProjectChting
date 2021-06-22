@@ -15,137 +15,114 @@
 
 <%-- 댓글달기 --%>
 <div class="container">
-    <form id="commentForm" name="commentForm" method="post">
-        <br><br>
+    <br><br>
+    <div>
+        <b1><strong>Reply</strong></b1>
         <div>
-            <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
-            </div>
-            <div>
-                <table class="table">
-                    <tr>
-                        <td>
-                            <textarea style="width: 900px" rows="3" cols="30" id="comment" name="comment" placeholder="1000자 이내로 입력해주세요 :)"
+            <table class="table">
+                <tr>
+                    <td>
+                            <textarea style="width: 900px" rows="3" cols="30" id="content" name="content"
+                                      placeholder="1000자 이내로 입력해주세요 :)"
                                       onfocus="this.placeholder = ''"
                                       onblur="this.placeholder = '1000자 이내로 입력해주세요 :)'"></textarea>
-                            <br>
-                            <div style="text-align: center">
-                                <%-- <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>--%>
-                                <input type="button" onclick="location.href='board_replyList.do?post_no='" value="댓글등록"/>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                        <br>
+                        <div style="text-align: center">
+                            <%-- <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>--%>
+                            <input type="button" id="submit" onclick="replyWrite()" value="댓글등록"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <input type="hidden" id="b_code" name="b_code" value="" />
-    </form>
+    </div>
+    <input type="hidden" id="b_code" name="b_code" value=""/>
 </div>
 
 
 <div class="container">
-    <form id="commentListForm" name="commentListForm" method="post">
-        <div id="commentList">
-            <table>
-
-                <c:forEach var="preply" items="${reply}">
-                    <tr>
-                        <td>${preply.reply_no}</td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>${preply.post_no}</td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>${preply.userid}</td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>${preply.writedate}</td>
-                        <br>
-                        <td>${preply.content}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-    </form>
+    <div id="commentList">
+        <table id="replyArea">
+            <c:forEach var="preply" items="${reply}">
+                <tr>
+                    <td>${preply.reply_no}</td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <td>${preply.post_no}</td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <td>${preply.userid}</td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <td>${preply.writedate}</td>
+                    <br>
+                    <td>${preply.content}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <b3 id="cCnt"></b3>
 </div>
-
+</body>
+<script src="assets/js/jquery.min.js"></script>
 <script>
+    $(document).ready(getReplyList());
+
     /*
      * 댓글 등록하기(Ajax)
      */
-    function fn_comment(code){
-
+    function replyWrite() {
+        let json = { "post_no" : '${plist.post_no}', "userid" : userid , "content" : $('#content').val()};
         $.ajax({
-            type:'POST',
-            url : "<c:url value='/board_replyWrite.do'/>",
-            data:$("#commentForm").serialize(),
-            success : function(data){
-                if(data=="success")
-                {
-                   getCommentList();
-                    $("#comment").val("");
-                }
+            url: 'board_replyWrite.do',
+            data: JSON.stringify(json),
+            type: 'post',
+            dataType: "text",
+            contentType : "application/json",
+            success: function (response) {
+                console.log('123123');
+                getReplyList();
             },
-            error:function(request,status,error){
-                //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            error: function (request, status, error) {
+                console.log(request + "," + status + "," + error);
             }
 
         });
+        $('#content').val('');
     }
-
-    /**
-     * 초기 페이지 로딩시 댓글 불러오기
-     */
-    $(function(){
-
-        getCommentList();
-
-    });
 
     /**
      * 댓글 불러오기(Ajax)
      */
-    function getCommentList(){
-
+    function getReplyList() {
         $.ajax({
-            type:'GET',
-            url : "<c:url value='/board_replyList.do'/>",
-            dataType : "json",
-            data:$("#commentForm").serialize(),
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            success : function(data){
+            url: 'board_replyList.do',
+            data: {
+                post_no: '${plist.post_no}'
+            },
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+                let nosuch = "";
+                let such = "";
 
-                var html = "";
-                var cCnt = data.length;
-
-                if(data.length > 0){
-
-                    for(i=0; i<data.length; i++){
-                        html += "<div>";
-                        html += "<div><table class='table'><h6><strong>"+data[i].writer+"</strong></h6>";
-                        html += data[i].comment + "<tr><td></td></tr>";
-                        html += "</table></div>";
-                        html += "</div>";
-                    }
-
+                if (response.length > 0) {
+                    response.forEach(reply => {
+                        console.log(reply);
+                        such += "<tr><td>" + reply.reply_no + "/ </td>&nbsp;&nbsp;&nbsp;&nbsp;<td>" + reply.userid + " / </td>&nbsp;&nbsp;&nbsp;&nbsp;<td>" + reply.formatdate + " / </td><br><td>" + reply.content + " / </td></tr>";
+                    });
                 } else {
-
-                    html += "<div>";
-                    html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-                    html += "</table></div>";
-                    html += "</div>";
+                    nosuch += "<div>";
+                    nosuch += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                    nosuch += "</table></div>";
+                    nosuch += "</div>";
 
                 }
-
-                $("#cCnt").html(cCnt);
-                $("#commentList").html(html);
-
+                $("#cCnt").html(nosuch);
+                $("#commentList").html(such);
             },
-            error:function(request,status,error){
-
+            error: function (request, status, error) {
+                console.log(request + "," + status + "," + error);
             }
-
         });
     }
 
 </script>
-
-</body>
 </html>
