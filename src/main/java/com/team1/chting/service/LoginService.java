@@ -58,7 +58,8 @@ public class LoginService {
             if(file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
                 System.out.println(fileName);
-                fileName = signUpDto.getUserid() + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = userid
+                fileName = signUpDto.getUserid() + "." + fileName.split("\\.")[1].toLowerCase();
+                ; //프로필이미지 이름 = userid
                 String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
                 String fpath = path + File.separator + fileName;
 
