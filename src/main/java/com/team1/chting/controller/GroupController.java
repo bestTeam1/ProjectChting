@@ -2,6 +2,7 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.InterestCategoryDto;
+import com.team1.chting.dto.SessionDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.BoardService;
 import com.team1.chting.service.GroupService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +36,11 @@ public class GroupController {
       작성일 : 2021-06-18
     */
     @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
-    public String groupMakeTest(@RequestParam("userid") String userid,
-                                Model model) {
+    public String groupMakeTest(Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
 
         UserDto userDto = userService.userInfoBasic(userid);
         int groupAdmin = userDto.getCnt();
