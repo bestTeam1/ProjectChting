@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @Service
@@ -178,7 +179,7 @@ public class GroupService {
                 if (file != null && file.getSize() > 0 && !file.isEmpty()) {
                     String fileName = file.getOriginalFilename();
                     System.out.println(fileName);
-                    fileName = groupNo + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = group_name
+                    fileName = groupNo + "." + fileName.split("\\.")[1].toLowerCase(); //프로필이미지 이름 = group_name
                     String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
                     String fpath = path + File.separator + fileName;
 

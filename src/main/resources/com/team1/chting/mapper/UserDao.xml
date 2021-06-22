@@ -3,6 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.UserDao">
+    <!-- 회원 기본 정보   -->
     <select id="selectUserInfo" resultType="com.team1.chting.dto.UserDto">
         select u.userid, u.nickname, u.profile_img, a.area_name as first_area_name, b.area_name as second_area_name, u.content, gur.cnt
         from user_info u
@@ -17,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where u.userid = #{userid}
     </select>
 
+    <!-- 회원이 선택한 관심사 -->
     <select id="selectUserInterest" resultType="com.team1.chting.dto.UserDto">
         select u.userid, ic.catename
         from user_info u
@@ -26,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by ic.catename
     </select>
 
+    <!-- 회원 참여 모임 정보   -->
     <select id="selectUserJoinGroup" resultType="com.team1.chting.dto.UserDto">
         select u.userid, gi.group_name
         from user_info u
@@ -35,22 +38,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by gi.group_name
     </select>
 
-    <update id="deleteAcount">
+    <!-- 회원 탈퇴 -->
+    <delete id="deleteAcount">
         update user_info
         set enabled = 0
         where userid = #{userid}
-    </update>
+    </delete>
 
+    <!--  회원 정보 수정  -->
     <update id="updateUser">
         update user_info
         set first_area = #{first_area}, second_area = #{second_area}, content = #{content}, profile_img = #{profile_img}
         where userid = #{userid}
     </update>
 
+    <!--  회원 닉네임 조회  -->
     <select id="selectNickname" resultType="String">
         select nickname from user_info where userid = #{userid}
     </select>
 
+    <!--  회원이 선택한 지역  -->
     <select id="selectAreacode" resultType="com.team1.chting.dto.UserDto">
         select first_area, second_area
         from user_info
