@@ -5,23 +5,33 @@
 <mapper namespace="com.team1.chting.dao.HomeDao">
 
     <select id="getNewGroupList" resultType="com.team1.chting.dto.GroupDto">
-        select group_no, group_name, group_img, catename, area_name, content
-        from group_info
-            left join area a on group_info.area_code = a.area_code
-            left join interest_category ic on group_info.catecode = ic.catecode
-        where enabled = 1
-        order by opendate desc limit 8
+        select gi.group_no, gi.group_name, gi.group_img, ic.catename, a.area_name, gi.content
+        from user_info u
+                 left join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
+                 left join (select gi.group_no
+                            from user_interest ui
+                                     join group_info gi on ui.catecode = gi.catecode
+                            where ui.userid = 'testuser002')uint on gi.group_no = uint.group_no
+                 join interest_category ic on gi.catecode = ic.catecode
+                 join area a on gi.area_code = a.area_code
+        where u.enabled = 1 and gi.enabled = 1 and u.userid = 'testuser002'
+        order by gi.opendate desc limit 8
     </select>
 
     <select id="getBestGroupList" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, group_name, group_img, catename, area_name, gi.content, count(post_group.group_no) as posts
-        from post_group
-                 left join post_category pc on post_group.post_catecode = pc.post_catecode
-                 left join group_info gi on post_group.group_no = gi.group_no
-                 left join area a on gi.area_code = a.area_code
-                 left join interest_category ic on gi.catecode = ic.catecode
-        group by gi.group_no
-        order by posts DESC limit 8
+        select gi.group_no, gi.group_name, gi.group_img, ic.catename, a.area_name, gi.content, pg.cnt
+        from user_info u
+                 left join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
+                 left join (select gi.group_no
+                            from user_interest ui
+                                     join group_info gi on ui.catecode = gi.catecode
+                            where ui.userid = 'testuser002'
+        )uint on gi.group_no = uint.group_no
+                 left join (select group_no, count(post_no)as cnt from post_group group by group_no)pg on gi.group_no = pg.group_no
+                 join interest_category ic on gi.catecode = ic.catecode
+                 join area a on gi.area_code = a.area_code
+        where u.enabled = 1 and gi.enabled = 1 and u.userid = 'testuser002'
+        order by pg.cnt desc limit 8
     </select>
 
 
