@@ -142,7 +142,7 @@
                             "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
                             "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li>"
 
-                        if (authority_ == '2') {
+                        if (authority_ == '1') {
                             str += " <li><a href='groupJoin.do?userid=" + userid + "'>모임관리</a></li>";
                         }
 
