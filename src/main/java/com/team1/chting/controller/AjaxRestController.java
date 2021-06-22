@@ -161,6 +161,7 @@ public class AjaxRestController {
 
     @RequestMapping(value = "/group/insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     public ResponseEntity<String> insertGroupJoinRequest(@RequestBody JoinRequestDto dto) {
+        System.out.println(dto.toString());
         int result = groupService.insertGroupJoinRequest(dto);
         if(result > 0) {
             return new ResponseEntity<String>("success", HttpStatus.OK);
