@@ -127,17 +127,17 @@ public class UserController {
       작성일 : 2021-06-09
     */
     @RequestMapping(value="delAcount.do", produces = "application/text; charset=utf8")
-    public String deleteAcount(@RequestParam("userid") String userid) {
+    public String deleteAcount(HttpServletRequest request) {
 
-        System.out.println("deleteAcount ajax 들어옴");
-        System.out.println("userid : " +userid);
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
 
         userService.delAcount(userid);
+        session.invalidate();
 
         return "index";
 
     }
-
-
 
 }
