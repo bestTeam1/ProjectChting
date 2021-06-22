@@ -83,7 +83,7 @@
     </select>
 
     <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
+        select gi.group_no, gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user from group_info gi
                                                                                                 left join group_user_role gur on gi.group_no = gur.group_no
         where gi.group_no = #{group_no}
     </select>

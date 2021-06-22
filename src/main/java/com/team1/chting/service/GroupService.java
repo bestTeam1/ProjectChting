@@ -207,11 +207,14 @@ public class GroupService {
         try {
             GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
             result = groupDao.insertGroupJoinRequest(dto);
+            System.out.println(result);
             return result;
         } catch(DataIntegrityViolationException e) {
             result = -1;
+            System.out.println(e.getMessage());
             return result;
         } catch(Exception e) {
+            System.out.println(result);
             return result;
         }
     }
