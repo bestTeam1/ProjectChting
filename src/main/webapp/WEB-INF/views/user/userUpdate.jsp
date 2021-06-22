@@ -29,17 +29,21 @@
                     <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
                     <input type="hidden" name="first_area" value="">
                     <input type="hidden" name="second_area" value="">
+                    <input type="hidden" name="profile_img" value="${userInfoBasic.profile_img}">
+
                     <table>
                         <tr>
                             <td style="vertical-align: middle">프로필</td>
                             <td>
                                 <c:choose>
                                     <c:when test="${fn:startsWith(imgSrc, 'http')}">
-                                        <img id="preview" src="${userInfoBasic.profile_img}"
-                                             style="width:130px; height:130px; border-radius:70%;">
+                                        <img id="preview" name="fileName"
+                                             src="${userInfoBasic.profile_img}"
+                                             style="width:130px; height:130px; border-radius:70%;" >
                                     </c:when>
                                     <c:otherwise>
-                                        <img id="preview" src="./upload/profileimg/${userInfoBasic.profile_img}"
+                                        <img id="preview" name="fileName"
+                                             src="./upload/profileimg/${userInfoBasic.profile_img}"
                                              style="width:130px; height:130px; border-radius:70%;">
                                     </c:otherwise>
                                 </c:choose>
@@ -75,7 +79,7 @@
                                 <select id="area1" style="width: 30%; float:left;">
                                     <c:forEach var="area" items="${areaList}">
                                         <option value=""
-                                                <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
+                                                <c:if test="${userInfoBasic.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
                                     </c:forEach>
                                 </select>
                             </td>
@@ -87,7 +91,7 @@
                                 <select id="area2" style="width: 30%; float:left;">
                                     <c:forEach var="area" items="${areaList}">
                                         <option value=""
-                                                <c:if test="${userinfo.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
+                                                <c:if test="${userInfoBasic.second_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
                                     </c:forEach>
                                 </select>
                             </td>
@@ -133,24 +137,17 @@
 
 <script type="text/javascript">
 
-    //버튼 커스텀
-    // let swal = Swal.mixin({
-    //     customClass: {
-    //         confirmButton: 'button',
-    //         cancelButton: 'button'
-    //     },
-    //     buttonsStyling: false
-    // });
-
     $(function () {
         //프로필 이미지 프리뷰
         let file = document.querySelector('#fileName');
 
         file.onchange = function () {
             let fileList = file.files;
+
             // 읽기
             let reader = new FileReader();
             reader.readAsDataURL(fileList[0]);
+
             //로드 한 후
             reader.onload = function () {
                 document.querySelector('#preview').src = reader.result;

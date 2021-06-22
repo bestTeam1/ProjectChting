@@ -57,9 +57,8 @@ public class LoginService {
             CommonsMultipartFile file = signUpDto.getFileName();
             if(file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
-                System.out.println(fileName);
+                //프로필이미지 이름 = userid.확장자
                 fileName = signUpDto.getUserid() + "." + fileName.split("\\.")[1].toLowerCase();
-                ; //프로필이미지 이름 = userid
                 String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
                 String fpath = path + File.separator + fileName;
 
