@@ -69,12 +69,9 @@
                         </table>
 
                         <%-- 수정, 삭제, 목록 버튼 --%>
-                        <div style="display: flex; justify-content: center">
-                            <input id="update" type="button" value="수정"/> &nbsp;
+                        <div id='buttonArea' style="display: flex; justify-content: center">
+                            <input id="back" type="button" value="목록"/> &nbsp;
                             &nbsp; &nbsp; &nbsp; &nbsp;
-                            <input id="delete" type="button" value="삭제"/> &nbsp;
-                            &nbsp; &nbsp; &nbsp; &nbsp;
-                            <input id="back" type="button" value="목록"/>
                         </div>
                         <input type="hidden" name="group_no" value="${group_no}">
                         <br><br>
@@ -92,25 +89,16 @@
 </div>
 </body>
 <script type="text/javascript">
+    let writer = "${plist.userid}";
+    if(userid == writer) {
+        $('#buttonArea').append('<input id="update" type="button" value="수정"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="delete" type="button" value="삭제"/>');
+    } else {
 
+    }
     //수정 클릭
     $(document).on("click", "#update", function (e) {
         e.preventDefault();
-
-        Swal.fire({
-            title: '게시글 수정',
-            text: '게시글을 수정하시겠습니까?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '네',
-            cancelButtonText: '아니오'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href="board_update.do?post_no=${plist.post_no}"
-            }
-        })
+        window.location.href="board_update.do?post_no=${plist.post_no}"
     });
 
     //삭제 클릭
@@ -128,21 +116,33 @@
             canclButtonText: '아니오'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    title: '게시글 삭제',
-                    text : '게시글이 삭제되어 목록으로 돌아갑니다'
-                }).then((result) => {
-                    window.location.href= "board_delete.do?group_no=${plist.group_no}";
-                })
-
+                $.ajax({
+                    url: "board_delete.do",
+                    data: {
+                        post_no : '${plist.post_no}'
+                    },
+                    type: "delete",
+                    success: function (response) {
+                        Swal.fire({
+                            title: '게시글 삭제',
+                            text : '게시글이 삭제되어 목록으로 돌아갑니다'
+                        }).then((result) => {
+                            window.location.href= "board_list.do?group_no=${plist.group_no}";
+                        })
+                    },
+                    error: function (Http, status, error) {
+                        console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+                    }
+                });
             } else {
-                swal.fire({
+                Swal.fire({
                     title: '삭제 취소',
                     text : '삭제를 취소하셨습니다'
-                })
+                });
             }
         })
     });
+
     //목록 클릭
     $(document).on("click", "#back", function (e) {
         e.preventDefault();

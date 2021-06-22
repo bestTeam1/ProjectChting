@@ -41,10 +41,7 @@ public interface GroupDao {
     public PostDto read(@Param("post_no")int post_no);
 
     // 게시글 수정
-    public int update(@Param("post_no") int post_no,
-                      @Param("subject") String subject,
-                      @Param("content") String content,
-                      @Param("file") String file);
+    public int update(PostDto postDto);
 
 
     // 게시글 삭제
