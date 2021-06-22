@@ -19,7 +19,7 @@ public class GroupDto {
 	private String area_code;
 	private String catecode;
 	private String area_name;
-	private String parent_catename;
+	private String catename;
 	private int enabled;
 	private int join_user;
 	private Date opendate;
