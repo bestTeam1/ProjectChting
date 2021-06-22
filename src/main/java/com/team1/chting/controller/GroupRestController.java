@@ -1,16 +1,17 @@
 package com.team1.chting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.UserDto;
 import com.team1.chting.service.GroupAdminService;
+import com.team1.chting.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,9 @@ public class GroupRestController {
 
     @Autowired
     private GroupAdminService broupAdminService;
+
+    @Autowired
+    private GroupService groupService;
 
     /*
       모임관리 모임원강퇴
@@ -116,6 +120,13 @@ public class GroupRestController {
             return  new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
         }
 
+    }
+
+    // 글 삭제하기
+    @RequestMapping(value = "board_delete.do", method = RequestMethod.DELETE)
+    public ResponseEntity<String> delete(@RequestParam("post_no") String post_no){
+        groupService.delete(Integer.parseInt(post_no));
+        return new ResponseEntity<String>("", HttpStatus.OK);
     }
 
 }
