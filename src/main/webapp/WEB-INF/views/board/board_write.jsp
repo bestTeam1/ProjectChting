@@ -14,12 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
-
     <title>글쓰기</title>
-
     <title>내가 가입한 모임 - 게시판</title>
     <style>
         html,
@@ -79,16 +75,37 @@
 
         var subject = $("#subject").val().trim();
         var content =  $("#content").val().trim();
-        var post_catename = $("#post_catename").val().trim();
+        var post_catename = $("#post_catename").val();
 
-        if(post_catename == "") {
-            swal.fire("카테고리를 선택해주세요.");
+        if(post_catename == "default") {
+            Swal.fire({
+                text: '카테고리를 선택해주세요.',
+                icon: 'warning',
+            });
             return;
         } else if(subject == "") {
-            swal.fire("제목을 입력해주세요.");
+            Swal.fire({
+                text: '제목을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if(!(1 < subject.length <= 20)){
+            Swal.fire({
+                text: '제목은 2~20 자로 입력해주세요.',
+                icon: 'warning',
+            });
             return;
         } else if(content == ""){
-            swal.fire("내용을 선택해주세요.");
+            Swal.fire({
+                text: '내용을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if(!(1 < content.length <= 2000)){
+            Swal.fire({
+                text: '내용은 2~2000 자로 입력해주세요.',
+                icon: 'warning',
+            });
             return;
         }
         var form = document.createElement("form")
@@ -112,7 +129,7 @@
                         <form id="form" method="post" action='board_write.do' enctype="multipart/form-data">
                             <%-- 카테고리 셀렉트  --%>
                             <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
-                                <option value="" selected disabled hidden>==카테고리==</option>
+                                <option value="default" selected hidden>==카테고리==</option>
                                 <option value="A004">자유글</option>
                                 <option value="A003">정모후기</option>
                                 <option value="A002">가입인사</option>
@@ -141,6 +158,7 @@
                             </div>
 
                             <input type="hidden" name="group_no" value="${group_no}">
+                            <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
                         </form>
 
                     </header>
