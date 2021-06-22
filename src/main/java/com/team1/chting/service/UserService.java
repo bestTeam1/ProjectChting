@@ -1,5 +1,6 @@
 package com.team1.chting.service;
 
+import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dao.InterestCategoryDao;
 import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.InterestCategoryDto;
@@ -8,7 +9,11 @@ import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Service
@@ -76,14 +81,14 @@ public class UserService {
     }
 
     /*
-    관심사 카테고리 선택하기 (중분류)
+    관심사 카테고리 선택하기
     작성자 : 박주현
     작성일 : 2021-06-11
     */
-    public List<InterestCategoryDto> getInterestCategory(List<InterestCategoryDto> list) {
+    public List<InterestCategoryDto> getInterestCategory() {
 
         InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
-        List<InterestCategoryDto> categoryList = categoryDao.selectInterestCategory(list);
+        List<InterestCategoryDto> categoryList = categoryDao.selectInterestCategory();
 
         return categoryList;
 
@@ -130,15 +135,27 @@ public class UserService {
     작성자 : 박주현
     작성일 : 2021-06-16
     */
-    public void updateUser(UserDto userDto) {
-        UserDao userDao = sqlsession.getMapper(UserDao.class);
-        int result = userDao.updateUser(userDto);
+    public void updateUser(UserDto userDto, HttpServletRequest request) throws Exception  {
 
-        if (result > 0) {
-            System.out.println("정보 수정 성공");
-        } else {
-            System.out.println("정보 수정 실패");
+        if(userDto.getFileName() != null) {
+            CommonsMultipartFile file = userDto.getFileName();
+            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                //System.out.println(fileName);
+                fileName = userDto.getUserid() + "." + fileName.split("\\.")[1]; //프로필이미지 이름 = userid
+                String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
+                String fpath = path + File.separator + fileName;
+
+                if(!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                userDto.setProfile_img(fileName);
+            }
         }
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        userDao.updateUser(userDto);
     }
 
     /*

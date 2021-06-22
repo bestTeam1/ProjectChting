@@ -17,59 +17,57 @@
 
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <h3>MyPage</h3>
-            <article>
-                <div class="content align-center">
-                    <h3><c:out value="${userInfo.userInfoBasic.nickname}"/></h3>
-                    <c:choose>
-                        <c:when test="${not empty profile_img}">
-                            <img id="preview" src="${profile_img}" width="130">
-                        </c:when>
-                        <c:otherwise>
-                            <img id="preview"
-                                 src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
-                                 width="130" alt="프로필 이미지">
-                        </c:otherwise>
-                    </c:choose>
-                    <br><br>
-                    <p><c:out value="${userInfo.userInfoBasic.first_area_name}"/> <c:out
-                            value="${userInfo.userInfoBasic.second_area_name}"/></p>
-                    <hr>
-                    <h3>자기소개</h3>
-                    <p><c:out value="${userInfo.userInfoBasic.content}"/></p>
-                    <hr>
-                </div>
-            </article>
+            <c:set var="userInfoBasic" value="${userInfo.userInfoBasic}"></c:set>
+            <div class="content align-center">
+                <h3><c:out value="${userInfoBasic.nickname}"/></h3>
+                <c:choose>
+                    <c:when test="${not empty userInfoBasic.profile_img}">
+                        <img id="preview" src="./upload/profileimg/${userInfoBasic.profile_img}"
+                             style="width:130px; height:130px; border-radius:70%;">
+                    </c:when>
+                    <c:otherwise>
+                        <img id="preview"
+                             src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
+                             width="130" alt="프로필 이미지">
+                    </c:otherwise>
+                </c:choose>
+                <br><br>
+                <p><c:out value="${userInfoBasic.first_area_name}"/> <c:out
+                        value="${userInfoBasic.second_area_name}"/></p>
+                <hr>
+                <h3>자기소개</h3>
+                <p><c:out value="${userInfoBasic.content}"/></p>
+                <hr>
+            </div>
 
-            <article>
-                <div class="content align-center">
-                    <h3>관심사</h3>
-                    <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                        <div class="circle_user_interest">
-                            <c:out value="${userInterest.catename}"/>
-                        </div>
-                    </c:forEach>
-                    <hr>
-                </div>
-            </article>
+            <div class="content align-center">
+                <h3>관심사</h3>
+                <c:forEach var="userInterest" items="${userInfo.userInterest}">
+                    <div class="circle_user_interest">
+                        <c:out value="${userInterest.catename}"/>
+                    </div>
+                </c:forEach>
+                <hr>
+            </div>
 
-            <article>
-                <div class="content align-center">
-                    <h3>가입한 모임</h3>
-                    <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
-                        <c:out value="${userJoinGroup.group_name}"/>
-                    </c:forEach>
-                </div>
-            </article>
+            <div class="content align-center">
+                <h3>가입한 모임</h3>
+                <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
+                    <c:out value="${userJoinGroup.group_name}"/>
+                </c:forEach>
+            </div>
+
             <input type="button" value="회원 정보 수정" id="updateUser"
                    onclick="location.href='userUpdate.do?userid=${sessionScope.get("userData").userid}'">
             <input type="button" value="회원 탈퇴" id="delacount">
-
+            <form style="display: none" action="" method="POST" id="userid">
+                <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}"/>
+            </form>
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
@@ -77,7 +75,10 @@
 </div>
 
 <script type="text/javascript">
+    //값이 1이면 모임장 권한을 가진 모임이 있음
     let userGroupRole = "${userInfo.userInfoBasic.cnt}";
+
+    //console.log(userGroupRole);
 
     let swal = Swal.mixin({
         customClass: {
@@ -87,14 +88,13 @@
         buttonsStyling: false
     })
 
-    console.log(userGroupRole); //값이 1이면 모임장 권한을 가진 모임이 있음
 
     $(function () {
         $("#delacount").click(function () {
 
             if (userGroupRole == '1') {
                 swal.fire({
-                    text: "모임장 권한을 가지고 있는 모임이 있어 권한 위임 후 탈퇴가 가능합니다.",
+                    text: "모임장 권한을 가지고 있는 모임이 있어 권한 위임 또는 모임 해산 후 탈퇴가 가능합니다.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: '모임 관리 페이지로 이동',
@@ -102,7 +102,8 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href = "groupJoin.do?userid=" + userid;
+                        $("#userid").attr("action", "groupMemberManage.do");
+                        $("#userid").submit();
                     }
                 })
             } else {

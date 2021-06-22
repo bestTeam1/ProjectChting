@@ -75,7 +75,7 @@
 
     <!-- 모임 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriGroup" resultType="com.team1.chting.dto.GroupDto">
-        select group_no, group_name, group_img, area_name, parent_catename, opendate, enabled,
+        select group_no, group_name, group_img, area_name, catename, opendate, enabled,
                (select count (*) from group_user_role where group_info.group_no = group_user_role.group_no) as join_user
         from group_info left join area a on group_info.area_code = a.area_code
                         left join interest_category ic on group_info.catecode = ic.catecode
