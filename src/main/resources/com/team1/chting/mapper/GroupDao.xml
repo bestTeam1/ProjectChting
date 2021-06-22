@@ -20,7 +20,7 @@
     <!--  글쓰기  -->
     <insert id="insert" parameterType="com.team1.chting.dto.PostDto">
         insert into post_group(group_no,userid,post_catecode,subject,content,file)
-        values ('${group_no}','testuser','${post_catecode}','${subject}','${content}','${file}')
+        values (#{group_no},#{userid},#{post_catecode},#{subject},#{content},#{file})
     </insert>
 
     <!-- 상세보기 -->
@@ -38,8 +38,8 @@
     </delete>
 
     <!--  수정하기  -->
-    <update id="update">
-        update post_group set subject = '${subject}', content = '${content}', file = '${file}' where post_no = #{post_no}
+    <update id="update" parameterType="com.team1.chting.dto.PostDto">
+        update post_group set subject = #{subject}, content = #{content}, file = #{file}, post_catecode = #{post_catecode} where post_no = #{post_no}
     </update>
 
 
