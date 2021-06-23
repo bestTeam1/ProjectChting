@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:websocket="http://www.springframework.org/schema/websocket"
-       xmlns="http://www.springframework.org/schema/beans"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	http://www.springframework.org/schema/context
@@ -11,7 +11,7 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
     http://www.springframework.org/schema/websocket
-    http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
+    http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 어노테이션 사용 설정 -->
     <mvc:annotation-driven/>
@@ -42,4 +42,5 @@
         <websocket:sockjs></websocket:sockjs>
     </websocket:handlers>
 
+    <util:properties id = "properties" location="classpath:properties/Api.properties" />
 </beans>
