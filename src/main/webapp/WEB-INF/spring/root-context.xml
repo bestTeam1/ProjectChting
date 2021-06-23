@@ -116,6 +116,10 @@
 		</property>
 	</bean>
 
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+
 	<!-- JSON 데이터 VIEW -->
 	<bean id="jsonView" name="jsonView"
 		class="net.sf.json.spring.web.servlet.view.JsonView">
