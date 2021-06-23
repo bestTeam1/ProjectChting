@@ -166,4 +166,37 @@ public class GroupRestController {
         }
     }
 
+    // 댓글삭제
+    @RequestMapping(value = "board_replyDelete.do", method = RequestMethod.GET)
+    public ResponseEntity<String> replyDel(@RequestParam("reply_no")String reply_no){
+        groupService.replyDelete(Integer.parseInt(reply_no));
+
+        ResponseEntity<String> entity = null;
+        try {
+            groupService.replyDelete(Integer.parseInt(reply_no));
+            entity = new ResponseEntity<String>("success", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return entity;
+    }
+
+    // 댓글수정
+    @RequestMapping(value = "board_replyUpdate.do", method = RequestMethod.POST)
+    public ResponseEntity<String> replyModify(@RequestParam("postReplyDto") PostReplyDto postReplyDto){
+        groupService.replyUpdate(postReplyDto);
+
+        ResponseEntity<String> entity = null;
+        try {
+            groupService.replyUpdate(postReplyDto);
+            entity = new ResponseEntity<String>("success", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return entity;
+    }
+
 }
+

@@ -141,26 +141,6 @@ public class GroupUserController {
     }
 
 
-    // 댓글삭제
-    @RequestMapping(value = "board_replyDelete.do")
-    @ResponseBody
-    public String replyDel(@ModelAttribute("reply_no")int reply_no){
-        groupservice.replyDelete(reply_no);
-        return "success";
-    }
-
-    // 댓글수정
-    public String replyEdit(@ModelAttribute("postReplyDto") PostReplyDto postReplyDto, HttpSession httpSession){
-        String userid = (String) httpSession.getAttribute("userid");
-
-        try {
-            postReplyDto.setUserid(userid);
-            groupservice.replyUpdate(postReplyDto);
-        }catch (Exception e){
-            e.getStackTrace();
-        }
-        return "success";
-    }
 
 
 }
