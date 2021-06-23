@@ -69,7 +69,8 @@ public class LoginController {
         try {
 
             int result = loginService.signUpReg(signUpDto, request, catecode);
-            emailService.sendMail(signUpDto.getEmail(), signUpDto.getNickname());
+            //emailService.sendMail(signUpDto.getEmail(), signUpDto.getNickname());
+            emailService.sendMail("", signUpDto.getNickname());
             //System.out.println(result);
             return new ResponseEntity<String>("회원가입이 완료되었습니다. 다시 로그인 해주세요.", HttpStatus.OK);
         } catch (Exception e) {

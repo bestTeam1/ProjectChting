@@ -18,7 +18,6 @@
             position: relative;
             height: 100%;
         }
-
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -27,12 +26,10 @@
             margin: 0;
             padding: 0;
         }
-
         .swiper-container {
             width: 100%;
             height: 100%;
         }
-
         .swiper-slide {
             text-align: center;
             font-size: 18px;
@@ -51,21 +48,14 @@
             -webkit-align-items: center;
             align-items: center;
         }
-
         .swiper-slide img {
             display: block;
             width: 50%;
             height: 100%;
             object-fit: cover;
         }
-
-        a {
-            text-decoration: none !important
-        }
-
-        a:hover {
-            text-decoration: none !important
-        }
+        a { text-decoration:none !important }
+        a:hover { text-decoration:none !important }
     </style>
 </head>
 <body class="is-preload">
@@ -79,20 +69,18 @@
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- EventBanner -->
             <section id="banner">
-                <div class="content">
-                    <!-- Swiper -->
-                    <div class="swiper-container mySwiper" style="width: 900px">
-                        <div class="swiper-wrapper" id="slider">
-                            <div class="swiper-slide"><img
-                                    src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png">
-                            </div>
+					<div class="content">
+                        <!-- Swiper -->
+                        <div class="swiper-container mySwiper" style="width: 900px">
+                            <div class="swiper-wrapper" id="slider">
+                                <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
 
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
                         </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
+					</div>
             </section>
 
             <!-- 공지사항 -->
@@ -114,10 +102,12 @@
                 <header class="major">
                     <h2>추천모임</h2>
                 </header>
-                <div id="title1"></div>
-                <div class="posts"></div>
-                <div id="title2"></div>
-
+                <div id="title_1"></div>
+                <div id="title1" class="posts"></div>
+                <div id="middle_"></div>
+                <div id="middle" class="posts"></div>
+                <div id="title_2"></div>
+                <div id="title2" class="posts"></div>
             </section>
 
         </div>
@@ -130,16 +120,16 @@
     //이벤트 슬라이드
     let slider = $('#slider');
     $.ajax({
-        url: "main/event",
-        data: {},
-        dataType: "json",
-        type: "get",
-        success: function (response) {
+        url : "main/event",
+        data : {},
+        dataType:"json",
+        type:"get",
+        success : function(response) {
             response.forEach(event => {
-                slider.append("<div class='swiper-slide'><a href='eventDetail.do?event_no=" + event.event_no + "'><img src='" + event.event_img + "'></a></div>");
+                slider.append("<div class='swiper-slide'><a href='adminEventDetail.do?eventNo=" + event.event_no + "'><img src='upload/event/" + event.event_img + "'></a></div>");
             });
             var swiper = new Swiper(".mySwiper", {
-                slidesPerView: 1, //슬라이드 표시할 사진갯수
+                slidesPerView : 1, //슬라이드 표시할 사진갯수
                 spaceBetween: 30,
                 centeredSlides: false,
                 autoplay: {
@@ -161,72 +151,71 @@
     //공지사항
     let noticeList = $('#noticeList');
     $.ajax({
-        url: "main/notice",
-        data: {},
-        dataType: "json",
-        type: "get",
-        success: function (response) {
-            response.forEach(notice => {
-                noticeList.append("<a href='noticeDetail.do?notice_no='" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
-            });
-        }
+       url : "main/notice",
+       data : {},
+       dataType:"json",
+       type:"get",
+       success : function(response) {
+           console.log(response);
+           response.forEach(notice => {
+              noticeList.append("<a href='adminNoticeDetail.do?noticeNo=" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
+           });
+       }
     });
 
 
     //추천모임
     //로그인상태검사
-    let posts = $('.posts');
-    if (${empty pageContext.request.userPrincipal}) {
+    let middle = $('#middle');
+    if(${empty pageContext.request.userPrincipal}) {
         console.log("비로그인상태");
         $.ajax({
-            url: "main/nologin",
-            data: {},
-            dataType: "json",
-            type: "get",
-            success: function (response) {
-                response.forEach(group => {
-                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
-                });
-            },
-            error: function (Http, status, error) {
-                console.log("Http : " + Http + ", status : " + status + ", error : " + error);
-            }
+           url : "main/nologin",
+           data : {},
+           dataType : "json",
+           type : "get",
+           success : function(response){
+               response.forEach(group => {
+                   let group_img = "upload/groupimg/" + group.group_img;
+                    middle.append("<article><a class='image'><img src='" + group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+               });
+           },
+           error : function(Http, status, error) {
+               console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+           }
         });
     } else {
         console.log("로그인상태");
-        $('#title1').html("같은 지역 추천모임");
-        $('#title2').html("같은 관심사 추천모임");
-
+        $('#title_1').html("<h3>같은 지역 추천모임</h3>");
+        $('#title_2').html("<h3>같은 관심사 추천모임</h3>");
+        $('#middle_').html("<br><hr>");
         $.ajax({
-            url: "main/loginedArea/" + "${sessionScope.get("userData").userid}",
-            data: {},
-            dataType: "json",
-            type: "get",
-            success: function (response) {
+            url : "main/loginedArea/" + "${sessionScope.get("userData").userid}",
+            data : {},
+            dataType : "json",
+            type : "get",
+            success : function(response){
                 response.forEach(group => {
-                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                    let group_img = "upload/groupimg/" + group.group_img;
+                    $('#title1').append("<article><a class='image'><img src='" + group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
-            error: function (Http, status, error) {
+            error : function(Http, status, error) {
                 console.log("Http : " + Http + ", status : " + status + ", error : " + error);
             }
         });
-
-
-        $('#recommandGroup').append("<div class='posts' id='posts'></div>");
-        let posts2 = $('#posts');
-
         $.ajax({
-            url: "main/loginedCatecode/" + "${sessionScope.get("userData").userid}",
-            data: {},
-            dataType: "json",
-            type: "get",
-            success: function (response) {
+            url : "main/loginedCatecode/" + "${sessionScope.get("userData").userid}",
+            data : {},
+            dataType : "json",
+            type : "get",
+            success : function(response){
                 response.forEach(group => {
-                    posts2.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                    let group_img = "upload/groupimg/" + group.group_img;
+                    $('#title2').append("<article><a class='image'><img src='" + group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
-            error: function (Http, status, error) {
+            error : function(Http, status, error) {
                 console.log("Http : " + Http + ", status : " + status + ", error : " + error);
             }
         });
