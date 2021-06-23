@@ -173,7 +173,6 @@ public class GroupService {
       작성일 : 2021-06-20
     */
         public void groupMake (GroupDto groupDto, HttpServletRequest request, String groupNo) throws Exception {
-
             if (groupDto.getFileName() != null) {
                 CommonsMultipartFile file = groupDto.getFileName();
                 if (file != null && file.getSize() > 0 && !file.isEmpty()) {
