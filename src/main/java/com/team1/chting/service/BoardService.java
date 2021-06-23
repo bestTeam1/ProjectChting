@@ -2,10 +2,7 @@ package com.team1.chting.service;
 
 import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dao.GroupDao;
-import com.team1.chting.dto.AreaDto;
-import com.team1.chting.dto.GroupDto;
-import com.team1.chting.dto.PostDto;
-import com.team1.chting.dto.UserDto;
+import com.team1.chting.dto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,4 +84,26 @@ public class BoardService {
 
         return groupInterest;
     }
+
+    public int insertDiary(DiaryDto diaryDto) {
+
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        int result = boardDao.insertDiary(diaryDto);
+        return result;
+    }
+
+    public List<DiaryCalDto> getDiaryList(String group_no) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        List<DiaryCalDto> diaryDtoList = boardDao.getDiaryList(group_no);
+
+        return diaryDtoList;
+    }
+
+    public DiaryDto getDiaryDetail(String group_no, String schedule_no) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        DiaryDto diaryDto = boardDao.getDiaryDetail(group_no, schedule_no);
+
+        return diaryDto;
+    }
+
 }
