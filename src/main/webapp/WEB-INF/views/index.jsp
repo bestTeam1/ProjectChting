@@ -102,11 +102,12 @@
                 <header class="major">
                     <h2>추천모임</h2>
                 </header>
-                <div id="title1"></div>
-                <div class="posts">
-
-                </div>
-                <div id="title2"></div>
+                <div id="title_1"></div>
+                <div id="title1" class="posts"></div>
+                <div id="middle_"></div>
+                <div id="middle" class="posts"></div>
+                <div id="title_2"></div>
+                <div id="title2" class="posts"></div>
             </section>
 
         </div>
@@ -125,7 +126,7 @@
         type:"get",
         success : function(response) {
             response.forEach(event => {
-                slider.append("<div class='swiper-slide'><a href='eventDetail.do?event_no=" + event.event_no + "'><img src='" + event.event_img + "'></a></div>");
+                slider.append("<div class='swiper-slide'><a href='adminEventDetail.do?eventNo=" + event.event_no + "'><img src='upload/event/" + event.event_img + "'></a></div>");
             });
             var swiper = new Swiper(".mySwiper", {
                 slidesPerView : 1, //슬라이드 표시할 사진갯수
@@ -155,8 +156,9 @@
        dataType:"json",
        type:"get",
        success : function(response) {
+           console.log(response);
            response.forEach(notice => {
-              noticeList.append("<a href='noticeDetail.do?notice_no='" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
+              noticeList.append("<a href='adminNoticeDetail.do?noticeNo=" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
            });
        }
     });
@@ -164,7 +166,7 @@
 
     //추천모임
     //로그인상태검사
-    let posts = $('.posts');
+    let middle = $('#middle');
     if(${empty pageContext.request.userPrincipal}) {
         console.log("비로그인상태");
         $.ajax({
@@ -174,7 +176,8 @@
            type : "get",
            success : function(response){
                response.forEach(group => {
-                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                   let group_img = "upload/groupimg/" + group.group_img;
+                    middle.append("<article><a class='image'><img src='" + group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                });
            },
            error : function(Http, status, error) {
@@ -183,9 +186,9 @@
         });
     } else {
         console.log("로그인상태");
-        $('#title1').html("같은 지역 추천모임");
-        $('#title2').html("같은 관심사 추천모임");
-
+        $('#title_1').html("<h3>같은 지역 추천모임</h3>");
+        $('#title_2').html("<h3>같은 관심사 추천모임</h3>");
+        $('#middle_').html("<br><hr>");
         $.ajax({
             url : "main/loginedArea/" + "${sessionScope.get("userData").userid}",
             data : {},
@@ -193,15 +196,14 @@
             type : "get",
             success : function(response){
                 response.forEach(group => {
-                    posts.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                    let group_img = "upload/groupimg/" + group.group_img;
+                    $('#title1').append("<article><a class='image'><img src='" + group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
             error : function(Http, status, error) {
                 console.log("Http : " + Http + ", status : " + status + ", error : " + error);
             }
         });
-        $('#recommandGroup').append("<div class='posts' id='posts'></div>");
-        let posts2 = $('#posts');
         $.ajax({
             url : "main/loginedCatecode/" + "${sessionScope.get("userData").userid}",
             data : {},
@@ -209,7 +211,8 @@
             type : "get",
             success : function(response){
                 response.forEach(group => {
-                    posts2.append("<article><a class='image'><img src='" + group.group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
+                    let group_img = "upload/groupimg/" + group.group_img;
+                    $('#title2').append("<article><a class='image'><img src='" + group_img + "' alt=''/></a><h3>" + group.group_name + "</h3><p>" + group.content + "</p><ul class='actions'><li><a href='board_main.do?group_no=" + group.group_no + "' class='button'>상세보기</a></li> </ul> </article>")
                 });
             },
             error : function(Http, status, error) {

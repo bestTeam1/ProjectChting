@@ -59,6 +59,10 @@ public class AdminController {
     @RequestMapping(value = "adminNoticeDetail.do", method = RequestMethod.GET)
     public String adminNoticeDetail(String noticeNo, String page, Model model) {
 
+        if(page == null) {
+            page = "1";
+        }
+
         NoticeDto noticeDto = adminService.getNoticeDetail(noticeNo);
 
         model.addAttribute("detail", noticeDto);
@@ -107,6 +111,10 @@ public class AdminController {
     @RequestMapping(value = "adminEventDetail.do", method = RequestMethod.GET)
     public String adminEventDetail(String eventNo, String page, Model model) throws Exception {
         EventDto eventDto = adminService.getEventDetail(eventNo);
+
+        if(page == null) {
+            page = "1";
+        }
 
         model.addAttribute("event", eventDto);
         model.addAttribute("page", page);
