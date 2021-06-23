@@ -82,7 +82,7 @@
                         <div class="swiper-container mySwiper" style="width: 900px">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <a href = "#" style="" >${group.group_name}<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>
+                                    <a href = "#" style="" >${group.group_name}<img src="upload/groupimg/${group.group_img}"></a></div>
                             </div>
                         </div>
 
