@@ -87,33 +87,36 @@
             <!-- Banner -->
             <section>
                 <div class="content">
-                    <header>
-                        <!-- Swiper -->
-                        <div class="swiper-container mySwiper" style="width: 900px">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <a href="#" style="">${group.group_name}<img
-                                            src="upload/groupimg/${group.group_img}"></a></div>
-                            </div>
-                        </div>
-
-                    </header>
+                    <!-- Swiper -->
+                    <div class="swiper-container mySwiper" style="width: 900px">
+                        <h3 class="align-center">${group.group_name}</h3>
+                    </div>
+                    <div class="content align-center">
+                    <c:choose>
+                        <c:when test="${empty group.group_img}">
+                            <img id="preview" src="./upload/groupimg/default.jpg"
+                                 width="150">
+                        </c:when>
+                        <c:otherwise>
+                            <img id="preview" src="./upload/groupimg/${group.group_img}"
+                                width="300">
+                        </c:otherwise>
+                    </c:choose>
+                    </div>
                 </div>
             </section>
 
             <%-- 회원리스트 아이콘 --%>
             <div style="text-align: center">
                 <p>
-                    회원 : <i class="fa fa-user" aria-hidden="true"></i> ? 명
+                    회원 : <i class="fa fa-user" aria-hidden="true"></i> <c:out value="${joinUser}"/>명
                 </p>
             </div>
             <br>
             <br>
 
             <div class="content" align="center">
-
-                <p>👉${group.group_name} - 소개글👈</p>
-
+                <p>👉소개글👈</p>
                 <table>
                     <tr>
                         <td style="text-align: center">${group.content}</td>
@@ -122,6 +125,29 @@
             </div>
             <br>
             <br>
+
+            <div class="area" align="center">
+                <p>지역</p>
+                <table>
+                    <tr>
+                        <td style="text-align: center">${group.area_name}</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <br>
+
+            <div class="catename" align="center">
+                <p>관심사</p>
+                <table>
+                    <tr>
+                        <td style="text-align: center">${group.catename}</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <br>
+
 
             <div id="buttonArea" style="text-align: center">
             </div>
@@ -255,7 +281,7 @@
 
     function update() {
         let groupNo = "${group.group_no}";
-        location.href="groupUpdate.do?group_no="+groupNo;
+        location.href = "groupUpdate.do?group_no=" + groupNo;
     }
 
     function sweetAlert(title, text, icon) {
