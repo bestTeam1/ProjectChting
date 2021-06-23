@@ -28,6 +28,7 @@
                     <input type="hidden" name="catecode" id="catecode" value="${groupInfo.catecode}">
                     <input type="hidden" name="area_code" value="">
                     <input type="hidden" name="group_no" value="${groupInfo.group_no}">
+                    <input type="hidden" name="group_img" value="${groupInfo.group_img}">
                     <table>
                         <tr>
                             <td style="vertical-align: middle">모임 이름</td>
@@ -66,7 +67,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <img id="preview" name="fileName"
-                                             src="./upload/profileimg/${groupInfo.group_img}"
+                                             src="./upload/groupimg/${groupInfo.group_img}"
                                              width="130">
                                     </c:otherwise>
                                 </c:choose>
