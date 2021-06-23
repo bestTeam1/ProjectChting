@@ -52,29 +52,33 @@
         (SELECT group_no, group_name, group_img, content FROM group_info WHERE enabled = 1 LIMIT 10) order by rand();
     </select>
 
+    <!-- 관심사 기반 추천모임 -->
     <select id="catecodeGroup" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, gi.group_name, gi.group_img, gi.content
+        select gi.group_no, gi.group_name, gi.group_img, gi.content, pg.cnt
         from user_info u
-                 left join user_interest ui on #{userid} = ui.userid
+                 join user_interest ui on u.userid = ui.userid
                  join group_info gi on ui.catecode = gi.catecode
                  left join (
             select group_no, count(post_no) as cnt
             from post_group
             group by group_no
         ) pg on gi.group_no = pg.group_no
-        order by pg.cnt desc limit 5
+        where u.userid = #{userid}
+        order by pg.cnt desc limit 4
     </select>
 
+    <!-- 지역 기반 추천모임 -->
     <select id="areaGroup" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, gi.group_name, gi.group_img, gi.content
+        select gi.group_no, gi.group_name, gi.group_img, gi.content, pg.cnt
         from user_info u
-                 left join group_info gi on #{first_area} = gi.area_code or #{second_area} = gi.area_code
+                 join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
                  left join (
             select group_no, count(post_no) as cnt
             from post_group
             group by group_no
         ) pg on gi.group_no = pg.group_no
-        order by pg.cnt desc limit 5
+        where u.userid = #{userid}
+        order by pg.cnt desc limit 4
     </select>
 
     <select id="userGroupList" resultType="com.team1.chting.dto.GroupDto">
@@ -94,17 +98,18 @@
     </select>
 
 
-<!--댓글등록-->
-        <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
-            insert into post_reply(post_no, userid, content)
-            values (#{post_no},#{userid},#{content})
-        </insert>
+    <!--댓글등록-->
+    <insert id="replyWrite" parameterType="com.team1.chting.dto.PostReplyDto">
+        insert into post_reply(post_no, userid, content)
+        values (#{post_no}, #{userid}, #{content})
+    </insert>
 
 
     <!--  댓글목록  -->
     <select id="getReply" parameterType="int" resultType="com.team1.chting.dto.PostReplyDto">
-        select reply_no, post_no, userid, content, writedate from post_reply
-        where post_no= #{post_no}
+        select reply_no, post_no, userid, content, writedate
+        from post_reply
+        where post_no = #{post_no}
         order by writedate desc
     </select>
 
