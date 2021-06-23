@@ -47,6 +47,12 @@
                             <p>이벤트 시작일 : <c:out value="${event.startdate}"/></p>
                             <p>이벤트 종료일 : <c:out value="${event.enddate}"/></p>
                         </section>
+                        <c:if test="${!empty event.file}">
+                            <div class="content align-center">
+                                <img id="preview" src="./upload/event/${event.file}"
+                                     width="300">
+                            </div>
+                        </c:if>
                         <section>
                             <table>
                                 <tr>
