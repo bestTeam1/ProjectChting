@@ -77,6 +77,11 @@ public class AjaxRestController {
         String result = "";
         try {
             list = groupService.randomGroup();
+            for(GroupDto dto : list) {
+                if(dto.getGroup_img() == null) {
+                    dto.setGroup_img("default.jpg");
+                }
+            }
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch(Exception e){
@@ -93,7 +98,12 @@ public class AjaxRestController {
         UserDto userDto = userService.selectAreacode(userid);
         String result = "";
         try {
-            list = groupService.areaGroup(userDto.getFirst_area(),userDto.getSecond_area());
+            list = groupService.areaGroup(userid);
+            for(GroupDto dto : list) {
+                if(dto.getGroup_img() == null) {
+                    dto.setGroup_img("default.jpg");
+                }
+            }
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
@@ -110,6 +120,11 @@ public class AjaxRestController {
         String result = "";
         try {
             list = groupService.catecodeGroup(userid);
+            for(GroupDto dto : list) {
+                if(dto.getGroup_img() == null) {
+                    dto.setGroup_img("default.jpg");
+                }
+            }
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch (Exception e) {
