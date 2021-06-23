@@ -123,6 +123,8 @@ public class GroupUserController {
     @RequestMapping(value = "board_diary.do", method = RequestMethod.GET)
     public String groupDiary(@RequestParam("group_no") String group_no, Model model){
 
+        model.addAttribute("group_no", group_no);
+
         return "board/board_diary";
     }
 
