@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -34,15 +35,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-
 //        System.out.println(httpServletRequest.getContextPath());
 //        System.out.println("getAuthorities" + authentication.getAuthorities());
+//        System.out.println("---------------------------------");
 //        System.out.println("getPrincipal" + authentication.getPrincipal());
+//        System.out.println("---------------------------------");
 //        System.out.println("getDetails" + authentication.getDetails());
 //        System.out.println("getName" + authentication.getName());
 //        System.out.println("getCredentials" + authentication.getCredentials());
 //        System.out.println("toString :: " + authentication.getAuthorities().toString());
-//        System.out.println((authentication.getPrincipal().getClass()));
+        System.out.println((authentication.getPrincipal().getClass()));
 
         String redirectURL = "/index.do";
 
