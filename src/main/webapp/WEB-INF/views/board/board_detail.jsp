@@ -22,10 +22,9 @@
                 <div class="content">
                     <header id="detailBody">
                         <h2 id="subject" style="vertical-align: text-bottom;">
-                            <%--                            <img src="http://drive.google.com/uc?export=view&id=1rNujOwPH73iMFcEA-gEQoWKlwPhXPGVz"--%>
-                            <%--                                 width="50px" height="50px"--%>
-                            <%--                                 style="display: inline-block; box-sizing: border-box;--%>
-                            <%--                                       margin-bottom:10px; margin-right: 10px; border-radius: 50%; vertical-align: middle;">--%>
+                           <img src="http://drive.google.com/uc?export=view&id=1rNujOwPH73iMFcEA-gEQoWKlwPhXPGVz"
+                           width="50px" height="50px"
+                              margin-bottom:10px; margin-right: 10px; border-radius: 50%; vertical-align: middle;">
                             </span>
                             ${plist.subject}
                         </h2>
@@ -58,6 +57,7 @@
 </div>
 </div>
 </body>
+
 <script type="text/javascript">
     let writer = "${plist.userid}";
     if(userid == writer) {
