@@ -109,10 +109,10 @@ public class GroupService {
             return list;
         }
 
-        public List<GroupDto> areaGroup (String first_area, String second_area){
+        public List<GroupDto> areaGroup (String userid){
             List<GroupDto> list = new ArrayList<GroupDto>();
             GroupDao dao = sqlsession.getMapper(GroupDao.class);
-            list = dao.areaGroup(first_area, second_area);
+            list = dao.areaGroup(userid);
             return list;
         }
 

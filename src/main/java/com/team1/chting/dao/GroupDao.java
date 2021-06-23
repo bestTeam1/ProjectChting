@@ -22,7 +22,7 @@ public interface GroupDao {
     public List<GroupDto> randomGroup();
 
     //회원 -> 지역기반 5개
-    public List<GroupDto> areaGroup(@Param("first_area") String first_area,@Param("second_area") String second_area);
+    public List<GroupDto> areaGroup(String userid);
 
     //회원 -> 관심사기반 5개
     public List<GroupDto> catecodeGroup(String userid);
