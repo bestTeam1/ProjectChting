@@ -219,4 +219,16 @@ public class GroupAdminService {
         groupAdminDao.updateGroup(groupDto);
 
     }
+
+    /*
+     모임 참여 회원 수
+     작성자 : 박주현
+     작성일 : 2021-06-23
+    */
+    public int getJoinUser(String groupNo) {
+        GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
+        int result = groupAdminDao.selectJoinUser(groupNo);
+
+        return result;
+    }
 }
