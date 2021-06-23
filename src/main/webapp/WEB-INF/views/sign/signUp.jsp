@@ -206,36 +206,32 @@
             $('#signUpBtn').prop('disabled', true);
 
             $.ajax({
-                    type: 'POST',
-                    enctype: 'multipart/form-data',
-                    url: 'signUp.do',
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    timeout: 60000,
-                    success: function (data) {
-                        Swal.fire(
-                            '회원가입 완료!',
-                            '다시 로그인을 진행 해주세요!',
-                            'success'
-                        ).then(() => {
-                            location.href = "${pageContext.request.contextPath}/logout";
-                        });
-                    }
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: 'signUp.do',
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                timeout: 60000,
+                success: function (data) {
+                    Swal.fire(
+                        '회원가입 완료!',
+                        '다시 로그인을 진행 해주세요!',
+                        'success'
+                    ).then(() => {
+                        location.href = "${pageContext.request.contextPath}/logout";
+                    });
                 },
-                error
-        :
-
-            function (e) {
-                Swal.fire(
-                    '오류 발생 Error',
-                    '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
-                    'error'
-                );
-            }
+                error: function (e) {
+                    Swal.fire(
+                        '오류 발생 Error',
+                        '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
+                        'error'
+                    );
+                }
+            });
         });
-    });
     })
     ;
 
