@@ -1,7 +1,9 @@
 package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.SessionDto;
 import com.team1.chting.dto.UserDto;
+import com.team1.chting.service.BoardService;
 import com.team1.chting.service.GroupAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.security.acl.Group;
 import java.util.List;
 
 @Controller
@@ -18,6 +22,9 @@ public class GroupAdminController {
 
     @Autowired
     private GroupAdminService groupAdminService;
+
+    @Autowired
+    private BoardService boardService;
 
 
     /*
@@ -120,5 +127,36 @@ public class GroupAdminController {
         System.out.println("모임해산ok??");
 
         return "index";
+    }
+
+    /*
+      모임 정보 수정 페이지(GET)
+      만든이 : 박주현
+      작성일 : 2021-06-23
+     */
+    @RequestMapping(value = "groupUpdate.do", method = RequestMethod.GET)
+    public String groupUpdate(Model model,
+                              @RequestParam("group_no") String groupNo) {
+
+        model.addAttribute("groupInfo", groupAdminService.getGroupInfo(groupNo));
+        model.addAttribute("areaList", boardService.getAreaList());
+        return "group/groupUpdate";
+    }
+
+    /*
+      모임 정보 수정 처리(POST)
+      만든이 : 박주현
+      작성일 : 2021-06-23
+     */
+    @RequestMapping(value = "groupUpdate.do", method = RequestMethod.POST)
+    public String groupUpdateOk(Model model,
+                                GroupDto groupDto,
+                                HttpServletRequest request) throws Exception {
+
+        String groupNo = groupDto.getGroup_no();
+        System.out.println("groupDto :" +groupDto);
+        groupAdminService.updateGroup(groupDto, request);
+
+        return "redirect:board_main.do?group_no="+groupNo;
     }
 }
