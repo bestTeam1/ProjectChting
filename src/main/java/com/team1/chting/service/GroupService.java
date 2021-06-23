@@ -130,9 +130,9 @@ public class GroupService {
             return list;
         }
 
-        public GroupDto groupByGroup_no (String group_no){
+        public GroupDto groupByGroup_no (String groupNo){
             GroupDao dao = sqlsession.getMapper(GroupDao.class);
-            GroupDto dto = dao.groupByGroup_no(group_no);
+            GroupDto dto = dao.groupByGroup_no(groupNo);
             return dto;
         }
 
@@ -238,6 +238,7 @@ public class GroupService {
 
         return result;
     }
+
 
 }
 

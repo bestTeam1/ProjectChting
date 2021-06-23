@@ -73,12 +73,22 @@
         where group_no = #{groupNo}
     </select>
 
-    <!--  회원 정보 수정  -->
+    <!-- 모임 정보 수정 -->
     <update id="updateGroup">
         update group_info
         set group_name = #{group_name}, content = #{content}, area_code = #{area_code}, catecode = #{catecode}, group_img = #{group_img}
         where group_no = #{group_no}
     </update>
+
+    <!-- 모임 참여 인원 수  -->
+    <select id="selectJoinUser" resultType="int">
+        select count(*)as user
+        from group_user_role gur
+        join group_info gi on gur.group_no = gi.group_no
+        where gi.enabled = 1
+        and gi.group_no = #{groupNo}
+    </select>
+
 
 </mapper>
 
