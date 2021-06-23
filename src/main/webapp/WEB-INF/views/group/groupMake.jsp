@@ -78,6 +78,9 @@
                                 <p style="float:left;" id="interest"></p>
                                 <input type="button" style="" id="interestBtn" class="button small" value="선택"
                                        onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');">
+<%--                                <div class="text" id="text">--%>
+
+<%--                                </div>--%>
                             </td>
                         </tr>
 
@@ -119,6 +122,13 @@
 <script type="text/javascript">
 
     $(function () {
+
+        // $('#interestBtn').click(function () {
+        //     $('#text').append("<textarea> 텍스트 </textarea>")
+        // })
+
+
+
         //모임 대표 이미지 프리뷰
         let file = document.querySelector('#fileName');
 
