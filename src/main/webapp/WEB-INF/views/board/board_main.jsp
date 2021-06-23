@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>내가 가입한 모임 - 메인</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no" />
+          content="width=device-width, initial-scale=1, user-scalable=no"/>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Swiper JS -->
@@ -15,8 +15,8 @@
     <!-- slider -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <%--icon--%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
-
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 
 
     <style>
@@ -27,6 +27,7 @@
             position: relative;
             height: 100%;
         }
+
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -35,10 +36,12 @@
             margin: 0;
             padding: 0;
         }
+
         .swiper-container {
             width: 100%;
             height: 100%;
         }
+
         .swiper-slide {
             text-align: -webkit-center;
             font-size: 18px;
@@ -57,14 +60,21 @@
             -webkit-align-items: center;
             align-items: center;
         }
+
         .swiper-slide img {
             display: block;
             width: 50%;
             height: 100%;
             object-fit: cover;
         }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
+
+        a {
+            text-decoration: none !important
+        }
+
+        a:hover {
+            text-decoration: none !important
+        }
     </style>
 </head>
 <body class="is-preload">
@@ -73,7 +83,7 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
                 <div class="content">
@@ -82,7 +92,8 @@
                         <div class="swiper-container mySwiper" style="width: 900px">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <a href = "#" style="" >${group.group_name}<img src="upload/groupimg/${group.group_img}"></a></div>
+                                    <a href="#" style="">${group.group_name}<img
+                                            src="upload/groupimg/${group.group_img}"></a></div>
                             </div>
                         </div>
 
@@ -93,12 +104,11 @@
             <%-- 회원리스트 아이콘 --%>
             <div style="text-align: center">
                 <p>
-            회원 : <i class="fa fa-user" aria-hidden="true"></i> ${group.join_user} 명
+                    회원 : <i class="fa fa-user" aria-hidden="true"></i> ? 명
                 </p>
             </div>
             <br>
             <br>
-
 
             <div class="content" align="center">
 
@@ -114,10 +124,9 @@
             <br>
 
             <div id="buttonArea" style="text-align: center">
-           </div>
+            </div>
             <br>
             <br>
-
 
 
             <div class="content" align="center">
@@ -132,9 +141,9 @@
             </div>
 
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
+    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 
 </body>
@@ -151,9 +160,13 @@
         type: "get",
         success: function (response) {
             authority = response;
-            if (response == '1') { //모임원유저
+
+            console.log(response);
+
+            if (response == '1') { //모임장유저
+                buttonArea.append("<button onclick='update()'>수정하기</button>");
                 buttonArea.append("<button onclick='out()'>탈퇴하기</button>");
-            } else if (response == '2') { //모임장유저
+            } else if (response == '2') { //모임원유저
                 buttonArea.append("<button onclick='out()'>탈퇴하기</button>");
             } else { //비로그인유저, 모임미가입유저
                 buttonArea.append("<button onclick='join()'>가입하기</button>");
@@ -187,7 +200,7 @@
                 success: function (response) {
                     if (response == "success") {
                         sweetAlert("그룹가입신청이 완료되었습니다.", "모임장이 신청을 수락할 때까지 기다려주세요!", response);
-                    } else if(response == "warning"){
+                    } else if (response == "warning") {
                         sweetAlert("이미 그룹가입신청이 되어있습니다.", "모임장이 신청을 수락할 때까지 기다려주세요!", response);
                     }
                 },
@@ -201,7 +214,7 @@
     }
 
     function out() {
-        if(authority == '1') {
+        if (authority == '1') {
             Swal.fire({
                 title: "모임장 권한을 가지고 게십니다.",
                 text: "탈퇴하시려면 모임장 권한을 양도하고 탈퇴해주세요.",
@@ -228,7 +241,7 @@
                         buttons: '확인'
                     }).then((value) => {
                         if (value) {
-                            location.href ='index.do';
+                            location.href = 'index.do';
                         }
                     });
                 },
@@ -238,6 +251,11 @@
                 }
             });
         }
+    }
+
+    function update() {
+        let groupNo = "${group.group_no}";
+        location.href="groupUpdate.do?group_no="+groupNo;
     }
 
     function sweetAlert(title, text, icon) {

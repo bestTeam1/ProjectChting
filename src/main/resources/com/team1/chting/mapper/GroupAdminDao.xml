@@ -64,5 +64,21 @@
         UPDATE group_info SET enabled = 0 where group_no = "${groupNo}"
     </update>
 
+    <!-- 모임 정보 가져오기 -->
+    <select id="selectGroupInfo" resultType="com.team1.chting.dto.GroupDto">
+        select gi.group_no, gi.userid, gi.group_name, gi.content, gi.group_img, gi.area_code, a.area_name, gi.catecode, ic.catename
+        from group_info gi
+                 join interest_category ic on gi.catecode = ic.catecode
+                 join area a on gi.area_code = a.area_code
+        where group_no = #{groupNo}
+    </select>
+
+    <!--  회원 정보 수정  -->
+    <update id="updateGroup">
+        update group_info
+        set group_name = #{group_name}, content = #{content}, area_code = #{area_code}, catecode = #{catecode}, group_img = #{group_img}
+        where group_no = #{group_no}
+    </update>
+
 </mapper>
 
