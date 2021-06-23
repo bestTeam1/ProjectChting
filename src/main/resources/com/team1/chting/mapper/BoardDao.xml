@@ -28,5 +28,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from interest_category;
     </select>
 
+    <insert id="insertDiary" parameterType="com.team1.chting.dto.DiaryDto">
+        insert into group_schedule(group_no, subject, location, content,  type, startdate, enddate, xcoord, ycoord)
+        values (#{group_no}, #{subject}, #{location} ,#{content}, #{type}, #{startdate}, #{startdate}, #{xcoord}, #{ycoord})
+    </insert>
+
+    <select id="getDiaryList" resultType="com.team1.chting.dto.DiaryCalDto">
+        select schedule_no, type as title, startdate as start from group_schedule where group_no = #{group_no}
+    </select>
+
+    <select id="getDiaryDetail" resultType="com.team1.chting.dto.DiaryDto">
+        select * from group_schedule where group_no = #{group_no} and schedule_no = #{schedule_no}
+    </select>
+
 </mapper>
 
