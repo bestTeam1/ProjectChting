@@ -49,4 +49,6 @@ public interface GroupAdminDao {
     //모임 정보 수정
     void updateGroup(GroupDto groupDto);
 
+    //모임 참여 인원 수
+    int selectJoinUser(String groupNo);
 }

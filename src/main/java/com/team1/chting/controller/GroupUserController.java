@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.PostReplyDto;
+import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
 import org.apache.commons.io.FilenameUtils;
@@ -39,6 +40,9 @@ public class GroupUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupAdminService groupAdminService;
+
 
     /*
       게시판
@@ -46,11 +50,17 @@ public class GroupUserController {
       작성일 : 2021-06-18
     */
 
-    // 메인
+    // 모임 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
-    public String groupMain(@RequestParam("group_no") String group_no, Model model){
-        GroupDto dto = groupservice.groupByGroup_no(group_no);
+    public String groupMain(@RequestParam("group_no") String groupNo, Model model){
+
+        GroupDto dto = groupservice.groupByGroup_no(groupNo);
         model.addAttribute("group",dto);
+
+        //가입한 회원 수
+        int joinUser = groupAdminService.getJoinUser(groupNo);
+        model.addAttribute("joinUser", joinUser);
+
         return "board/board_main";
     }
 
