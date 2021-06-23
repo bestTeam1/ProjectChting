@@ -20,6 +20,7 @@
             position: relative;
             height: 100%;
         }
+
         body {
             background: #eee;
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -28,10 +29,12 @@
             margin: 0;
             padding: 0;
         }
+
         .swiper-container {
             width: 100%;
             height: 100%;
         }
+
         .swiper-slide {
             text-align: center;
             font-size: 18px;
@@ -50,14 +53,21 @@
             -webkit-align-items: center;
             align-items: center;
         }
+
         .swiper-slide img {
             display: block;
             width: 100%;
             height: 50%;
             object-fit: cover;
         }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
+
+        a {
+            text-decoration: none !important
+        }
+
+        a:hover {
+            text-decoration: none !important
+        }
 
 
     </style>
@@ -71,39 +81,40 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
                 <div class="content">
-                    <header>
-
-                        <table>
-                            <tr style="background-color: lavender; text-align: center">
-                                <td>No.</td>
-                                <td>이름</td>
-                                <td>카테고리</td>
-                                <td>제목</td>
-                                <td>작성일</td>
+                    <table>
+                        <tr style="background-color: lavender; text-align: center">
+                            <td>No.</td>
+                            <td>작성자</td>
+                            <td>카테고리</td>
+                            <td>제목</td>
+                            <td>작성일</td>
+                        </tr>
+                        <c:forEach var="plist" items="${postList}">
+                            <tr style="text-align: center">
+                                <td>${plist.post_no}</td>
+                                <td>${plist.nickname}</td>
+                                <td>${plist.post_catename}</td>
+                                <c:choose>
+                                    <c:when test="${plist.post_catecode == 'A001'}">
+                                        <td>
+                                            <a style="color: blueviolet"
+                                               href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>
+                                            <a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                                        </td>
+                                    </c:otherwise>
+                                </c:choose>
+                                <td>${plist.writedate}</td>
                             </tr>
-
-                            <c:forEach var="plist" items="${postList}">
-                                <tr style="text-align: center">
-<%--                                    <c:out value="${plist.post_no}"/>--%>
-<%--                                    <c:out value="${plist.post_no}"/>--%>
-<%--                                    <c:out value="${plist.post_no}"/>--%>
-<%--                                    <c:out value="${plist.post_no}"/>--%>
-<%--                                    <c:out value="${plist.post_no}"/>--%>
-                                    <td>${plist.post_no}</td>
-                                    <td>${plist.nickname}</td>
-                                    <td>${plist.post_catename}</td>
-                                    <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a></td>
-                                    <td>${plist.writedate}</td>
-                                </tr>
-                            </c:forEach>
-
-                        </table>
-
-                    </header>
+                        </c:forEach>
+                    </table>
                 </div>
             </section>
 
@@ -113,9 +124,9 @@
             <br>
 
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
+    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 
 </body>

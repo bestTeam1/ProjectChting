@@ -26,5 +26,6 @@ public class UserDto {
 	private String catename;
 	private int cnt;
 	private int group_role_no;
+	private String group_no;
 	private CommonsMultipartFile fileName;
 }
