@@ -26,7 +26,7 @@
     </select>
 
     <select id="getNoticeDetail" resultType="com.team1.chting.dto.NoticeDto">
-        select notice_no, userid, subject, content, writedate from notice where notice_no = #{noticeNo}
+        select notice_no, userid, subject, content, file, writedate from notice where notice_no = #{noticeNo}
     </select>
 
     <select id="getEventDetail" resultType="com.team1.chting.dto.EventDto">
