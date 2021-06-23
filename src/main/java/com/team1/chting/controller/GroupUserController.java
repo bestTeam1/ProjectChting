@@ -1,6 +1,5 @@
 package com.team1.chting.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.PostReplyDto;
@@ -24,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.w3c.dom.html.HTMLModElement;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;

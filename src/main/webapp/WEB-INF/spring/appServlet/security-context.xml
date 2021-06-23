@@ -1,12 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns:b="http://www.springframework.org/schema/beans"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xmlns="http://www.springframework.org/schema/security"
 		 xmlns:context="http://www.springframework.org/schema/context"
 		 xmlns:mvc="http://www.springframework.org/schema/mvc"
+		 xmlns:util="http://www.springframework.org/schema/util"
 		 xsi:schemaLocation="http://www.springframework.org/schema/security
  			https://www.springframework.org/schema/security/spring-security.xsd
  			http://www.springframework.org/schema/beans
- 			https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+ 			https://www.springframework.org/schema/beans/spring-beans.xsd
+ 			http://www.springframework.org/schema/context
+ 			https://www.springframework.org/schema/context/spring-context.xsd
+ 			http://www.springframework.org/schema/mvc
+ 			https://www.springframework.org/schema/mvc/spring-mvc.xsd
+ 			http://www.springframework.org/schema/util
+ 			https://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!--
 	>>form-login 속성 정의하기
@@ -36,7 +44,6 @@
 	error-if-maximum-exceeded : max-sessions을 넘었을때 접속한 세션을 실패처리할지 여부 (expired-url와 얘중에 하나만 쓰면 될듯)
 
 		-->
-
 	<context:component-scan base-package="com.team1.chting" />
 	<context:annotation-config />
 	<mvc:annotation-driven />
@@ -50,7 +57,7 @@
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
 					  oidc-user-service-ref="customOidcUserService"
-					  authentication-success-handler-ref="successHandler" user-authorities-mapper-ref=""/>
+					  authentication-success-handler-ref="successHandler" />
 		<logout logout-url="/logout" logout-success-url="/index.do"/>
 		<csrf disabled="true" />
 	</http>
@@ -68,6 +75,8 @@
 	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
 	<b:bean id="customOidcUserService" class="com.team1.chting.security.CustomOidcUserService" />
 	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
+
+
 
 	<client-registrations>
 		<client-registration registration-id="google-login"

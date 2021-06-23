@@ -85,6 +85,7 @@
                                 <a style="font-size: xx-large; vertical-align: middle;"><i
                                         class="far fa-calendar-alt"></i></a>&nbsp;
                                 <input type="date" name="birth"><br><br>
+                                <c:out value="${socialData}" />
                             </td>
                         </tr>
 
