@@ -50,6 +50,11 @@ public class GroupUserController {
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
     public String groupMain(@RequestParam("group_no") String group_no, Model model){
         GroupDto dto = groupservice.groupByGroup_no(group_no);
+
+        if(dto.getGroup_img() == null) {
+            dto.setGroup_img("default.jpg");
+        }
+
         model.addAttribute("group",dto);
         return "board/board_main";
     }
