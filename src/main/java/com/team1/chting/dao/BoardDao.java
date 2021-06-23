@@ -1,9 +1,6 @@
 package com.team1.chting.dao;
 
-import com.team1.chting.dto.AreaDto;
-import com.team1.chting.dto.GroupDto;
-import com.team1.chting.dto.PostDto;
-import com.team1.chting.dto.UserDto;
+import com.team1.chting.dto.*;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -28,4 +25,13 @@ public interface BoardDao {
 
     //모임만들기 관심사 정보
     public List<UserDto> getGroupInterest();
+
+    //일정추가
+    public int insertDiary(DiaryDto diaryDto);
+
+    //일정 목록 불러오기
+    public List<DiaryCalDto> getDiaryList(@Param("group_no") String group_no);
+
+    //일정 상세보기
+    public DiaryDto getDiaryDetail(@Param("group_no")String group_no, @Param("schedule_no") String schedule_no);
 }
