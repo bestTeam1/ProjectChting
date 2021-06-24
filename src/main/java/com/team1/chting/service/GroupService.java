@@ -161,9 +161,9 @@ public class GroupService {
         }
 
         // 댓글 수정
-        public PostReplyDto replyUpdate (PostReplyDto postReplyDto){
+        public void replyUpdate (PostReplyDto postReplyDto){
             GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-            return groupDao.replyUpdate(postReplyDto);
+            groupDao.replyUpdate(postReplyDto);
         }
 
 
