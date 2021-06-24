@@ -60,7 +60,7 @@ public class GroupUserController {
         model.addAttribute("group",dto);
 
         //가입한 회원 수
-        int joinUser = groupAdminService.getJoinUser(groupNo);
+        int joinUser = groupAdminService.getJoinUser(group_no);
         model.addAttribute("joinUser", joinUser);
 
         return "board/board_main";
