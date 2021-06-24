@@ -19,5 +19,6 @@ public class SignUpDto {
     private  String second_area;
     private int enabled;
     private Date joindate;
+    private String logintype;
     private  CommonsMultipartFile fileName;
 }

@@ -29,13 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="insertUser" parameterType="com.team1.chting.dto.SignUpDto">
-        insert into user_info (userid, nickname, gender, birth, profile_img, email, content, first_area, second_area, enabled)
-        values (#{userid}, #{nickname}, #{gender}, #{birth}, #{profile_img}, #{email}, #{content}, #{first_area}, #{second_area}, 1)
-    </insert>
-
-    <insert id="tempInterestInsert" parameterType="java.util.HashMap">
-        insert into user_interest (userid, catecode)
-        values (#{userid}, #{catecode})
+        insert into user_info (userid, nickname, gender, birth, profile_img, email, content, first_area, second_area, enabled, logintype)
+        values (#{userid}, #{nickname}, #{gender}, #{birth}, #{profile_img}, #{email}, #{content}, #{first_area}, #{second_area}, 1, #{logintype})
     </insert>
 
 </mapper>
