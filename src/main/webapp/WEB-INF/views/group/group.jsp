@@ -187,7 +187,7 @@
                     var html = "";
                     var length = 0;
                     data.forEach(group => {
-                        html += '<div class="swiper-slide"><a href = "index.do" style="" >' +group.group_name+ '<img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></a></div>';
+                        html += '<div class="swiper-slide"><a href = "${pageContext.request.contextPath}/board_main.do?group_no=' + group.group_no + '" style="" >' +group.group_name+ '<img src="./upload/groupimg/' + group.group_img + '"></a></div>';
                         length++;
                     });
 

@@ -26,12 +26,12 @@
                 <h2>Menu</h2>
             </header>
             <ul id="sideList">
-                <li><a href="index.do">ChTing</a></li>
-                <li><a href="adminIndex.do">관리자</a></li>
-                <li><a href="groupRecommend.do">모임 추천</a></li>
+                <li><a href="${pageContext.request.contextPath}/index.do">ChTing</a></li>
+                <li><a href="admin/adminIndex.do">관리자</a></li>
+                <li><a href="${pageContext.request.contextPath}/groupRecommend.do">모임 추천</a></li>
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-                    <li><a href="myPage.do">마이페이지</a></li>
-                    <li><a href="groupMake.do">모임 생성</a></li>
+                    <li><a href="${pageContext.request.contextPath}/myPage.do">마이페이지</a></li>
+                    <li><a href="${pageContext.request.contextPath}/groupMake.do">모임 생성</a></li>
                 </se:authorize>
 
                 <%--                <li><span class="opener">조선 제1조 모임</span>
@@ -92,11 +92,11 @@
     </div>
 </div>
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/browser.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/breakpoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/util.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <%--  Sweet Alert2  --%>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- jQuery Modal -->

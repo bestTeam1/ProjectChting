@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
 
     <title>글쓰기</title>
@@ -60,11 +58,10 @@
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
-                <h1>${noticeNo}</h1>
                 <div class="content">
                     <header>
                         <%--action='<c:url value='/board/board_insert.do'/>'--%>
-                        <form id="form" method="post" action='noticeWriteOk.do' enctype="multipart/form-data">
+                        <form id="form" method="post" action='${pageContext.request.contextPath}/admin/noticeWriteOk.do' enctype="multipart/form-data">
                             <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}" >
                             <input type="hidden" name="notice_no" value="${noticeNo}">
                         <%-- 카테고리 셀렉트  --%>
@@ -84,7 +81,7 @@
                             <div style="display: flex; justify-content: center">
 
                             <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" onclick="location.href='adminNotice.do'">목록</button>
+                                <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/adminNotice.do'">목록</button>
                             </div>
                         </form>
 

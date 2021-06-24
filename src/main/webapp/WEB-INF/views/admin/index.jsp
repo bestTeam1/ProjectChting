@@ -8,10 +8,6 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- chartjs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -46,7 +42,7 @@
             </section>
             <div id="floatForFooter" style="height: 1000px">
             </div>
-        <a href="chartRecentUser.do">testchartratio</a>
+        <a href="${pageContext.request.contextPath}/chartRecentUser.do">testchartratio</a>
 
     </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

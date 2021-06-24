@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
 
     <title>글쓰기</title>
@@ -21,12 +19,12 @@
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
-            <section>    <h3>${event}</h3>
+            <section>
 
                 <div class="content">
                     <header>
                         <!-- form -->
-                        <form id="form" enctype="multipart/form-data" method="post" action='adminEventModifyOk.do'>
+                        <form id="form" enctype="multipart/form-data" method="post" action='${pageContext.request.contextPath}/admin/adminEventModifyOk.do'>
                             <div>제목<input type="text" id="subject" name="subject" value="${event.subject}"></div>
                             <br>이벤트기간
                             <input type="date" id="startdate" name="startdate" value="${event.startdate}"> -
@@ -80,6 +78,11 @@
     //오늘날짜
     $(document).ready(function () {
         $('#currentDate').val(new Date().toDateInputValue());
+        $('#enddate').attr("min",$('#startdate').val());
+    });
+
+    $('#back').click(()=>{
+        window.location.href='${pageContext.request.contextPath}/admin/adminEvent.do?page=${page}';
     });
 </script>
 </html>
