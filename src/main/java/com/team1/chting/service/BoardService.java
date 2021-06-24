@@ -111,4 +111,9 @@ public class BoardService {
         boardDao.deleteDiary(group_no, schedule_no);
     }
 
+    public void modifyDiary(String group_no, String schedule_no, String modifyDate) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        boardDao.modifyDiary(group_no, schedule_no, modifyDate);
+    }
+
 }
