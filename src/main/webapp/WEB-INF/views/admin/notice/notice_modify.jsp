@@ -14,37 +14,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
-
     <title>글쓰기</title>
-
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            text-decoration: none !important
-        }
-
-        a:hover {
-            text-decoration: none !important
-        }
-    </style>
-
 </head>
 <body class="is-preload">
 
@@ -59,7 +30,7 @@
                 <div class="content">
                     <header>
 
-                        <form id="form" method="post" action='adminNoticeModifyOk.do'>
+                        <form id="form" method="post" action='${pageContext.request.contextPath}/admin/adminNoticeModifyOk.do'>
                             <div>제목<input type="text" id="subject" name="subject" value="${detail.subject}"></div>
                             <br><br>
                             <div>내용<textarea rows="5" cols="13" id="content" name="content"
@@ -78,7 +49,7 @@
                             <input type="hidden" value="${page}" name="page" >
                         </form>
 
-                        <button type="button" onclick="location.href='adminNotice.do?page=${page}'">돌아가기</button>
+                        <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/adminNotice.do?page=${page}'">돌아가기</button>
 
                     </header>
                 </div>
