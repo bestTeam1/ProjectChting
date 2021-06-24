@@ -128,8 +128,7 @@ public class UserController {
         //System.out.println("userid: " +userid);
         //System.out.println("list : " +list);
 
-        userService.deleteInterestCategory(userid);
-        userService.updateInterestCategory(list);
+        userService.updateInterestCategory(list, userid);
 
         return "user/userUpdate";
 
