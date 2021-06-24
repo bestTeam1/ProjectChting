@@ -50,13 +50,17 @@ public class GroupUserController {
 
     // 모임 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
-    public String groupMain(@RequestParam("group_no") String groupNo, Model model){
+    public String groupMain(@RequestParam("group_no") String group_no, Model model){
+        GroupDto dto = groupservice.groupByGroup_no(group_no);
 
-        GroupDto dto = groupservice.groupByGroup_no(groupNo);
+        if(dto.getGroup_img() == null) {
+            dto.setGroup_img("default.jpg");
+        }
+
         model.addAttribute("group",dto);
 
         //가입한 회원 수
-        int joinUser = groupAdminService.getJoinUser(groupNo);
+        int joinUser = groupAdminService.getJoinUser(group_no);
         model.addAttribute("joinUser", joinUser);
 
         return "board/board_main";
@@ -95,10 +99,13 @@ public class GroupUserController {
 
     // 글 상세보기
     @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
-    public String read(@RequestParam("post_no") int post_no, Model model){
+    public String read(@RequestParam("post_no") int post_no, @RequestParam String userid, Model model){
         PostDto postDto = groupservice.read(post_no);
+        String nickname = userService.selectNickname(userid);
 
         model.addAttribute("plist", postDto);
+        model.addAttribute("nickname", nickname);
+
         return "board/board_detail";
     }
 
