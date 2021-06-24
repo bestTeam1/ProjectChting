@@ -24,7 +24,5 @@ public interface LoginDao {
     //회원가입 수연
     public int insertUser(SignUpDto signUpDto);
 
-    //임시 관심사 넣기 수연
-    public int tempInterestInsert(HashMap<String, String> tempInterest);
 
 }

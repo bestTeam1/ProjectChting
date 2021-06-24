@@ -11,8 +11,7 @@
           content="width=device-width, initial-scale=1, user-scalable=no"/>
     <%--  Sweet Alert2  --%>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <%--  J Query  --%>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" integrity="sha512-S1RkECuolGdQWD0oCmmxBDhSy412eTVKms9ZscfHjBT3TiVYz70oD1AgNM/FylUqZ0U/9tDp/XuV1FjZoUoVCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="is-preload">
 
@@ -21,22 +20,6 @@
     <!-- DB Object -->
     <c:set var="arealist" value="${requestScope.areaList}"/>
     <c:set var="interestList" value="${requestScope.interestList}"/>
-    <!-- Social Object -->
-    <c:set var="loginType" value="${requestScope.loginType}"/>
-
-    <c:choose>
-        <c:when test="${loginType.trim().equals('google-login')}">
-            <c:set var="profile_img" value="${pageContext.request.getAttribute('picture')}"/>
-            <c:set var="nickname" value="${pageContext.request.getAttribute('name')}"/>
-            <c:set var="email" value="${pageContext.request.getAttribute('email')}"/>
-        </c:when>
-        <c:when test="${loginType.trim().equals('kakao-login')}">
-            <c:set var="profile_img" value="${pageContext.request.getAttribute('properties').thumbnail_image}"/>
-            <c:set var="nickname" value="${pageContext.request.getAttribute('properties').nickname}"/>
-            <c:set var="email" value="${pageContext.request.getAttribute('kakao_account').email}"/>
-        </c:when>
-    </c:choose>
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -55,14 +38,14 @@
                             <td style="vertical-align: middle">프로필
                                 <span style="color: red;"> *</span></td>
                             <td>
-                                <input type="hidden" name="userid" value="${pageContext.request.userPrincipal.name}">
-                                <input type="hidden" name="nickname" value="${nickname}">
-                                <input type="hidden" name="email" value="${email}">
-                                <input type="hidden" name="profile_img" value="${profile_img}">
+                                <input type="hidden" name="userid" value="${socialData.userid}">
+                                <input type="hidden" name="nickname" value="${socialData.nickname}">
+                                <input type="hidden" name="profile_img" value="${socialData.profile_img}">
+                                <input type="hidden" name="logintype" value="${socialData.loginType}">
                                 <br>
                                 <c:choose>
-                                    <c:when test="${not empty profile_img}">
-                                        <img id="preview" src="${profile_img}" width="130" alt="프로필 이미지가 보여지는 영역">
+                                    <c:when test="${not empty socialData.profile_img}">
+                                        <img id="preview" src="${socialData.profile_img}" width="130" alt="프로필 이미지가 보여지는 영역">
                                     </c:when>
                                     <c:otherwise>
                                         <img id="preview"
@@ -84,11 +67,9 @@
                             <td><br>
                                 <a style="font-size: xx-large; vertical-align: middle;"><i
                                         class="far fa-calendar-alt"></i></a>&nbsp;
-                                <input type="date" name="birth"><br><br>
-                                <c:out value="${socialData}" />
+                                <input type="date" name="birth" required><br><br>
                             </td>
                         </tr>
-
                         <tr>
                             <td style="vertical-align: middle">성별
                                 <span style="color: red;"> *</span></td>
@@ -98,38 +79,21 @@
                                 <label for="male">남자</label>
                                 <input type="radio" id="female" name="gender" value="여성">
                                 <label for="female">여자</label>
-
                             </td>
                         </tr>
-
                         <tr>
                             <td style="vertical-align: middle">소개글
                                 <span style="color: red;"> *</span></td>
                             <td><textarea style="resize: none;" cols="50" rows="5" name="content"
                                           placeholder="100자 이내로 기입해주세요 :)"
                                           onfocus="this.placeholder = ''"
-                                          onblur="this.placeholder = '100자 이내로 기입해주세요 :)'"></textarea></td>
+                                          onblur="this.placeholder = '100자 이내로 기입해주세요 :)'" required></textarea></td>
                         </tr>
-
                         <tr>
                             <td style="vertical-align: middle">관심사
                                 <span style="color: red;"> *</span></td>
                             <td>
-                                <%--                                    <ol>--%>
-                                <%--                                        <ul class="a">--%>
-                                <%--                                            <c:forEach var="userInterest" items="${userInfo.userInterest}">--%>
-                                <%--                                                <div class="circle_user_interest">--%>
-                                <%--                                                        ${userInterest.catename}--%>
-                                <%--                                                </div>--%>
-                                <%--                                            </c:forEach>--%>
-                                <%--                                            <input type="button" class="button small" value="추가"--%>
-                                <%--                                                   onclick="window.open('categoryChoice.do', 'categoryChoice', 'width=600, height=600, left=100, top=50');">--%>
-                                <%--                                        </ul>--%>
-                                <%--                                    </ol>--%>
-
-
-                                <select id="interest" name="interest" style="width: 30%; float:left;" required>
-                                    <option value="" disabled selected> - 선택하세요 -</option>
+                                <select class="js-example-basic-multiple-limit" multiple="multiple" name="interest" style="width: 30%; float: left;" required>
                                     <c:forEach var="interestList" items="${interestList}" begin="0" end="107"
                                                step="1">
                                         <option value="${interestList.code}">${interestList.name}</option>
@@ -152,9 +116,10 @@
                         </tr>
 
                         <tr>
-                            <td style="vertical-align: middle">선호 지역 2</td>
+                            <td style="vertical-align: middle">선호 지역 2
+                                <span style="color: red;"> *</span></td>
                             <td>
-                                <select id="second_area" name="second_area" style="width: 30%; float:left;">
+                                <select id="second_area" name="second_area" style="width: 30%; float:left;" required>
                                     <option value="" disabled selected> - 선택하세요 -</option>
                                     <c:forEach var="area2" items="${areaList}">
                                         <option value="${area2.code}">${area2.name}</option>
@@ -162,6 +127,20 @@
                                 </select>
                             </td>
                         </tr>
+                        <c:choose>
+                            <c:when test="${socialData.email == 'github'}">
+                                <tr>
+                                    <td style="vertical-align: middle">이메일
+                                        <span style="color: red;"> *</span></td>
+                                    <td>
+                                        <input type="email" name="email" required>
+                                    </td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="hidden" name="email" value="${socialData.email}">
+                            </c:otherwise>
+                        </c:choose>
                         <tr>
                             <td style="vertical-align: middle">약관동의
                                 <span style="color: red;"> *</span></td>
@@ -169,7 +148,7 @@
                                 <div style="border-color: rebeccapurple; border-block-style: solid; margin: 5px; padding: 10px; width: 400px; height: 50px;">
                                     대충 약관내용이라는 내용
                                 </div>
-                                <input type="checkbox" id="siterule" name="siterule" value="agree">
+                                <input type="checkbox" id="siterule" name="siterule" value="agree" required>
                                 <label for="siterule"> 약관동의 체크 </label><br>
                             </td>
                         </tr>
@@ -182,9 +161,21 @@
     </div>
     <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.full.min.js" integrity="sha512-a7XpBrwW2cJN4EE8L4Gsy9II/KNLsXHr4LhDoYC39Whrz1LWzYMNZYph4rp9XwsLXUTpPWJ1oy8HkFxHATrERA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript">
     $(function () {
+        areaOverlapCheck();
+        $(".js-example-basic-multiple-limit").select2({
+            maximumSelectionLength: 3
+        });
+
+        $('#signUpFrm').validate();
+
+        $.extend($.validate.message, {
+            required : "필수 항목 입니다."
+        })
+
         //프로필 이미지 프리뷰
         var file = document.querySelector('#fileName');
         file.onchange = function () {
@@ -216,25 +207,43 @@
                 cache: false,
                 timeout: 60000,
                 success: function (data) {
-                    Swal.fire(
-                        '회원가입 완료!',
-                        '다시 로그인을 진행 해주세요!',
-                        'success'
-                    ).then(() => {
+                    Swal.fire({
+                        title : '회원가입 완료!',
+                        text : '다시 로그인을 진행 해주세요!',
+                        icon : 'success',
+                        timer : 2000
+                    }).then(() => {
                         location.href = "${pageContext.request.contextPath}/logout";
                     });
                 },
                 error: function (e) {
-                    Swal.fire(
-                        '오류 발생 Error',
-                        '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
-                        'error'
-                    );
+                    Swal.fire({
+                        title : '오류 발생 Error',
+                        text : '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
+                        icon : 'error',
+                        timer : 2000
+                    }).then(() => {
+                        location.reload();
+                    });
                 }
             });
         });
-    })
-    ;
+    });
+
+    function areaOverlapCheck(){
+        $('#first_area').on('change', function (data){
+            if($('#first_area').val() === $('#second_area').val()){
+                alert('같은 지역을 선택하실 수 없습니다. 다시 선택해주세요.');
+                $('#first_area').val("");
+            }
+        });
+        $('#second_area').on('change', function(data){
+            if($('#second_area').val() === $('#first_area').val()){
+                alert('같은 지역을 선택하실 수 없습니다. 다시 선택해주세요.');
+                $('#second_area').val("");
+            }
+        });
+    }
 
 </script>
 </body>

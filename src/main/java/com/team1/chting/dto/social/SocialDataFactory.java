@@ -9,6 +9,8 @@ public class SocialDataFactory {
             return new Google(userData, registrationId);
         }else if("kakao-login".equalsIgnoreCase(registrationId)) {
             return new Kakao(userData, registrationId);
+        }else if("github-login".equalsIgnoreCase(registrationId)) {
+            return new Github(userData, registrationId);
         }
         return null;
     }
