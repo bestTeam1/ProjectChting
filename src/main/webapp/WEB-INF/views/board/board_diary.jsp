@@ -9,7 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="${pageContext.request.contextPath}/fullcalendar/css/main.min.css" rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/fullcalendar/js/main.min.js"/>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
@@ -69,6 +68,12 @@
             cursor: pointer;
         }
 
+        #cancelEvent {
+            width: 20%;
+            margin-top: 25px;
+            margin-left: 20px;
+        }
+
     </style>
     <title>Calendar</title>
 </head>
@@ -102,11 +107,12 @@
                                 <input class="chtingCal" id="chtingCalLocation" type="text" onclick="searchMap()"
                                        placeholder="장소를 알려주세요!">
                             </div>
-                            <input type="hidden" name="xcoord" id="xcoord"/>
-                            <input type="hidden" name="ycoord" id="ycoord"/>
-                            <div style="display: flex; justify-content: center">
+                            <!-- 카카오맵 기본좌표 강남 비트캠프 -->
+                            <input type="hidden" name="xcoord" id="xcoord" value="127.029018585511"/>
+                            <input type="hidden" name="ycoord" id="ycoord" value="37.4994547195947"/>
+                            <input type="hidden" name="schedule_no" id="chtingScheduleNo" value=""/>
+                            <div id="buttonDiv" style="display: flex; justify-content: center">
                                 <button class="formBtn" id="diarySubmit"> 확인</button>
-                                <a id="refuse" href="#" class="button primary fit">가입거절</a>
                             </div>
                         </form>
                         <div style="display: table; justify-content: right">
@@ -116,7 +122,7 @@
                 </div>
 
                 <!-- Link to open the modal -->
-                <p ><a id="modal" href="#ex1" rel="modal:open"></a></p>
+                <p><a id="modal" href="#ex1" rel="modal:open"></a></p>
                 <div id='external-events' style="width: 15%; float: left; padding-right: 30px; padding-left: 20px;">
                     <p>
                         <strong>이벤트 생성하기</strong>
@@ -180,20 +186,26 @@
             initialView: 'dayGridMonth',
             locale: 'ko',
             headerToolbar: {
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar
             events: loadingEvents()
             ,
             eventClick: function (event) {
+                //클릭시에는 이미있는 이벤트를 삭제할수있는 삭제버튼이 생성됨
+                $('#buttonDiv').each(function () {
+                    if ($('a', this).length == 0) {
+                        $('#buttonDiv').append('<a id="cancelEvent" class="button primary">삭제</a>');
+                        cancelEvent();
+                    }
+                })
                 var schedule_no = event.event.extendedProps.schedule_no//클릭한 이벤트의 스케쥴넘버(DB)
                 //ajax로 해당 스케줄의 정보 가져와서 출력
                 $.ajax({
                     url: "board_diary_detail.do",
                     type: 'POST',
                     dataType: 'JSON',
-                    async : false,
+                    async: false,
                     data: {
                         group_no: '${group_no}',
                         schedule_no: schedule_no
@@ -204,6 +216,7 @@
                         $('#chtingCalDate').val(response.calDate);
                         $('#chtingContent').val(response.content);
                         $('#chtingSubject').val(response.subject);
+                        $('#chtingScheduleNo').val(response.schedule_no);
                         $('#xcoord').val(response.xcoord);
                         $('#ycoord').val(response.ycoord);
 
@@ -220,7 +233,15 @@
             },
             //내려놨을때 form불러와서 데이터를 추가로 받는다
             drop: function (info) {
+                //이미 취소버튼이 생성됐으면 지워줍니다.
+                $('#buttonDiv').each(function () {
+                    if ($('a', this).length != 0) {
+                        $('a', this).remove();
+                    }
+                })
+
                 $('#modal').click();
+                makeMap();
 
                 $('#chtingCalType').val(info.draggedEl.innerText);
                 $('#chtingCalDate').val(moment(info.dateStr).format('YYYY-MM-DD'));
@@ -263,6 +284,7 @@
             },
             dataType: 'JSON',
             success(response) {
+                console.log(response);
                 return_value = response;
             }
         })
@@ -308,28 +330,6 @@
         });
     }
 
-
-    function address() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var jibunAddr = data.jibunAddress; // 지번 주소 변수
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('chtingCalLocation').value = data.zonecode;
-                if (roadAddr !== '') {
-                    document.getElementById("chtingCalLocation").value = roadAddr;
-                } else if (jibunAddr !== '') {
-                    document.getElementById("chtingCalLocation").value = jibunAddr;
-                }
-                //가져온 주소로 이동
-                moveMap();
-            }
-        }).open();
-    }
-
     //위치에 표시된 장소로 맵을 이동하는 기능
     function searchMap() {
 
@@ -366,6 +366,13 @@
 
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                 map.setBounds(bounds);
+            } else if (data == null || data == undefined || data == "") { //키워드를 입력안했을시
+                Swal.fire({
+                    icon: 'error',
+                    title: '장소검색 실패!',
+                    text: '검색하신 키워드에 대한 정보가 없습니다',
+                    footer: 'ex) 강남역 맛집'
+                })
             }
         }
 
@@ -397,7 +404,14 @@
 
     //일정 만들기 확인 클릭
     $('#diarySubmit').on('click', function (e) {
-        e.preventDefault();
+        Swal.fire('Any fool can use a computer');
+        Swal.fire('Any fool can use a computer');
+        Swal.fire('Any fool can use a computer');
+        Swal.fire('Any fool can use a computer');
+        Swal.fire('Any fool can use a computer');
+        alert('?????');
+
+
         $.ajax({
             url: "board_diaryOk.do",
             type: "GET",
@@ -409,8 +423,8 @@
                 subject: $('#chtingSubject').val(),
                 content: $('#chtingContent').val(),
                 location: $('#chtingCalLocation').val(),
-                xcoord : $('#xcoord').val(),
-                ycoord : $('#ycoord').val()
+                xcoord: $('#xcoord').val(),
+                ycoord: $('#ycoord').val()
             },
             success: function (response) {
                 Swal.fire({
@@ -427,10 +441,49 @@
         });
     });
 
-    function groupDiaryOk() {
+    //일정 만들기 취소 클릭이벤트
+    function cancelEvent() {
+        $('#cancelEvent').on('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '일정 취소',
+                text: '일정을 취소하시겠습니까??',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '네',
+                canclButtonText: '아니오'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "board_diary_delete.do",
+                        data: {
+                            group_no: '${group_no}',
+                            schedule_no: $('#chtingScheduleNo').val()
+                        },
+                        type: "get",
+                        success: function (response) {
+                            Swal.fire({
+                                title: '일정 삭제',
+                                text: '일정이 삭제되었습니다'
+                            }).then((result) => {
+                                window.location.href = "";
+                            })
+                        },
+                        error: function (Http, status, error) {
+                            console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: '일정 삭제 취소',
+                        text: '삭제를 취소하셨습니다'
+                    });
+                }
+            })
 
-
+        });
     }
-
 </script>
 </html>
