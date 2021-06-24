@@ -45,5 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from group_schedule where group_no = #{group_no} and schedule_no = #{schedule_no}
     </select>
 
+    <update id="modifyDiary">
+        update group_schedule set startdate = #{modifyDate} where schedule_no = #{schedule_no} and group_no  = #{group_no};
+    </update>
+
 </mapper>
 
