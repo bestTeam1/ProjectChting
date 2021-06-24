@@ -73,7 +73,7 @@
                         <!-- Swiper -->
                         <div class="swiper-container mySwiper" style="width: 900px">
                             <div class="swiper-wrapper" id="slider">
-                                <div class="swiper-slide"><img src="https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png"></div>
+                                <div class="swiper-slide"></div>
 
                             </div>
                             <div class="swiper-button-next"></div>
@@ -126,7 +126,7 @@
         type:"get",
         success : function(response) {
             response.forEach(event => {
-                slider.append("<div class='swiper-slide'><a href='adminEventDetail.do?eventNo=" + event.event_no + "'><img src='upload/event/" + event.event_img + "'></a></div>");
+                slider.append("<div class='swiper-slide'><a href='${pageContext.request.contextPath}/admin/adminEventDetail.do?eventNo=" + event.event_no + "'><img src='${pageContext.request.contextPath}/upload/event/" + event.event_img + "'></a></div>");
             });
             var swiper = new Swiper(".mySwiper", {
                 slidesPerView : 1, //슬라이드 표시할 사진갯수
@@ -158,7 +158,7 @@
        success : function(response) {
            console.log(response);
            response.forEach(notice => {
-              noticeList.append("<a href='adminNoticeDetail.do?noticeNo=" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
+              noticeList.append("<a href='${pageContext.request.contextPath}/admin/adminNoticeDetail.do?noticeNo=" + notice.notice_no + "'><li>" + notice.subject + "</li></a>");
            });
        }
     });

@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
 
     <title>글쓰기</title>
@@ -27,7 +25,7 @@
                 <div class="content">
                     <header>
                         <%--action='<c:url value='/board/board_insert.do'/>'--%>
-                        <form id="form" method="post" action='eventWriteOk.do' enctype="multipart/form-data">
+                        <form id="form" method="post" action='${pageContext.request.contextPath}/admin/eventWriteOk.do' enctype="multipart/form-data">
                             <!-- userid와 eventNo 들고감 -->
                             <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}" >
                             <input type="hidden" name="event_no" value="${eventNo}">
@@ -52,7 +50,7 @@
                             <div style="display: flex; justify-content: center">
 
                                 <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" onclick="location.href='adminEvent.do'">목록</button>
+                                <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/adminEvent.do'">목록</button>
                             </div>
                         </form>
 
@@ -128,6 +126,7 @@
     //이벤트 시작일 default 현재날짜로 넣어두기
     $(document).ready(function () {
         $('#startdate').val(new Date().toDateInputValue());
+        $('#enddate').attr("min",$('#startdate').val());
     });
 
 </script>
