@@ -1,6 +1,7 @@
 package com.team1.chting.dao;
 
 import com.team1.chting.dto.*;
+import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
 import com.team1.chting.utils.Criteria;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -49,10 +50,14 @@ public interface GroupDao {
 
 
     // 게시글 전체 목록
-    public List<PostDto> getPostList(@Param("group_no") String group_no);
+    public List<PostDto> getPostList(@Param("group_no") String group_no, @Param("page") int page)throws Exception;
 
-    // 페이징 리스트?
-    public List<Map<String, Object>> postList(Criteria cri);
+    public List<PostDto> listPageCriPost(AdminCriteria cri) throws Exception;
+
+
+    public int pageCount()throws Exception;
+
+    public int pageCountPost(@Param("group_no") String group_no) throws Exception;
 
 
     // 댓글목록

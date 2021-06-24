@@ -18,6 +18,7 @@ public class PostDto {
 	private String file;
 	private Date writedate;
 	private CommonsMultipartFile fileName;
+	private int enabled;
 
 
 }
