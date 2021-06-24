@@ -120,7 +120,7 @@
                         if(reply.userid == '${nickname}') {
                             such += "<div>";
                             such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
-                            such += "<div id='reply" + reply.reply_no +"'>" + "✔️ " + reply.content + "&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='replyUpdate' class='replyUpdate' onclick='replyEdit(" + reply.reply_no + "," + reply.content + ")'>수정</a>&nbsp;&nbsp;<a href='javascript:void(0)' id='replyDelete' class='replyDelete' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a>" + "</div>" + "<tr><hr></tr>";
+                            such += "<div id='reply" + reply.reply_no +"'>" + "✔️ " + reply.content + "&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='replyUpdate' class='replyUpdate' onclick='replyEdit(" + reply.reply_no + "," + "\"" + reply.content + "\"" + ")'>수정</a>&nbsp;&nbsp;<a href='javascript:void(0)' id='replyDelete' class='replyDelete' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a>" + "</div>" + "<tr><hr></tr>";
                             such += "</div>";
                             such += "</div>";
                         } else {
@@ -154,7 +154,6 @@
        */
     function replyEdit(reply_no, content){
         let id = "#reply" + reply_no;
-        console.log(id);
         var such = "";
 
         such += "<a href='javascript:void(0)' onclick='updateReply("+ reply_no + ","+ userid + ")'>저장</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='getReplyList()'>취소"+"</a>";
@@ -177,7 +176,6 @@
             type : 'POST',
             dataType : 'text',
             success: function(response){
-                console.log(response);
                 getReplyList();
             }
             , error: function (request, status, error) {
