@@ -85,7 +85,9 @@
         select count(*)as user
         from group_user_role gur
         join group_info gi on gur.group_no = gi.group_no
+        join user_info ui on gi.userid = ui.userid
         where gi.enabled = 1
+        and ui.enabled = 1
         and gi.group_no = #{groupNo}
     </select>
 
