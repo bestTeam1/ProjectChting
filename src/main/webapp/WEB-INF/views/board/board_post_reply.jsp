@@ -68,7 +68,6 @@
             dataType: "text",
             contentType: "application/json",
             success: function (response) {
-                console.log('123123');
                 getReplyList();
             },
             error: function (request, status, error) {
@@ -117,12 +116,20 @@
 
                 if (response.length > 0) {
                     response.forEach(reply => {
-                        console.log(reply);
-                        such += "<div>";
-                        such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
-                        such += "✔️ " + reply.content + "&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='replyUpdate' class='replyUpdate' onclick='replyEdit("+ reply.reply_no + ","+ reply.userid + ","+ reply.content +")'>수정</a>&nbsp;&nbsp;<a href='javascript:void(0)' id='replyDelete' class='replyDelete' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a><tr><hr></tr>";
-                        such += "</div>";
-                        such += "</div>";
+                        console.log(reply.userid);
+                        if(reply.userid == '${nickname}') {
+                            such += "<div>";
+                            such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
+                            such += "<div id='reply" + reply.reply_no +"'>" + "✔️ " + reply.content + "&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='replyUpdate' class='replyUpdate' onclick='replyEdit(" + reply.reply_no + "," + "\"" + reply.content + "\"" + ")'>수정</a>&nbsp;&nbsp;<a href='javascript:void(0)' id='replyDelete' class='replyDelete' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a>" + "</div>" + "<tr><hr></tr>";
+                            such += "</div>";
+                            such += "</div>";
+                        } else {
+                            such += "<div>";
+                            such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
+                            such += "✔️ " + reply.content + "<tr><hr></tr>";
+                            such += "</div>";
+                            such += "</div>";
+                        }
                     });
 
                 } else {
@@ -145,45 +152,30 @@
     /*
        * 댓글 수정하기(view)
        */
-    function replyEdit(reply_no,  userid, content){
-
+    function replyEdit(reply_no, content){
+        let id = "#reply" + reply_no;
         var such = "";
 
-        such += "<div>";
-        such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>";
-        such += "<a href='javascript:void(0)' onclick='updateReply("+ reply.reply_no + ","+ reply.userid + ")'>저장</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='getReplyList()'>취소"+"</a>";
+        such += "<a href='javascript:void(0)' onclick='updateReply("+ reply_no + ","+ userid + ")'>저장</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='getReplyList()'>취소"+"</a>";
         such += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
-        such += "✔️ " + reply.content;
+        such +=  content;
         such += "</textarea>";
-        such += "</div>";
-        such += "</div>";
 
-        $('#userid' + userid).replaceWith(such);
-        $('#userid' + userid + ' #content').focus();
-
-
+        $(id).html(such);
     }
 
     function updateReply(reply_no, userid){
         var replyEditContent = $('#editContent').val();
 
-
-        var paramData = JSON.stringify({"content": replyEditContent
-            , "reply_no": reply_no
-        });
-
-        var headers = {"Content-Type" : "application/json"
-            , "X-HTTP-Method-Override" : "POST"};
-
         $.ajax({
-
-            url: 'board_replyUpdate.do'
-            , headers : headers
-            , data : paramData
-            , type : 'POST'
-            , dataType : 'text'
-            , success: function(response){
-                console.log(response);
+            url: 'board_replyUpdate.do',
+            data : {
+                "content": replyEditContent,
+                "reply_no": reply_no
+            },
+            type : 'POST',
+            dataType : 'text',
+            success: function(response){
                 getReplyList();
             }
             , error: function (request, status, error) {

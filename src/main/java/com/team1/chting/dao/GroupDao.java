@@ -22,7 +22,7 @@ public interface GroupDao {
     public List<GroupDto> randomGroup();
 
     //회원 -> 지역기반 5개
-    public List<GroupDto> areaGroup(@Param("first_area") String first_area,@Param("second_area") String second_area);
+    public List<GroupDto> areaGroup(String userid);
 
     //회원 -> 관심사기반 5개
     public List<GroupDto> catecodeGroup(String userid);
@@ -62,7 +62,8 @@ public interface GroupDao {
 
 
     // 댓글수정
-    public PostReplyDto replyUpdate(PostReplyDto postReplyDto);
+    public void replyUpdate(PostReplyDto postReplyDto);
+
     // 댓글삭제
     public int replyDelete(int reply_no);
 
