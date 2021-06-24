@@ -27,7 +27,7 @@
             </header>
             <ul id="sideList">
                 <li><a href="${pageContext.request.contextPath}/index.do">ChTing</a></li>
-                <li><a href="admin/adminIndex.do">관리자</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/adminIndex.do">관리자</a></li>
                 <li><a href="${pageContext.request.contextPath}/groupRecommend.do">모임 추천</a></li>
                 <se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
                     <li><a href="${pageContext.request.contextPath}/myPage.do">마이페이지</a></li>
