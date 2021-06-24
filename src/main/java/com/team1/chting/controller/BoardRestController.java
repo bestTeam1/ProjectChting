@@ -151,7 +151,7 @@ public class BoardRestController {
     }
 
     /*
-    모임 일정 수정
+    모임 일정 삭제
     작성자 : 이승준
     2021-06-24
     */
@@ -162,6 +162,26 @@ public class BoardRestController {
         //가져온 그룹넘버와 스케줄번호로 조회
         try {
             boardService.deleteDiary(group_no, schedule_no);
+            return new ResponseEntity<String>("true", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("false", HttpStatus.BAD_GATEWAY);
+        }
+    }
+
+    /*
+    모임 일정 날짜변경(드래그앤드롭)
+    작성자 : 이승준
+    2021-06-24
+    */
+    @RequestMapping(value="board_diary_modify.do", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> diaryDelete(@RequestParam("group_no") String group_no,
+                                              @RequestParam("modifyDate") String modifyDate,
+                                              @RequestParam("schedule_no") String schedule_no) {
+
+        //가져온 그룹넘버와 스케줄번호로 조회
+        try {
+            boardService.modifyDiary(group_no, schedule_no, modifyDate);
             return new ResponseEntity<String>("true", HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
