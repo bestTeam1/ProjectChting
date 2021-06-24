@@ -38,8 +38,14 @@
                                     <td>제목</td>
                                     <td>작성일</td>
                                 </tr>
+
                                 <c:forEach var="plist" items="${plist}">
                                     <tr style="text-align: center">
+                                            <%--                                    <c:out value="${plist.post_no}"/>--%>
+                                            <%--                                    <c:out value="${plist.post_no}"/>--%>
+                                            <%--                                    <c:out value="${plist.post_no}"/>--%>
+                                            <%--                                    <c:out value="${plist.post_no}"/>--%>
+                                            <%--                                    <c:out value="${plist.post_no}"/>--%>
                                         <td>${plist.post_no}</td>
                                         <td>${plist.nickname}</td>
                                         <td>${plist.post_catename}</td>
@@ -47,12 +53,12 @@
                                             <c:when test="${plist.post_catecode == 'A001'}">
                                                 <td>
                                                     <a style="color: blueviolet"
-                                                       href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                                                       href='<c:url value='board_detail.do?post_no=${plist.post_no}&userid=${sessionScope.get("userData").userid}'/>'>${plist.subject}</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td>
-                                                    <a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                                                    <a href='<c:url value='board_detail.do?post_no=${plist.post_no}&userid=${sessionScope.get("userData").userid}'/>'>${plist.subject}</a>
                                                 </td>
                                             </c:otherwise>
                                         </c:choose>
