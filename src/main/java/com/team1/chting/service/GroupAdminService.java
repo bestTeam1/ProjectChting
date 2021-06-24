@@ -1,13 +1,19 @@
 package com.team1.chting.service;
 
 import com.team1.chting.dao.GroupAdminDao;
+import com.team1.chting.dao.GroupDao;
+import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Service
@@ -173,6 +179,56 @@ public class GroupAdminService {
         groupAdminDao.groupDisbandEnabled(groupNo);
     }
 
+    /*
+     모임 정보 가져오기
+     작성자 : 박주현
+     작성일 : 2021-06-23
+    */
+    public GroupDto getGroupInfo(String groupNo) {
 
+        GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
+        GroupDto groupDto = groupAdminDao.selectGroupInfo(groupNo);
 
+        return groupDto;
+    }
+
+    /*
+     모임 정보 수정하기
+     작성자 : 박주현
+     작성일 : 2021-06-23
+    */
+    public void updateGroup(GroupDto groupDto, HttpServletRequest request) throws Exception {
+        if (groupDto.getFileName() != null) {
+            CommonsMultipartFile file = groupDto.getFileName();
+            if (file != null && file.getSize() > 0 && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                System.out.println(fileName);
+                fileName = groupDto.getGroup_no() + "." + fileName.split("\\.")[1].toLowerCase(); //프로필이미지 이름 = group_name
+                String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
+                String fpath = path + File.separator + fileName;
+
+                if (!fileName.equals("")) {
+                    FileOutputStream fs = new FileOutputStream(fpath);
+                    fs.write(file.getBytes());
+                    fs.close();
+                }
+                groupDto.setGroup_img(fileName);
+            }
+        }
+        GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
+        groupAdminDao.updateGroup(groupDto);
+
+    }
+
+    /*
+     모임 참여 회원 수
+     작성자 : 박주현
+     작성일 : 2021-06-23
+    */
+    public int getJoinUser(String groupNo) {
+        GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
+        int result = groupAdminDao.selectJoinUser(groupNo);
+
+        return result;
+    }
 }
