@@ -4,11 +4,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>이벤트 관리</title>
+    <title>이벤트 목록</title>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
-
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -45,7 +44,7 @@
                                             (종료)
                                         </c:otherwise>
                                     </c:choose>
-                                    <a href="${pageContext.request.contextPath}/admin/adminEventDetail.do?eventNo=${i.event_no}&page=${pm.cri.page}">${i.subject}</a>
+                                    <a href="${pageContext.request.contextPath}/eventList.do?eventNo=${i.event_no}&page=${pm.cri.page}">${i.subject}</a>
                                 </td>
                                 <td>${i.startdate}</td>
                                 <td>${i.enddate}</td>
@@ -61,18 +60,18 @@
                         <ul class="pagination" style="text-align: center">
                             <!-- 이전prev -->
                             <c:if test="${pm.prev}">+
-                                <li><a href="${pageContext.request.contextPath}/admin/adminEvent.do?page=${pm.startPage-1}">&laquo;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/eventList.do?page=${pm.startPage-1}">&laquo;</a></li>
                             </c:if>
                             <!-- 페이지블럭 -->
                             <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
                                 <!-- 삼항연산자를 사용해서 class로 스타일적용  -->
                                 <li ${pm.cri.page == idx? 'class=active':''}>
-                                    <a href="${pageContext.request.contextPath}/admin/adminEvent.do?page=${idx}">${idx}</a>
+                                    <a href="${pageContext.request.contextPath}/eventList.do?page=${idx}">${idx}</a>
                                 </li>
                             </c:forEach>
                             <!-- 다음next -->
                             <c:if test="${pm.next && pm.endPage > 0}">
-                                <li><a href="${pageContext.request.contextPath}/admin/adminEvent.do?page=${pm.endPage+1}">&raquo;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/eventList.do.do?page=${pm.endPage+1}">&raquo;</a></li>
                             </c:if>
                         </ul>
                     </div>
