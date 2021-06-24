@@ -38,8 +38,6 @@
                                     <td>제목</td>
                                     <td>작성일</td>
                                 </tr>
-
-
                                 <c:forEach var="plist" items="${plist}">
                                     <tr style="text-align: center">
                                         <td>${plist.post_no}</td>
