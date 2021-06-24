@@ -87,7 +87,7 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-11
      */
-    @RequestMapping(value = "groupDisband.do", method = RequestMethod.POST)
+    @RequestMapping(value = "groupDisband.do", method = RequestMethod.GET)
     public String groupDisband(HttpServletRequest httpServletRequest, Model model) {
 
         String userid = httpServletRequest.getParameter("userid");

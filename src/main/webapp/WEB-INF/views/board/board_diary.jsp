@@ -404,14 +404,6 @@
 
     //일정 만들기 확인 클릭
     $('#diarySubmit').on('click', function (e) {
-        Swal.fire('Any fool can use a computer');
-        Swal.fire('Any fool can use a computer');
-        Swal.fire('Any fool can use a computer');
-        Swal.fire('Any fool can use a computer');
-        Swal.fire('Any fool can use a computer');
-        alert('?????');
-
-
         $.ajax({
             url: "board_diaryOk.do",
             type: "GET",
