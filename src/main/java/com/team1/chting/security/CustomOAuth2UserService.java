@@ -33,15 +33,11 @@ import java.util.*;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final LoginService loginService;
-    private final HttpSession httpSession;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
-
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        System.out.println("registrationId :: " + registrationId + oAuth2User.getName());
 
         LoginDto loginDto = loginService.isUser(oAuth2User.getName());
 
@@ -50,7 +46,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             resultRole = "ROLE_GUEST";
         } else {
             resultRole = loginDto.getRole();
-            //httpSession.setAttribute("user", new SessionDto(loginDto));
         }
 
         return new DefaultOAuth2User(

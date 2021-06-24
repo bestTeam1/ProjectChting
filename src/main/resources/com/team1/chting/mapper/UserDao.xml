@@ -30,11 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 회원 참여 모임 정보   -->
     <select id="selectUserJoinGroup" resultType="com.team1.chting.dto.UserDto">
-        select u.userid, gi.group_name
+        select u.userid, gi.group_name, gi.group_no
         from user_info u
                  join group_user_role gur on u.userid = gur.userid
                  join group_info gi on gur.group_no = gi.group_no
-        where u.userid = #{userid}
+        where gi.enabled = 1 and u.userid = #{userid}
         order by gi.group_name
     </select>
 

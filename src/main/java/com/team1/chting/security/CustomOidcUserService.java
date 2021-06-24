@@ -22,15 +22,13 @@ import java.util.Collections;
 public class CustomOidcUserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
 
     private final LoginService loginService;
-    private final HttpSession httpSession;
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         OidcUserService delegate = new OidcUserService();
         OidcUser oidcUser = delegate.loadUser(userRequest);
 
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        System.out.println("registrationId :: " + registrationId + oidcUser.getName());
+        System.out.println("oidcUser ToString :: " + oidcUser.toString());
 
         LoginDto loginDto = loginService.isUser(oidcUser.getName());
 
@@ -39,7 +37,6 @@ public class CustomOidcUserService implements OAuth2UserService<OidcUserRequest,
             resultRole = "ROLE_GUEST";
         } else {
             resultRole = loginDto.getRole();
-            //httpSession.setAttribute("userData", new SessionDto(loginDto));
         }
 
         return new DefaultOidcUser(
