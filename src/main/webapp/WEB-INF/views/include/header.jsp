@@ -9,7 +9,7 @@
 	}
 </style>
 <!-- css -->
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
 
 <!-- Header -->
 <header id="header">
