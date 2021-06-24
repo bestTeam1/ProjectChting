@@ -23,15 +23,23 @@ public class Github extends SocialData{
             if(next.equals("id")) {
                 this.userid = userData.get(next).toString();
             }else if(next.equals("name")) {
-                this.nickname = userData.get(next).toString();
+                if(userData.get(next) != null) {
+                    this.nickname = userData.get(next).toString();
+                }else {
+                    this.nickname = "github";
+                }
+            }else if(next.equals("email")) {
+                if(userData.get(next) != null) {
+                    this.email = userData.get(next).toString();
+                }else {
+                    this.email = "github";
+                }
             }else if(next.equals("avatar_url")) {
                 this.profile_img = userData.get(next).toString();
             }
         }
-        this.email = "github";
         this.logintype = registrationId.substring(0, registrationId.lastIndexOf("-"));
     }
-
 
     @Override
     public String getUserid() {

@@ -39,7 +39,6 @@
                                 <span style="color: red;"> *</span></td>
                             <td>
                                 <input type="hidden" name="userid" value="${socialData.userid}">
-                                <input type="hidden" name="nickname" value="${socialData.nickname}">
                                 <input type="hidden" name="profile_img" value="${socialData.profile_img}">
                                 <input type="hidden" name="logintype" value="${socialData.loginType}">
                                 <br>
@@ -59,8 +58,20 @@
                                 <br><br>
                             </td>
                         </tr>
-
-                        </tr>
+                        <c:choose>
+                            <c:when test="${socialData.nickname == 'github'}">
+                                <tr>
+                                    <td style="vertical-align: middle">이름
+                                        <span style="color: red;"> *</span></td>
+                                    <td>
+                                        <input type="text" name="nickname" minlength="2" maxlength="10" required>
+                                    </td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="hidden" name="nickname" value="${socialData.nickname}">
+                            </c:otherwise>
+                        </c:choose>
                         <tr>
                             <td style="vertical-align: middle">생년월일
                                 <span style="color: red;"> *</span></td>
