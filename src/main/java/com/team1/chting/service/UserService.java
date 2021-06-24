@@ -8,7 +8,9 @@ import com.team1.chting.dto.MyPageInfo;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +76,11 @@ public class UserService {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         int result = userDao.deleteAcount(userid);
 
-        System.out.println("회원 탈퇴 result : " +result);
+        if (result > 0) {
+            System.out.println("회원 탈퇴 성공");
+        }else {
+            System.out.println("회원 탈퇴 실패");
+        }
     }
 
     /*
@@ -92,40 +98,23 @@ public class UserService {
     }
 
     /*
-    관심사 카테고리 선택하기 (선택한 관심사 INSERT)
+    관심사 카테고리 선택하기 (기존 관심사 DELETE / 선택한 관심사 INSERT)
     작성자 : 박주현
     작성일 : 2021-06-17
     */
-    public void updateInterestCategory(List<InterestCategoryDto> list) {
+    @Transactional
+    public void updateInterestCategory(List<InterestCategoryDto> list, String userid) {
         InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
 
-        int result = categoryDao.insertInterestCategory(list);
-
-        if (result > 0) {
-            System.out.println("관심사 인서트 성공");
-        } else {
-            System.out.println("관심사 인서트 실패");
+        try {
+            categoryDao.deleteInterestCategory(userid);
+            categoryDao.insertInterestCategory(list);
+        }catch (Exception e) {
+            System.out.println(" [!] User InterestCategory Transaction Error :: " + e.getMessage());
+            throw e;
         }
 
     }
-
-    /*
-    관심사 카테고리 선택하기 (기존 관심사 DELETE)
-    작성자 : 박주현
-    작성일 : 2021-06-17
-    */
-    public void deleteInterestCategory(String userid) {
-        InterestCategoryDao categoryDao = sqlsession.getMapper(InterestCategoryDao.class);
-
-        int result = categoryDao.deleteInterestCategory(userid);
-
-        if (result > 0) {
-            System.out.println("관심사 삭제 성공");
-        } else {
-            System.out.println("관심사 삭제 실패");
-        }
-    }
-
 
     /*
     회원 정보 수정
