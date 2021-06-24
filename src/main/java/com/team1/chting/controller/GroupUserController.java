@@ -6,6 +6,8 @@ import com.team1.chting.dto.PostReplyDto;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
+import com.team1.chting.utils.AdminCriteria;
+import com.team1.chting.utils.PageMaker;
 import org.apache.commons.io.FilenameUtils;
 
 import com.team1.chting.service.UserService;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.w3c.dom.html.HTMLModElement;
+import sun.jvm.hotspot.debugger.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,12 +71,21 @@ public class GroupUserController {
 
     // 게시물 리스트
     @RequestMapping(value = "board_list.do", method = RequestMethod.GET)
-    public String postList(@RequestParam("group_no") String group_no, Model model){
-        // 전체 글 개수
-        List<PostDto> postList = groupservice.getPostList(group_no);
+    public String postList(@RequestParam("group_no") String group_no, AdminCriteria cri, Model model)throws Exception{
 
-        model.addAttribute("postList", postList);
+        cri.setGroupNo(group_no);
+        // 전체 글 개수
+        model.addAttribute("plist", groupservice.listCriPost(cri));
+        //List<PostDto> postList = groupservice.getPostList(group_no);
+
+        PageMaker pm = new PageMaker();
+        pm.setCri(cri);
+        pm.setTotalCount(groupservice.pageCountPost(group_no));
+
+       // model.addAttribute("postList", postList);
+        model.addAttribute("pm", pm);
         model.addAttribute("group_no", group_no);
+
         return "board/board_list";
     }
 
@@ -89,7 +101,12 @@ public class GroupUserController {
     public String insert (PostDto postDto, Model model, HttpServletRequest httpServletRequest,
                           @RequestParam("uploadFile")CommonsMultipartFile file) throws Exception {
         groupservice.insert(postDto, httpServletRequest, file);
-//        model.addAttribute("postList", groupservice.getPostList());
+        //model.addAttribute("postList", groupservice.listCriPost(cri));
+
+//        PageMaker pm = new PageMaker();
+//        pm.setCri(cri);
+//        pm.setTotalCount(groupservice.pageCountPost());
+
         String group_no = postDto.getGroup_no();
         return "redirect:board_list.do?group_no=" + group_no;
     }
@@ -99,7 +116,7 @@ public class GroupUserController {
 
     // 글 상세보기
     @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
-    public String read(@RequestParam("post_no") int post_no, @RequestParam String userid, Model model){
+    public String read(@RequestParam("post_no") int post_no, @RequestParam("userid") String userid, Model model){
         PostDto postDto = groupservice.read(post_no);
         String nickname = userService.selectNickname(userid);
 
@@ -131,7 +148,7 @@ public class GroupUserController {
             System.out.println("게시판 수정 실패");
         }
 
-        return "redirect:board_detail.do?post_no=" + postDto.getPost_no();
+        return "redirect:board_detail.do?post_no=" + postDto.getPost_no() + "&userid=" + postDto.getUserid();
     }
 
     // 일정
