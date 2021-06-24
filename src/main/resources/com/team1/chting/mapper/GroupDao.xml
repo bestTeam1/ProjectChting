@@ -8,19 +8,41 @@
     <!-- group_no, group_name, group_img, join_user, content, area_code, s_catecode, enabled, opendate -->
 
     <!--상세보기-->
+<!--    <select id="getPostList" resultType="com.team1.chting.dto.PostDto">-->
+<!--        select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate, pg.post_catecode, pg.file-->
+<!--        from post_group pg-->
+<!--                 left join post_category pc on pg.post_catecode = pc.post_catecode-->
+<!--                 left join user_info ui on pg.userid = ui.userid-->
+<!--        where pg.group_no = #{group_no}-->
+<!--        order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc-->
+<!--    </select>-->
     <select id="getPostList" resultType="com.team1.chting.dto.PostDto">
         select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate, pg.post_catecode, pg.file
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
-        where pg.group_no = #{group_no}
-        order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc
+        where pg.group_no = #{groupNo}
+        order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc limit ${page}, 10
+    </select>
+
+<!--페이지 정보를 지정한 크기만큼 가져오기-->
+    <select id="listPageCriPost" resultType="com.team1.chting.dto.PostDto">
+        select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate, pg.post_catecode, pg.file
+        from post_group pg
+                 left join post_category pc on pg.post_catecode = pc.post_catecode
+                 left join user_info ui on pg.userid = ui.userid
+        where pg.group_no = #{groupNo}
+        order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc limit #{pageStart},#{pageSize}
+    </select>
+
+    <select id="pageCountPost" resultType="int">
+        select count(*) from post_group where group_no = #{group_no}
     </select>
 
     <!--  글쓰기  -->
     <insert id="insert" parameterType="com.team1.chting.dto.PostDto">
-        insert into post_group(group_no, userid, post_catecode, subject, content, file)
-        values (#{group_no}, #{userid}, #{post_catecode}, #{subject}, #{content}, #{file})
+        insert into post_group(group_no, userid, post_catecode, subject, content, file, enabled)
+        values (#{group_no}, #{userid}, #{post_catecode}, #{subject}, #{content}, #{file},'1')
     </insert>
 
     <!-- 상세보기 -->
@@ -36,6 +58,14 @@
         from post_group
         where post_no = #{post_no}
     </delete>
+
+<!--    <update id="delete" parameterType="int">-->
+<!--        update post_group set enabled = 0 where post_no = #{post_no}-->
+<!--    </update>-->
+
+<!--    <update id="delete">-->
+<!--        update post_group set enabled = 0 where ${group_no} = #{post_no}-->
+<!--    </update>-->
 
     <!--  수정하기  -->
     <update id="update" parameterType="com.team1.chting.dto.PostDto">
@@ -121,6 +151,7 @@
         from post_reply
         where reply_no = #{reply_no}
     </delete>
+
 
     <!--  댓글수정  -->
     <update id="replyUpdate" parameterType="com.team1.chting.dto.PostReplyDto">

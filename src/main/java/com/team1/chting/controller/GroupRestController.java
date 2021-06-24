@@ -131,7 +131,7 @@ public class GroupRestController {
 
     // 글 삭제하기
     @RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
-    public ResponseEntity<String> delete(@RequestParam("post_no") String post_no){
+    public ResponseEntity<String> delete(@RequestParam("post_no") String post_no, String page, Model model){
         groupService.delete(Integer.parseInt(post_no));
         return new ResponseEntity<String>("", HttpStatus.OK);
     }

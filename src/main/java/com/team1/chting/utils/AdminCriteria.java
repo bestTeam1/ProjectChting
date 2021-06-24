@@ -4,6 +4,7 @@ public class AdminCriteria {
     //페이지 정보, 페이지 크기 정보를 저장하는 객체
     private int page;
     private int pageSize;
+    private String groupNo;
 
     public AdminCriteria() {
         this.page = 1;
@@ -39,6 +40,14 @@ public class AdminCriteria {
     //Mapper에서 사용하는 법 #{pageStart}
     public int getPageStart() {
         return (this.page - 1)*this.pageSize;
+    }
+
+    public void setGroupNo (String group_no) {
+        this.groupNo = group_no;
+    }
+
+    public String getGroupNo() {
+        return this.groupNo;
     }
 
     //toString()
