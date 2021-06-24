@@ -184,15 +184,13 @@ public class GroupRestController {
 
     // 댓글수정
     @RequestMapping(value = "board_replyUpdate.do", method = RequestMethod.POST)
-    public ResponseEntity<String> replyModify(@RequestParam("postReplyDto") PostReplyDto postReplyDto){
-        groupService.replyUpdate(postReplyDto);
-
+    public ResponseEntity<String> replyModify(PostReplyDto postReplyDto){
         ResponseEntity<String> entity = null;
         try {
             groupService.replyUpdate(postReplyDto);
             entity = new ResponseEntity<String>("success", HttpStatus.OK);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         return entity;

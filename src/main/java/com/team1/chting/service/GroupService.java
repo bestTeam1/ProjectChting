@@ -103,12 +103,12 @@ public class GroupService {
         return list;
     }
 
-    public List<GroupDto> areaGroup(String first_area, String second_area) {
-        List<GroupDto> list = new ArrayList<GroupDto>();
-        GroupDao dao = sqlsession.getMapper(GroupDao.class);
-        list = dao.areaGroup(first_area, second_area);
-        return list;
-    }
+        public List<GroupDto> areaGroup (String userid){
+            List<GroupDto> list = new ArrayList<GroupDto>();
+            GroupDao dao = sqlsession.getMapper(GroupDao.class);
+            list = dao.areaGroup(userid);
+            return list;
+        }
 
     public List<GroupDto> catecodeGroup(String userid) {
         List<GroupDto> list = new ArrayList<GroupDto>();
@@ -154,11 +154,11 @@ public class GroupService {
         return groupDao.replyDelete(reply_no);
     }
 
-    // 댓글 수정
-    public PostReplyDto replyUpdate(PostReplyDto postReplyDto) {
-        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        return groupDao.replyUpdate(postReplyDto);
-    }
+        // 댓글 수정
+        public void replyUpdate (PostReplyDto postReplyDto){
+            GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+            groupDao.replyUpdate(postReplyDto);
+        }
 
 
     /*

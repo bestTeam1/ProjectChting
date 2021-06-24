@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +9,6 @@
 <body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
-
     <!-- Main -->
     <div id="main">
         <div class="inner">
@@ -57,7 +54,6 @@
 </div>
 </div>
 </body>
-
 <script type="text/javascript">
     let writer = "${plist.userid}";
     if (userid == writer) {
