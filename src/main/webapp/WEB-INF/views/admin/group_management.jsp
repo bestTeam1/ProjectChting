@@ -39,7 +39,7 @@
                         </tr>
                         <c:forEach var="i" items="${groupList}">
                             <tr>
-                                <td><a href="board_main.do?group_no=${i.group_no}">${i.group_name}</a></td>
+                                <td><a href="${pageContext.request.contextPath}/board_main.do?group_no=${i.group_no}">${i.group_name}</a></td>
                                 <td>${i.join_user}</td>
                                 <td>${i.area_name}</td>
                                 <td>${i.catename}</td>
@@ -59,18 +59,18 @@
                         <ul class="pagination" style="text-align: center">
                             <!-- 이전prev -->
                             <c:if test="${pm.prev}">
-                                <li><a href="adminGroupManagement.do?page=${pm.startPage-1}">&laquo;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/adminGroupManagement.do?page=${pm.startPage-1}">&laquo;</a></li>
                             </c:if>
                             <!-- 페이지블럭 -->
                             <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
                                 <!-- 삼항연산자를 사용해서 class로 스타일적용  -->
                                 <li ${pm.cri.page == idx? 'class=active':''}>
-                                    <a href="adminGroupManagement.do?page=${idx}">${idx}</a>
+                                    <a href="${pageContext.request.contextPath}/admin/adminGroupManagement.do?page=${idx}">${idx}</a>
                                 </li>
                             </c:forEach>
                             <!-- 다음next -->
                             <c:if test="${pm.next && pm.endPage > 0}">
-                                <li><a href="adminGroupManagement.do?page=${pm.endPage+1}">&raquo;</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/adminGroupManagement.do?page=${pm.endPage+1}">&raquo;</a></li>
                             </c:if>
                         </ul>
                     </div>

@@ -8,12 +8,6 @@
 <head>
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 상세보기</title>
-
-    </style>
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="is-preload">
 <!-- Wrapper -->
@@ -49,7 +43,7 @@
                         </section>
                         <c:if test="${!empty event.file}">
                             <div class="content align-center">
-                                <img id="preview" src="./upload/event/${event.file}"
+                                <img id="preview" src="../upload/event/${event.file}"
                                      width="300">
                             </div>
                         </c:if>
@@ -57,17 +51,20 @@
                             <table>
                                 <tr>
                                     <td colspan="4" class="text-left" valign="top" height=200>
-                                    ${event.content}
+                                        ${event.content}
                                     </td>
                                 </tr>
                             </table>
                             <div style="display: flex; justify-content: center">
-                                <input id="modify" type="button" value="수정"/> &nbsp;
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <input id="end" type="button" value="종료"/> &nbsp;
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <input id="disabled" type="button" value="취소"/> &nbsp;
-                                &nbsp; &nbsp; &nbsp; &nbsp;
+                                <c:if test='${sessionScope.get("userData").userrole.equals("ROLE_ADMIN")}'>
+
+                                    <input id="modify" type="button" value="수정"/> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <input id="end" type="button" value="종료"/> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <input id="disabled" type="button" value="취소"/> &nbsp;
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                </c:if>
                                 <input id="back" type="button" value="목록"/>
                             </div>
                         </section>
@@ -98,7 +95,7 @@
             cancelButtonText: '아니오'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "adminEventModify.do?eventNo=${event.event_no}&page=${page}"
+                window.location.href = "${pageContext.request.contextPath}/admin/adminEventModify.do?eventNo=${event.event_no}&page=${page}"
             }
         })
     });
@@ -122,7 +119,7 @@
                     title: '이벤트 삭제',
                     text: '이벤트가 삭제되어 목록으로 돌아갑니다'
                 }).then((result) => {
-                    window.location.href="adminDeleteBoard.do?type=Event&num=${event.event_no}&page=${page}";
+                    window.location.href = "${pageContext.request.contextPath}/admin/adminDeleteBoard.do?type=Event&num=${event.event_no}&page=${page}";
                 })
 
             } else {
@@ -153,7 +150,7 @@
                     title: '이벤트 취소',
                     text: '이벤트가 취소되어 목록으로 돌아갑니다'
                 }).then((result) => {
-                    window.location.href="adminEventDisabled.do?eventNo=${event.event_no}&page=${page}";
+                    window.location.href = "${pageContext.request.contextPath}/admin/adminEventDisabled.do?eventNo=${event.event_no}&page=${page}";
                 })
 
             } else {
@@ -168,7 +165,7 @@
     $(document).on("click", "#back", function (e) {
         e.preventDefault();
 
-        window.location.href = "adminEvent.do?page=${page}";
+        window.location.href = "${pageContext.request.contextPath}/admin/adminEvent.do?page=${page}";
     });
 </script>
 </html>
