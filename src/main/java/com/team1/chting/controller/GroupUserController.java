@@ -54,17 +54,17 @@ public class GroupUserController {
     // 모임 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
     public String groupMain(@RequestParam("group_no") String group_no, Model model){
-        GroupDto dto = groupservice.groupByGroup_no(group_no);
+            GroupDto dto = groupservice.groupByGroup_no(group_no);
 
-        if(dto.getGroup_img() == null) {
-            dto.setGroup_img("default.jpg");
-        }
+            if(dto.getGroup_img() == null) {
+                dto.setGroup_img("default.jpg");
+            }
 
-        model.addAttribute("group",dto);
+            model.addAttribute("group",dto);
 
-        //가입한 회원 수
-        int joinUser = groupAdminService.getJoinUser(group_no);
-        model.addAttribute("joinUser", joinUser);
+            //가입한 회원 수
+            int joinUser = groupAdminService.getJoinUser(group_no);
+            model.addAttribute("joinUser", joinUser);
 
         return "board/board_main";
     }

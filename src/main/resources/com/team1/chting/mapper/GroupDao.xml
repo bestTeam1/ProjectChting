@@ -126,7 +126,7 @@
         from group_info gi
         left join interest_category ic on gi.catecode = ic.catecode
         left join area a on gi.area_code = a.area_code
-        where gi.enabled = 1 and gi.group_no = #{groupNo}
+        where gi.group_no = #{groupNo}
     </select>
 
 

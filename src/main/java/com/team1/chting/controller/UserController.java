@@ -51,6 +51,19 @@ public class UserController {
     }
 
     /*
+      마이페이지 회원 정보 불러오기_ userid 파라미터
+      작성자 : 김명환
+      작성일 : 2021-06-24
+    */
+    @RequestMapping(value = "userPage.do", method = RequestMethod.GET)
+    public String userPage(@RequestParam("userid") String userid, Model model) {
+
+        model.addAttribute("userInfo", userService.getMyPageInfo(userid));
+
+        return "user/userinfo";
+    }
+
+    /*
       마이페이지 회원 정보 수정 페이지(GET)
       작성자 : 박주현
       작성일 : 2021-06-10
@@ -78,11 +91,11 @@ public class UserController {
     public String updateUser(UserDto userDto,
                              HttpServletRequest request) throws Exception {
 
-        System.out.println("userDto : " +userDto);
+        System.out.println("userDto : " + userDto);
         String userid = userDto.getUserid();
         userService.updateUser(userDto, request);
 
-        return "redirect:/myPage.do?userid="+userid;
+        return "redirect:/myPage.do?userid=" + userid;
     }
 
     /*
@@ -118,7 +131,7 @@ public class UserController {
 
         List<InterestCategoryDto> list = new ArrayList<>();
 
-        for(int i = 0; i < catelist.size(); i++) {
+        for (int i = 0; i < catelist.size(); i++) {
             InterestCategoryDto interestCategory = new InterestCategoryDto();
             interestCategory.setCatecode(catelist.get(i));
             interestCategory.setUserid(userid);
@@ -139,7 +152,7 @@ public class UserController {
       작성자 : 박주현
       작성일 : 2021-06-09
     */
-    @RequestMapping(value="delAcount.do", produces = "application/text; charset=utf8")
+    @RequestMapping(value = "delAcount.do", produces = "application/text; charset=utf8")
     public String deleteAcount(HttpServletRequest request) {
 
         HttpSession session = request.getSession();

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 //관리자 권한 페이지에서 할수있는 작업들. 관리자 메인 통계 chart 부분은 ChartController에 할당
 @Controller
+@RequestMapping("/admin/")
 public class AdminController {
 
     @Autowired
@@ -25,8 +26,6 @@ public class AdminController {
     //관리자 메인 (차트활용)
     @RequestMapping(value = "adminIndex.do", method = RequestMethod.GET)
     public String groupJoin(Model model) {
-
-
 
         return "admin/index";
     }
@@ -134,7 +133,7 @@ public class AdminController {
             System.out.println("이벤트 취소 실패");
         }
 
-        return "redirect:adminEvent.do?page="+page;
+        return "redirect:/admin/adminEvent.do?page="+page;
     }
 
     /*
@@ -259,6 +258,7 @@ public class AdminController {
 
         return "admin/notice/notice";
     }
+
     /*
        이벤트 글쓰기 (파일업로드 포함)
        만든이 : 이승준
@@ -283,7 +283,7 @@ public class AdminController {
         // 뷰페이지로 전달
         model.addAttribute("pm", pm);
 
-        return "redirect:adminEvent.do";
+        return "redirect:/admin/adminEvent.do";
     }
 
     /*
@@ -306,7 +306,7 @@ public class AdminController {
             System.out.println("공지사항 수정 실패");
         }
 
-        return "redirect:adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
+        return "redirect:/admin/adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
     }
 
     /*
@@ -323,7 +323,7 @@ public class AdminController {
         String page = httpServletRequest.getParameter("page");
         adminService.eventModify(eventDto, httpServletRequest, file); //파일업로드 포함한 글쓰기
 
-        return "redirect:adminEventDetail.do?page=" + page + "&eventNo=" + eventDto.getEvent_no();
+        return "redirect:/admin/adminEventDetail.do?page=" + page + "&eventNo=" + eventDto.getEvent_no();
     }
 
 
