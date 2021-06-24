@@ -6,6 +6,7 @@ import java.sql.Date;
 
 @Data
 public class DiaryDto {
+	private String schedule_no;
 	private String group_no;
 	private String type;
 	private Date startdate;
