@@ -55,7 +55,6 @@
                 </c:forEach>
                 <hr>
             </div>
-            ${userInfo.userJoinGroup}
             <div class="content align-center">
                 <h3>가입한 모임</h3>
                 <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
