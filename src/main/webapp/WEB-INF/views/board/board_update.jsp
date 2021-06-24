@@ -14,8 +14,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset=UTF-8">
     <title>글수정</title>
 </head>
@@ -56,7 +54,8 @@
                                 <button type="button" onclick="goList()">목록</button>
                             </div>
                             <input type="hidden" name="post_no" value="${plist.post_no}">
-                            <%--                        <button type="button" onclick="location.href='board_list.do'">목록</button>--%>
+                            <input type="hidden" name="userid" value="${plist.userid}">
+                        <%--                        <button type="button" onclick="location.href='board_list.do'">목록</button>--%>
                         </form>
                     </header>
                 </div>

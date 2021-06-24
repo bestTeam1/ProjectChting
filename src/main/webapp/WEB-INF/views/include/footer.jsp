@@ -8,8 +8,6 @@
 				href="https://unsplash.com">Unsplash</a>. Design: <a
 				href="https://html5up.net">HTML5 UP</a>.
 		</p>
-		<a href="board_chatting.do?group_no=A0001">채팅경로1</a>
-		<a href="board_chatting.do?group_no=A0002">채팅경로2</a>
 	</div>
 </footer>
 
