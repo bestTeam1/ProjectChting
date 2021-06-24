@@ -76,24 +76,30 @@
                         <tr>
                             <td style="vertical-align: middle">선호 지역 1</td>
                             <td>
-                                <select id="area1" style="width: 30%; float:left;">
+                                <select id="area1" style="width: 30%; float:left; margin-right: 10px;">
+                                    <option selected disabled hidden>=== 선택 ===</option>
                                     <c:forEach var="area" items="${areaList}">
-                                        <option value=""
+                                        <option
                                                 <c:if test="${userInfoBasic.first_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
                                     </c:forEach>
                                 </select>
+                                <p id="error1"
+                                   style="color: red; vertical-align: middle; margin-top: 10px; margin-bottom: 0px;"></p>
                             </td>
                         </tr>
 
                         <tr>
                             <td style="vertical-align: middle">선호 지역 2</td>
                             <td>
-                                <select id="area2" style="width: 30%; float:left;">
+                                <select id="area2" style="width: 30%; float:left; margin-right: 10px;">
+                                    <option selected disabled hidden>=== 선택 ===</option>
                                     <c:forEach var="area" items="${areaList}">
-                                        <option value=""
+                                        <option
                                                 <c:if test="${userInfoBasic.second_area_name == area.area_name}">selected</c:if>>${area.area_code} ${area.area_name}</option>
                                     </c:forEach>
                                 </select>
+                                <p id="error2"
+                                   style="color: red; vertical-align: middle; margin-top: 10px; margin-bottom: 0px;"></p>
                             </td>
                         </tr>
 
@@ -154,15 +160,44 @@
             };
         };
 
+        //선호지역 1,2 같은 지역인지 체크
+        $('#area1').change(function () {
+            if($('#area1 option:selected').text() === $('#area2 option:selected').text()) {
+                Swal.fire('같은 지역을 선택하실 수 없습니다. 다시 선택해 주세요.');
+                $("#area1 option:eq(0)").prop("selected", true);
+            }
+        });
+        $('#area2').change(function () {
+            if($('#area2 option:selected').text() === $('#area1 option:selected').text()) {
+                Swal.fire('같은 지역을 선택하실 수 없습니다. 다시 선택해 주세요.');
+                $("#area2 option:eq(0)").prop("selected", true);
+            }
+        });
     });
 
     //Form 전송
     function confirm() {
         let area1Arr = $("#area1 option:selected").text().split(" ");
         let area2Arr = $("#area2 option:selected").text().split(" ");
-        let area1 = area1Arr[0];
-        let area2 = area2Arr[0];
+        let area1 = area1Arr[0]; //선호지역1 지역코드
+        let area2 = area2Arr[0]; //선호지역2 지역코드
+        let def = '==='; //셀렉트박스 디폴트값
 
+        //지역 에러메시지
+        if(area1 === def) {
+            $('#error1').html('지역을 선택해 주세요!');
+            return;
+        }else {
+            $('#error1').html('');
+        }
+        if(area2 === def) {
+            $('#error2').html('지역을 선택해 주세요!');
+            return;
+        }else {
+            $('#error2').html('');
+        }
+
+        //input hidden값으로 보내서 form으로 같이 전송
         $('input[name=first_area]').attr('value', area1);
         $('input[name=second_area]').attr('value', area2);
 
