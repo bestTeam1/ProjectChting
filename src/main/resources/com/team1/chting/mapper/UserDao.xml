@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 회원 탈퇴 -->
     <delete id="deleteAcount">
         update user_info
-        set enabled = 0
+        set enabled = 0, userid = CONCAT(userid, 'del')
         where userid = #{userid}
     </delete>
 
