@@ -29,6 +29,7 @@
                 <div class="content">
                     <header>
 
+                        <div>
                         <table>
                             <tr style="background-color: lavender; text-align: center">
                                 <td>No.</td>
@@ -38,7 +39,7 @@
                                 <td>작성일</td>
                             </tr>
 
-                            <c:forEach var="plist" items="${postList}">
+                            <c:forEach var="plist" items="${plist}">
                                 <tr style="text-align: center">
 <%--                                    <c:out value="${plist.post_no}"/>--%>
 <%--                                    <c:out value="${plist.post_no}"/>--%>
@@ -54,6 +55,29 @@
                             </c:forEach>
 
                         </table>
+                        </div>
+
+                        <div class="box-footer">
+                            <div class="text-center">
+                                <ul class="pagination" style="text-align: center">
+                                    <!-- 이전prev -->
+                                    <c:if test="${pm.prev}">
+                                        <li><a href="board_list.do?group_no=${group_no}&page=${pm.startPage-1}">&laquo;</a></li>
+                                    </c:if>
+                                    <!-- 페이지블럭 -->
+                                    <c:forEach var="idx" begin="${pm.startPage}" end="${pm.endPage}">
+                                        <!-- 삼항연산자를 사용해서 class로 스타일적용  -->
+                                        <li ${pm.cri.page == idx? 'class=active':''}>
+                                            <a href="board_list.do?group_no=${group_no}&page=${idx }">${idx}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <!-- 다음next -->
+                                    <c:if test="${pm.next && pm.endPage > 0}">
+                                        <li><a href="board_list.do?group_no=${group_no}&page=${pm.endPage+1}">&raquo;</a></li>
+                                    </c:if>
+                                </ul>
+                            </div>
+                        </div>
 
                     </header>
                 </div>
