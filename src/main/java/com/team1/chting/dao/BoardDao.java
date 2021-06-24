@@ -34,4 +34,7 @@ public interface BoardDao {
 
     //일정 상세보기
     public DiaryDto getDiaryDetail(@Param("group_no")String group_no, @Param("schedule_no") String schedule_no);
+
+    //일정 삭제하기
+    public void deleteDiary(@Param("group_no")String group_no, @Param("schedule_no") String schedule_no);
 }
