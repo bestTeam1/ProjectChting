@@ -150,5 +150,23 @@ public class BoardRestController {
         return new ResponseEntity<String>("false", HttpStatus.BAD_GATEWAY);
     }
 
+    /*
+    모임 일정 수정
+    작성자 : 이승준
+    2021-06-24
+    */
+    @RequestMapping(value="board_diary_delete.do", method= RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> diaryDelete(@RequestParam("group_no") String group_no,
+                                              @RequestParam("schedule_no") String schedule_no) {
+
+        //가져온 그룹넘버와 스케줄번호로 조회
+        try {
+            boardService.deleteDiary(group_no, schedule_no);
+            return new ResponseEntity<String>("true", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("false", HttpStatus.BAD_GATEWAY);
+        }
+    }
 
 }

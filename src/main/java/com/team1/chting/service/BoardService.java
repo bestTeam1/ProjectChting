@@ -106,4 +106,9 @@ public class BoardService {
         return diaryDto;
     }
 
+    public void deleteDiary(String group_no, String schedule_no) {
+        BoardDao boardDao = sqlsession.getMapper(BoardDao.class);
+        boardDao.deleteDiary(group_no, schedule_no);
+    }
+
 }
