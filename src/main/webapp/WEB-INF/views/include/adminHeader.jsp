@@ -8,7 +8,7 @@
 	}
 </style>
 <!-- css -->
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
 
 <!-- Header -->
 <header id="header">
@@ -17,11 +17,11 @@
 	나중에 /admin/Notice.do 이런식으로 url패턴 변경고려중
 	--%>
 	<ul class="icons">
-		<li><a href="adminIndex.do"><span class="label">통계</span></a></li>
-		<li><a href="adminNotice.do"><span class="label">공지사항</span></a></li>
-		<li><a href="adminEvent.do"><span class="label">이벤트</span></a></li>
-		<li><a href="adminUserManagement.do"><span class="label">회원관리</span></a></li>
-		<li><a href="adminGroupManagement.do"><span class="label">모임관리</span></a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/adminIndex.do"><span class="label">통계</span></a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/adminNotice.do"><span class="label">공지사항</span></a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/adminEvent.do"><span class="label">이벤트</span></a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/adminUserManagement.do"><span class="label">회원관리</span></a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/adminGroupManagement.do"><span class="label">모임관리</span></a></li>
 	</ul>
 </header>
 <script type="text/javascript">

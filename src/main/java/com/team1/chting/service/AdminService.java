@@ -164,6 +164,7 @@ public class AdminService {
                 fs.close();
             }
             eventDto.setFile(fileName);
+            eventDto.setEvent_img(fileName);
         }
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
@@ -189,6 +190,7 @@ public class AdminService {
                 fs.close();
             }
             eventDto.setFile(fileName);
+            eventDto.setEvent_img(fileName);
         }
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
