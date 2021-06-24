@@ -63,7 +63,7 @@
             from post_group
             group by group_no
         ) pg on gi.group_no = pg.group_no
-        where u.userid = #{userid}
+        where gi.enabled = 1 and u.userid = #{userid}
         order by pg.cnt desc limit 4
     </select>
 
@@ -77,7 +77,7 @@
             from post_group
             group by group_no
         ) pg on gi.group_no = pg.group_no
-        where u.userid = #{userid}
+        where gi.enabled = 1 and u.userid = #{userid}
         order by pg.cnt desc limit 4
     </select>
 
@@ -87,6 +87,7 @@
                  join group_user_role gur on u.userid = gur.userid
                  join group_info gi on gur.group_no = gi.group_no
         where u.enabled = 1
+          and gi.enabled = 1
           and u.userid = #{userid}
     </select>
 
