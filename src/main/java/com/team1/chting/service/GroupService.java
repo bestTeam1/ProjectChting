@@ -4,7 +4,6 @@ package com.team1.chting.service;
 import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dto.*;
 import com.team1.chting.utils.AdminCriteria;
-import javafx.geometry.Pos;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
