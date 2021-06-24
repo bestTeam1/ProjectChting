@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="${pageContext.request.contextPath}/fullcalendar/css/main.min.css" rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/fullcalendar/js/main.min.js"/>
-    <!-- modal -->
+    <!-- jquery modal popup-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
     <!-- dateFormat을 위한 momentjs -->
@@ -18,9 +18,6 @@
     <!-- KakaoMap API -->
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@properties['kakaoapi.key']"/>&libraries=services"></script>
-    <!-- Daum 주소검색 API -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
     <style>
         .fc-event {
             margin-top: 5px;
@@ -84,11 +81,10 @@
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
-
-
             <section style="position: relative">
+                <!-- modal -->
                 <div id="ex1" class="modal">
-                    <h3 class="chtingCal"> 일정을 추가하세요! </h3>
+                    <h3 id = "modalTitle" class="chtingCal"> 일정을 추가하세요! </h3>
                     <div>
                         <form id="form" name="diaryOkForm" onsubmit="return false">
                             <div style="display: flex; justify-content: center">
@@ -125,7 +121,7 @@
                 <p><a id="modal" href="#ex1" rel="modal:open"></a></p>
                 <div id='external-events' style="width: 15%; float: left; padding-right: 30px; padding-left: 20px;">
                     <p>
-                        <strong>이벤트 생성하기</strong>
+                        <strong>일정 생성하기</strong>
                     </p>
 
                     <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
@@ -137,12 +133,6 @@
                     <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
                         <div class='fc-event-main'>언택트</div>
                     </div>
-                    <%--
-                    <p>
-                        <input type='checkbox' id='drop-remove'/>
-                        <label for='drop-remove'>드롭 후 제거</label>
-                    </p>
-                    --%>
                 </div>
                 <div id='calendar' style="width: 80%; float: left">
                 </div>
@@ -192,6 +182,7 @@
             events: loadingEvents()
             ,
             eventClick: function (event) {
+                $('#modalTitle').text('일정을 확인하세요!'); //이벤트 클릭시에는 일정확인 메세지로 변경
                 //클릭시에는 이미있는 이벤트를 삭제할수있는 삭제버튼이 생성됨
                 $('#buttonDiv').each(function () {
                     if ($('a', this).length == 0) {
@@ -199,6 +190,7 @@
                         cancelEvent();
                     }
                 })
+                $('#diarySubmit').hide(); //확인버튼숨김
                 var schedule_no = event.event.extendedProps.schedule_no//클릭한 이벤트의 스케쥴넘버(DB)
                 //ajax로 해당 스케줄의 정보 가져와서 출력
                 $.ajax({
@@ -217,6 +209,7 @@
                         $('#chtingContent').val(response.content);
                         $('#chtingSubject').val(response.subject);
                         $('#chtingScheduleNo').val(response.schedule_no);
+                        $('#chtingCalLocation').val(response.location);
                         $('#xcoord').val(response.xcoord);
                         $('#ycoord').val(response.ycoord);
 
@@ -233,6 +226,7 @@
             },
             //내려놨을때 form불러와서 데이터를 추가로 받는다
             drop: function (info) {
+                $('#diarySubmit').show(); //이전에 eventClick으로 hide되었을 경우를 fix
                 //이미 취소버튼이 생성됐으면 지워줍니다.
                 $('#buttonDiv').each(function () {
                     if ($('a', this).length != 0) {
@@ -247,31 +241,51 @@
                 $('#chtingCalDate').val(moment(info.dateStr).format('YYYY-MM-DD'));
 
                 makeMap();
+            },
+            eventDrop: function (info) { //이벤트를 옮겼을때 수정함
+                var year = (info.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
+                var month = info.event._instance.range.start.getMonth()+1; //옮긴 달력의 날짜
+                var day = info.event._instance.range.start.getDate(); //옮긴 달력의 날짜
+
+
+                var modifyDate = year + '-' + month + '-' + day;
+                var schedule_no = info.event._def.extendedProps.schedule_no;// 옮긴이벤트번호
+
+                $.ajax({
+                    url: "board_diary_modify.do",
+                    type: 'GET',
+                    dataType: 'text',
+                    async: false,
+                    data: {
+                        group_no: '${group_no}',
+                        modifyDate: modifyDate,
+                        schedule_no: schedule_no
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '날짜가 변경되었습니다!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    },
+                    error: function (Http, status, error) {
+                        console.log(error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: '에러 발생',
+                            text: '날짜를 변경할 수 없었습니다',
+                            footer: '<a href="#">Chting 관리자에게 문의하기</a>'
+                        })
+                    }
+                });
+
+
             }
         });
         calendar.render();
     });
-
-    //1. 전체 이벤트리스트
-    function allSave() {
-        var allEvent = calendar.getEvents();
-
-        var events = new Array();
-        for (var i = 0; i < allEvent.length; i++) {
-
-            var obj = new Object();
-
-            //fullcalendar로 받은 정보 넣기
-            obj.type = allEvent[i]._def.title;
-            obj.date = allEvent[i]._instance.range.start;
-
-            events.push(obj);
-        }
-        var jsondata = JSON.stringify(events);
-        console.log(jsondata);
-
-        savedata(jsondata);
-    }
 
     function loadingEvents() { //처음 페이지 로딩시 이벤트 불러오기, json형태로
         var return_value = null;
@@ -391,6 +405,7 @@
                 // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
                 infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                 infowindow.open(map, marker);
+                $('#chtingCalLocation').val(place.place_name);
                 $('#xcoord').val(place.x);
                 $('#ycoord').val(place.y);
                 Swal.fire({
