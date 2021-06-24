@@ -3,6 +3,8 @@ package com.team1.chting.service;
 
 import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dto.*;
+import com.team1.chting.utils.AdminCriteria;
+import javafx.geometry.Pos;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,12 +30,46 @@ public class GroupService {
       작성일 : 2021-06-18
     */
 
+public List<PostDto> listCriPost(AdminCriteria cri)throws Exception{
+    GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+    return groupDao.listPageCriPost(cri);
+}
+
+public int pageCount()throws Exception{
+    GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+    return groupDao.pageCount();
+}
     // 내가가입한모임 - 게시글 리스트
-    public List<PostDto> getPostList(String group_no) {
+//    public List<PostDto> getPostList(String group_no) {
+//        List<PostDto> postlist = new ArrayList<PostDto>();
+//        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+//        postlist = groupDao.getPostList(group_no);
+//        return postlist;
+//    }
+    public List<PostDto> getPostList(String group_no, int page) throws Exception{
+        if(page <= 0){
+            page = 1;
+        }
+        page = (page -1) * 10;
+
+        System.out.println("------------------");
+        System.out.println(group_no);
+        System.out.println(page);
+
         List<PostDto> postlist = new ArrayList<PostDto>();
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-        postlist = groupDao.getPostList(group_no);
+        postlist = groupDao.getPostList(group_no, page);
         return postlist;
+    }
+
+    public List<PostDto> listPageCriPost(AdminCriteria cri) throws Exception{
+        return sqlsession.selectList("listPageCriPost", cri);
+    }
+
+    public int pageCountPost(String group_no) throws Exception{
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.pageCountPost(group_no);
+
     }
 
 
@@ -232,6 +268,7 @@ public class GroupService {
 
         return result;
     }
+
 
 
 }
