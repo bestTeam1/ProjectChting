@@ -43,4 +43,12 @@ public interface GroupAdminDao {
     //자신이 모임장으로 있는 모임의 이름
     public GroupDto getAdminGroupName(@Param("groupNo") String groupNo);
 
+    //모임 정보 가져오기
+    GroupDto selectGroupInfo(String groupNo);
+
+    //모임 정보 수정
+    void updateGroup(GroupDto groupDto);
+
+    //모임 참여 인원 수
+    int selectJoinUser(String groupNo);
 }

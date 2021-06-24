@@ -1,6 +1,8 @@
 package com.team1.chting.controller;
 
 import com.team1.chting.dto.SignUpDto;
+import com.team1.chting.dto.social.SocialData;
+import com.team1.chting.dto.social.SocialDataFactory;
 import com.team1.chting.service.EmailService;
 import com.team1.chting.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public class LoginController {
 
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) request.getUserPrincipal();
         Map<String, Object> userData = token.getPrincipal().getAttributes();
+
+        SocialData socialData = SocialDataFactory.getSocialData(userData, token.getAuthorizedClientRegistrationId());
+        System.out.println(socialData.toString());
         Set<String> userDataSet = userData.keySet();
         Iterator<String> Iter_userDataSet = userDataSet.iterator();
 
@@ -49,7 +54,7 @@ public class LoginController {
             String next = Iter_userDataSet.next();
             model.addAttribute(next, userData.get(next));
         }
-
+        model.addAttribute("socialData", socialData);
         model.addAttribute("areaList", loginService.getAreaList());
         model.addAttribute("data", request.getUserPrincipal());
         model.addAttribute("loginType", token.getAuthorizedClientRegistrationId());

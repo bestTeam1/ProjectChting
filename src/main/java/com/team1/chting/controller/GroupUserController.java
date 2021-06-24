@@ -1,9 +1,9 @@
 package com.team1.chting.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.PostReplyDto;
+import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
 import org.apache.commons.io.FilenameUtils;
@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.w3c.dom.html.HTMLModElement;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -39,6 +38,9 @@ public class GroupUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupAdminService groupAdminService;
+
 
     /*
       게시판
@@ -46,7 +48,7 @@ public class GroupUserController {
       작성일 : 2021-06-18
     */
 
-    // 메인
+    // 모임 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
     public String groupMain(@RequestParam("group_no") String group_no, Model model){
         GroupDto dto = groupservice.groupByGroup_no(group_no);
@@ -56,6 +58,11 @@ public class GroupUserController {
         }
 
         model.addAttribute("group",dto);
+
+        //가입한 회원 수
+        int joinUser = groupAdminService.getJoinUser(groupNo);
+        model.addAttribute("joinUser", joinUser);
+
         return "board/board_main";
     }
 
@@ -130,6 +137,8 @@ public class GroupUserController {
     // 일정
     @RequestMapping(value = "board_diary.do", method = RequestMethod.GET)
     public String groupDiary(@RequestParam("group_no") String group_no, Model model){
+
+        model.addAttribute("group_no", group_no);
 
         return "board/board_diary";
     }

@@ -13,54 +13,6 @@
 <head>
     <meta charset=UTF-8">
     <title>내가 가입한 모임 - 게시판</title>
-    <style>
-
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-        body {
-            background: #eee;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            /* Center slide text vertically */
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            -webkit-align-items: center;
-            align-items: center;
-        }
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 50%;
-            object-fit: cover;
-        }
-        a { text-decoration:none !important }
-        a:hover { text-decoration:none !important }
-
-
-    </style>
 </head>
 <body class="is-preload">
 
@@ -71,7 +23,7 @@
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp" />
+            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
             <!-- Banner -->
             <section>
                 <div class="content">
@@ -96,7 +48,7 @@
                                     <td>${plist.post_no}</td>
                                     <td>${plist.nickname}</td>
                                     <td>${plist.post_catename}</td>
-                                    <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}&userid=${sessionScope.get("userData").userid}'/>'>${plist.subject}</a></td>
+                                    <td><a href="<c:url value='board_detail.do?post_no=${plist.post_no}&userid=${sessionScope.get("userData").userid}'/>">${plist.subject}</a></td>
                                     <td>${plist.writedate}</td>
                                 </tr>
                             </c:forEach>
@@ -113,9 +65,9 @@
             <br>
 
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
+    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 
 </body>

@@ -54,9 +54,9 @@ public class GroupController {
         String tmpNo3 = String.format("%05d", tmpNo2);
         String groupNo = tmpNo1.concat(tmpNo3);
 
-        //모임장으로 속해있는 그룹이 있다면
+        //모임장으로 속해있는 그룹이 있다면 에러페이지 이동
         if (groupAdmin == 1) {
-            return "group/group_error/alreadyGroupError"; //에러페이지 이동
+            return "group/group_error/alreadyGroupError";
         }
 
         model.addAttribute("areaList", boardService.getAreaList());

@@ -9,12 +9,12 @@
 
     <!--상세보기-->
     <select id="getPostList" resultType="com.team1.chting.dto.PostDto">
-        select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate
+        select pg.post_no, ui.nickname, pc.post_catename, pg.subject, pg.writedate, pg.post_catecode, pg.file
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
         where pg.group_no = #{group_no}
-        order by post_no desc, writedate desc
+        order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc
     </select>
 
     <!--  글쓰기  -->
@@ -91,10 +91,11 @@
     </select>
 
     <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, gi.group_img, gi.group_name, gi.content, count(gur.userid) as join_user
+        select gi.group_no, gi.group_img, gi.group_name, gi.content, ic.catename, a.area_name
         from group_info gi
-                 left join group_user_role gur on gi.group_no = gur.group_no
-        where gi.group_no = #{group_no}
+        left join interest_category ic on gi.catecode = ic.catecode
+        left join area a on gi.area_code = a.area_code
+        where gi.enabled = 1 and gi.group_no = #{groupNo}
     </select>
 
 

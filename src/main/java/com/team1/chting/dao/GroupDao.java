@@ -31,7 +31,7 @@ public interface GroupDao {
     public List<GroupDto> userGroupList(String userid);
 
     //그룹메인페이지 -> 그룹넘버를 이용한 그룹 검색
-    public GroupDto groupByGroup_no(String group_no);
+    public GroupDto groupByGroup_no(String groupNo);
 
     // 게시글 작성
     public void insert(PostDto postDto);
