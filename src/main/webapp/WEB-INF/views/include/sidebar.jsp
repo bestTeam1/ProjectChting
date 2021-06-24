@@ -131,26 +131,26 @@
                             group_no: group.group_no
                         },
                         type: "get",
-                        success: function (response) {
-                            authority_ = response;
+                        success: function (response_) {
+                            authority_ = response_;
+
+                            var str = "<li><span class='opener active'>" + group.group_name
+                                + "</span><ul><li><a href='board_main.do?group_no=" + group.group_no + "'>메인</a></li><li>" +
+                                "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
+                                "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
+                                "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li>"
+
+                            if (authority_ == '1') {
+                                str += " <li><a href='groupJoin.do?userid=" + userid + "'>모임관리</a></li>";
+                            }
+
+                            str += "</ul></li>";
+
+                            sideList.append(str);
                         },
                         error: function (Http, status, error) {
                             console.log("Http : " + Http + ", status : " + status + ", error : " + error);
                         }
-                    }).then(() => {
-                        var str = "<li><span class='opener active'>" + group.group_name
-                            + "</span><ul><li><a href='board_main.do?group_no=" + group.group_no + "'>메인</a></li><li>" +
-                            "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
-                            "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
-                            "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li>"
-
-                        if (authority_ == '1') {
-                            str += " <li><a href='groupJoin.do?userid=" + userid + "'>모임관리</a></li>";
-                        }
-
-                        str += "</ul></li>";
-
-                        sideList.append(str);
                     });
                 });
             },

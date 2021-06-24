@@ -62,7 +62,8 @@ public interface GroupDao {
 
 
     // 댓글수정
-    public PostReplyDto replyUpdate(PostReplyDto postReplyDto);
+    public void replyUpdate(PostReplyDto postReplyDto);
+
     // 댓글삭제
     public int replyDelete(int reply_no);
 

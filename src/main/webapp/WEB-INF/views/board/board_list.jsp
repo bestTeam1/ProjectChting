@@ -96,7 +96,7 @@
                                     <td>${plist.post_no}</td>
                                     <td>${plist.nickname}</td>
                                     <td>${plist.post_catename}</td>
-                                    <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a></td>
+                                    <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}&userid=${sessionScope.get("userData").userid}'/>'>${plist.subject}</a></td>
                                     <td>${plist.writedate}</td>
                                 </tr>
                             </c:forEach>
