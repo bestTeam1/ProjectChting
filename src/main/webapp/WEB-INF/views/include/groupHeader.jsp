@@ -14,9 +14,8 @@
 <header id="header">
 	<ul class="icons">
 		<li><a id="groupJoin" href="groupJoin.do?userid=${sessionScope.get("userData").userid}"><span class="label">가입신청관리</span></a></li>
-		<li><a id="groupMemberManage" href="#"><span class="label">멤버관리</span></a></li>
-		<li><a id="groupBlackListManage" href="#"><span class="label">블랙리스트</span></a></li>
-		<li><a id="groupDisband" href="#"><span class="label">모임해산</span></a></li>
+		<li><a id="groupMemberManage" href="groupMemberManage.do?userid=${sessionScope.get("userData").userid}"><span class="label">멤버관리</span></a></li>
+		<li><a id="groupDisband" href="groupDisband.do?userid=${sessionScope.get("userData").userid}"><span class="label">모임해산</span></a></li>
 	</ul>
 
 	<form style="display: none" action="" method="POST" id="userid">
@@ -38,19 +37,5 @@
 		}
 	});
 
-	$(document).on("click", "#groupMemberManage", function () {
-		$("#userid").attr("action", "groupMemberManage.do");
-		$("#userid").submit();
-	});
-
-	$(document).on("click", "#groupBlackListManage", function () {
-		$("#userid").attr("action", "groupBlackListManage.do");
-		$("#userid").submit();
-	});
-
-	$(document).on("click", "#groupDisband", function () {
-		$("#userid").attr("action", "groupDisband.do");
-		$("#userid").submit();
-	});
 
 </script>
