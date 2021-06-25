@@ -3,6 +3,7 @@ package com.team1.chting.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.team1.chting.dto.chartdto.ChartJoinTypeDto;
+import com.team1.chting.dto.chartdto.ChartMainDto;
 import com.team1.chting.dto.chartdto.ChartRatioDto;
 import com.team1.chting.dto.chartdto.ChartRecentUserDto;
 import com.team1.chting.service.*;
@@ -48,7 +49,6 @@ public class ChartRestController {
 
         try {
             String result = objmap.writeValueAsString(chartRecentUserDto);
-            System.out.println(result);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch(Exception e){
             e.printStackTrace();
@@ -63,13 +63,28 @@ public class ChartRestController {
 
         ChartJoinTypeDto chartJoinType = chartService.getChartJoinType();
 
-        System.out.println(chartJoinType);
-
         ObjectMapper objmap = new ObjectMapper();
 
         try {
             String result = objmap.writeValueAsString(chartJoinType);
-            System.out.println(result);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
+        }
+
+    }
+
+    //차트데이터 회원가입 유형 데이터 가져오기
+    @RequestMapping(value = "dashboardInfo.do", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> dashboardInfo() {
+
+        ChartMainDto chartMainDto = chartService.getChartMainDto();
+
+        ObjectMapper objmap = new ObjectMapper();
+
+        try {
+            String result = objmap.writeValueAsString(chartMainDto);
             return new ResponseEntity<String>(result, HttpStatus.OK);
         } catch(Exception e){
             e.printStackTrace();
