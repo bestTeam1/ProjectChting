@@ -8,8 +8,6 @@
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- sweetalert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -123,7 +121,7 @@
                 confirmButtonText: '가입을 승인합니다'
             }).then (() => {
                 $.ajax({
-                    url : "joinAccept.do",
+                    url : "${pageContext.request.contextPath}/groupadmin/joinAccept.do",
                     dataType : "json",
                     data : {
                         requestList : requests,
@@ -196,7 +194,7 @@
                 confirmButtonText: '가입을 거절합니다'
             }).then (() => {
                 $.ajax({
-                    url: "joinDeny.do",
+                    url: "${pageContext.request.contextPath}/groupadmin/joinDeny.do",
                     dataType: "json",
                     data: {
                         requestList: requests,
