@@ -31,28 +31,28 @@ public class BoardRestController {
       만든이 : 이승준
       작성일 : 2021-06-08
      */
-    @RequestMapping(value="searchButton.do", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> searchGroup(@RequestParam("category") String category, @RequestParam("search") String search){
-
-        List<GroupDto> list = null;
-
-        ObjectMapper objmap = new ObjectMapper();
-
-        String result = "";
-
-        try {
-            list = boardService.getGroupListBySearch(category, search);
-            int list_size = 0;
-            for(GroupDto dto : list) {
-                //System.out.println(dto.toString());
-            }
-            result = objmap.writeValueAsString(list);
-            return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
-            //System.out.println(e.getMessage());
-            return new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
-        }
-    }
+//    @RequestMapping(value="searchButton.do", method= RequestMethod.GET, produces = "application/json")
+//    public ResponseEntity<String> searchGroup(@RequestParam("category") String category, @RequestParam("search") String search){
+//
+//        List<GroupDto> list = null;
+//
+//        ObjectMapper objmap = new ObjectMapper();
+//
+//        String result = "";
+//
+//        try {
+//            list = boardService.getGroupListBySearch(category, search);
+//            int list_size = 0;
+//            for(GroupDto dto : list) {
+//                //System.out.println(dto.toString());
+//            }
+//            result = objmap.writeValueAsString(list);
+//            return new ResponseEntity<String>(result, HttpStatus.OK);
+//        } catch(Exception e){
+//            //System.out.println(e.getMessage());
+//            return new ResponseEntity<String>(result, HttpStatus.BAD_GATEWAY);
+//        }
+//    }
 
     /*
       모임일정추가
