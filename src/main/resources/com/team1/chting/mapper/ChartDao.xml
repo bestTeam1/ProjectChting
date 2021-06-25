@@ -11,15 +11,22 @@
     </select>
 
     <select id="getRecentUser" resultType="com.team1.chting.dto.chartdto.ChartRecentUserDto">
-        SELECT COUNT(*) AS today,
-               COUNT(<![CDATA[ CASE WHEN joindate < '${now}' THEN 1 END]]>)AS oneDaysAgo,
-               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -1 DAY) THEN 1 END]]>)AS yesterday,
-               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -2 DAY) THEN 1 END]]>)AS twoDaysAgo,
-               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -3 DAY) THEN 1 END]]>)AS threeDaysAgo,
-               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -4 DAY) THEN 1 END]]>)AS fourDaysAgo,
-               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -5 DAY) THEN 1 END]]>)AS fiveDaysAgo,
-               COUNT(<![CDATA[ CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -6 DAY) THEN 1 END]]>)AS sixDaysAgo
+        SELECT COUNT(*)                                                                               AS today,
+               COUNT(<![CDATA[CASE WHEN joindate < '${now}' THEN 1 END]]>)                            AS oneDaysAgo,
+               COUNT(<![CDATA[CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -1 DAY) THEN 1 END]]>) AS yesterday,
+               COUNT(<![CDATA[CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -2 DAY) THEN 1 END]]>) AS twoDaysAgo,
+               COUNT(<![CDATA[CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -3 DAY) THEN 1 END]]>) AS threeDaysAgo,
+               COUNT(<![CDATA[CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -4 DAY) THEN 1 END]]>) AS fourDaysAgo,
+               COUNT(<![CDATA[CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -5 DAY) THEN 1 END]]>) AS fiveDaysAgo,
+               COUNT(<![CDATA[CASE WHEN joindate < DATE_ADD('${now}', INTERVAL -6 DAY) THEN 1 END]]>) AS sixDaysAgo
         from user_info;
+    </select>
+
+    <select id="getChartJoinType" resultType="com.team1.chting.dto.chartdto.ChartJoinTypeDto">
+        SELECT COUNT(CASE WHEN logintype = "google" and enabled = 1 THEN 1 END) AS google,
+               COUNT(CASE WHEN logintype = "kakao" and enabled = 1 THEN 1 END)  AS kakao,
+               COUNT(CASE WHEN logintype = "github" and enabled = 1 THEN 1 END) AS github
+        FROM user_info
     </select>
 
 
