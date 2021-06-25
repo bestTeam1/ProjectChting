@@ -5,11 +5,11 @@
 <html lang="ko">
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <!--CDN 링크 -->
 </head>
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Close Header / <head> -->
 <!-- Start Service -->
 <c:set var="userInfoBasic" value="${userInfo.userInfoBasic}"></c:set>
 <c:set var="imgSrc" value="${userInfoBasic.profile_img}"/>
@@ -59,127 +59,129 @@
             </div>
         </div>
     </div>
+    <hr>
+    <div class="row px-lg-3">
+        <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
+            <div class="pricing-table card h-100 shadow-sm border-0 py-5">
+                <div class="pricing-table-body card-body rounded-pill text-center align-self-center p-md-0">
+                    <i class="pricing-table-icon display-3 bx bx-current-location text-secondary"></i>
+                    <h2 class="pricing-table-heading h5 semi-bold-600">선호 지역</h2>
+                    <hr>
+                    <br>
+                    <ul class="pricing-table-body text-start text-dark px-4 list-unstyled light-300">
+                        <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<c:out
+                            value="${userInfoBasic.first_area_name}"/>&nbsp;&nbsp;
+                        <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<c:out
+                            value="${userInfoBasic.second_area_name}"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
+            <div class="pricing-table card h-100 shadow-sm border-0 py-5">
+                <div class="pricing-table-body card-body text-center align-self-center p-md-0">
+                    <i class="pricing-table-icon display-3 bx bx-category-alt text-secondary"></i>
+                    <h2 class="pricing-table-heading h5 semi-bold-600">관심사</h2>
+                    <hr>
+                    <br>
+                    <ul class="pricing-table-list text-start text-dark px-4 list-unstyled light-300">
+                        <c:forEach var="userInterest" items="${userInfo.userInterest}">
+                            <i class="fas fa-heart"></i>&nbsp;&nbsp;<c:out value="${userInterest.catename}"/><br>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
+            <div class="pricing-table card h-100 shadow-sm border-0 py-5">
+                <div class="pricing-table-body card-body text-center align-self-center p-md-0">
+                    <i class="pricing-table-icon display-3 bx bxs-group text-secondary"></i>
+                    <h2 class="pricing-table-heading h5 semi-bold-600">가입한 모임</h2>
+                    <hr>
+                    <br>
+                    <ul class="pricing-table-list text-start text-dark px-4 list-unstyled light-300">
+                        <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
+                            <i class="fas fa-check"></i>&nbsp;&nbsp;
+                            <a href="board_main.do?group_no=${userJoinGroup.group_no}">
+                                <c:out value="${userJoinGroup.group_name}"/></a><br>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>
 </section>
-<hr>
 
-<div class="row px-lg-3">
-    <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
-        <div class="pricing-table card h-100 shadow-sm border-0 py-5">
-            <div class="pricing-table-body card-body rounded-pill text-center align-self-center p-md-0">
-                <i class="pricing-table-icon display-3 bx bx-current-location text-secondary"></i>
-                <h2 class="pricing-table-heading h5 semi-bold-600">선호 지역</h2>
-                <hr>
-                <br>
-                <ul class="pricing-table-body text-start text-dark px-4 list-unstyled light-300">
-                    <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.first_area_name}"/>&nbsp;&nbsp;
-                    <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.second_area_name}"/>
-                </ul>
-            </div>
-        </div>
-    </div>
+<!-- End Service -->
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<!-- End Footer / Script -->
+<script type="text/javascript">
+    //값이 1이면 모임장 권한을 가진 모임이 있음
+    let userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
+    $(function () {
+        $("#delacount").click(function () {
 
-    <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
-        <div class="pricing-table card h-100 shadow-sm border-0 py-5">
-            <div class="pricing-table-body card-body text-center align-self-center p-md-0">
-                <i class="pricing-table-icon display-3 bx bx-category-alt text-secondary"></i>
-                <h2 class="pricing-table-heading h5 semi-bold-600">관심사</h2>
-                <hr>
-                <br>
-                <ul class="pricing-table-list text-start text-dark px-4 list-unstyled light-300">
-                    <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                        <i class="fas fa-heart"></i>&nbsp;&nbsp;<c:out value="${userInterest.catename}"/><br>
-                    </c:forEach>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
-        <div class="pricing-table card h-100 shadow-sm border-0 py-5">
-            <div class="pricing-table-body card-body text-center align-self-center p-md-0">
-                <i class="pricing-table-icon display-3 bx bxs-group text-secondary"></i>
-                <h2 class="pricing-table-heading h5 semi-bold-600">가입한 모임</h2>
-                <hr>
-                <br>
-                <ul class="pricing-table-list text-start text-dark px-4 list-unstyled light-300">
-                    <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
-                        <i class="fas fa-check"></i>&nbsp;&nbsp;
-                        <a href="board_main.do?group_no=${userJoinGroup.group_no}">
-                            <c:out value="${userJoinGroup.group_name}"/></a><br>
-                    </c:forEach>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- End Service -->
-    <!-- Start Footer / Script -->
-    <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-    <!-- End Footer / Script -->
-    <script type="text/javascript">
-        //값이 1이면 모임장 권한을 가진 모임이 있음
-        let userGroupRole = "${userInfo.userInfoBasic.cnt}";
-
-        $(function () {
-            $("#delacount").click(function () {
-
-                if (userGroupRole == '1') {
-                    Swal.fire({
-                        text: "모임장 권한을 가지고 있는 모임이 있어 권한 위임 또는 모임 해산 후 탈퇴가 가능합니다.",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: '모임 관리 페이지로 이동',
-                        cancelButtonText: '취소',
-                        reverseButtons: true
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.href = "groupMemberManage.do"
-                        }
-                    })
-                } else {
-                    Swal.fire({
-                        title: "정말 탈퇴하시겠습니까?",
-                        text: "계정 복구가 불가합니다.",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: '네, 탈퇴할게요!',
-                        cancelButtonText: '취소',
-                        reverseButtons: true
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "delAcount.do",
-                                dataType: "text",
-                                data: {
-                                    userid: userid
-                                },
-                                success: function (data) {
-                                    Swal.fire(
-                                        '탈퇴 완료되었습니다.',
-                                        '메인 페이지로 이동합니다.',
-                                        'success', {
-                                            buttons: {
-                                                confirm: {
-                                                    text: '확인',
-                                                    value: true,
-                                                    className: 'button'
-                                                }
+            if (userGroupRole == '1') {
+                Swal.fire({
+                    text: "모임장 권한을 가지고 있는 모임이 있어 권한 위임 또는 모임 해산 후 탈퇴가 가능합니다.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '모임 관리 페이지로 이동',
+                    cancelButtonText: '취소',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "groupMemberManage.do"
+                    }
+                })
+            } else {
+                Swal.fire({
+                    title: "정말 탈퇴하시겠습니까?",
+                    text: "계정 복구가 불가합니다.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '네, 탈퇴할게요!',
+                    cancelButtonText: '취소',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "delAcount.do",
+                            dataType: "text",
+                            data: {
+                                userid: userid
+                            },
+                            success: function (data) {
+                                Swal.fire(
+                                    '탈퇴 완료되었습니다.',
+                                    '메인 페이지로 이동합니다.',
+                                    'success', {
+                                        buttons: {
+                                            confirm: {
+                                                text: '확인',
+                                                value: true,
+                                                className: 'button'
                                             }
-                                        }).then((result) => {
-                                        location.href = "${pageContext.request.contextPath}/logout";
-                                    })
-                                },
-                                error: function (request, status, error) {
-                                    console.log(error);
-                                }
-                            })
-                        }
-                    })
-                }
-            });
+                                        }
+                                    }).then((result) => {
+                                    location.href = "${pageContext.request.contextPath}/logout";
+                                })
+                            },
+                            error: function (request, status, error) {
+                                console.log(error);
+                            }
+                        })
+                    }
+                })
+            }
         });
+    });
 
-    </script>
+</script>
 </body>
 </html>
 
