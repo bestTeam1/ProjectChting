@@ -1,125 +1,188 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Editorial by HTML5 UP</title>
+<!DOCTYPE html>
+<html lang="ko">
 
-    <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <%--  Sweet Alert2  --%>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <%--  J Query  --%>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body class="is-preload">
-<!-- Wrapper -->
-<div id="wrapper">
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-            <div class="content">
-                <form id="groupMakeFrm" method="POST" action='groupMake.do' enctype="multipart/form-data">
-                    <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
-                    <input type="hidden" name="catecode" id="catecode" value="">
-                    <input type="hidden" name="groupNo" value="${groupNo}">
-                    <table>
-                        <tr>
-                            <td style="vertical-align: middle">모임 이름</td>
-                            <td>
-                                <textarea name="group_name" id="group_name" cols="50" rows="1"
-                                          style="resize: none;"
-                                          class="form-control"
-                                          placeholder="4 ~ 20자 이내로 기입해주세요 :)"
-                                          onfocus="this.placeholder = ''"
-                                          onblur="this.placeholder = '4 ~ 20자 이내로 기입해주세요 :)'"></textarea>
-                                <h6 id="groupNameKeyUp"></h6>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align: middle">모임 소개글</td>
-                            <td>
-                                <textarea name="content" id="content" cols="50" rows="5"
-                                          style="resize: none;"
-                                          class="form-control"
-                                          placeholder="10 ~ 1000자 이내로 기입해주세요 :)"
-                                          onfocus="this.placeholder = ''"
-                                          onblur="this.placeholder = '10 ~ 1000자 이내로 기입해주세요 :)'"></textarea>
-                                <h6 id="contentKeyUp"></h6>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align: middle">모임 대표 사진</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${not empty group_img}">
-                                        <img id="preview" src="${group_img}" width="130" alt="모임 대표이미지가 보여지는 영역">
-                                    </c:when>
-                                    <c:otherwise>
-                                        <img id="preview"
-                                             src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
-                                             width="130" alt="모임 대표 이미지">
-                                    </c:otherwise>
-                                </c:choose>
-                                <br><br>
-                                <input type="file" id="fileName" name="fileName" class="fileName"
-                                       accept="image/*;capture=camera">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align: middle">관심사</td>
-                            <td>
-                                <p style="float:left;" id="interest"></p>
-                                <input type="button" style="" id="interestBtn" class="button small" value="선택"
-                                       onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align: middle">지역</td>
-                            <td>
-                                <select name="area_code" id="area_code" style="width: 30%; float:left;">
-                                    <option value="" selected disabled hidden>=== 선택 ===</option>
-                                    <c:forEach items="${areaList}" var="area">
-                                        <option value="${area.area_code}">${area.area_code} ${area.area_name}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="vertical-align: middle">정원</td>
-                            <td>
-                                <ol>
-                                    <ul class="a">
-                                        <li>모임은 최대 20명만 참여할 수 있습니다.</li>
-                                        <li>인원을 늘리고 싶으시면 유료결제를 이용해 주세요. &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <input type="button" class="button small" value="결제하기">
-                                        </li>
-                                    </ul>
-                                </ol>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+<body>
+<!-- Header / <head> -->
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Start Service -->
+<form id="groupMakeFrm" method="POST" action='groupMake.do' enctype="multipart/form-data">
+    <section class="service-wrapper py-3">
+        <section class="bg-light w-100">
+            <div class="container">
+                <div class="row d-flex align-items-center py-5">
+                    <div class="col-lg-6 text-start">
+                        <h1 class="h2 py-5 text-primary typo-space-line">Chting 모임 만들기</h1>
+                        <p class="light-300">
+                            지역과 관심사를 선택하고 마음이 맞는 사람들과 함께 취미 활동을 해보세요 !
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="./assets/img/banner-img-02.svg">
+                    </div>
+                </div>
             </div>
-            <input type="button" onclick="confirm()" value="완료"/>
-        </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-    </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
-</div>
+        </section>
 
+        <%-- 모임 대표 사진 --%>
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                    <i class="display-3 bx bx-package"></i>
+                    <p>대표 사진</p>
+                </div>
+
+                <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <ul class="list-unstyled text-center light-300">
+                        <div class="form-floating mb-4">
+                            <c:choose>
+                                <c:when test="${not empty group_img}">
+                                    <img id="preview" src="${group_img}" width="130" alt="모임 대표이미지가 보여지는 영역">
+                                </c:when>
+                                <c:otherwise>
+                                    <img id="preview"
+                                         src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
+                                         width="200" style="float: left; margin-bottom: 20px;">
+                                </c:otherwise>
+                            </c:choose>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="fileName" name="fileName"
+                                       aria-describedby="inputGroupFileAddon04"
+                                       aria-label="Upload" accept="image/*;capture=camera">
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+                <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                </div>
+            </div>
+        </div>
+
+        <%-- 모임 이름 --%>
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                    <i class="display-3 bx bx-package"></i>
+                    <p>모임 이름</p>
+                </div>
+                <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <ul class="list-unstyled text-center light-300">
+                        <div class="form-floating mb-4">
+                        <textarea name="group_name" id="group_name" class="form-control form-control-lg light-300"
+                                  style="resize: none; width: 800px; height: 100px; "
+                                  placeholder="4 ~ 20자 이내로 입력해 주세요."></textarea>
+                            <label for="group_name">4 ~ 20자 이내로 입력해 주세요.</label>
+                            <p align="left" id="groupNameKeyUp"></p>
+
+                        </div>
+                    </ul>
+                </div>
+                <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                </div>
+            </div>
+        </div>
+
+        <%-- 모임 소개글 --%>
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                    <i class="display-3 bx bx-package"></i>
+                    <p>모임 소개</p>
+                </div>
+
+                <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <ul class="list-unstyled text-center light-300">
+                        <div class="form-floating mb-4">
+                        <textarea name="content" id="content" class="form-control form-control-lg light-300"
+                                  style="resize: none; width: 800px; height: 200px;"
+                                  placeholder="10 ~ 1000자 이내로 입력해 주세요."></textarea>
+                            <label for="content">10 ~ 1000자 이내로 입력해 주세요.</label>
+                            <p align="left" id="contentKeyUp"></p>
+                        </div>
+                    </ul>
+                </div>
+                <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                </div>
+            </div>
+        </div>
+
+        <%-- 관심사 --%>
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                    <i class="display-3 bx bx-package"></i>
+                    <p>관심사</p>
+                </div>
+                <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <input type="button" style="" id="interestBtn"
+                           class="btn rounded-pill px-4 btn-outline-primary light-300" value="관심사 선택"
+                           onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');"/>
+                </div>
+                <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                </div>
+            </div>
+        </div>
+
+        <%-- 지역 --%>
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                    <i class="display-3 bx bx-package"></i>
+                    <p>지역</p>
+                </div>
+                <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <select name="area_code" id="area_code" style="width: 30%; float:left;">
+                        <option value="" selected disabled hidden>=== 선택 ===</option>
+                        <c:forEach items="${areaList}" var="area">
+                            <option value="${area.area_code}">${area.area_code} ${area.area_name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                </div>
+            </div>
+        </div>
+
+        <%-- 유료결제 --%>
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                    <i class="display-3 bx bx-package"></i>
+                    <p>결제</p>
+                </div>
+                <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
+                        모임은 최대 20명만 참여할 수 있습니다.<br>
+                        증원을 위해서는 유료 결제를 이용해 주세요.<br><br>
+                        <input type="button" class="btn rounded-pill px-4 btn-outline-primary light-300" value="결제">
+                    </p>
+                </div>
+                <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+            <div class="row p-2">
+                <div class="col-md-12 col-12 m-auto text-center">
+                    <input type="button" onclick="confirm()" value="완료"
+                           class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<!-- End Service -->
+
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+
+<!-- End Footer / Script -->
 <script type="text/javascript">
 
     $(function () {
-
         //모임 대표 이미지 프리뷰
         let file = document.querySelector('#fileName');
 
@@ -186,19 +249,19 @@
         if ($('#group_name').val().trim() == '') {
             Swal.fire('모임 이름을 입력해 주세요 !')
             return;
-        }else if ($('#group_name').val().length < 4) {
+        } else if ($('#group_name').val().length < 4) {
             Swal.fire('모임 이름을 최소 4자 이상 입력해 주세요 !')
             return;
-        }else if ($('#content').val().trim() == '') {
+        } else if ($('#content').val().trim() == '') {
             Swal.fire('모임 소개글을 입력해 주세요 !')
             return;
-        }else if ($('#content').val().length < 10) {
+        } else if ($('#content').val().length < 10) {
             Swal.fire('모임 소개글을 최소 10자 이상 입력해 주세요 !')
             return;
         } else if ($('#area_code').val() == null) {
             Swal.fire('지역을 선택해 주세요 !')
             return;
-        }else if ($('#catecode').val() == '') {
+        } else if ($('#catecode').val() == '') {
             Swal.fire('관심사를 선택해 주세요 !')
             return;
         }
