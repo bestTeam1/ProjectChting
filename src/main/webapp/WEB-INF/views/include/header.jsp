@@ -66,7 +66,7 @@
 				</div>
 			</div>
 			<div class="navbar align-self-center d-flex">
-				<a class="navbar-btn btn-sm btn-primary" href="myPage.do?userid=${sessionScope.get("userData").userid}">MyPage</a>
+				<a class="navbar-btn btn-sm btn-primary" href="myPage.do">MyPage</a>
 				<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/login">Login</a>
 			</div>
 		</div>
