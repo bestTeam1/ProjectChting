@@ -56,9 +56,8 @@
 		<form-login default-target-url="/index.do" />
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
-					  oidc-user-service-ref="customOidcUserService"
 					  authentication-success-handler-ref="successHandler" />
-		<logout logout-url="/logout" logout-success-url="/index.do"/>
+		<logout logout-url="/logout" logout-success-url="/index.do" invalidate-session="true"/>
 		<csrf disabled="true" />
 	</http>
 
@@ -73,7 +72,6 @@
 	</authentication-manager>
 
 	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
-	<b:bean id="customOidcUserService" class="com.team1.chting.security.CustomOidcUserService" />
 	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
 
 	<client-registrations>
@@ -83,7 +81,7 @@
 							 client-authentication-method="basic"
 							 authorization-grant-type="authorization_code"
 							 redirect-uri="{baseUrl}/login/oauth2/code/{registrationId}"
-							 scope=""
+							 scope="profile,email"
 							 client-name="Google"
 							 provider-id="google" />
 
@@ -127,8 +125,7 @@
 				  token-uri="https://github.com/login/oauth/access_token"
 				  user-info-uri="https://api.github.com/user"
 				  user-info-authentication-method="header"
-				  user-info-user-name-attribute="id"
-				  jwk-set-uri="https://kapi.kakao.com/v1/user/access_token_info" />
+				  user-info-user-name-attribute="id" />
 
 	</client-registrations>
 
