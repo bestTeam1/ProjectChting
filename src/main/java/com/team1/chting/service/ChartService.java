@@ -1,6 +1,7 @@
 package com.team1.chting.service;
 
 import com.team1.chting.dao.ChartDao;
+import com.team1.chting.dto.chartdto.ChartJoinTypeDto;
 import com.team1.chting.dto.chartdto.ChartRatioDto;
 import com.team1.chting.dto.chartdto.ChartRecentUserDto;
 import org.apache.ibatis.session.SqlSession;
@@ -32,6 +33,13 @@ public class ChartService {
         String now = today.format(time);
 
         return chartDao.getRecentUser(now);
+    }
+
+    //차트데이터 회원가입 유형 데이터 가져오기
+    public ChartJoinTypeDto getChartJoinType() {
+        ChartDao chartDao = sqlSession.getMapper(ChartDao.class);
+        return chartDao.getChartJoinType();
+
     }
 
 }

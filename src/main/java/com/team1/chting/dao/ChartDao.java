@@ -1,5 +1,6 @@
 package com.team1.chting.dao;
 
+import com.team1.chting.dto.chartdto.ChartJoinTypeDto;
 import com.team1.chting.dto.chartdto.ChartRatioDto;
 import com.team1.chting.dto.chartdto.ChartRecentUserDto;
 import org.apache.ibatis.annotations.Param;
@@ -12,4 +13,8 @@ public interface ChartDao {
 
     //차트데이터 최근 7일 총 유저수 가져오기
     public ChartRecentUserDto getRecentUser(@Param("now") String now);
+
+    //차트데이터 회원가입 유형 데이터 가져오기
+    public ChartJoinTypeDto getChartJoinType();
+
 }
