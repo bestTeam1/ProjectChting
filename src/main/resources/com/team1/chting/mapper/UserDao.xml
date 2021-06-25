@@ -112,4 +112,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where gi.enabled = 1 and u.userid = #{userid}
         order by pg.cnt desc limit 8
     </select>
+
+    <!-- 가입한 모든 그룹정보 -->
+    <select id="getGroupListAll" resultType="com.team1.chting.dto.GroupDto">
+        select gur.group_no, group_name, group_img, catename, area_name, content
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
+                 left join group_user_role gur on group_info.group_no = gur.group_no
+        where enabled = 1 and gur.userid = #{userid}
+        order by gur.group_role_no
+    </select>
 </mapper>
