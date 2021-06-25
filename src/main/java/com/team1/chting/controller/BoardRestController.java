@@ -4,15 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team1.chting.dto.DiaryCalDto;
 import com.team1.chting.dto.DiaryDto;
 import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostReplyDto;
 import com.team1.chting.service.BoardService;
+import com.team1.chting.service.GroupService;
+import com.team1.chting.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.Date;
@@ -24,6 +25,12 @@ public class BoardRestController {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private GroupService groupService;
+
+    @Autowired
+    private UserService userService;
 
 
     /*
@@ -187,6 +194,74 @@ public class BoardRestController {
             e.printStackTrace();
             return new ResponseEntity<String>("false", HttpStatus.BAD_GATEWAY);
         }
+    }
+
+
+    // 글 삭제하기
+    @RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
+    public ResponseEntity<String> delete(@RequestParam("post_no") String post_no, String page, Model model){
+        groupService.delete(Integer.parseInt(post_no));
+        return new ResponseEntity<String>("", HttpStatus.OK);
+    }
+
+    /*
+      댓글
+      작성자 : 현상진
+      작성일 : 2021-06-21
+    */
+    // 댓글목록
+    @RequestMapping(value = "board_replyList.do", method = RequestMethod.GET)
+    public List<PostReplyDto> reply_List(@RequestParam String post_no){
+        List<PostReplyDto> list = groupService.getReply(Integer.parseInt(post_no));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(PostReplyDto dto : list) {
+            dto.setFormatdate(format.format(dto.getWritedate()));
+            dto.setUserid(userService.selectNickname(dto.getUserid()));
+        }
+        return list;
+    }
+
+    //댓글등록
+    @RequestMapping(value = "board_replyWrite.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+    public ResponseEntity<String> replyInsert(@RequestBody PostReplyDto postReplyDto){
+        System.out.println(postReplyDto.toString());
+        try {
+            groupService.replyWrite(postReplyDto);
+            return new ResponseEntity<String>("", HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<String>("", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // 댓글삭제
+    @RequestMapping(value = "board_replyDelete.do", method = RequestMethod.GET)
+    public ResponseEntity<String> replyDel(@RequestParam("reply_no")String reply_no){
+        groupService.replyDelete(Integer.parseInt(reply_no));
+
+        ResponseEntity<String> entity = null;
+        try {
+            groupService.replyDelete(Integer.parseInt(reply_no));
+            entity = new ResponseEntity<String>("success", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return entity;
+    }
+
+    // 댓글수정
+    @RequestMapping(value = "board_replyUpdate.do", method = RequestMethod.POST)
+    public ResponseEntity<String> replyModify(PostReplyDto postReplyDto){
+        ResponseEntity<String> entity = null;
+        try {
+            groupService.replyUpdate(postReplyDto);
+            entity = new ResponseEntity<String>("success", HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return entity;
     }
 
 }
