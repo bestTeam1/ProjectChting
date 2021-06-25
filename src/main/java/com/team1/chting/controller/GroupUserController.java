@@ -69,7 +69,10 @@ public class GroupUserController {
 
         //모임원으로 있는 모임들 가져오기
         List<GroupDto> groupList = userService.getGroupList(userid);
-        int length = groupList.size();
+
+        //가입한 모든 모임 가져오기 (모임장,모임원)
+        List<GroupDto> groupListAll = userService.getGroupListAll(userid);
+        int length = groupListAll.size();
 
         List<GroupDto> newGroupByCate = userService.getNewGroupByCate(userid);
         List<GroupDto> bestGroupByCate = userService.getBestGroupByCate(userid);
@@ -78,6 +81,7 @@ public class GroupUserController {
         model.addAttribute("groupList", groupList);
         model.addAttribute("newGroupList", newGroupByCate);
         model.addAttribute("bestGroupList", bestGroupByCate);
+        model.addAttribute("groupListAll", groupListAll);
 
         return "board/board_total";
     }

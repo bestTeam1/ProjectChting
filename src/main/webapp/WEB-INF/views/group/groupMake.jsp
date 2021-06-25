@@ -12,29 +12,31 @@
     <div class="container">
         <div class="row d-flex align-items-center py-5">
             <div class="col-lg-6 text-start">
-                    <h1 class="h2 py-5 text-primary typo-space-line">Chting 모임 만들기</h1>
-                    <p class="light-300">
-                        지역과 관심사를 선택하고 마음이 맞는 사람들과 함께 취미 활동을 해보세요 !
-                    </p>
+                <h1 class="h2 py-5 text-primary typo-space-line">Chting 모임 만들기</h1>
+                <p class="light-300">
+                    지역과 관심사를 선택하고 마음이 맞는 사람들과 함께 취미 활동을 해보세요 !
+                </p>
             </div>
             <div class="col-lg-6">
-                    <img src="./assets/img/banner-img-02.svg">
+                <img src="./assets/img/banner-img-02.svg">
             </div>
         </div>
     </div>
 </section>
 <section class="container my-lg-5">
     <form id="groupMakeFrm" method="POST" action='groupMake.do' enctype="multipart/form-data">
-        <div class="service-wrapper py-3">
+        <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
+        <input type="hidden" name="catecode" id="catecode" value="">
+        <input type="hidden" name="groupNo" value="${groupNo}">
 
+        <div class="service-wrapper py-3">
             <%-- 모임 대표 사진 --%>
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
-                        <i class="display-3 bx bx-package"></i>
+                        <i class="display-3 bx bx-image-add"></i>
                         <p>대표 사진</p>
                     </div>
-
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
@@ -44,7 +46,6 @@
                                     </c:when>
                                     <c:otherwise>
                                         <img id="preview"
-                                             src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
                                              width="200" style="float: left; margin-bottom: 20px;">
                                     </c:otherwise>
                                 </c:choose>
@@ -65,7 +66,7 @@
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
-                        <i class="display-3 bx bx-package"></i>
+                        <i class="display-3 bx bx-edit"></i>
                         <p>모임 이름</p>
                     </div>
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
@@ -89,7 +90,7 @@
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
-                        <i class="display-3 bx bx-package"></i>
+                        <i class="display-3 bx bx-edit"></i>
                         <p>모임 소개</p>
                     </div>
 
@@ -113,13 +114,16 @@
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
-                        <i class="display-3 bx bx-package"></i>
+                        <i class="display-3 bx bx-category-alt"></i>
                         <p>관심사</p>
                     </div>
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
                         <input type="button" style="" id="interestBtn"
                                class="btn rounded-pill px-4 btn-outline-primary light-300" value="관심사 선택"
                                onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');"/>
+                        <div class="text-left text-secondary text-muted">
+                            <p id="interest"></p>
+                        </div>
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
                     </div>
@@ -130,7 +134,7 @@
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
-                        <i class="display-3 bx bx-package"></i>
+                        <i class="display-3 bx bx-location-plus"></i>
                         <p>지역</p>
                     </div>
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
@@ -145,26 +149,6 @@
                     </div>
                 </div>
             </div>
-
-            <%-- 유료결제 --%>
-            <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
-                <div class="row p-2">
-                    <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
-                        <i class="display-3 bx bx-package"></i>
-                        <p>결제</p>
-                    </div>
-                    <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
-                        <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
-                            모임은 최대 20명만 참여할 수 있습니다.<br>
-                            증원을 위해서는 유료 결제를 이용해 주세요.<br><br>
-                            <input type="button" class="btn rounded-pill px-4 btn-outline-primary light-300" value="결제">
-                        </p>
-                    </div>
-                    <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
-                    </div>
-                </div>
-            </div>
-
 
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
