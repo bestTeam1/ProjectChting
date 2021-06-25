@@ -8,8 +8,6 @@
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=no" />
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- sweetalert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -131,7 +129,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "succeedGroupAdmin.do",
+                    url: "${pageContext.request.contextPath}/groupadmin/succeedGroupAdmin.do",
                     dataType: "text",
                     data: {
                         adminUserid: $('#userid').val(),
@@ -185,7 +183,7 @@
                         banishes.push(chk);
                     });
                     $.ajax({
-                        url : "banishMember.do",
+                        url : "${pageContext.request.contextPath}/groupadmin/banishMember.do",
                         dataType : "json",
                         data : {
                             banishList : banishes,
