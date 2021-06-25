@@ -21,7 +21,11 @@ public interface BoardDao {
     public List<PostDto> postByGroup_no(String Group_no);
 
     //모임검색
-    public List<GroupDto> getGroupListBySearch(@Param("category") String category,@Param("search") String search);
+    public List<GroupDto> getGroupListBySearch(@Param("category") String category, @Param("search") String search,
+                                               @Param("pageStart") int pageStart, @Param("pageSize")int pageSize);
+
+    //모임검색 토탈 개수 getGroupListBySearchTotalCount
+    public int getGroupListBySearchTotalCount(@Param("category") String category, @Param("search") String search);
 
     //모임만들기 관심사 정보
     public List<UserDto> getGroupInterest();

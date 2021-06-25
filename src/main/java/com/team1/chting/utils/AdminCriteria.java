@@ -35,6 +35,10 @@ public class AdminCriteria {
         this.pageSize = pageSize;
     }
 
+    public void resetPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
     //페이징처리 시작하는 값생성
     //멤버변수가 아니지만 gettet와 setter를 생성하면 Mapper에서 접근가능하다.
     //Mapper에서 사용하는 법 #{pageStart}
