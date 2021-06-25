@@ -29,5 +29,33 @@
         FROM user_info
     </select>
 
+    <select id="getTotalUser" resultType="int">
+        select count(*) from user_info where enabled = 1
+    </select>
+
+    <select id="getTotalGroup" resultType="int">
+        select count(*) from group_info where enabled = 1
+    </select>
+    <select id="getTotalEvent" resultType="int">
+        select count(*) from group_schedule;
+    </select>
+    <select id="getTotalInterest" resultType="int">
+        select count(catename) as totalInterest
+        from user_interest
+                 left join interest_category ic on ic.catecode = user_interest.catecode
+        group by catename
+        order by totalInterest desc
+            limit 1
+    </select>
+    
+    <select id="getTopInterest" resultType="String">
+        select ic.catename as topInterest
+        from user_interest
+                 left join interest_category ic on ic.catecode = user_interest.catecode
+        group by catename
+        order by count(catename) desc
+            limit 1
+    </select>
+
 
 </mapper>
