@@ -45,9 +45,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        System.out.println("getCredentials" + authentication.getCredentials());
 //        System.out.println("toString :: " + authentication.getAuthorities().toString());
         System.out.println((authentication.getPrincipal().getClass()));
-
         String redirectURL = "/index.do";
-
         Collection<? extends GrantedAuthority> authList = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> authList_iterator = authList.iterator();
         while (authList_iterator.hasNext()) {
@@ -59,7 +57,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 httpServletRequest.getSession().setAttribute("userData", new SessionDto(loginDto));
             }
         }
-
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + redirectURL);
     }
 }
