@@ -6,18 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.team1.chting.dto.*;
-import com.team1.chting.dto.MyPageInfo;
 import com.team1.chting.service.BoardService;
-import net.sf.json.JSONArray;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,9 +37,14 @@ public class UserController {
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
         String userid = sessionDto.getUserid();
 
+        //세션에 userid가 없다면 - 비로그인
+        if(userid == null || userid.equals("")) {
+            return "error/login_error.jsp";
+        }
+
         model.addAttribute("userInfo", userService.getMyPageInfo(userid));
 
-        return "user/userinfo";
+        return "user/userInfo";
     }
 
     /*
@@ -60,7 +57,7 @@ public class UserController {
 
         model.addAttribute("userInfo", userService.getMyPageInfo(userid));
 
-        return "user/userinfo";
+        return "user/userInfo";
     }
 
     /*
