@@ -28,4 +28,5 @@ public class UserDto {
 	private int group_role_no;
 	private String group_no;
 	private CommonsMultipartFile fileName;
+	private String logintype;
 }
