@@ -51,8 +51,8 @@ p, a {font-weight: 400;}
 #main_nav .nav-item .nav-link:hover {color: #fff;}
 
 #navbar_logo #logo_img {
-  padding: 4%;
-  width: 77%;
+  padding: 2%;
+  width: 73%;
 }
 
 #searchValue {
@@ -62,8 +62,7 @@ p, a {font-weight: 400;}
 /* header 62  */
 @media screen and (max-width: 991px) {
   #navbar_logo #logo_img {
-    padding: 1%;
-    width: 57%;
+    width: 53%;
   }
 
   #searchValue {
