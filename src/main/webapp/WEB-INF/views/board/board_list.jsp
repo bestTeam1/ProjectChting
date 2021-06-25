@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ssyy
-  Date: 2021/06/21
-  Time: 11:43 오전
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -33,7 +26,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="plist" items="${postList}">
+                <c:forEach var="plist" items="${plist}">
                     <tr>
                         <td>${plist.post_no}</td>
                         <td>${plist.nickname}</td>
@@ -60,7 +53,7 @@
                 <c:otherwise>
                     <div class="btn-group me-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-secondary text-white"
-                                onclick="location.href='${search_link}'+'&page=${pm.cri.page-1}'">Previous
+                                onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${pm.cri.page-1}&group_no=${group_no}'">Previous
                         </button>
                     </div>
                 </c:otherwise>
@@ -92,7 +85,7 @@
                     <c:when test="${pm.cri.page != i}">
                         <div class="btn-group me-2" role="group" aria-label="Second group">
                             <button type="button" class="btn btn-secondary text-white"
-                                    onclick="location.href='${search_link}'+'&page=${i}'">${i}</button>
+                                    onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${i}&group_no=${group_no}'">${i}</button>
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -114,7 +107,7 @@
                 <c:when test="${pm.cri.page < pm.endPage}">
                     <div class="btn-group" role="group" aria-label="Third group">
                         <button type="button" class="btn btn-secondary text-white"
-                                onclick="location.href='${search_link}'+'&page=${pm.cri.page+1}'">Next
+                                onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${pm.cri.page+1}&group_no=${group_no}'">Next
                         </button>
                     </div>
                 </c:when>
