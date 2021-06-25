@@ -219,7 +219,7 @@
                 timeout: 60000,
                 success: function (data) {
                     Swal.fire({
-                        title : '회원가입 완료!',
+                        title : data,
                         text : '다시 로그인을 진행 해주세요!',
                         icon : 'success',
                         timer : 2000
@@ -230,11 +230,9 @@
                 error: function (e) {
                     Swal.fire({
                         title : '오류 발생 Error',
-                        text : '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
+                        text : '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.' + e.message,
                         icon : 'error',
                         timer : 2000
-                    }).then(() => {
-                        location.reload();
                     });
                 }
             });
