@@ -5,7 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.team1.chting.dao.UserDao">
     <!-- 회원 기본 정보   -->
     <select id="selectUserInfo" resultType="com.team1.chting.dto.UserDto">
-        select u.userid, u.nickname, u.profile_img, a.area_name as first_area_name, b.area_name as second_area_name, u.content, gur.cnt
+        select u.userid, u.nickname, u.profile_img, a.area_name as first_area_name, b.area_name as second_area_name, u.content,
+               u.birth, u.email, u.logintype, gur.cnt
         from user_info u
                  join area a on u.first_area = a.area_code
                  join area b on u.second_area = b.area_code
@@ -15,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where userid = #{userid} and group_role_no = 1
             group by group_role_no
         )gur on u.userid = gur.userid
-        where u.userid = #{userid}
+        where u.enabled = 1 and u.userid = #{userid}
     </select>
 
     <!-- 회원이 선택한 관심사 -->
@@ -24,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from user_info u
                  join user_interest ui on u.userid = ui.userid
                  join interest_category ic on ui.catecode = ic.catecode
-        where u.userid = #{userid}
+        where u.enabled = 1 and u.userid = #{userid}
         order by ic.catename
     </select>
 
@@ -34,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from user_info u
                  join group_user_role gur on u.userid = gur.userid
                  join group_info gi on gur.group_no = gi.group_no
-        where gi.enabled = 1 and u.userid = #{userid}
+        where u.enabled = 1 and gi.enabled = 1 and u.userid = #{userid}
         order by gi.group_name
     </select>
 
