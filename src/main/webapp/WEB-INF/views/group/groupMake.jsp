@@ -6,6 +6,7 @@
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Close Header / <head> -->
 <!-- Start Service -->
 <section class="bg-light w-100">
     <div class="container">
