@@ -33,7 +33,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="col-md-4 mb-3">
-                        <a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">
+                        <a href="groupMake.do" class="recent-work card border-0 shadow-lg overflow-hidden">
                             <img class="recent-work-img card-img"
                                  src="${pageContext.request.contextPath}/upload/defaultimg/make_group.jpg"
                                  alt="Card image">
