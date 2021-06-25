@@ -41,4 +41,7 @@ public interface UserDao {
 
     //회원의 지역, 카테고리에 맞는 BEST 모임 리스트
     public List<GroupDto> getBestGroupByCate(@Param("userid") String userid);
+
+    //가입한 모든 모임 가져오기
+    List<GroupDto> getGroupListAll(String userid);
 }
