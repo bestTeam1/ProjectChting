@@ -1,60 +1,77 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>모임 관리</title>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no" />
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-</head>
-<body class="is-preload">
-<!-- Wrapper -->
-<div id="wrapper">
+<!DOCTYPE html>
+<html lang="ko">
+<style>
+    td {
+        text-align: center;
+        /* center checkbox horizontally */
+        vertical-align: middle;
+        /* center checkbox vertically */
+    }
 
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
-            <!-- Banner -->
-            <section id="main">
-                <h1 style="text-align: center">모임 가입신청을 관리하세요</h1>
-                <h2 style="text-align: center"></h2>
-            </section>
-            <section id="table">
-                <h2>&#60; 가입신청 명단 &#62;</h2>
-                <p> 가입신청을 받아주거나 거절할 수 있습니다 </p>
-                <table id="joinRequestList" style="text-align: center">
+    img {
+        width: 50%;
+        height: 50%;
+        text-align: center;
+    }
+</style>
+<body>
+<!-- Header / <head> -->
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
+<!-- Close Header / <head> -->
 
-                </table>
-                <input id="groupNo" type="hidden" value="${groupNo}">
-                <div class="col-6 col-12-small">
-                    <ul class="actions stacked">
-                        <li><a id="accept"  href="#" class="button fit">가입승인</a></li>
-                        <li><a id="refuse"  href="#" class="button primary fit">가입거절</a></li>
-                    </ul>
-                </div>
+<!-- Start Feature Work -->
+<section class="bg-light py-5 ">
 
-            </section>
-        </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-    </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
-</div>
+    <c:choose>
+        <c:when test="${empty groupJoinRequest}">
+            <h1 class="text-center"> 가입신청이 없습니다! </h1>
+            <div class="text-center img-fluid">
+                <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg" class="rounded" alt="...">
+            </div>
+        </c:when>
+        <c:otherwise>
+            <table class="table w-75 text-center m-auto">
+                <thead class="table-primary">
+                <tr>
+                    <th>이름</th>
+                    <th>소개</th>
+                    <th>성별</th>
+                    <th>신청일</th>
+                    <th>선택</th>
+                </tr>
+                </thead>
+                <tbody id="joinRequestList">
 
+                </tbody>
+            </table>
+            <div class="col-lg-8 col-12 m-lg-auto text-center">
+                <input type="button" class="banner-button btn rounded-pill btn-primary text-white btn-lg px-4 mt-lg-5 "
+                       id="accept" value="가입 승인">
+                <input type="button" class="banner-button btn rounded-pill btn-danger text-white btn-lg px-4 mt-lg-5 "
+                       id="refuse" value="가입 거절">
+            </div>
+        </c:otherwise>
+    </c:choose>
+
+</section>
+<!-- End Feature Work -->
+<div id="footerDiv" style="height: 300px"></div>
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
     //로그인체크 (백단에서 못막았을 경우)
-    $(function(){
+    $(function () {
         var check = '${sessionScope.get("userData").userid}';
-        if( check == null || check =="" || check == undefined ) {
+        if (check == null || check == "" || check == undefined) {
             Swal.fire({
                 title: '오류',
-                text : '로그인을 해주세요!!'
+                text: '로그인을 해주세요!!'
             }).then(() => {
                 history.go(-1);
             })
@@ -62,21 +79,12 @@
     });
 
     //Table에 회원정보 넣기
-    $(document).ready(function(){
+    $(document).ready(function () {
         loadRequest();
     });
 
     //가입신청 Table 생성
     function loadRequest() {
-        $('#joinRequestList').append(
-            '<tr style="background-color:' +
-            'lightgrey">'
-            + '<th style="text-align: center">이름</th>'
-            + '<th style="text-align: center">소개</th>'
-            + '<th style="text-align: center">성별</th>'
-            + '<th style="text-align: center">선택</th>'
-            + '</tr>'
-        );
 
         var tableNum = 0;
 
@@ -84,28 +92,30 @@
         (function () {
             $('#joinRequestList').append(
                 '<tr>'
-                +'<td>${joinRequest.nickname}</td>'
-                +'<td>${joinRequest.content}</td>'
-                +'<td>${joinRequest.gender}</td>'
-                +'<td>'
-                +'<div class="col-6 col-12-small">'
-                +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="${joinRequest.userid}" >'
-                +'<label for="selectAgreement'+ tableNum +'"></label>'
-                +'</div>'
-                +'</td>'
-                +'</tr>'
+                + '<td>${joinRequest.nickname}</td>'
+                + '<td>${joinRequest.content}</td>'
+                + '<td>${joinRequest.gender}</td>'
+                + '<td>${joinRequest.joindate}</td>'
+                + '<td>'
+                + '<div>'
+                + '<input class="form-check-input  m-auto" type="checkbox" id="selectAgreement' + tableNum + '" name="selectAgreement" value="${joinRequest.userid}" >'
+                + '<label for="selectAgreement' + tableNum + '"></label>'
+                + '</div>'
+                + '</td>'
+                + '</tr>'
             );
             tableNum++;
         })();
         </c:forEach>
     }
 
+
     //체크 후 가입승인 클릭 이벤트
-    $(function(){
-        $('#accept').click(function(event){
+    $(function () {
+        $('#accept').click(function (event) {
             event.preventDefault();
             var requests = [];
-            $('input[name=selectAgreement]:checked').each(function(){ //체크한 정보 담기
+            $('input[name=selectAgreement]:checked').each(function () { //체크한 정보 담기
                 var chk = $(this).val();
                 requests.push(chk);
             });
@@ -118,67 +128,69 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '가입을 승인합니다'
-            }).then (() => {
-                $.ajax({
-                    url : "${pageContext.request.contextPath}/groupadmin/joinAccept.do",
-                    dataType : "json",
-                    data : {
-                        requestList : requests,
-                        groupNo : $('#groupNo').val()
-                    },
-                    success : function(data){
-                        $('#joinRequestList').children().remove();
-                        $('#joinRequestList').append(
-                            '<tr style="background-color:lightgrey">'
-                            + '<th style="text-align: center">이름</th>'
-                            + '<th style="text-align: center">소개</th>'
-                            + '<th style="text-align: center">성별</th>'
-                            + '<th style="text-align: center">선택</th>'
-                            + '</tr>'
-                        );
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: '가입이 승인되었습니다',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
-                        console.log(Object.keys(data).length); // json갯수
-                        var tableNum = 0;
-                        $.each(data, function (index, item) {
-                            $('#joinRequestList').append(
-                                '<tr>'
-                                +'<td>'+ item.nickname +'</td>'
-                                +'<td>'+ item.content +'</td>'
-                                +'<td>'+ item.gender +'</td>'
-                                +'<td>'
-                                +'<div class="col-6 col-12-small">'
-                                +'<input type="checkbox" id="selectAgreement'+ tableNum +'" name="selectAgreement" value="'+ item.userid +'" >'
-                                +'<label for="selectAgreement'+ tableNum +'"></label>'
-                                +'</div>'
-                                +'</td>'
-                                +'</tr>'
-                            );
-                            tableNum++; //테이블 NUM으로 테이블 구분
+                confirmButtonText: '가입을 승인합니다',
+                cancelButtonText: '아니오'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "${pageContext.request.contextPath}/groupadmin/joinAccept.do",
+                        dataType: "json",
+                        data: {
+                            requestList: requests,
+                            groupNo: '${groupNo}'
+                        },
+                        success: function (data) {
+                            $('#joinRequestList').children().remove();
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '가입이 승인되었습니다',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                            console.log(Object.keys(data).length); // json갯수
+                            var tableNum = 0;
+                            $.each(data, function (index, item) {
+                                $('#joinRequestList').append(
+                                    '<tr>'
+                                    + '<td>' + item.nickname + '</td>'
+                                    + '<td>' + item.content + '</td>'
+                                    + '<td>' + item.gender + '</td>'
+                                    + '<td>' + item.joindate + '</td>'
+                                    + '<td>'
+                                    + '<div>'
+                                    + '<input type="checkbox" id="selectAgreement' + tableNum + '" name="selectAgreement" value="' + item.userid + '" >'
+                                    + '<label for="selectAgreement' + tableNum + '"></label>'
+                                    + '</div>'
+                                    + '</td>'
+                                    + '</tr>'
+                                );
+                                tableNum++; //테이블 NUM으로 테이블 구분
 
-                        });
-                        console.log(requests);
-                    },
-                    error : function(request, status, error) {
-                        console.log(error)
-                    }
-                })
+                            });
+                            console.log(requests);
+                        },
+                        error: function (request, status, error) {
+                            console.log(error)
+                        }
+                    })
+                } else {
+                    Swal.fire(
+                        '취소했습니다',
+                        '가입을 승인하지 않았습니다',
+                        'error'
+                    )
+                }
             });
         });
     });
 
     //체크 후 가입거절절 클릭이벤트, 가입승인 이벤트와 로직은 동일
-    $(function(){
-        $('#refuse').click(function(event){
+    $(function () {
+        $('#refuse').click(function (event) {
             event.preventDefault();
             var requests = [];
-            $('input[name=selectAgreement]:checked').each(function(){
+            $('input[name=selectAgreement]:checked').each(function () {
                 var chk = $(this).val();
                 requests.push(chk);
             });
@@ -191,62 +203,67 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '가입을 거절합니다'
-            }).then (() => {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/groupadmin/joinDeny.do",
-                    dataType: "json",
-                    data: {
-                        requestList: requests,
-                        groupNo: $('#groupNo').val()
-                    },
-                    success: function (data) {
-                        $('#joinRequestList').children().remove();
-                        $('#joinRequestList').append(
-                            '<tr style="background-color:lightgrey">'
-                            + '<th style="text-align: center">이름</th>'
-                            + '<th style="text-align: center">소개</th>'
-                            + '<th style="text-align: center">성별</th>'
-                            + '<th style="text-align: center">선택</th>'
-                            + '</tr>'
-                        );
+                confirmButtonText: '가입을 거절합니다',
+                cancelButtonText: '아니오'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "${pageContext.request.contextPath}/groupadmin/joinDeny.do",
+                        dataType: "json",
+                        data: {
+                            requestList: requests,
+                            groupNo: '${groupNo}'
+                        },
+                        success: function (data) {
+                            $('#joinRequestList').children().remove();
 
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            iconColor: 'red',
-                            title: '가입이 거절되었습니다',
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                iconColor: 'red',
+                                title: '가입이 거절되었습니다',
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
 
-                        var tableNum = 0;
-                        $.each(data, function (index, item) {
-                            $('#joinRequestList').append(
-                                '<tr>'
-                                + '<td>' + item.nickname + '</td>'
-                                + '<td>' + item.content + '</td>'
-                                + '<td>' + item.gender + '</td>'
-                                + '<td>'
-                                + '<div class="col-6 col-12-small">'
-                                + '<input type="checkbox" id="selectAgreement'
-                                + tableNum
-                                + '" name="selectAgreement" value="' + item.userid + '" >'
-                                + '<label for="selectAgreement' + tableNum + '"></label>'
-                                + '</div>'
-                                + '</td>'
-                                + '</tr>'
-                            );
-                            tableNum++;
-                        });
-                    },
-                    error: function (request, status, error) {
-                        console.log(error)
-                    }
-                })
+                            var tableNum = 0;
+                            $.each(data, function (index, item) {
+                                $('#joinRequestList').append(
+                                    '<tr>'
+                                    + '<td>' + item.nickname + '</td>'
+                                    + '<td>' + item.content + '</td>'
+                                    + '<td>' + item.gender + '</td>'
+                                    + '<td>' + item.joindate + '</td>'
+                                    + '<td>'
+                                    + '<div>'
+                                    + '<input class="form-check-input  m-auto" type="checkbox" id="selectAgreement' + tableNum + '" name="selectAgreement" value="${joinRequest.userid}" >'
+                                    + '<label for="selectAgreement' + tableNum + '"></label>'
+                                    + '</div>'
+                                    + '</td>'
+                                    + '</tr>'
+                                );
+                                tableNum++;
+                            });
+                        },
+                        error: function (request, status, error) {
+                            console.log(error)
+                        }
+                    })
+                } else {
+                    Swal.fire(
+                        '취소했습니다',
+                        '가입을 거절하지 않았습니다',
+                        'error'
+                    )
+                }
             })
         });
     });
+
+
+    function checkEmpty () {
+
+    }
 
 </script>
 </html>

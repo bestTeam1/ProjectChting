@@ -134,7 +134,7 @@
                         <c:otherwise>
                             <div class="btn-group me-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary text-white"
-                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminGroupManagement.do?page=${pm.cri.page-1}'">Previous
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?page=${pm.cri.page-1}'">Previous
                                 </button>
                             </div>
                         </c:otherwise>
@@ -166,7 +166,7 @@
                             <c:when test="${pm.cri.page != i}">
                                 <div class="btn-group me-2" role="group" aria-label="Second group">
                                     <button type="button" class="btn btn-secondary text-white"
-                                            onclick="location.href='${pageContext.request.contextPath}/admin/adminGroupManagement.do?&page=${i}'">${i}</button>
+                                            onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?&page=${i}'">${i}</button>
                                 </div>
                             </c:when>
                             <c:otherwise>
@@ -188,7 +188,7 @@
                         <c:when test="${pm.cri.page < pm.endPage}">
                             <div class="btn-group" role="group" aria-label="Third group">
                                 <button type="button" class="btn btn-secondary text-white"
-                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminGroupManagement.do?&page=${pm.cri.page+1}'">Next
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?&page=${pm.cri.page+1}'">Next
                                 </button>
                             </div>
                         </c:when>
