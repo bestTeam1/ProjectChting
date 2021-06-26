@@ -20,7 +20,7 @@
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-<jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
+<jsp:include page="/WEB-INF/views/include/groupAdminSidebar.jsp"/>
 <!-- Close Header / <head> -->
 
 <!-- Start Feature Work -->
@@ -49,9 +49,9 @@
                 </tbody>
             </table>
             <div class="col-lg-8 col-12 m-lg-auto text-center">
-                <input type="button" class="banner-button btn rounded-pill btn-primary text-white btn-lg px-4 mt-lg-5 "
+                <input type="button" class="banner-button btn rounded-pill btn-accept text-white btn-lg px-4 mt-lg-5 "
                        id="accept" value="가입 승인">
-                <input type="button" class="banner-button btn rounded-pill btn-danger text-white btn-lg px-4 mt-lg-5 "
+                <input type="button" class="banner-button btn rounded-pill btn-cancel text-white btn-lg px-4 mt-lg-5 "
                        id="refuse" value="가입 거절">
             </div>
         </c:otherwise>
@@ -126,8 +126,8 @@
                 text: "가입을 승인하시겠습니까?",
                 icon: '경고',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#A0A0FF',
+                cancelButtonColor: '#aaaaaa',
                 confirmButtonText: '가입을 승인합니다',
                 cancelButtonText: '아니오'
             }).then((result) => {
@@ -201,8 +201,8 @@
                 text: "가입을 거절하시겠습니까?",
                 icon: '경고',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#A0A0FF',
+                cancelButtonColor: '#aaaaaa',
                 confirmButtonText: '가입을 거절합니다',
                 cancelButtonText: '아니오'
             }).then((result) => {
