@@ -155,15 +155,12 @@
 <!-- Custom -->
 <script src="${pageContext.request.contextPath}/assets/js/custom.js"></script>
 <!-- Select2 JS -->
+<script src="${pageContext.request.contextPath}/assets/js/select2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/fastclick.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/prism.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/jspdf.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/html2canvas.js"></script>
 <!-- underscore.js -->
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
 <%--  Sweet Alert2  --%>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="${pageContext.request.contextPath}/assets/js/sweetalert2.js"></script>
 <%--  Font awesome  --%>
 <script src="https://kit.fontawesome.com/c5fd5902bb.js" crossorigin="anonymous"></script>
 
