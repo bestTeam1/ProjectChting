@@ -133,6 +133,7 @@
             <div class="col-lg-8 col-12 m-lg-auto text-center">
                 <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="shareBtn" value="Chting 공유하기">
             </div>
+            <a href="http://localhost:8090/chting_war_exploded/oauth2/authorization/google-login">로그인테스트</a>
         </div>
     </div>
 </section>
@@ -207,23 +208,7 @@
     </div>
 </section>
 <!-- End Service -->
-<div id="shareModal" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="col-lg-7 col-12 text-light pt-2">
-                <h3 class="h4 light-300">찾으시는 모임이 없다구요?</h3>
-                <p class="light-300">걱정 마세요! 당신만의 모임을 만들어 커뮤니티를 구축하실 수 있습니다!</p>
-            </div>
-            <div class="col-lg-3 col-12 pt-4">
-                <a href="groupMake.do?userid=${sessionScope.get("userData").userid}" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">모임 만들러 가기</a>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 <!-- Start Footer / Script -->
