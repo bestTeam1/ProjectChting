@@ -53,6 +53,10 @@
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
-
+<script>
+    $(function(){
+        openNav();
+    });
+</script>
 </body>
 </html>

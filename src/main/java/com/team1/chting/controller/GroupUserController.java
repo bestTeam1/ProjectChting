@@ -13,6 +13,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.team1.chting.service.UserService;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -105,7 +106,7 @@ public class GroupUserController {
             //가입한 회원 수
             int joinUser = groupAdminService.getJoinUser(group_no);
             model.addAttribute("joinUser", joinUser);
-
+            model.addAttribute("group_no", group_no);
         return "board/board_main";
     }
 
@@ -131,32 +132,38 @@ public class GroupUserController {
 
     //글쓰기
     @RequestMapping(value = "board_write.do", method = RequestMethod.GET)
-    public String groupWrite(@RequestParam("group_no") String group_no, Model model){
+    public String groupWrite(String group_no, Model model){
+   // public String groupWrite(PostDto postDto, @RequestParam("group_no") String group_no, Model model){
+      // model.addAttribute("postDto", postDto);
         model.addAttribute("group_no", group_no);
         return "board/board_write";
     }
 
     // 글쓰기 post
-    @RequestMapping(value = "board_write.do", method = RequestMethod.POST)
-    public String insert (PostDto postDto, Model model, HttpServletRequest httpServletRequest,
+    @RequestMapping(value = "board_writeOk.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public String groupWriteOk (PostDto postDto, Model model, HttpServletRequest httpServletRequest,
                           @RequestParam("uploadFile")CommonsMultipartFile file) throws Exception {
         groupservice.insert(postDto, httpServletRequest, file);
-        //model.addAttribute("postList", groupservice.listCriPost(cri));
+     //   model.addAttribute("postList", groupservice.listCriPost(cri));
 
-//        PageMaker pm = new PageMaker();
-//        pm.setCri(cri);
-//        pm.setTotalCount(groupservice.pageCountPost());
+//         PageMaker pm = new PageMaker();
+//         pm.setCri(cri);
+//         pm.setTotalCount(groupservice.pageCountPost());
+
+//         model.addAttribute("pm", pm);
 
         String group_no = postDto.getGroup_no();
-        return "redirect:board_list.do?group_no=" + group_no;
+        return "redirect:board_list.do?group_no="+ group_no;
     }
-
-
 
 
     // 글 상세보기
     @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
-    public String read(@RequestParam("post_no") int post_no, @RequestParam("userid") String userid, Model model){
+    public String read(@RequestParam("post_no") int post_no, HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
         PostDto postDto = groupservice.read(post_no);
         String nickname = userService.selectNickname(userid);
 
