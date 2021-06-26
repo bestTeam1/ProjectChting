@@ -18,13 +18,13 @@
 <%-- 댓글달기 --%>
 <div>
     <br><br>
-    <div>
+    <div style="text-align: center">
         <b1><strong>Reply</strong></b1>
-        <div>
+        <div  style="text-align: -webkit-center">
             <table>
                 <tr>
                     <td>
-                            <textarea style="width: 900px" rows="3" id="content" name="content"
+                            <textarea style="width: 900px;" rows="3" id="content" name="content"
                                       placeholder="댓글사용시 로그인이 필요합니다."
                                       onfocus="this.placeholder = ''"
                                       onblur="this.placeholder = '댓글사용시 로그인이 필요합니다.'"></textarea>
@@ -40,9 +40,9 @@
     </div>
     <input type="hidden" id="b_code" name="b_code" value=""/>
 </div>
+<br><br>
 
-
-<div class="container">
+<div class="container" style="text-align: left">
     <div id="commentList">
 
     </div>

@@ -153,8 +153,9 @@ public class GroupUserController {
 //         model.addAttribute("pm", pm);
 
         String group_no = postDto.getGroup_no();
-        return "redirect:board_list.do?group_no="+ postDto.getGroup_no() + "&usesrid=" + postDto.getUserid();
+        return "redirect:board_list.do?group_no="+ group_no;
     }
+
 
     // 글 상세보기
     @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
