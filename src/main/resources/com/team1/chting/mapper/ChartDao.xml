@@ -30,31 +30,58 @@
     </select>
 
     <select id="getTotalUser" resultType="int">
-        select count(*) from user_info where enabled = 1
+        select count(*)
+        from user_info
+        where enabled = 1
     </select>
 
     <select id="getTotalGroup" resultType="int">
-        select count(*) from group_info where enabled = 1
+        select count(*)
+        from group_info
+        where enabled = 1
     </select>
     <select id="getTotalEvent" resultType="int">
-        select count(*) from group_schedule;
+        select count(*)
+        from group_schedule;
     </select>
     <select id="getTotalInterest" resultType="int">
         select count(catename) as totalInterest
         from user_interest
                  left join interest_category ic on ic.catecode = user_interest.catecode
         group by catename
-        order by totalInterest desc
-            limit 1
+        order by totalInterest desc limit 1
     </select>
-    
+
     <select id="getTopInterest" resultType="String">
         select ic.catename as topInterest
         from user_interest
                  left join interest_category ic on ic.catecode = user_interest.catecode
         group by catename
-        order by count(catename) desc
-            limit 1
+        order by count(catename) desc limit 1
+    </select>
+
+    <select id="getChartGroupTypes" resultType="com.team1.chting.dto.chartdto.ChartInterestDto">
+        select COUNT(CASE WHEN catecode = "A" and enabled = 1 THEN 1 END) AS outdoor,
+               COUNT(CASE WHEN catecode = "B" and enabled = 1 THEN 1 END) AS exercises,
+               COUNT(CASE WHEN catecode = "C" and enabled = 1 THEN 1 END) AS book,
+               COUNT(CASE WHEN catecode = "D" and enabled = 1 THEN 1 END) AS language,
+               COUNT(CASE WHEN catecode = "E" and enabled = 1 THEN 1 END) AS culture,
+               COUNT(CASE WHEN catecode = "F" and enabled = 1 THEN 1 END) AS music,
+               COUNT(CASE WHEN catecode = "G" and enabled = 1 THEN 1 END) AS crafting,
+               COUNT(CASE WHEN catecode = "H" and enabled = 1 THEN 1 END) AS dance,
+               COUNT(CASE WHEN catecode = "I" and enabled = 1 THEN 1 END) AS voluntary,
+               COUNT(CASE WHEN catecode = "J" and enabled = 1 THEN 1 END) AS social,
+               COUNT(CASE WHEN catecode = "K" and enabled = 1 THEN 1 END) AS car,
+               COUNT(CASE WHEN catecode = "L" and enabled = 1 THEN 1 END) AS picture,
+               COUNT(CASE WHEN catecode = "M" and enabled = 1 THEN 1 END) AS game,
+               COUNT(CASE WHEN catecode = "N" and enabled = 1 THEN 1 END) AS cook,
+               COUNT(CASE WHEN catecode = "O" and enabled = 1 THEN 1 END) AS pet,
+               COUNT(CASE WHEN catecode = "P" and enabled = 1 THEN 1 END) AS etc
+        from user_info left join user_interest ui on user_info.userid = ui.userid
+    </select>
+
+    <select id="getChartSchedule" resultType="com.team1.chting.dto.chartdto.ChartScheduleDto">
+        select group_name as title, xcoord, ycoord from group_schedule left join group_info gi on gi.group_no = group_schedule.group_no;
     </select>
 
 
