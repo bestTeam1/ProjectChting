@@ -49,8 +49,10 @@
             width: 50%;
         }
 
-        .chtingCal {
+        input[type="text"] {
             text-align: center;
+            width: 90% !important;
+            margin-top: 20px;
         }
 
         .formBtn {
@@ -84,6 +86,8 @@
     <div id="main">
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+            <jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
+
             <!-- Banner -->
             <section style="position: relative">
 
@@ -99,22 +103,32 @@
                             </div>
                             <div class="modal-body">
                                 <form id="form" name="diaryOkForm" onsubmit="return false">
-                                    <div style="display: flex; justify-content: center">
-                                        <input class="chtingCal" id="chtingCalType" type="text" disabled>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingCalType" disabled>
+                                        <label for="chtingCalType">모임유형</label>
                                     </div>
-                                    <div style="display: flex; justify-content: center">
-                                        <input class="chtingCal" id="chtingCalDate" type="text" disabled>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingCalDate" disabled>
+                                        <label for="chtingCalDate">모임날짜</label>
                                     </div>
-                                    <div style="display: flex; justify-content: center">
-                                        <input class="chtingCal" id="chtingContent" type="text" placeholder="제목">
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingContent">
+                                        <label for="chtingContent">제목</label>
                                     </div>
-                                    <div style="display: flex; justify-content: center">
-                                        <input class="chtingCal" id="chtingSubject" type="text" placeholder="내용">
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingSubject">
+                                        <label for="chtingSubject">내용</label>
                                     </div>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingCalLocation"
+                                               onclick="searchMap()" placeholder="장소를 알려주세요!">
+                                        <label for="chtingCalLocation" id="placeholderForSearch">&#128270; 장소를
+                                            알려주세요!</label>
+                                    </div>
+
+
                                     <div style="display: flex; justify-content: center">
-                                        <input class="chtingCal" id="chtingCalLocation" type="text"
-                                               onclick="searchMap()"
-                                               placeholder="장소를 알려주세요!">
+                                        <input class="chtingCal" type="hidden" type="text">
                                     </div>
                                     <!-- 카카오맵 기본좌표 강남 비트캠프 -->
                                     <input type="hidden" name="xcoord" id="xcoord" value="127.029018585511"/>
@@ -122,7 +136,7 @@
                                     <input type="hidden" name="schedule_no" id="chtingScheduleNo" value=""/>
                                 </form>
                                 <div style="display: table; justify-content: right">
-                                    <div id="map" style="width: 450px; height: 300px;"></div>
+                                    <div id="map" style="width: 465px; height: 300px;"></div>
                                 </div>
                             </div>
                             <div class="modal-footer" id="buttonDiv">
@@ -254,11 +268,17 @@
                     }
                 })
 
-
                 calendarModal.show();
 
                 $('#chtingCalType').val(info.draggedEl.innerText);
                 $('#chtingCalDate').val(info.dateStr);
+
+                //조기화
+                $('#xcoord').val('127.029018585511');
+                $('#ycoord').val('37.4994547195947');
+                $('#chtingContent').val('');
+                $('#chtingSubject').val('');
+                $('#chtingCalLocation').val('');
 
                 makeMap();
             },
@@ -367,10 +387,13 @@
 
         var iwContent = '<div style="text-align: center; padding-left: 15px">모임장소' +
             '<a href="https://map.kakao.com/link/map/' +
-            '모임장소' + ',' + ycoord +',' +  xcoord + '" style="color:#000000" target="_blank">&#127757;</a>' +
+            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">&#127757;</a>' +
             '<a href="https://map.kakao.com/link/to/' +
-            '모임장소' + ',' + ycoord +',' +  xcoord + '" style="color:#000000" target="_blank">&#127939;</a></div>',
+            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">&#127939;</a></div>',
+
+
             iwPosition = new kakao.maps.LatLng(ycoord, xcoord); //인포윈도우 표시 위치입니다
+
 
 // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
