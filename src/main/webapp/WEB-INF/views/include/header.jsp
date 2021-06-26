@@ -51,7 +51,7 @@
 				<div id="nav search" style="padding-right: 7%;">
 					<form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
 						<div class="input-group input-group-navbar justify-content-center">
-							<select name="category" class="form-control form-select-sm search" aria-label="Search">
+							<select name="category" class="form-control form-select-sm search" aria-label="Search" id="searchSelect">
 								<option value="">전체</option>
 								<c:forEach items="${applicationScope.search_areaList}" var="area">
 									<c:choose>

@@ -171,7 +171,7 @@
 <script>
     //window.load
     $(function () {
-        $('select').niceSelect();
+        $('#searchSelect').niceSelect();
         // init Isotope
         var $projects = $('.projects').isotope({
             itemSelector: '.project',
