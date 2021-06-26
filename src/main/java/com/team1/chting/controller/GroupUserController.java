@@ -152,11 +152,13 @@ public class GroupUserController {
     }
 
 
-
-
     // 글 상세보기
     @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
-    public String read(@RequestParam("post_no") int post_no, @RequestParam("userid") String userid, Model model){
+    public String read(@RequestParam("post_no") int post_no, HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
         PostDto postDto = groupservice.read(post_no);
         String nickname = userService.selectNickname(userid);
 
