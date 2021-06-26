@@ -183,8 +183,6 @@
         </div>
     </form>
 </section>
-
-
 <!-- End Service -->
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
