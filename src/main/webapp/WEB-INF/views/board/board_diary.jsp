@@ -218,7 +218,7 @@
                 //클릭시에는 이미있는 이벤트를 삭제할수있는 삭제버튼이 생성됨
                 $('#buttonDiv').each(function () {
                     if ($('button', this).length == 2) {
-                        $('#buttonDiv').prepend('<button type="button" class="btn btn-danger">삭제</button>');
+                        $('#buttonDiv').prepend('<button type="button" id="delete" class="btn btn-danger">삭제</button>');
                         cancelEvent();
                     }
                 })
@@ -512,7 +512,7 @@
 
     //일정 만들기 취소 클릭이벤트
     function cancelEvent() {
-        $('#cancelEvent').on('click', function (e) {
+        $('#delete').on('click', function (e) {
             e.preventDefault();
             Swal.fire({
                 title: '일정 취소',
@@ -522,7 +522,7 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: '네',
-                canclButtonText: '아니오'
+                cancelButtonText: '아니오'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
