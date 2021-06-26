@@ -37,11 +37,6 @@ public class UserController {
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
         String userid = sessionDto.getUserid();
 
-        //세션에 userid가 없다면 - 비로그인
-        if(userid == null || userid.equals("")) {
-            return "error/login_error.jsp";
-        }
-
         model.addAttribute("userInfo", userService.getMyPageInfo(userid));
 
         return "user/userInfo";
