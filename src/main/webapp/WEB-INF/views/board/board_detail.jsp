@@ -7,32 +7,42 @@
     <title>내가 가입한 모임 - 상세보기</title>
 </head>
 <body class="is-preload">
+<!-- Header / <head> -->
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Close Header / <head> -->
+<!-- Start Work Sigle -->
+<c:set var="userid" value="${sessionScope.get('userData').userid}" />
 <!-- Wrapper -->
-<div id="wrapper">
+<!-- Start Board SideBar -->
+<jsp:include page="board_include/board_sidebar.jsp" />
+<section class="container" style="min-height: 700px;">
+<div class="row justify-content-center pb-4">
     <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+    <div class="col-lg-8 mt-3">
+
+<%--            <jsp:include page="/WEB-INF/views/include/header.jsp"/>--%>
             <!-- Banner -->
-            <section>
+
                 <div class="content">
                     <header id="detailBody">
                         <h2 id="subject" style="vertical-align: text-bottom; text-align: center">
                             ${plist.subject}
                         </h2>
                         <c:if test="${!empty plist.file}">
-                            <div class="content align-center">
+                            <div class="content align-center" style="text-align: center">
                                 <img id="preview" src="./upload/boardimg/${plist.file}"
                                      width="300">
                             </div>
                         </c:if>
-                        <table>
-                            <tr>
-                                <td colspan="4" class="text-left" valign="top" height=200>
+
+                            <div>
+
+                                <p colspan="4" height=200 style="text-align: center">
                                     ${plist.content}
-                                </td>
-                            </tr>
-                        </table>
+                                </p>
+
+                          </div>
+
 
                         <%-- 수정, 삭제, 목록 버튼 --%>
                         <div id='buttonArea' style="display: flex; justify-content: center">
@@ -46,13 +56,17 @@
                         </div>
                     </header>
                 </div>
-            </section>
-        </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+
+
+<%--        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>--%>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
+<%--    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>--%>
+
 </div>
-</div>
+</section>
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
     let writer = "${plist.userid}";
