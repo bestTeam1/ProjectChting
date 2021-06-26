@@ -121,7 +121,7 @@
                         console.log(reply.userid);
                         if(reply.userid == '${nickname}') {
                             such += "<div>";
-                            such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
+                            such += "<div><h7><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h7>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
                             such += "<div id='reply" + reply.reply_no +"'>" + "✔️ " + reply.content + "&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='replyUpdate' class='replyUpdate' onclick='replyEdit(" + reply.reply_no + "," + "\"" + reply.content + "\"" + ")'>수정</a>&nbsp;&nbsp;<a href='javascript:void(0)' id='replyDelete' class='replyDelete' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a>" + "</div>" + "<tr><hr></tr>";
                             such += "</div>";
                             such += "</div>";
@@ -135,8 +135,8 @@
                     });
 
                 } else {
-                    nosuch += "<div>";
-                    nosuch += "<div><table class='table'><h5><strong>등록된 댓글이 없습니다.</strong></h5>";
+                    nosuch += "<div style='text-align: center'>";
+                    nosuch += "<div><table class='table'><h7><strong>등록된 댓글이 없습니다.</strong></h7>";
                     nosuch += "</table></div>";
                     nosuch += "</div>";
 
