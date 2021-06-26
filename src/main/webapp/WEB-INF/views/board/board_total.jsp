@@ -38,7 +38,7 @@
                 <c:choose>
                     <c:when test="${not empty i.group_name}">
                         <div class="col-md-4 mb-3">
-                            <a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">
+                            <a href="board_main.do?group_no=${i.group_no}" class="recent-work card border-0 shadow-lg overflow-hidden">
                                 <img class="recent-work-img card-img img-responsive"
                                 <c:choose>
                                 <c:when test="${empty i.group_img}">
