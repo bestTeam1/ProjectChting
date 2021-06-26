@@ -121,6 +121,12 @@
         </div>
     </div>
 
+    <br>
+    <div style="text-align: center">
+        <form action="board_write.do?group_no=${group_no}">
+            <input type="submit" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2" value="글쓰기">
+        </form>
+    </div>
 </section>
 
 <!-- Start Footer / Script -->

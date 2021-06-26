@@ -5,6 +5,8 @@ import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
 import com.team1.chting.utils.Criteria;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.parameters.P;
+
 import java.util.Map;
 import java.util.List;
 
@@ -58,7 +60,6 @@ public interface GroupDao {
     public int pageCount()throws Exception;
 
     public int pageCountPost(@Param("group_no") String group_no) throws Exception;
-
 
     // 댓글목록
    public List<PostReplyDto> getReply(int post_no);
