@@ -51,13 +51,13 @@ public class GroupUserController {
 
         //로그인한 세션의 userid
         HttpSession session = httpServletRequest.getSession();
-        SessionDto sessionDto = (SessionDto)session.getAttribute("userData");
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
         String userid = sessionDto.getUserid();
 
         System.out.println(userid);
 
         //세션에 userid가 없다면 - 비로그인
-        if(userid == null || userid.equals("")) {
+        if (userid == null || userid.equals("")) {
             return "error/login_error.jsp";
         }
 
@@ -94,25 +94,37 @@ public class GroupUserController {
     */
     // 모임 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
-    public String groupMain(@RequestParam("group_no") String group_no, Model model){
-            GroupDto dto = groupservice.groupByGroup_no(group_no);
+    public String groupMain(@RequestParam("group_no") String group_no, Model model, HttpServletRequest request) {
+        GroupDto dto = groupservice.groupByGroup_no(group_no);
 
-            if(dto.getGroup_img() == null) {
-                dto.setGroup_img("default.jpg");
-            }
+        //로그인한 세션의 userid
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
 
-            model.addAttribute("group",dto);
+//        if (dto.getGroup_img() == null) {
+//            dto.setGroup_img("default.jpg");
+//        }
 
-            //가입한 회원 수
-            int joinUser = groupAdminService.getJoinUser(group_no);
-            model.addAttribute("joinUser", joinUser);
-            model.addAttribute("group_no", group_no);
+        model.addAttribute("group", dto);
+
+        //모임장으로 있는 모임의 모임번호 가져오기
+        GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
+        String groupNo = groupAdminDto.getGroup_no();
+
+        GroupDto groupDto = userService.getAdminGroup(groupNo);
+        model.addAttribute("adminGroup", groupDto);
+
+        //가입한 회원 수
+        int joinUser = groupAdminService.getJoinUser(group_no);
+        model.addAttribute("joinUser", joinUser);
+        model.addAttribute("group_no", group_no);
         return "board/board_main";
     }
 
     // 게시물 리스트
     @RequestMapping(value = "board_list.do", method = RequestMethod.GET)
-    public String postList(@RequestParam("group_no") String group_no, AdminCriteria cri, Model model)throws Exception{
+    public String postList(@RequestParam("group_no") String group_no, AdminCriteria cri, Model model) throws Exception {
 
         cri.setGroupNo(group_no);
         // 전체 글 개수
@@ -123,7 +135,7 @@ public class GroupUserController {
         pm.setCri(cri);
         pm.setTotalCount(groupservice.pageCountPost(group_no));
 
-       // model.addAttribute("postList", postList);
+        // model.addAttribute("postList", postList);
         model.addAttribute("pm", pm);
         model.addAttribute("group_no", group_no);
 
@@ -132,19 +144,19 @@ public class GroupUserController {
 
     //글쓰기
     @RequestMapping(value = "board_write.do", method = RequestMethod.GET)
-    public String groupWrite(String group_no, Model model){
-   // public String groupWrite(PostDto postDto, @RequestParam("group_no") String group_no, Model model){
-      // model.addAttribute("postDto", postDto);
+    public String groupWrite(String group_no, Model model) {
+        // public String groupWrite(PostDto postDto, @RequestParam("group_no") String group_no, Model model){
+        // model.addAttribute("postDto", postDto);
         model.addAttribute("group_no", group_no);
         return "board/board_write";
     }
 
     // 글쓰기 post
     @RequestMapping(value = "board_writeOk.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public String groupWriteOk (PostDto postDto, Model model, HttpServletRequest httpServletRequest,
-                          @RequestParam("uploadFile")CommonsMultipartFile file) throws Exception {
+    public String groupWriteOk(PostDto postDto, Model model, HttpServletRequest httpServletRequest,
+                               @RequestParam("uploadFile") CommonsMultipartFile file) throws Exception {
         groupservice.insert(postDto, httpServletRequest, file);
-     //   model.addAttribute("postList", groupservice.listCriPost(cri));
+        //   model.addAttribute("postList", groupservice.listCriPost(cri));
 
 //         PageMaker pm = new PageMaker();
 //         pm.setCri(cri);
@@ -153,13 +165,13 @@ public class GroupUserController {
 //         model.addAttribute("pm", pm);
 
         String group_no = postDto.getGroup_no();
-        return "redirect:board_list.do?group_no="+ group_no;
+        return "redirect:board_list.do?group_no=" + group_no;
     }
 
 
     // 글 상세보기
     @RequestMapping(value = "board_detail.do", method = RequestMethod.GET)
-    public String read(@RequestParam("post_no") int post_no, HttpServletRequest request, Model model){
+    public String read(@RequestParam("post_no") int post_no, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
         String userid = sessionDto.getUserid();
@@ -174,10 +186,9 @@ public class GroupUserController {
     }
 
 
-
     // 글 수정하기
     @RequestMapping(value = "board_update.do", method = RequestMethod.GET)
-    public String update(@RequestParam("post_no")int post_no, Model model){
+    public String update(@RequestParam("post_no") int post_no, Model model) {
         PostDto postDto = groupservice.read(post_no);
 
         model.addAttribute("plist", postDto);
@@ -188,10 +199,10 @@ public class GroupUserController {
     // 글 수정 post
     @RequestMapping(value = "board_update.do", method = RequestMethod.POST)
     public String updateOk(PostDto postDto, Model model, HttpServletRequest httpServletRequest,
-                                           @RequestParam("uploadFile")CommonsMultipartFile file) throws Exception{
+                           @RequestParam("uploadFile") CommonsMultipartFile file) throws Exception {
         boolean u = groupservice.updateOk(postDto, file, httpServletRequest);
 
-        if (u != true){
+        if (u != true) {
             System.out.println("게시판 수정 실패");
         }
 
@@ -200,7 +211,7 @@ public class GroupUserController {
 
     // 일정
     @RequestMapping(value = "board_diary.do", method = RequestMethod.GET)
-    public String groupDiary(@RequestParam("group_no") String group_no, Model model){
+    public String groupDiary(@RequestParam("group_no") String group_no, Model model) {
 
         model.addAttribute("group_no", group_no);
 
@@ -209,9 +220,9 @@ public class GroupUserController {
 
     // 채팅
     @RequestMapping(value = "board_chatting.do", method = RequestMethod.GET)
-    public String groupChatting(@RequestParam("group_no") String group_no, Model model){
+    public String groupChatting(@RequestParam("group_no") String group_no, Model model) {
         String group_name = groupservice.groupByGroup_no(group_no).getGroup_name();
-        Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userid = userService.selectNickname(authentication.getName());
 
         model.addAttribute("userid", userid);
@@ -220,8 +231,6 @@ public class GroupUserController {
 
         return "board/board_chatting";
     }
-
-
 
 
 }
