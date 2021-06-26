@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -45,7 +47,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        System.out.println("getCredentials" + authentication.getCredentials());
 //        System.out.println("toString :: " + authentication.getAuthorities().toString());
         System.out.println((authentication.getPrincipal().getClass()));
-        String redirectURL = "/index.do";
+        String redirectURL = "/myGroup.do";
         Collection<? extends GrantedAuthority> authList = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> authList_iterator = authList.iterator();
         while (authList_iterator.hasNext()) {

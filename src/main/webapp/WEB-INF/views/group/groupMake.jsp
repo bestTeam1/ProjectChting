@@ -7,6 +7,7 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
+
 <!-- Start Service -->
 <section class="bg-light w-100">
     <div class="container">
@@ -117,12 +118,12 @@
                         <i class="display-3 bx bx-category-alt"></i>
                         <p>관심사</p>
                     </div>
-                    <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <div class="pricing-list-body col-md-5 align-items-center py-5">
                         <input type="button" style="" id="interestBtn"
                                class="btn rounded-pill px-4 btn-outline-primary light-300" value="관심사 선택"
                                onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');"/>
-                        <div class="text-left text-secondary text-muted">
-                            <p id="interest"></p>
+                        <div class="text-left text-secondary text-muted d-inline-flex">
+                            <p id="interest" class="align-middle badge bg-primary text-wrap" style="font-size: 14px; padding: 1em;"></p>
                         </div>
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
@@ -137,7 +138,7 @@
                         <i class="display-3 bx bx-location-plus"></i>
                         <p>지역</p>
                     </div>
-                    <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <div class="pricing-list-body col-md-5 align-items-center py-5">
                         <select name="area_code" id="area_code" style="width: 30%; float:left;">
                             <option value="" selected disabled hidden>=== 선택 ===</option>
                             <c:forEach items="${areaList}" var="area">
@@ -150,6 +151,7 @@
                 </div>
             </div>
 
+            <%-- 완료 --%>
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="col-md-12 col-12 my-5 text-center">
@@ -167,7 +169,7 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
 <!-- End Footer / Script -->
-<script type="text/javascript">
+<script>
 
     $(function () {
         //모임 대표 이미지 프리뷰
