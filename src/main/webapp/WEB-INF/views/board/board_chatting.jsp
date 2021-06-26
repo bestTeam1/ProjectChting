@@ -279,21 +279,33 @@
 </head>
 <body class="is-preload">
 
+<!-- Header / <head> -->
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Close Header / <head> -->
+<!-- Start Work Sigle -->
+<%--<c:set var="userid" value="${sessionScope.get('userData').userid}"/>--%>
 
+<!-- Start Board SideBar -->
+<jsp:include page="board_include/board_sidebar.jsp"/>
+<!-- End Board SideBar -->
 <!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+    <div class="row justify-content-center pb-4">
+        <div class="col-lg-8 mt-3">
+<%--            <jsp:include page="/WEB-INF/views/include/header.jsp"/>--%>
             <!-- Banner -->
-            <section>
+            <section class="container" style="min-height: 700px;">
                 <div class="content">
                     <header>
-                        <h2>${group_name} - 채팅</h2>
+                        <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
+                            <h2 id="subject" style="vertical-align: text-bottom; text-align: center">
+                                ${group_name}
+                            </h2>
+                        </ul>
                     </header>
-                    <div class="container">
+                    <div class="container" style="text-align: center">
                         <%--                        <div class="col-6">
                                                     <label><b>채팅방</b></label>
                                                 </div>
@@ -312,18 +324,20 @@
                                                 </div>--%>
                         <ol id="chattingArea" class="chat">
                         </ol>
-                        <input class="textarea" type="text" placeholder="Type here!" id="msg" />
-                        <button class="btn btn-outline-secodary" type="button" id="button-send">전송</button>
+                         <input class="textarea" type="text" placeholder="" id="msg"/>
+                        <button class="btn btn-secondary text-white" type="button" id="button-send">전송</button>
                     </div>
                 </div>
             </section>
 
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<%--        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>--%>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
+<%--    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>--%>
 </div>
-
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<!-- End Footer / Script -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
@@ -353,7 +367,7 @@
         if('${group_no}' == group_no) {
             if(messageType == 'chat') {
                 if (sessionId == cur_session) {
-                    var str = "<li class='self'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
+                    var str = "<li class='self'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time></div></li>";
                     $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
                 } else {
@@ -362,11 +376,11 @@
 
                 }
             } else if(messageType == 'enter') {
-                var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + sessionId + " 님이 입장하셨습니다." + "-" + "</div>";
+                var str = "<div style='text-align:center;background-color:#6266ea; color:whitesmoke'>"  + sessionId + " 님이 입장하셨습니다."  + "</div>";
                 $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
             } else if(messageType == 'leave') {
-                var str = "<div style='text-align:center;background-color:lightslategray; color:whitesmoke'>" + "-" + sessionId + " 님이 퇴장하셨습니다." + "-" + "</div>";
+                var str = "<div style='text-align:center;background-color:#6266ea; color:whitesmoke'>"  + sessionId + " 님이 퇴장하셨습니다."  + "</div>";
                 $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
 
             }
