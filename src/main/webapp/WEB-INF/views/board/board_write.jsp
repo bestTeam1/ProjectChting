@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hyunsangjin
-  Date: 2021/06/07
-  Time: 2:42 오후
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,13 +5,18 @@
 
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+    <meta charset=UTF-8">
+    <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
 
+    <title>내가 가입한 모임 - 상세보기</title>
+</head>
+<body class="is-preload">
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <!-- Start Work Sigle -->
-<c:set var="userid" value="${sessionScope.get('userData').userid}"/>
+<%--<c:set var="userid" value="${sessionScope.get('userData').userid}"/>--%>
 
 <!-- Start Board SideBar -->
 <jsp:include page="board_include/board_sidebar.jsp"/>
@@ -64,7 +61,7 @@
             });
             return;
         }
-        //var form = document.createElement("form")
+        var form = document.createElement("form")
 
         $('#form').submit();
     }
