@@ -97,7 +97,6 @@
                 alert("관심사 선택이 완료되었습니다 ");
                 close();
                 $("#interest", opener.document).html(cateName);
-                $("#interest", opener.document).css('margin', '10px');
                 $("#interestBtn", opener.document).val('변경');
                 $("#interestBtn", opener.document).css('margin', '5px');
                 $("#catecode", opener.document).val(cateCode);
