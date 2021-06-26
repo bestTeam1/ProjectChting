@@ -34,7 +34,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		if(application.getAttribute("search_areaList") == null) {
-			System.out.println("search_areaList DB get!!!!");
 			application.setAttribute("search_areaList", boardService.getAreaList());
 		}
 		return "index";
@@ -43,7 +42,6 @@ public class HomeController {
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Model model) {
 		if(application.getAttribute("search_areaList") == null) {
-			System.out.println("search_areaList DB get!!!!");
 			application.setAttribute("search_areaList", boardService.getAreaList());
 		}
 		List<GroupDto> newGroupList = homeService.getNewGroupList();
