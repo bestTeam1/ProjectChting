@@ -79,16 +79,16 @@
 
 			<div class="navbar align-self-center d-flex justify-content-between">
 				<se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
-					<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/login">Login</a>
+					<a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/login">Login</a>
 				</se:authorize>
 				<se:authorize access="hasAuthority('ROLE_USER')">
-					<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
-					<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
+					<a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
+					<a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
 				</se:authorize>
 				<se:authorize access="hasAuthority('ROLE_ADMIN')">
-					<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/admin/adminIndex.do">Admin</a>&emsp;|&emsp;
-					<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
-					<a class="navbar-btn btn-sm btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
+					<a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/admin/adminIndex.do">Admin</a>&emsp;|&emsp;
+					<a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/myPage.do">MyPage</a>&emsp;|&emsp;
+					<a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
 				</se:authorize>
 			</div>
 		</div>
@@ -96,5 +96,6 @@
 </nav>
 <div class="text-sm-center" style="font-size: 12px;">
 	<a>$ {sessionScope.get("userData").userid} : ${sessionScope.get("userData").userid}</a>&emsp;|&emsp;
-	<a>$ {sessionScope.get("userData").userrole} : ${sessionScope.get("userData").userrole}</a>&emsp;
+	<a>$ {sessionScope.get("userData").userrole} : ${sessionScope.get("userData").userrole}</a>&emsp;|&emsp;
+	<a href="${pageContext.request.contextPath}/signIn.do" class="bx bx-door-open border border-success">로그인</a>
 </div>
