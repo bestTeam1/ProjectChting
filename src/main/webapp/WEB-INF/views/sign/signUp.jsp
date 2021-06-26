@@ -170,7 +170,6 @@
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.full.min.js" integrity="sha512-a7XpBrwW2cJN4EE8L4Gsy9II/KNLsXHr4LhDoYC39Whrz1LWzYMNZYph4rp9XwsLXUTpPWJ1oy8HkFxHATrERA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>

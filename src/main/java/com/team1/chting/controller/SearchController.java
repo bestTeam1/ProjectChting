@@ -21,6 +21,13 @@ public class SearchController {
     @Autowired
     private BoardService boardService;
 
+    /*
+      모임검색
+      만든이 : 이승준
+      작성일 : 2021-06-08
+      수정 기록 1 : 김수연 > 디자인 개선으로 인하여
+     */
+
     @RequestMapping(value="search.do", method= RequestMethod.GET)
     public String search(@RequestParam("category") String category,
                          @RequestParam("search") String search,
@@ -50,7 +57,6 @@ public class SearchController {
         model.addAttribute("search_result", search_result);
         model.addAttribute("search_link", search_link);
         model.addAttribute("pm", pm);
-        String url = (String) request.getAttribute("javax.servlet.include.request_uri");
         return "group/search";
     }
 
