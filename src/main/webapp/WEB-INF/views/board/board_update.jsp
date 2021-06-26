@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hyunsangjin
-  Date: 2021/06/07
-  Time: 2:42 오후
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,59 +7,76 @@
 <html>
 <head>
     <meta charset=UTF-8">
-    <title>글수정</title>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+
+    <title>내가 가입한 모임 - 상세보기</title>
 </head>
 <body class="is-preload">
+<!-- Header / <head> -->
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Close Header / <head> -->
+<!-- Start Work Sigle -->
+<%--<c:set var="userid" value="${sessionScope.get('userData').userid}"/>--%>
 
-<!-- Wrapper -->
-<div id="wrapper">
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-            <!-- Banner -->
-            <section>
-                <div class="content">
-                    <header>
-                        <form id="form" method="post" enctype="multipart/form-data" action='board_update.do'>
-                            <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
-                                <option value="A004">자유글</option>
-                                <option value="A003">정모후기</option>
-                                <option value="A002">가입인사</option>
-                                <option value="A001">공지사항</option>
-                            </select>
-                            <br><br>
+<!-- Start Board SideBar -->
+<jsp:include page="board_include/board_sidebar.jsp"/>
+<!-- End Board SideBar -->
 
-                            <div>제목<input type="text" id="subject" name="subject" value="${plist.subject}"></div>
-                            <br><br>
-                            <div>내용<textarea rows="5" cols="13" id="content" name="content"
-                                             style="resize: none">${plist.content}</textarea>
-                            </div>
-                            <br><br>
-                            <div><label class="form-label" for="customFile">첨부파일</label>
-                                <!-- file은 기본 value를 줄수가없음. null(파일을 바꾸지않음) 이면 file은 DB업데이트에서 제외? 시키는 로직으로 해야할듯함 -->
-                                <input type="file" class="form-control" id="customFile" name="uploadFile"/></div>
-                            <br><br>
+<section class="container" style="min-height: 700px;">
+    <div class="row justify-content-center pb-4">
+        <div class="col-lg-8 mt-3">
+            <form id="form" method="post" action='${pageContext.request.contextPath}/board_update.do' enctype="multipart/form-data">
+                <%-- 카테고리 셀렉트  --%>
+                    <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
+                        <option value="A004">자유글</option>
+                        <option value="A003">정모후기</option>
+                        <option value="A002">가입인사</option>
+                        <option value="A001">공지사항</option>
+                    </select>
+                <br><br><br><br>
 
-                            <div style="display: flex; justify-content: center">
-                                <button type="button" onclick="confirm()">완료</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" onclick="goList()">목록</button>
-                            </div>
-                            <input type="hidden" name="post_no" value="${plist.post_no}">
-                            <input type="hidden" name="userid" value="${plist.userid}">
-                        <%--                        <button type="button" onclick="location.href='board_list.do'">목록</button>--%>
-                        </form>
-                    </header>
+                <table>
+                    <%--  <div>작성자<input type="text" name="writer" value="${modifyId}" readonly="readonly"></div>--%>
+                    <div class="mb-3">
+                        <label for="subject">제목</label> <input type="text" id="subject" name="subject"
+                                                               class="form-control" value="${plist.subject}">
+                    </div>
+                    <br><br>
+                    <div class="mb-3">
+                        <label for="content">내용</label> <textarea rows="5" cols="60" class="form-control" id="content"
+                                                                  name="content" style="resize: none">${plist.content}</textarea>
+                    </div>
+                </table>
+                <br><br>
+                <%--                            <div><label class="form-label" for="customFile">첨부파일</label>--%>
+                <%--                                <input type="file" class="form-control" id="customFile" name="file"/></div>--%>
+
+                <!-- 파일 선택 -->
+                <label class="form-label" for="fileName">첨부파일</label>
+                <input type="file" class="form-control" id="fileName" name="uploadFile"/>
+
+                <%--                <input type="file" id="fileName" name="uploadFile" class="fileName">--%>
+                <br><br>
+
+                <div style="display: flex; justify-content: center">
+                    <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                           onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" onclick="goList()" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5">목록</button>
+
                 </div>
-            </section>
+
+                <input type="hidden" name="post_no" value="${plist.post_no}">
+                <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
+            </form>
 
 
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
-</div>
+</section>
 
+<!-- Start Footer / Script -->
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
     $('#post_catename').val('${plist.post_catecode}');
@@ -127,5 +136,5 @@
         });
     }
 </script>
-
 </html>
+
