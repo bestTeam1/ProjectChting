@@ -1,7 +1,5 @@
 package com.team1.chting.controller;
 
-import com.team1.chting.dto.InterestCategoryDto;
-import com.team1.chting.dto.SessionDto;
 import com.team1.chting.dto.SignUpDto;
 import com.team1.chting.dto.social.SocialData;
 import com.team1.chting.dto.social.SocialDataFactory;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
