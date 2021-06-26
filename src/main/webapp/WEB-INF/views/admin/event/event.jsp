@@ -96,6 +96,7 @@
                                 <thead>
                                 <tr>
                                     <th>번호</th>
+                                    <th>제목</th>
                                     <th>시작일</th>
                                     <th>종료일</th>
                                     <th>작성일</th>
