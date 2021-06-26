@@ -386,11 +386,23 @@
                 //null
             },
             success: function (data) {
+                var recentDate = Array();
+                let today = new Date();
+                for (var i = 6; i >= 0 ; i--) {
+                    let year = today.getFullYear(); // 년도
+                    let month = today.getMonth() + 1;  // 월
+                    let date = today.getDate() - i;  // 날짜
+
+                    recentDate.push(year + '/' + month + '/' + date);
+                }
+                console.log(recentDate)
+
+
                 var ctx = $('#chartTotalUsers');
                 var totalUsersChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: Object.keys(data),
+                        labels: recentDate,
                         datasets: [{
                             label: '가입자 수',
                             data: Object.values(data),
@@ -636,7 +648,7 @@
                 for (var i = 0; i < data.length; i ++) {
 
                     // 마커 이미지의 이미지 크기 입니다
-                    var imageSize = new kakao.maps.Size(24, 35);
+                    var imageSize = new kakao.maps.Size(20, 34);
 
                     // 마커 이미지를 생성합니다
                     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
