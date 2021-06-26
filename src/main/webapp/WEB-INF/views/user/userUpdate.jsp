@@ -89,7 +89,7 @@
                     <div class="pricing-list-body col-md-5 align-items-center py-5">
                         <input type="button" style="margin-right: 5px;" id="interestBtn"
                                class="btn rounded-pill px-4 btn-outline-primary light-300" value="변경"
-                               onclick="window.open('userCategory.do', '관심사 선택', 'width=600, height=600, left=100, top=50');"/>
+                               onclick="window.open('userCategory.do', '관심사 선택', 'width=600, height=450, left=100, top=50');"/>
                         <div class="text-left text-secondary text-muted d-inline-flex">
                             <c:forEach var="userInterest" items="${userInfo.userInterest}">
                                 <p id="interest" class="align-middle badge bg-primary text-wrap"
