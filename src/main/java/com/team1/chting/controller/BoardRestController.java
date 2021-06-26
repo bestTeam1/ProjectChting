@@ -26,6 +26,12 @@ public class BoardRestController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private GroupService groupService;
+
+    @Autowired
+    private UserService userService;
+
     /*
       모임일정추가
       만든이 : 이승준
