@@ -44,8 +44,9 @@
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <h2 class="h3 text-center"><c:out value="${userInfoBasic.nickname}"/></h2>
                     <br>
-                    <i class="fas fa-quote-left"></i>&nbsp;<c:out value="${userInfoBasic.content}"/>&nbsp;<i
-                        class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i>
+                        <pre style="margin:0px;"><c:out value="${userInfoBasic.content}"/></pre>
+                    <i class="fas fa-quote-right"></i>
                 </ul>
             </div>
             <div class="team-member col-md-4">
@@ -133,8 +134,9 @@
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: '모임 관리 페이지로 이동',
+                    confirmButtonColor: '#A0A0FF',
                     cancelButtonText: '취소',
-                    reverseButtons: true
+                    cancelButtonColor: '#aaaaaa'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         location.href = "groupMemberManage.do"
@@ -147,8 +149,9 @@
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: '네, 탈퇴할게요!',
+                    confirmButtonColor: '#A0A0FF',
                     cancelButtonText: '취소',
-                    reverseButtons: true
+                    cancelButtonColor: '#aaaaaa'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
@@ -158,17 +161,10 @@
                                 userid: userid
                             },
                             success: function (data) {
-                                Swal.fire(
-                                    '탈퇴 완료되었습니다.',
-                                    '메인 페이지로 이동합니다.',
-                                    'success', {
-                                        buttons: {
-                                            confirm: {
-                                                text: '확인',
-                                                value: true,
-                                                className: 'button'
-                                            }
-                                        }
+                                Swal.fire({
+                                    title : '탈퇴 완료되었습니다.',
+                                    text:'메인 페이지로 이동합니다.',
+
                                     }).then((result) => {
                                     location.href = "${pageContext.request.contextPath}/logout";
                                 })

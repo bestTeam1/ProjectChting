@@ -43,11 +43,14 @@
                             <div class="form-floating mb-4">
                                 <c:choose>
                                     <c:when test="${not empty group_img}">
-                                        <img id="preview" src="${group_img}" width="130" alt="모임 대표이미지가 보여지는 영역">
+                                        <img class="img-fluid border rounded"
+                                             id="preview" src="${group_img}"
+                                             style="width:200px; height:200px; margin-bottom: 10px;">
                                     </c:when>
                                     <c:otherwise>
-                                        <img id="preview"
-                                             width="200" style="float: left; margin-bottom: 20px;">
+                                        <img class="img-fluid border rounded"
+                                             id="preview"
+                                             style="width:200px; height:200px; margin-bottom: 10px;">
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="input-group">
@@ -99,7 +102,7 @@
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
                         <textarea name="content" id="content" class="form-control form-control-lg light-300"
-                                  style="resize: none; width: 800px; height: 200px;"
+                                  style="resize: none; width: 800px; height: 300px;"
                                   placeholder="10 ~ 1000자 이내로 입력해 주세요."></textarea>
                                 <label for="content">10 ~ 1000자 이내로 입력해 주세요.</label>
                                 <p align="left" id="contentKeyUp"></p>
@@ -123,7 +126,8 @@
                                class="btn rounded-pill px-4 btn-outline-primary light-300" value="관심사 선택"
                                onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=450, left=100, top=50');"/>
                         <div class="text-left text-secondary text-muted d-inline-flex">
-                            <p id="interest" class="align-middle badge bg-primary text-wrap" style="font-size: 14px; padding: 1em;"></p>
+                            <p id="interest" class="align-middle badge bg-primary text-wrap"
+                               style="font-size: 14px; padding: 1em;"></p>
                         </div>
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
@@ -198,7 +202,10 @@
             } else if (inputLength >= 4 && inputLength <= 20) {
                 $(this).css('color', 'grey');
             } else if (remain < 1) {
-                Swal.fire('모임 이름은 20자 이내로 입력해 주세요 !')
+                Swal.fire({
+                    text: '모임 이름은 20자 이내로 입력해 주세요!',
+                    confirmButtonColor: '#A0A0FF'
+                });
             }
         })
 
@@ -214,7 +221,10 @@
             } else if (inputLength >= 10 && inputLength <= 1000) {
                 $(this).css('color', 'grey');
             } else if (remain < 1) {
-                Swal.fire('모임 소개글은 1000자 이내로 입력해 주세요 !')
+                Swal.fire({
+                    text: '모임 소개글은 1000자 이내로 입력해 주세요!',
+                    confirmButtonColor: '#A0A0FF'
+                });
             }
         })
 
@@ -223,7 +233,9 @@
         if (check == null || check == "" || check == undefined) {
             Swal.fire({
                 title: '오류',
-                text: '로그인을 해주세요!!'
+                icon: 'warning',
+                text: '로그인을 해주세요!!',
+                confirmButtonColor: '#A0A0FF'
             }).then(() => {
                 history.go(-1);
             })

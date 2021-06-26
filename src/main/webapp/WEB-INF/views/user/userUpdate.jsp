@@ -208,13 +208,19 @@
         //선호지역 1,2 같은 지역인지 체크
         $('#area1').change(function () {
             if ($('#area1 option:selected').text() === $('#area2 option:selected').text()) {
-                Swal.fire({text : '같은 지역을 선택하실 수 없습니다. 다시 선택해 주세요.'});
+                Swal.fire({
+                    text: '같은 지역을 선택하실 수 없습니다. 다시 선택해 주세요.',
+                    confirmButtonColor: '#A0A0FF'
+                });
                 $("#area1 option:eq(0)").prop("selected", true);
             }
         });
         $('#area2').change(function () {
             if ($('#area2 option:selected').text() === $('#area1 option:selected').text()) {
-                Swal.fire({text : '같은 지역을 선택하실 수 없습니다. 다시 선택해 주세요.'});
+                Swal.fire({
+                    text: '같은 지역을 선택하실 수 없습니다. 다시 선택해 주세요.',
+                    confirmButtonColor: '#A0A0FF'
+                });
                 $("#area2 option:eq(0)").prop("selected", true);
             }
         });
@@ -249,17 +255,19 @@
 
         Swal.fire({
             title: "수정하시겠습니까?",
-            icon: 'info',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonText: '확인',
+            confirmButtonColor: '#A0A0FF',
             cancelButtonText: '취소',
-            reverseButtons: true
+            cancelButtonColor: '#aaaaaa'
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
                     title: '정보 수정 완료!',
                     text: '마이페이지 메인으로 이동합니다.',
-                    confirmButtonText: '확인'
+                    confirmButtonText: '확인',
+                    confirmButtonColor: '#A0A0FF'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#userUpdateFrm').submit();

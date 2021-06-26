@@ -56,7 +56,6 @@
                              style="height: 500px;" alt="Card image cap">
                     </c:otherwise>
                 </c:choose>
-
             </div>
         </div>
     </div>
@@ -70,7 +69,7 @@
             <h5 class="objective-heading h5 mb-3 text-center light-300"><p><i class="fas fa-angle-double-left"></i> 모임
                 소개 <i class="fas fa-angle-double-right"></i></p></h5>
             <h6 class="text-center h6">
-                <c:out value="${group.content}"/>
+                <pre><c:out value="${group.content}"/></pre>
             </h6>
         </div>
     </div>
@@ -127,9 +126,10 @@
         if (userid == '') {
             Swal.fire({
                 title: "비로그인 유저입니다.",
-                text: "로그인 후 가입을 진행해주세요.",
+                text: "로그인 후 가입을 진행해 주세요.",
                 icon: "error",
-                buttons: '확인'
+                buttons: '확인',
+                confirmButtonColor: '#A0A0FF'
             }).then((value) => {
                 if (value) {
                     location.href = 'login';
@@ -145,27 +145,42 @@
                 contentType: "application/json; charset=UTF-8",
                 success: function (response) {
                     if (response == "success") {
-                        sweetAlert("그룹가입신청이 완료되었습니다.", "모임장이 신청을 수락할 때까지 기다려주세요!", response);
+                        Swal.fire({
+                            title: "모임 가입신청이 완료되었습니다.",
+                            text: "모임장이 신청을 수락할 때까지 기다려주세요!",
+                            confirmButtonColor: '#A0A0FF',
+                            response
+                        });
                     } else if (response == "warning") {
-                        sweetAlert("이미 그룹가입신청이 되어있습니다.", "모임장이 신청을 수락할 때까지 기다려주세요!", response);
+                        Swal.fire({
+                            title: "이미 모임 가입신청이 되어있습니다.",
+                            text: "모임장이 신청을 수락할 때까지 기다려주세요!",
+                            confirmButtonColor: '#A0A0FF',
+                            response
+                        });
                     }
                 },
                 error: function (Http, status, error) {
                     console.log("Http : " + Http + ", status : " + status + ", error : " + error);
-                    sweetAlert("그룹가입신청에 실패했습니다.", "그룹가입신청을 다시 확인해주세요.", "error");
+                    Swal.fire({
+                        title: "모임 가입신청에 실패했습니다.",
+                        text: "모임 가입신청을 다시 확인해주세요.",
+                        confirmButtonColor: '#A0A0FF',
+                        error
+                    });
                 }
             });
-
         }
     }
 
     function out() {
         if (authority == '1') {
             Swal.fire({
-                title: "모임장 권한을 가지고 게십니다.",
+                title: "모임장 권한을 가지고 있습니다.",
                 text: "탈퇴하시려면 모임장 권한을 양도하고 탈퇴해주세요.",
                 icon: "error",
-                buttons: '확인'
+                buttons: '확인',
+                confirmButtonColor: '#A0A0FF'
             }).then((value) => {
                 if (value) {
                     location.href = 'groupMemberManage.do?userid=' + userid;
@@ -184,7 +199,8 @@
                         title: "모임에서 탈퇴되었습니다.",
                         text: "모임에 대한 권한이 사라집니다.",
                         icon: response,
-                        buttons: '확인'
+                        buttons: '확인',
+                        confirmButtonColor: '#A0A0FF'
                     }).then((value) => {
                         if (value) {
                             location.href = 'index.do';
@@ -193,7 +209,12 @@
                 },
                 error: function (Http, status, error) {
                     console.log("Http : " + Http + ", status : " + status + ", error : " + error);
-                    sweetAlert("모임탈퇴에 실패하셨습니다.", "다시 확인해주세요.", "error");
+                    Swal.fire({
+                        title: "모임 탈퇴에 실패했습니다.",
+                        text: "다시 확인해 주세요.",
+                        confirmButtonColor: '#A0A0FF',
+                        error
+                    });
                 }
             });
         }
@@ -202,15 +223,6 @@
     function update() {
         let groupNo = "${group.group_no}";
         location.href = "groupUpdate.do?group_no=" + groupNo;
-    }
-
-    function sweetAlert(title, text, icon) {
-        Swal.fire({
-            title: title,
-            text: text,
-            icon: icon,
-            buttons: '확인'
-        })
     }
 
 </script>
