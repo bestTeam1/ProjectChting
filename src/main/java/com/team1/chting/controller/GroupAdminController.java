@@ -26,7 +26,6 @@ public class GroupAdminController {
     @Autowired
     private BoardService boardService;
 
-
     /*
       모임관리 첫페이지 모임가입신청 리스트
       만든이 : 이승준
