@@ -1,16 +1,14 @@
 package com.team1.chting.service;
 
 import com.team1.chting.dao.ChartDao;
-import com.team1.chting.dto.chartdto.ChartJoinTypeDto;
-import com.team1.chting.dto.chartdto.ChartMainDto;
-import com.team1.chting.dto.chartdto.ChartRatioDto;
-import com.team1.chting.dto.chartdto.ChartRecentUserDto;
+import com.team1.chting.dto.chartdto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service
 public class ChartService {
@@ -55,6 +53,18 @@ public class ChartService {
 
         return chartMainDto;
 
+    }
+    //모임 관심사별 회원수
+    public ChartInterestDto getChartGroupTypes() {
+        ChartDao chartDao = sqlSession.getMapper(ChartDao.class);
+
+        return chartDao.getChartGroupTypes();
+    }
+    //모임 일정 위치 데이터
+    public List<ChartScheduleDto> getChartSchedule() {
+        ChartDao chartDao = sqlSession.getMapper(ChartDao.class);
+
+        return chartDao.getChartSchedule();
     }
 
 }
