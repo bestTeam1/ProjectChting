@@ -2361,6 +2361,18 @@ fieldset:disabled a.btn {
   border-color: #4e73df;
 }
 
+.btn-accept {
+  color: #A0A0FF;
+  background-color:#A0A0FF;
+  border-color: #A0A0FF;
+}
+
+.btn-cancel {
+  color: #aaaaaa;
+  background-color:#aaaaaa;
+  border-color: #aaaaaa;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #2e59d9;
