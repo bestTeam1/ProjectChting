@@ -24,7 +24,10 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 	<!-- Select2 CSS -->
+	<link href="${pageContext.request.contextPath}/assets/css/select2.css" rel="stylesheet"/>
 	<link href="${pageContext.request.contextPath}/assets/css/nice-select.css" rel="stylesheet"/>
+	<!-- Sweetalert2 CSS -->
+	<link href="${pageContext.request.contextPath}/assets/css/sweetalert2.css" rel="stylesheet"/>
 
 </head>
 <!-- Header -->
@@ -64,7 +67,7 @@
 									</c:choose>
 								</c:forEach>
 							</select>
-							<input name="search" id="searchValue" type="search" class="form-control form-control-sm"
+							<input name="search" id="searchValue" type="search" class="form-inline form-control form-control-sm"
 								   placeholder="Search…" aria-label="Search"
 								   value="<c:out value="${search_keyword}"></c:out>">
 							<button id="searchButton" class="btn btn-sm btn-outline-secondary" type="submit"><i
