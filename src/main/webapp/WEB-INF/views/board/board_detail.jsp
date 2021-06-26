@@ -23,20 +23,35 @@
             <section>
                 <div class="content">
                     <header id="detailBody">
+                        <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                         <h2 id="subject" style="vertical-align: text-bottom; text-align: center">
                             ${plist.subject}
                         </h2>
+                        </ul>
                         <c:if test="${!empty plist.file}">
                             <div class="content align-center" style="text-align: center">
                                 <img id="preview" src="./upload/boardimg/${plist.file}"
                                      width="300">
                             </div>
                         </c:if>
-                        <table>
-                                <p colspan="4" class="text-center" valign="top" height=200>
-                                    ${plist.content}
-                                </p>
-                        </table>
+                        <br>
+
+                        <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
+                           <h6><i class="fas fa-quote-left" aria-hidden="true"></i>&nbsp;${plist.content}&nbsp;<i class="fas fa-quote-right" aria-hidden="true"></i></h6>
+                        </ul>
+
+<%--                        <div class="input-group input-group-sm " role="group"--%>
+<%--                             style="text-align: left; width: 900px; display: inline-block;" >--%>
+<%--                            <table class="table table-striped table-bordered" style="text-align: -webkit-center">--%>
+<%--                                <tread>--%>
+
+<%--                                    <tr  style="height: 300px;">--%>
+<%--                                        <td> ${plist.content}--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
+<%--                                </tread>--%>
+<%--                            </table>--%>
+<%--                        </div>--%>
 
                         <%-- 수정, 삭제, 목록 버튼 --%>
                         <div id='buttonArea' style="display: flex; justify-content: center">
