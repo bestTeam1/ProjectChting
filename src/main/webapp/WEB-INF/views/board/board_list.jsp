@@ -6,10 +6,10 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <!-- Start Work Sigle -->
-<c:set var="userid" value="${sessionScope.get('userData').userid}" />
+<c:set var="userid" value="${sessionScope.get('userData').userid}"/>
 
 <!-- Start Board SideBar -->
-<jsp:include page="board_include/board_sidebar.jsp" />
+<jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
 
 <section class="container" style="min-height: 700px;">
@@ -31,7 +31,8 @@
                         <td>${plist.post_no}</td>
                         <td>${plist.nickname}</td>
                         <td>${plist.post_catename}</td>
-                        <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a></td>
+                        <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                        </td>
                         <td>${plist.writedate}</td>
                     </tr>
                 </c:forEach>
@@ -53,7 +54,8 @@
                 <c:otherwise>
                     <div class="btn-group me-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-secondary text-white"
-                                onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${pm.cri.page-1}&group_no=${group_no}'">Previous
+                                onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${pm.cri.page-1}&group_no=${group_no}'">
+                            Previous
                         </button>
                     </div>
                 </c:otherwise>
@@ -64,17 +66,17 @@
             <!-- 시작숫자 종료숫자 조건 -->
             <c:choose>
                 <c:when test="${pm.endPage <= pm.displayPageNum}">
-                    <c:set var="pageStartNumber" value="${pm.startPage}" />
-                    <c:set var="pageEndNumber" value="${pm.endPage}" />
+                    <c:set var="pageStartNumber" value="${pm.startPage}"/>
+                    <c:set var="pageEndNumber" value="${pm.endPage}"/>
                 </c:when>
                 <c:otherwise>
-                    <c:set var="pageStartNumber" value="${(pm.cri.page / pm.displayPageNum) + 1}" />
+                    <c:set var="pageStartNumber" value="${(pm.cri.page / pm.displayPageNum) + 1}"/>
                     <c:choose>
                         <c:when test="${pm.endPage < ((pm.cri.page / pm.displayPageNum) + 10)}">
-                            <c:set var="pageEndNumber" value="${pm.endPage}" />
+                            <c:set var="pageEndNumber" value="${pm.endPage}"/>
                         </c:when>
                         <c:otherwise>
-                            <c:set var="pageEndNumber" value="${((pm.cri.page / pm.displayPageNum) + 10)}" />
+                            <c:set var="pageEndNumber" value="${((pm.cri.page / pm.displayPageNum) + 10)}"/>
                         </c:otherwise>
                     </c:choose>
                 </c:otherwise>
@@ -107,7 +109,8 @@
                 <c:when test="${pm.cri.page < pm.endPage}">
                     <div class="btn-group" role="group" aria-label="Third group">
                         <button type="button" class="btn btn-secondary text-white"
-                                onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${pm.cri.page+1}&group_no=${group_no}'">Next
+                                onclick="location.href='${pageContext.request.contextPath}/board_list.do?page=${pm.cri.page+1}&group_no=${group_no}'">
+                            Next
                         </button>
                     </div>
                 </c:when>
@@ -123,9 +126,8 @@
 
     <br>
     <div style="text-align: center">
-        <form action="board_write.do?group_no=${group_no}">
-            <input type="submit" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2" value="글쓰기">
-        </form>
+        <input type="button" onclick="location.href = 'board_write.do?group_no=${group_no}'"
+               class="btn btn-primary rounded-pill btn-block shadow px-4 py-2" value="글쓰기" >
     </div>
 </section>
 
