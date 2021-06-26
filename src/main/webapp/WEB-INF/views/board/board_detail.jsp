@@ -4,15 +4,21 @@
 <html>
 <head>
     <meta charset=UTF-8">
+    <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+
     <title>내가 가입한 모임 - 상세보기</title>
 </head>
 <body class="is-preload">
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<!-- Start Board SideBar -->
+<jsp:include page="board_include/board_sidebar.jsp" />
+<!-- End Board SideBar -->
 <!-- Wrapper -->
 <div id="wrapper">
     <!-- Main -->
     <div id="main">
         <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<%--            <jsp:include page="/WEB-INF/views/include/header.jsp"/>--%>
             <!-- Banner -->
             <section>
                 <div class="content">
@@ -21,27 +27,26 @@
                             ${plist.subject}
                         </h2>
                         <c:if test="${!empty plist.file}">
-                            <div class="content align-center">
+                            <div class="content align-center" style="text-align: center">
                                 <img id="preview" src="./upload/boardimg/${plist.file}"
                                      width="300">
                             </div>
                         </c:if>
                         <table>
-                            <tr>
-                                <td colspan="4" class="text-left" valign="top" height=200>
+                                <p colspan="4" class="text-center" valign="top" height=200>
                                     ${plist.content}
-                                </td>
-                            </tr>
+                                </p>
                         </table>
 
                         <%-- 수정, 삭제, 목록 버튼 --%>
                         <div id='buttonArea' style="display: flex; justify-content: center">
-                            <input id="back" type="button" value="목록"/> &nbsp;
+                            <input id="back" type="button" class="navbar-btn btn-sm btn-primary"  value="목록"/> &nbsp;
                             &nbsp; &nbsp; &nbsp; &nbsp;
                         </div>
                         <input type="hidden" name="group_no" value="${group_no}">
                         <br><br>
-                        <div>
+                        <div style="text-align: center">
+
                             <jsp:include page="/WEB-INF/views/board/board_post_reply.jsp"/>
                         </div>
                     </header>
@@ -50,14 +55,14 @@
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 </div>
 </body>
 <script type="text/javascript">
+    let userid = '${sessionScope.get("userData").userid}';
     let writer = "${plist.userid}";
     if (userid == writer) {
-        $('#buttonArea').append('<input id="update" type="button" value="수정"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="delete" type="button" value="삭제"/>');
+        $('#buttonArea').append('<input id="update" class="navbar-btn btn-sm btn-primary"  type="button" value="수정"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="delete" class="navbar-btn btn-sm btn-primary"  type="button" value="삭제"/>');
     } else {
 
     }
@@ -118,6 +123,5 @@
 
 </script>
 </html>
-
 
 

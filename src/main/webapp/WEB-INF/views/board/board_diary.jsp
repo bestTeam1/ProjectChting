@@ -10,8 +10,6 @@
     <link href="${pageContext.request.contextPath}/fullcalendar/css/main.min.css" rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/fullcalendar/js/main.min.js"/>
     <!-- jquery modal popup-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
     <!-- dateFormat을 위한 momentjs -->
     <script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js"
             type="text/javascript"></script>
@@ -51,8 +49,10 @@
             width: 50%;
         }
 
-        .chtingCal {
+        input[type="text"] {
             text-align: center;
+            width: 90% !important;
+            margin-top: 20px;
         }
 
         .formBtn {
@@ -71,6 +71,12 @@
             margin-left: 20px;
         }
 
+        #calendar {
+            width: 80%;
+            height: 88%;
+            float: left;
+        }
+
     </style>
     <title>Calendar</title>
 </head>
@@ -80,45 +86,70 @@
     <div id="main">
         <div class="inner">
             <jsp:include page="/WEB-INF/views/include/header.jsp"/>
+            <jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
+
             <!-- Banner -->
             <section style="position: relative">
-                <!-- modal -->
-                <div id="ex1" class="modal">
-                    <h3 id = "modalTitle" class="chtingCal"> 일정을 추가하세요! </h3>
-                    <div>
-                        <form id="form" name="diaryOkForm" onsubmit="return false">
-                            <div style="display: flex; justify-content: center">
-                                <input class="chtingCal" id="chtingCalType" type="text" disabled>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel">일정을 추가하세요!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                             </div>
-                            <div style="display: flex; justify-content: center">
-                                <input class="chtingCal" id="chtingCalDate" type="text" disabled>
+                            <div class="modal-body">
+                                <form id="form" name="diaryOkForm" onsubmit="return false">
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingCalType" disabled>
+                                        <label for="chtingCalType">모임유형</label>
+                                    </div>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingCalDate" disabled>
+                                        <label for="chtingCalDate">모임날짜</label>
+                                    </div>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingContent">
+                                        <label for="chtingContent">제목</label>
+                                    </div>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingSubject">
+                                        <label for="chtingSubject">내용</label>
+                                    </div>
+                                    <div class="form-floating mb-3 chtingCal" style="margin-left: 10%">
+                                        <input type="text" class="form-control" id="chtingCalLocation"
+                                               onclick="searchMap()" placeholder="장소를 알려주세요!">
+                                        <label for="chtingCalLocation" id="placeholderForSearch">&#128270; 장소를
+                                            알려주세요!</label>
+                                    </div>
+
+
+                                    <div style="display: flex; justify-content: center">
+                                        <input class="chtingCal" type="hidden" type="text">
+                                    </div>
+                                    <!-- 카카오맵 기본좌표 강남 비트캠프 -->
+                                    <input type="hidden" name="xcoord" id="xcoord" value="127.029018585511"/>
+                                    <input type="hidden" name="ycoord" id="ycoord" value="37.4994547195947"/>
+                                    <input type="hidden" name="schedule_no" id="chtingScheduleNo" value=""/>
+                                </form>
+                                <div style="display: table; justify-content: right">
+                                    <div id="map" style="width: 465px; height: 300px;"></div>
+                                </div>
                             </div>
-                            <div style="display: flex; justify-content: center">
-                                <input class="chtingCal" id="chtingContent" type="text" placeholder="제목">
+                            <div class="modal-footer" id="buttonDiv">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="">닫기
+                                </button>
+                                <button type="button" class="btn btn-primary" id="diarySubmit">저장</button>
                             </div>
-                            <div style="display: flex; justify-content: center">
-                                <input class="chtingCal" id="chtingSubject" type="text" placeholder="내용">
-                            </div>
-                            <div style="display: flex; justify-content: center">
-                                <input class="chtingCal" id="chtingCalLocation" type="text" onclick="searchMap()"
-                                       placeholder="장소를 알려주세요!">
-                            </div>
-                            <!-- 카카오맵 기본좌표 강남 비트캠프 -->
-                            <input type="hidden" name="xcoord" id="xcoord" value="127.029018585511"/>
-                            <input type="hidden" name="ycoord" id="ycoord" value="37.4994547195947"/>
-                            <input type="hidden" name="schedule_no" id="chtingScheduleNo" value=""/>
-                            <div id="buttonDiv" style="display: flex; justify-content: center">
-                                <button class="formBtn" id="diarySubmit"> 확인</button>
-                            </div>
-                        </form>
-                        <div style="display: table; justify-content: right">
-                            <div id="map" style="width: 450px; height: 300px;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Link to open the modal -->
-                <p><a id="modal" href="#ex1" rel="modal:open"></a></p>
+
+                <!-- Calendar -->
                 <div id='external-events' style="width: 15%; float: left; padding-right: 30px; padding-left: 20px;">
                     <p>
                         <strong>일정 생성하기</strong>
@@ -134,17 +165,18 @@
                         <div class='fc-event-main'>언택트</div>
                     </div>
                 </div>
-                <div id='calendar' style="width: 80%; float: left">
+                <div id='calendar'>
                 </div>
+                <!-- Calendar end -->
             </section>
             <div id="footerDiv"></div>
         </div>
         <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
 </div>
 </body>
 <script>
+    var calendarModal = new bootstrap.Modal(document.getElementById('exampleModal'))
     var calendar = null;
     //풀캘린더
     $(document).ready(function () {
@@ -175,18 +207,18 @@
         calendar = new Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'ko',
-            headerToolbar: {
-            },
+            headerToolbar: {},
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar
             events: loadingEvents()
             ,
             eventClick: function (event) {
-                $('#modalTitle').text('일정을 확인하세요!'); //이벤트 클릭시에는 일정확인 메세지로 변경
+                $('#map').empty();
+                $('#ModalLabel').text('일정을 확인하세요!'); //이벤트 클릭시에는 일정확인 메세지로 변경
                 //클릭시에는 이미있는 이벤트를 삭제할수있는 삭제버튼이 생성됨
                 $('#buttonDiv').each(function () {
-                    if ($('a', this).length == 0) {
-                        $('#buttonDiv').append('<a id="cancelEvent" class="button primary">삭제</a>');
+                    if ($('button', this).length == 2) {
+                        $('#buttonDiv').prepend('<button type="button" class="btn btn-danger">삭제</button>');
                         cancelEvent();
                     }
                 })
@@ -212,39 +244,47 @@
                         $('#chtingCalLocation').val(response.location);
                         $('#xcoord').val(response.xcoord);
                         $('#ycoord').val(response.ycoord);
-
-                        $('#chtingCalLocation').attr('placeholder', '장소를 바꾸시겠습니까?');
                     },
                     error: function (Http, status, error) {
                         console.log(error);
                     }
                 });
 
-                $('#modal').click();
+                calendarModal.show();
                 $('#map').empty();
+
                 makeMap();
+
+
             },
             //내려놨을때 form불러와서 데이터를 추가로 받는다
             drop: function (info) {
                 $('#diarySubmit').show(); //이전에 eventClick으로 hide되었을 경우를 fix
-                //이미 취소버튼이 생성됐으면 지워줍니다.
-                $('#buttonDiv').each(function () {
-                    if ($('a', this).length != 0) {
-                        $('a', this).remove();
+
+                $('#buttonDiv').each(function () { //취소버튼이 생성되어있다면 지워줌
+                    if ($('button', this).length == 3) {
+                        $('#buttonDiv').children().first().remove();
+                        cancelEvent();
                     }
                 })
 
-                $('#modal').click();
-                makeMap();
+                calendarModal.show();
 
                 $('#chtingCalType').val(info.draggedEl.innerText);
-                $('#chtingCalDate').val(moment(info.dateStr).format('YYYY-MM-DD'));
+                $('#chtingCalDate').val(info.dateStr);
+
+                //조기화
+                $('#xcoord').val('127.029018585511');
+                $('#ycoord').val('37.4994547195947');
+                $('#chtingContent').val('');
+                $('#chtingSubject').val('');
+                $('#chtingCalLocation').val('');
 
                 makeMap();
             },
             eventDrop: function (info) { //이벤트를 옮겼을때 수정함
                 var year = (info.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
-                var month = info.event._instance.range.start.getMonth()+1; //옮긴 달력의 날짜
+                var month = info.event._instance.range.start.getMonth() + 1; //옮긴 달력의 날짜
                 var day = info.event._instance.range.start.getDate(); //옮긴 달력의 날짜
 
 
@@ -305,12 +345,14 @@
         return return_value;
     }
 
-    function makeMap() {
+    function makeMap() { //지도만들기
         $('#map').empty();
 
+        var xcoord = $('#xcoord').val(); //x축 좌표
+        var ycoord = $('#ycoord').val(); //y축 좌표
         var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         var options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), //지도의 중심좌표.
+            center: new kakao.maps.LatLng(ycoord, xcoord), //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
         };
 
@@ -334,14 +376,34 @@
 
             // 마커 위치를 클릭한 위치로 옮깁니다
             marker.setPosition(latlng);
-
-            var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-            message += '경도는 ' + latlng.getLng() + ' 입니다';
-
-            var resultDiv = document.getElementById('clickLatlng');
-            resultDiv.innerHTML = message;
-
         });
+
+        //div 위치오류 수정 (display : none 이었던 속성때문에 카카오 api가 위치를 제대로 못찾기때문에 재설정을 해줘야한다)
+        setTimeout(function () {
+            map.relayout();
+            map.setCenter(new kakao.maps.LatLng(ycoord, xcoord));
+            // map.setLevel(2); 필요하면 레벨조정
+        }, 200);
+
+        var iwContent = '<div style="text-align: center; padding-left: 15px">모임장소' +
+            '<a href="https://map.kakao.com/link/map/' +
+            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">&#127757;</a>' +
+            '<a href="https://map.kakao.com/link/to/' +
+            '모임장소' + ',' + ycoord + ',' + xcoord + '" style="color:#000000" target="_blank">&#127939;</a></div>',
+
+
+            iwPosition = new kakao.maps.LatLng(ycoord, xcoord); //인포윈도우 표시 위치입니다
+
+
+// 인포윈도우를 생성합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            position: iwPosition,
+            content: iwContent
+        });
+
+// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+        infowindow.open(map, marker);
+
     }
 
     //위치에 표시된 장소로 맵을 이동하는 기능
@@ -439,7 +501,7 @@
                     text: '일정이 추가되었습니다!'
                 }).then((result) => {
                     //modal팝업 닫기
-                    $('.close-modal').click();
+                    $('.btn-close').click();
                 })
             },
             error: function (Http, status, error) {

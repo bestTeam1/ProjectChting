@@ -50,7 +50,7 @@ p, a {font-weight: 400;}
 /* Main Nav */
 #main_nav .nav-item .nav-link:hover {color: #fff;}
 
-#navbar_logo #logo_img {
+.navbar_logo .logo_img {
   padding: 2%;
   width: 73%;
 }
@@ -59,9 +59,13 @@ p, a {font-weight: 400;}
   width: 220px;
 }
 
+.navbar > a {
+  text-decoration-line: none;
+}
+
 /* header 62  */
 @media screen and (max-width: 991px) {
-  #navbar_logo #logo_img {
+  .navbar_logo .logo_img {
     width: 53%;
   }
 
