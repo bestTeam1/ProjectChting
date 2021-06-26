@@ -3,9 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-</head>
+
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -18,11 +16,13 @@
     <div class="pt-5 pb-3 d-lg-flex align-items-center gx-5">
         <div class="col-lg-3">
             <h2 class="h2 py-5 typo-space-line">MyPage</h2>
+            <%-- 기본 정보 --%>
             <i class="fas fa-user-circle"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.logintype}"/><br>
             <i class="fas fa-birthday-cake"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.birth}"/><br>
             <i class="far fa-envelope"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.email}"/>
         </div>
         <div class="col-lg-9 row">
+            <%-- 프로필 이미지, 자기소개 --%>
             <div class="team-member col-md-4">
                 <c:choose>
                     <c:when test="${fn:startsWith(imgSrc, 'http')}">
@@ -53,7 +53,7 @@
             <div class="team-member col-md-4">
                 <input type="button" style="" id="updateUser"
                        class="btn rounded-pill px-4 btn-outline-primary light-300" value="회원 정보 수정"
-                       onclick="location.href='userUpdate.do?userid=${sessionScope.get("userData").userid}'"/>&nbsp;&nbsp;
+                       onclick="location.href='userUpdate.do'"/>&nbsp;&nbsp;
                 <input type="button" class="btn rounded-pill px-4 btn-outline-primary light-300"
                        value="회원 탈퇴" id="delacount">
             </div>
@@ -61,6 +61,7 @@
     </div>
     <hr>
     <div class="row px-lg-3">
+        <%-- 선호 지역 --%>
         <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
             <div class="pricing-table card h-100 shadow-sm border-0 py-5">
                 <div class="pricing-table-body card-body rounded-pill text-center align-self-center p-md-0">
@@ -78,7 +79,7 @@
             </div>
         </div>
 
-
+        <%-- 관심사 --%>
         <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
             <div class="pricing-table card h-100 shadow-sm border-0 py-5">
                 <div class="pricing-table-body card-body text-center align-self-center p-md-0">
@@ -95,6 +96,7 @@
             </div>
         </div>
 
+        <%-- 가입한 모임 --%>
         <div class="col-md-4 pb-5 pt-sm-0 mt-5 px-xl-3">
             <div class="pricing-table card h-100 shadow-sm border-0 py-5">
                 <div class="pricing-table-body card-body text-center align-self-center p-md-0">
@@ -118,7 +120,7 @@
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
-<script type="text/javascript">
+<script>
     //값이 1이면 모임장 권한을 가진 모임이 있음
     let userGroupRole = "${userInfo.userInfoBasic.cnt}";
 
