@@ -17,11 +17,6 @@
         <a href="${pageContext.request.contextPath}/groupJoin.do?userid=${sessionScope.get('userData').userid}">모임관리</a>
     </div><br>
 
-    <div class="row pt-5">
-        <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
-            <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line mb-4">${group.group_name}</h2>
-        </div>
-    </div>
 </section>
 <script>
     function openNav() {
