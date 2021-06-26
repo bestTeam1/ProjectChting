@@ -1,55 +1,46 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>모임 관리</title>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!-- sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!DOCTYPE html>
-<html lang="ko">
-<style>
-    td {
-        text-align: center;
-        vertical-align: middle;
-    }
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <jsp:include page="/WEB-INF/views/include/groupHeader.jsp" />
+            <!-- Banner -->
+            <section id="main">
+                <h1 style="text-align: center">멤버탈퇴는 재가입이 가능합니다</h1>
+            </section>
+            <section>
+                <table id="memberList" style="text-align: center">
 
-    img {
-        width: 50%;
-        height: 50%;
-        text-align: center;
-    }
-</style>
-<body>
-<!-- Header / <head> -->
-<jsp:include page="/WEB-INF/views/include/header.jsp"/>
-<jsp:include page="/WEB-INF/views/include/groupAdminSidebar.jsp"/>
-<!-- Close Header / <head> -->
-<section class="bg-light py-5 ">
-    <table class="table w-75 text-center m-auto">
-        <thead class="table-primary">
-        <tr>
-            <th>직책</th>
-            <th>이름</th>
-            <th>소개</th>
-            <th>성별</th>
-            <th>권한</th>
-            <th>강퇴</th>
-        </tr>
-        </thead>
-        <tbody id="memberList">
-
-        </tbody>
-    </table>
-</section>
-
-<input id="groupNo" type="hidden" value="${groupNo}">
-<input id="userid" type="hidden" value="${userid}">
-
-<div class="col-lg-8 col-12 m-lg-auto text-center">
-    <input type="button" class="banner-button btn rounded-pill btn-apeach text-white btn-lg px-4 mt-lg-5 "
-           id="banish" value="추방하기">
+                </table>
+                <input id="groupNo" type="hidden" value="${groupNo}">
+                <input id="userid" type="hidden" value="${userid}">
+                <div class="col-6 col-12-small">
+                    <ul class="actions stacked">
+                        <li><a id="banish"  href="#" class="button primary fit">모임에서 추방하기</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+    </div>
+    <jsp:include page="/WEB-INF/views/include/sidebar.jsp" />
 </div>
-<!-- End Feature Work -->
-<div id="footerDiv" style="height: 300px"></div>
-<!-- Start Footer / Script -->
-<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-<!-- End Footer / Script -->
+
 </body>
 <script type="text/javascript">
     //로그인체크 (백단에서 못막았을 경우)
@@ -85,8 +76,8 @@
                 position = "모임장";
             } else if (position_no == 2) {
                 position = "모임원";
-                succeed = "<button class ='btn btn-primary text-white' id='succeed' value='${member.userid}'>모임장위임</button>";
-                checkbox ='<div>'
+                succeed = "<button class ='succeed' value='${member.userid}'>모임장위임</button>";
+                checkbox ='<div class="col-6 col-12-small">'
                     +'<input type="checkbox" id="selectAgreement'+ tableNum
                     +'" name="selectAgreement" value="${member.userid}" >'
                     + '<label for="selectAgreement'+ tableNum +'"></label>' + '</div>';
@@ -96,8 +87,6 @@
                     '<tr>'
                     +'<td>' + position +'</td>'
                     +'<td>${member.nickname}</td>'
-                    +'<td>${member.content}</td>'
-                    +'<td>${member.gender}</td>'
                     +'<td>' + succeed +'</td>'
                     +'<td>' + checkbox +'</td>'
                     +'</tr>'
@@ -107,8 +96,6 @@
                     '<tr>'
                     +'<td>' + position +'</td>'
                     +'<td>${member.nickname}</td>'
-                    +'<td>${member.content}</td>'
-                    +'<td>${member.gender}</td>'
                     +'<td>' + succeed +'</td>'
                     +'<td>' + checkbox +'</td>'
                     +'</tr>'
@@ -117,17 +104,26 @@
             tableNum++;
         })();
         </c:forEach>
+
+        $('#memberList').prepend(
+            '<tr style="background-color: lightgrey">'
+            + '<th style="text-align: center">직책</th>'
+            + '<th style="text-align: center">이름</th>'
+            + '<th style="text-align: center">권한</th>'
+            + '<th style="text-align: center">강퇴</th>'
+            + '</tr>'
+        );
     }
     //모임장 위임 클릭
-    $(document).on("click", "#succeed", function (e) {
+    $(document).on("click", ".succeed", function (e) {
         e.preventDefault();
         Swal.fire({
             title: '정말입니까??',
             text: "이 결정은 되돌릴 수 없습니다. 정말로 모임장을 넘기시겠습니까?",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#A0A0FF',
-            cancelButtonColor: '#aaaaaa',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
             confirmButtonText: '네 모임장 권한을 넘기겠습니다',
             cancelButtonText: '취소'
         }).then((result) => {
@@ -175,8 +171,8 @@
                 text: "이 결정은 되돌릴 수 없습니다. 정말로 멤버를 강퇴하시겠습니까?",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#A0A0FF',
-                cancelButtonColor: '#aaaaaa',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
                 confirmButtonText: '네 강퇴하겠습니다',
                 cancelButtonText: '취소'
             }).then((result) => {
@@ -207,8 +203,8 @@
                                     position = "모임장";
                                 } else if (position_no == 2) {
                                     position = "모임원";
-                                    succeed = "<button class ='btn btn-primary' value=" + item.userid +">모임장위임</button>";
-                                    checkbox ='<div>'
+                                    succeed = "<button class ='succeed' value=" + item.userid +">모임장위임</button>";
+                                    checkbox ='<div class="col-6 col-12-small">'
                                         +'<input type="checkbox" id="selectAgreement'
                                         + tableNum
                                         +'" name="selectAgreement" value="' + item.userid + '" >'
@@ -220,8 +216,6 @@
                                         '<tr>'
                                         +'<td>' + position +'</td>'
                                         +'<td>' + item.nickname + '</td>'
-                                        +'<td>' + item.content + '</td>'
-                                        +'<td>' + item.gender + '</td>'
                                         +'<td>' + succeed +'</td>'
                                         +'<td>' + checkbox +'</td>'
                                         +'</tr>'
@@ -231,8 +225,6 @@
                                         '<tr>'
                                         +'<td>' + position +'</td>'
                                         +'<td>' + item.nickname + '</td>'
-                                        +'<td>' + item.content + '</td>'
-                                        +'<td>' + item.gender + '</td>'
                                         +'<td>' + succeed +'</td>'
                                         +'<td>' + checkbox +'</td>'
                                         +'</tr>'
@@ -240,7 +232,6 @@
                                 }
                                 tableNum++;
                             });
-                            /*
                             $('#memberList').prepend(
                                 '<tr style="background-color:lightgrey">'
                                 + '<th style="text-align: center">이름</th>'
@@ -249,8 +240,6 @@
                                 + '<th style="text-align: center">선택</th>'
                                 + '</tr>'
                             );
-
-                             */
                         },
                         error : function(request, status, error) {
                             console.log(error)
