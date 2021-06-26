@@ -216,4 +216,16 @@ public class UserService {
 
         return getBestGroupByCate;
     }
+
+    /*
+    가입한 모든 모임 가져오기
+    작성자 : 박주현
+    작성일 : 2021-06-26
+    */
+    public List<GroupDto> getGroupListAll(String userid) {
+        UserDao userDao = sqlsession.getMapper(UserDao.class);
+        List<GroupDto> groupListAll = userDao.getGroupListAll(userid);
+
+        return groupListAll;
+    }
 }

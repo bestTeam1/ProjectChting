@@ -2,29 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
-<html>
+<html lang="ko">
 <head>
-    <title>Editorial by HTML5 UP</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <%--  Sweet Alert2  --%>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <title>모임 관심사 선택하기</title>
     <%--  J Query  --%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- css -->
     <link rel="stylesheet" href="assets/css/main.css"/>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-
-        body, div, table, section, nav, li, header, input {
-            font-family: 'Jua', sans-serif;
-        }
-    </style>
 </head>
-<body class="is-preload">
 
+<body class="is-preload">
 <!-- Wrapper -->
 <div id="wrapper">
 
