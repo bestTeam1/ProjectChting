@@ -105,7 +105,7 @@ public class GroupUserController {
             //가입한 회원 수
             int joinUser = groupAdminService.getJoinUser(group_no);
             model.addAttribute("joinUser", joinUser);
-
+            model.addAttribute("group_no", group_no);
         return "board/board_main";
     }
 
