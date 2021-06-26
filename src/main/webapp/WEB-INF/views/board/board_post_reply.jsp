@@ -13,13 +13,15 @@
 </head>
 <body>
 
+
+
 <%-- 댓글달기 --%>
-<div class="container">
+<div>
     <br><br>
     <div>
         <b1><strong>Reply</strong></b1>
         <div>
-            <table class="table">
+            <table>
                 <tr>
                     <td>
                             <textarea style="width: 900px" rows="3" id="content" name="content"
@@ -29,7 +31,7 @@
                         <br>
                         <div style="text-align: center">
                             <%-- <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>--%>
-                            <input type="button" id="submit" onclick="replyWrite()" value="댓글등록"/>
+                            <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="submit" onclick="replyWrite()" value="댓글등록"/>
                         </div>
                     </td>
                 </tr>
