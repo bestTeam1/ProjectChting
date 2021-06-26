@@ -7,6 +7,7 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
+
 <!-- Start Service -->
 <section class="bg-light w-100">
     <div class="container">
@@ -150,6 +151,7 @@
                 </div>
             </div>
 
+            <%-- 완료 --%>
             <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
                 <div class="row p-2">
                     <div class="col-md-12 col-12 my-5 text-center">
@@ -167,7 +169,7 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
 <!-- End Footer / Script -->
-<script type="text/javascript">
+<script>
 
     $(function () {
         //모임 대표 이미지 프리뷰
