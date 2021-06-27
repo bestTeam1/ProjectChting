@@ -96,9 +96,14 @@
                 <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
             </div>
             <div class="banner-content col-lg-7 align-self-end">
-                <h2 class="h2 pb-3">Chting 에 가입 해보세요!</h2>
+                <h2 class="h2 pb-3" style="text-shadow: 2px 2px 4px gray">Chting! 다양한 취미, 새로운 사람들</h2>
                 <p class="text-muted pb-5 light-300">
-                    You are allowed to download and use this Purple Buzz template for your websites. You are <strong>not allowed</strong> to re-distribute this template ZIP file on other template websites. It is quite easy to simply copy and repost the ZIP file on any <a rel="nofollow" href="https://www.google.com/search?q=free+css" target="_blank">Free CSS collection</a> websites.</p>
+                <h3 style="color: #6266ea">당신의 취미를 공유해보세요.</h3>
+                <strong style="color: #acabfe">나의 취미를, 당신의 취미를</strong>
+                <p><strong>모임장</strong>이 되어서 당신의 취미를 공유하고 한층 더 즐거운 당신의 취미를 즐기세요<br>
+                    <strong>모임원</strong>이 되어서 다른사람들의 취미를 함께 배워보면서 소통해보아요</p>
+
+                </p>
             </div>
         </div>
     </div>
