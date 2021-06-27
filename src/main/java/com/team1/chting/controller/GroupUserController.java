@@ -52,14 +52,11 @@ public class GroupUserController {
         //로그인한 세션의 userid
         HttpSession session = httpServletRequest.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        if(sessionDto == null) {// 비로그인유저
+            return "sign/login";
+        }
         String userid = sessionDto.getUserid();
 
-        System.out.println(userid);
-
-        //세션에 userid가 없다면 - 비로그인
-        if (userid == null || userid.equals("")) {
-            return "error/login_error.jsp";
-        }
 
         //모임장으로 있는 모임의 모임번호 가져오기
         GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
@@ -97,23 +94,11 @@ public class GroupUserController {
     public String groupMain(@RequestParam("group_no") String group_no, Model model, HttpServletRequest request) {
         GroupDto dto = groupservice.groupByGroup_no(group_no);
 
-        //로그인한 세션의 userid
-        HttpSession session = request.getSession();
-        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        String userid = sessionDto.getUserid();
-
 //        if (dto.getGroup_img() == null) {
 //            dto.setGroup_img("default.jpg");
 //        }
 
         model.addAttribute("group", dto);
-
-        //모임장으로 있는 모임의 모임번호 가져오기
-        GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
-        String groupNo = groupAdminDto.getGroup_no();
-
-        GroupDto groupDto = userService.getAdminGroup(groupNo);
-        model.addAttribute("adminGroup", groupDto);
 
         //가입한 회원 수
         int joinUser = groupAdminService.getJoinUser(group_no);
@@ -124,7 +109,19 @@ public class GroupUserController {
 
     // 게시물 리스트
     @RequestMapping(value = "board_list.do", method = RequestMethod.GET)
-    public String postList(@RequestParam("group_no") String group_no, AdminCriteria cri, Model model) throws Exception {
+    public String postList(@RequestParam("group_no") String group_no, HttpServletRequest request , AdminCriteria cri, Model model) throws Exception {
+
+        //로그인한 세션의 userid
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
+        //모임원인지 체크, true = 모임원
+        boolean check = groupservice.checkMember(group_no, userid);
+
+        if(check == false) {
+            return "error/hasNoRoleError";
+        }
 
         cri.setGroupNo(group_no);
         // 전체 글 개수

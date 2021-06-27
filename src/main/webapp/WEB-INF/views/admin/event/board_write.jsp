@@ -15,10 +15,58 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
+<!-- Start Work Sigle -->
+<%--<c:set var="userid" value="${sessionScope.get('userData').userid}"/>--%>
 
 <!-- Start Board SideBar -->
 <jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
+
+<script type="text/javascript">
+    function confirm() {
+        // e.preventDefault
+        var post_catename = $("#post_catename").val();
+        var subject = $("#subject").val().trim();
+        var content = $("#content").val().trim();
+
+
+        if (post_catename == "default") {
+            Swal.fire({
+                text: '카테고리를 선택해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (subject == "") {
+            Swal.fire({
+                text: '제목을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (!(1 < subject.length <= 20)) {
+            Swal.fire({
+                text: '제목은 2~20 자로 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (content == "") {
+            Swal.fire({
+                text: '내용을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (!(1 < content.length <= 2000)) {
+            Swal.fire({
+                text: '내용은 2~2000 자로 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        }
+        var form = document.createElement("form")
+
+        $('#form').submit();
+    }
+
+</script>
 
 <section class="container" style="min-height: 700px;">
     <div class="row justify-content-center pb-4">
@@ -60,22 +108,18 @@
                 <%--                <input type="file" id="fileName" name="uploadFile" class="fileName">--%>
                 <br><br>
 
+                <div style="display: flex; justify-content: center">
+                    <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                           id="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                            onclick="location.href='board_list.do?group_no=${group_no}'">목록
+                    </button>
+
+                </div>
 
                 <input type="hidden" name="group_no" value="${group_no}">
                 <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
-
-
             </form>
-
-            <div style="display: flex; justify-content: center">
-                <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                       id="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                        onclick="location.href='board_list.do?group_no=${group_no}'">목록
-                </button>
-
-            </div>
-
 
 
         </div>
@@ -87,6 +131,8 @@
 <!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
+    let write = document.querySelector('#write');
+    console.log(write.html());
 
     $('#submit').on('click', (event) => {
         event.preventDefault();
@@ -127,7 +173,7 @@
             });
             return;
         } else {
-            $('#write').submit();
+            write.submit();
         }
     });
 
