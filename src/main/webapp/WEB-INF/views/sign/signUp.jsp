@@ -366,7 +366,7 @@
         $('#signUpFrm').validate({
 
             submitHandler : function(){
-
+                $('#contentArea').val($('#contentArea').val().replace(/(\n|\r\n)/g, '<br>'));
                 var frm = $('#signUpFrm')[0];
                 var data = new FormData(frm);
 
@@ -381,8 +381,8 @@
                     contentType: false,
                     cache: false,
                     timeout: 60000,
-                    success: function (data) {
-                        swal.fire({
+                    success: function () {
+                        Swal.fire({
                             title: '회원가입이 완료 되었습니다 :D',
                             text: '다시 로그인을 진행 해주세요!',
                             icon: 'success',
@@ -391,10 +391,10 @@
                             location.href = "${pageContext.request.contextPath}/logout";
                         });
                     },
-                    error: function (e) {
-                        swal.fire({
+                    error: function () {
+                        Swal.fire({
                             title: '오류 발생 Error',
-                            text: '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요. ' + e.message,
+                            text: '알 수 없는 오류가 발생되었습니다. 다시 시도 해주세요.',
                             icon: 'error',
                             timer: 3000
                         }).then(() => {
