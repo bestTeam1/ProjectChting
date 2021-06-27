@@ -247,7 +247,7 @@
         } else if (enddate == "") {
             Swal.fire('이벤트 종료날짜를 입력해주세요')
             return;
-        } else if (startdate >= enddate) {
+        } else if (startdate > enddate) {
             Swal.fire('이벤트 날짜를 확인해주세요! 이벤트 종료일이 시작일보다 빠릅니다')
             return;
         }
