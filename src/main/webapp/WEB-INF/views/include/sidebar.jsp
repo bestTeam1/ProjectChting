@@ -104,6 +104,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
 <!-- underscore.js -->
 <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+<!--socketJS -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
 
     //모임관리 링크 클릭시 POST 전송
@@ -115,6 +117,7 @@
     var userid = '${sessionScope.get("userData").userid}';
     let authority_ = '';
     let sideList = $('#sideList');
+    let msgCount = 0;
 
     if (${not empty pageContext.request.userPrincipal}) {
         $.ajax({
@@ -138,7 +141,39 @@
                                 + "</span><ul><li><a href='board_main.do?group_no=" + group.group_no + "'>메인</a></li><li>" +
                                 "<a href='board_list.do?group_no=" + group.group_no + "'>게시판</a></li><li>" +
                                 "<a href='board_diary.do?group_no=" + group.group_no + "'>일정</a></li><li>" +
-                                "<a href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li>"
+                                "<a id='chat" + group.group_no + "' href='board_chatting.do?group_no=" + group.group_no + "'>채팅</a></li>"
+
+                            var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting?group_no=' + group.group_no);
+                            sock.onmessage = onMessage;
+                            sock.onclose = onClose;
+                            sock.onopen = onOpen;
+
+                            function onMessage(msg) {
+                                var data = msg.data;
+                                var json = JSON.parse(data);
+                                let sessionId = json.userid;
+                                let group_no = json.group_no;
+                                console.log(sessionId);
+                                console.log(group_no);
+
+                                if(userid != '${sessionScope.get("userData").userid}' && group.group_no == group_no) {
+                                    msgCount++;
+                                    $('#chat' + group.group_no).html("채팅 (" + msgCount + ")");
+                                    $('#chat' + group.group_no).attr("style", "color:red");
+                                }
+                            }
+
+                            function onClose(evt) {
+
+                            }
+
+                            function onOpen(evt) {
+
+                            }
+
+                            function sendMessage() {
+
+                            }
 
                             if (authority_ == '1') {
                                 str += " <li><a href='groupJoin.do?userid=" + userid + "'>모임관리</a></li>";

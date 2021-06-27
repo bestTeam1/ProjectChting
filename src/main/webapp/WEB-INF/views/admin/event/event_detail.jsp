@@ -89,8 +89,8 @@
             text: '이벤트를 수정하시겠습니까?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#A0A0FF',
+            cancelButtonColor: '#aaaaaa',
             confirmButtonText: '네',
             cancelButtonText: '아니오'
         }).then((result) => {
@@ -109,8 +109,8 @@
             text: '이벤트를 종료 하시겠습니까?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#A0A0FF',
+            cancelButtonColor: '#aaaaaa',
             confirmButtonText: '네',
             cancelButtonText: '아니오'
         }).then((result) => {
@@ -140,8 +140,8 @@
             text: '이벤트를 취소 하시겠습니까?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#A0A0FF',
+            cancelButtonColor: '#aaaaaa',
             confirmButtonText: '네',
             cancelButtonText: '아니오'
         }).then((result) => {

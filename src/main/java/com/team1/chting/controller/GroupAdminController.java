@@ -36,6 +36,9 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        if(sessionDto == null) {// 비로그인유저
+            return "sign/login";
+        }
         String userid = sessionDto.getUserid();
 
         //로그인한 유저가 속해있는
@@ -61,6 +64,9 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        if(sessionDto == null) {// 비로그인유저
+            return "sign/login";
+        }
         String userid = sessionDto.getUserid();
 
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
@@ -84,6 +90,9 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        if(sessionDto == null) {// 비로그인유저
+            return "sign/login";
+        }
         String userid = sessionDto.getUserid();
 
         //유저가 모임장으로 있는 모임번호 가져오기위한 groupDto
@@ -113,6 +122,9 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        if(sessionDto == null) {// 비로그인유저
+            return "sign/login";
+        }
         String userid = sessionDto.getUserid();
 
         //유저가 모임장으로 있는 모임번호 가져오기위한 groupDto
