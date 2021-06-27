@@ -4,6 +4,7 @@ import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
 import com.team1.chting.dto.PostReplyDto;
 import com.team1.chting.dto.SessionDto;
+import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
@@ -85,18 +86,25 @@ public class GroupUserController {
     }
 
     /*
-      게시판
+      모임 메인
       작성자 : 현상진
       작성일 : 2021-06-18
     */
-    // 모임 메인
     @RequestMapping(value = "board_main.do", method = RequestMethod.GET)
     public String groupMain(@RequestParam("group_no") String group_no, Model model, HttpServletRequest request) {
         GroupDto dto = groupservice.groupByGroup_no(group_no);
 
-//        if (dto.getGroup_img() == null) {
-//            dto.setGroup_img("default.jpg");
-//        }
+        //로그인한 세션의 userid
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
+        //모임장으로 있는 모임의 모임번호 가져오기
+        GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
+        String groupNo = groupAdminDto.getGroup_no();
+
+        GroupDto groupDto = userService.getAdminGroup(groupNo);
+        model.addAttribute("adminGroup", groupDto);
 
         model.addAttribute("group", dto);
 
@@ -106,7 +114,7 @@ public class GroupUserController {
         model.addAttribute("group_no", group_no);
         return "board/board_main";
     }
-
+    
     // 게시물 리스트
     @RequestMapping(value = "board_list.do", method = RequestMethod.GET)
     public String postList(@RequestParam("group_no") String group_no, HttpServletRequest request , AdminCriteria cri, Model model) throws Exception {
@@ -144,6 +152,10 @@ public class GroupUserController {
     public String groupWrite(String group_no, Model model) {
         // public String groupWrite(PostDto postDto, @RequestParam("group_no") String group_no, Model model){
         // model.addAttribute("postDto", postDto);
+
+        List<PostCategoryDto> postCategoryList = groupservice.getPostCategory();
+        model.addAttribute("postCategory",postCategoryList);
+
         model.addAttribute("group_no", group_no);
         return "board/board_write";
     }
