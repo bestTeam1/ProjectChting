@@ -55,7 +55,7 @@
                     <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
                         <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
                             <i class="display-1 bx bx-package pt-4"></i>
-                            <h5 class="h5 semi-bold-600 pb-4 light-300">Free</h5>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300"></h5>
                         </div>
                     </div>
                 </div>
@@ -117,22 +117,23 @@
 
             <div class="objective col-lg-4">
                 <div class="objective-icon card m-auto py-4 mb-2 mb-sm-4 bg-secondary shadow-lg">
-                    <i class="display-4 bx bxs-bulb text-light"></i>
+                    <i class="far fa-handshake text-light fa-4x"></i>
                 </div>
-                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">Our Vision</h2>
+                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 함께!</h2>
                 <p class="light-300">
-                    Incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse commodo viverra.
+                    친구, 가족, 동료 등 함께 하 싶은 사람과<br>
+                    우리만의 공간을 만들어요.
                 </p>
             </div>
 
             <div class="objective col-lg-4 mt-sm-0 mt-4">
                 <div class="objective-icon card m-auto py-4 mb-2 mb-sm-4 bg-secondary shadow-lg">
-                    <i class='display-4 bx bx-revision text-light'></i>
+                    <i class="fas fa-users text-light fa-4x"></i>
                 </div>
-                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">Our Mission</h2>
+                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 모임!</h2>
                 <p class="light-300">
-                    Eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam quis.
+                    일정으로 모임장소를 정하고, 게시판과 채팅으로<br>
+                    다양한 이야기들도 공유해요.
                 </p>
             </div>
 
@@ -140,10 +141,10 @@
                 <div class="objective-icon card m-auto py-4 mb-2 mb-sm-4 bg-secondary shadow-lg">
                     <i class="display-4 bx bxs-select-multiple text-light"></i>
                 </div>
-                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">Our Goal</h2>
+                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 목표!</h2>
                 <p class="light-300">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor.
+                    지루하고 뻔한 일상에서, 새롭고 낯선 사람들과<br>
+                    좋은 추억과 알찬 시간을 보내요.
                 </p>
             </div>
 
@@ -157,32 +158,35 @@
     <div class="feature-work container my-4">
         <div class="row d-flex d-flex align-items-center">
             <div class="col-lg-5">
-                <h3 class="feature-work-title h4 text-muted light-300">Featured Work</h3>
-                <h1 class="feature-work-heading h2 py-3 semi-bold-600">Transform with us</h1>
+                <h3 class="feature-work-title h4 text-muted light-300">함께 만나 취미를 공유해요</h3>
+                <h1 class="feature-work-heading h2 py-3 semi-bold-600">Chting = 취미 + Meeting</h1>
                 <p class="feature-work-body text-muted light-300">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                    ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                    자신이 <strong>모임장</strong>이 되어서 취미를 공유하고<br>
+                    모임 일정을 통해 즐거운 만남과, 모임 게시판, 모임 채팅을 활용하여<br>
+                    다양한 이야기와 자신의 취미를 이야기해보세요.
                 </p>
-                <p class="feature-work-footer text-muted light-300">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
+                <p class="feature-work-footer text-muted light-300">
+                    취미가 없고 지루한 일상이 더이상 싫다면 <strong>모임원</strong>이 되어서<br>
+                    다른 사람들의 취미를 배우고, 흥미를 붙여서 지루한 일상을 모임원들과 함꼐<br>
+                    날리도록 하세요.
+                </p>
             </div>
 
             <div class="col-lg-6 offset-lg-1 mb-lg-5 align-left">
                 <div class="row">
                     <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-1-large.jpg">
-                        <img class="img-fluid" src="./assets/img/feature-work-1.jpg">
+                        <img class="img-fluid" src="https://cdn.notefolio.net/img/c1/0a/c10a946a80c5f3107b6f8b51ee4d7bb5a21b2daf1ac66e3764b5aef8a2197498_v1.jpg">
                     </a>
                     <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-2-large.jpg">
-                        <img class="img-fluid" src="./assets/img/feature-work-2.jpg">
+                        <img class="img-fluid" src="https://cdn.notefolio.net/img/b8/6a/b86a75339b92f85854dc6afcad80dc79289f3a8e58caf8ea73de7a2ab7b862b5_v1.jpg">
                     </a>
                 </div>
                 <div class="row pt-4">
                     <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-3-large.jpg">
-                        <img class="img-fluid" src="./assets/img/feature-work-3.jpg">
+                        <img class="img-fluid" src="https://cdn.notefolio.net/img/ba/8c/ba8c11b761d1852ba89fc14a2109454cee52ae7f8612ac7935788f6585a20511_v1.jpg">
                     </a>
                     <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-4-large.jpg">
-                        <img class="img-fluid" src="./assets/img/feature-work-4.jpg">
+                        <img class="img-fluid" src="https://cdn.notefolio.net/img/6c/97/6c97a0c6dd8da0cef7cf1ef605bbf2c4a9722f65f39bbf31bb571d33ee29f9bc_v1.jpg">
                     </a>
                 </div>
             </div>
