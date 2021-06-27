@@ -97,6 +97,9 @@ public class GroupUserController {
         //로그인한 세션의 userid
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        if(sessionDto == null) {// 비로그인유저
+            return "board/board_main";
+        }
         String userid = sessionDto.getUserid();
 
         //모임장으로 있는 모임의 모임번호 가져오기
