@@ -8,7 +8,7 @@
 
 <!-- Core plugin JavaScript-->
 <script src="${pageContext.request.contextPath}/assets/dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Custom scripts for all pages-->
 <script src="${pageContext.request.contextPath}/assets/dashboard/js/sb-admin-2.min.js"></script>
 
@@ -18,6 +18,8 @@
 <!-- Page level custom scripts -->
 <script src="${pageContext.request.contextPath}/assets/dashboard/js/demo/chart-area-demo.js"></script>
 <script src="${pageContext.request.contextPath}/assets/dashboard/s/demo/chart-pie-demo.js"></script>
+
+
 
 
 <!-- Custom fonts for this template-->
