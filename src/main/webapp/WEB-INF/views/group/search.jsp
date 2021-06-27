@@ -149,7 +149,7 @@
         console.log(resultList);
 
         resultList.forEach(result => {
-            let groupimg = "${pageContext.request.contextPath}" + "/upload/groupimg/" + result.groupimg;
+            let groupimg = "${pageContext.request.contextPath}" + "/upload/groupimg/" + result.group_img;
             $.ajax({
                 url : groupimg,
                 async : false,
