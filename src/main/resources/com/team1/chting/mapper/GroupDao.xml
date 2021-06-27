@@ -201,4 +201,9 @@
         where group_no = #{group_no}
           and userid = #{userid};
     </delete>
+
+    <select id="selectPostCategory" resultType="com.team1.chting.dto.PostCategoryDto">
+        select post_catecode, post_catename
+        from post_category
+    </select>
 </mapper>

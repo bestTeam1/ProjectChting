@@ -1,6 +1,7 @@
 package com.team1.chting.dao;
 
 import com.team1.chting.dto.*;
+import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
 
@@ -87,4 +88,6 @@ public interface GroupDao {
 
     public int deleteGroupUserRole(GroupUserRoleDto dto);
 
+    //모임 게시판 글 카테고리 가져오기
+    List<PostCategoryDto> selectPostCategory();
 }
