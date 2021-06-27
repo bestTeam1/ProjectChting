@@ -177,7 +177,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#A0A0FF',
                 cancelButtonColor: '#aaaaaa',
-                confirmButtonText: '네 강퇴하겠습니다',
+                confirmButtonText: '네 추방하겠습니다',
                 cancelButtonText: '취소'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -257,8 +257,7 @@
                         }
                     });
                     Swal.fire(
-                        '추방되었습니다',
-                        '해당 회원은 다시 가입신청 할 수 있습니다'
+                        '추방되었습니다'
                     )
                 }
             })
