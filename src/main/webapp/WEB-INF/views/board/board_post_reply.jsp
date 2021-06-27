@@ -1,59 +1,44 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hyunsangjin
-  Date: 2021/06/19
-  Time: 12:01 오후
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>댓글</title>
-</head>
+<!DOCTYPE html>
+<html lang="ko">
+
 <body>
-
-
 
 <%-- 댓글달기 --%>
 <div>
     <br><br>
     <div style="text-align: center">
-        <b1><strong>Reply</strong></b1>
-        <div  style="text-align: -webkit-center">
-            <table>
-                <tr>
-                    <td>
-                            <textarea style="width: 900px;" rows="3" id="content" name="content"
-                                      placeholder="댓글사용시 로그인이 필요합니다."
-                                      onfocus="this.placeholder = ''"
-                                      onblur="this.placeholder = '댓글사용시 로그인이 필요합니다.'"></textarea>
-                        <br>
-                        <div style="text-align: center">
-                            <%-- <a href='#' onClick="fn_comment('${result.code }')" class="btn pull-right btn-success">등록</a>--%>
-                            <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="submit" onclick="replyWrite()" value="댓글등록"/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <div style="text-align: -webkit-center">
+            <div class="card text-center" style="margin-bottom: 10px;">
+                <div class="card-body text-muted">
+                    <textarea rows="3" id="content" name="content"
+                              class="border w-100"
+                              style="resize: none;"
+                              placeholder="댓글사용시 로그인이 필요합니다."
+                              onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = '댓글사용시 로그인이 필요합니다.'"></textarea>
+                    <input type="button" class="btn rounded-pill btn-primary mb-5 float-end"
+                           id="submit" onclick="replyWrite()" value="댓글등록"/>
+
+
+                <div id="commentList">
+
+                </div>
+                <b3 id="cCnt"></b3>
+
+                <div class="text" id="text">
+
+                </div>
+
+                </div>
+            </div>
         </div>
     </div>
     <input type="hidden" id="b_code" name="b_code" value=""/>
 </div>
-<br><br>
-
-<div class="container" style="text-align: left">
-    <div id="commentList">
-
-    </div>
-    <b3 id="cCnt"></b3>
-
-    <div class="text" id="text">
-
-    </div>
-
-</div>
 </body>
+
 <script src="assets/js/jquery.min.js"></script>
 <script>
     $(document).ready(getReplyList());
@@ -119,27 +104,26 @@
                 if (response.length > 0) {
                     response.forEach(reply => {
                         console.log(reply.userid);
-                        if(reply.userid == '${nickname}') {
-                            such += "<div>";
-                            such += "<div><h7><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h7>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
-                            such += "<div id='reply" + reply.reply_no +"'>" + "✔️ " + reply.content + "&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' id='replyUpdate' class='replyUpdate' onclick='replyEdit(" + reply.reply_no + "," + "\"" + reply.content + "\"" + ")'>수정</a>&nbsp;&nbsp;<a href='javascript:void(0)' id='replyDelete' class='replyDelete' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a>" + "</div>" + "<tr><hr></tr>";
+                        if (reply.userid == '${nickname}') {
+                            such += "<div class='mt-5'>";
+                            such += "<div class='text-start'><h7><strong><i class='far fa-comments'>&nbsp;</i>" + reply.userid + "&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h7>";
+                            such += "<div class='m-3' id='reply" + reply.reply_no + "'>" + "&nbsp;" + reply.content + "&nbsp;&nbsp;&nbsp;";
+                            such += "<a href='javascript:void(0)' id='replyUpdate' class='btn btn-sm btn-outline-dark m-2' onclick='replyEdit(" + reply.reply_no + "," + "\"" + reply.content + "\"" + ")'>수정</a>";
+                            such += "<a href='javascript:void(0)' id='replyDelete' class='btn btn-sm btn-outline-dark' onclick='replyDel(" + reply.reply_no + ")'>삭제" + "</a></div><hr>";
                             such += "</div>";
                             such += "</div>";
                         } else {
-                            such += "<div>";
-                            such += "<div><h5><strong>" + reply.userid + "&nbsp;&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h5>"; //"+reply.reply_no+","+reply.content+","+reply.userid+"
-                            such += "✔️ " + reply.content + "<tr><hr></tr>";
+                            such += "<div class='mt-5'>";
+                            such += "<div class='text-start'><h7><strong><i class='far fa-comments'>&nbsp;</i>" + reply.userid + "&nbsp;&nbsp;(" + reply.formatdate + ")" + "</strong></h7>";
+                            such += "<div class='m-3' id='reply" + reply.reply_no + "'>" + "&nbsp;" + reply.content + "<hr>";
                             such += "</div>";
                             such += "</div>";
+
                         }
                     });
 
                 } else {
-                    nosuch += "<div style='text-align: center'>";
-                    nosuch += "<div><table class='table'><h7><strong>등록된 댓글이 없습니다.</strong></h7>";
-                    nosuch += "</table></div>";
-                    nosuch += "</div>";
-
+                    nosuch += "";
                 }
                 $("#cCnt").html(nosuch);
                 $("#commentList").html(such);
@@ -154,30 +138,31 @@
     /*
        * 댓글 수정하기(view)
        */
-    function replyEdit(reply_no, content){
+    function replyEdit(reply_no, content) {
         let id = "#reply" + reply_no;
         var such = "";
 
-        such += "<a href='javascript:void(0)' onclick='updateReply("+ reply_no + ","+ userid + ")'>저장</a>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='getReplyList()'>취소"+"</a>";
-        such += '<textarea name="editContent" id="editContent" class="form-control" rows="3">';
-        such +=  content;
+        such += "<a href='javascript:void(0)' class='btn btn-sm btn-outline-dark m-2' onclick='updateReply(" + reply_no + "," + userid + ")'>저장</a>";
+        such += "<a href='javascript:void(0)' class='btn btn-sm btn-outline-dark' onclick='getReplyList()'>취소" + "</a>";
+        such += '<textarea name="editContent" id="editContent" class="form-control" style="resize: none;" rows="3">';
+        such += content;
         such += "</textarea>";
 
         $(id).html(such);
     }
 
-    function updateReply(reply_no, userid){
+    function updateReply(reply_no, userid) {
         var replyEditContent = $('#editContent').val();
 
         $.ajax({
             url: 'board_replyUpdate.do',
-            data : {
+            data: {
                 "content": replyEditContent,
                 "reply_no": reply_no
             },
-            type : 'POST',
-            dataType : 'text',
-            success: function(response){
+            type: 'POST',
+            dataType: 'text',
+            success: function (response) {
                 getReplyList();
             }
             , error: function (request, status, error) {

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.GroupDao">
 
-    <select id="checkMember" resultType="int">
+    <select id="checkMember" resultType="com.team1.chting.dto.GroupUserRoleDto">
         select group_role_no from group_user_role where userid = #{userid} and group_no = #{group_no}
     </select>
 
@@ -13,7 +13,7 @@
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
-        where pg.group_no = #{groupNo}
+        where pg.enabled = 1 and pg.group_no = #{groupNo}
         order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc limit ${page}, 10
     </select>
 
@@ -23,12 +23,12 @@
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
-        where pg.group_no = #{groupNo}
+        where pg.enabled = 1 and pg.group_no = #{groupNo}
         order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc limit #{pageStart},#{pageSize}
     </select>
 
     <select id="pageCountPost" resultType="int">
-        select count(*) from post_group where group_no = #{group_no}
+        select count(*) from post_group where enabled = 1 and group_no = #{group_no}
     </select>
 
     <!--  글쓰기  -->
@@ -49,25 +49,23 @@
 
     <!-- 상세보기 -->
     <select id="read" parameterType="int" resultType="com.team1.chting.dto.PostDto">
-        select *
-        from post_group
+        select pg.*, pc.post_catename
+        from post_group pg
+                 join post_category pc on pg.post_catecode = pc.post_catecode
         where post_no = #{post_no}
     </select>
 
     <!--  삭제하기  -->
-    <delete id="delete" parameterType="int">
-        delete
-        from post_group
-        where post_no = #{post_no}
-    </delete>
+<!--    <delete id="delete" parameterType="int">-->
+<!--        delete-->
+<!--        from post_group-->
+<!--        where post_no = #{post_no}-->
+<!--    </delete>-->
 
-<!--    <update id="delete" parameterType="int">-->
-<!--        update post_group set enabled = 0 where post_no = #{post_no}-->
-<!--    </update>-->
+    <update id="delete">
+        update post_group set enabled = 0 where post_no = #{post_no}
+    </update>
 
-<!--    <update id="delete">-->
-<!--        update post_group set enabled = 0 where ${group_no} = #{post_no}-->
-<!--    </update>-->
 
     <!--  수정하기  -->
     <update id="update" parameterType="com.team1.chting.dto.PostDto">
@@ -201,4 +199,9 @@
         where group_no = #{group_no}
           and userid = #{userid};
     </delete>
+
+    <select id="selectPostCategory" resultType="com.team1.chting.dto.PostCategoryDto">
+        select post_catecode, post_catename
+        from post_category
+    </select>
 </mapper>
