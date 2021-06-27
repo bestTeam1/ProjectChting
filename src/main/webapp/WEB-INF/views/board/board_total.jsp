@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -36,7 +36,8 @@
                 <c:choose>
                     <c:when test="${not empty i.group_name}">
                         <div class="col-md-4 mb-3">
-                            <a href="board_main.do?group_no=${i.group_no}" class="recent-work card border-0 shadow-lg overflow-hidden">
+                            <a href="board_main.do?group_no=${i.group_no}"
+                               class="recent-work card border-0 shadow-lg overflow-hidden">
                                 <img class="recent-work-img card-img img-responsive"
                                 <c:choose>
                                 <c:when test="${empty i.group_img}">
@@ -54,7 +55,16 @@
                                     <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
                                         <div class="recent-work-content text-start mb-3 ml-3 text-dark">
                                             <h3 class="card-title light-300">${i.group_name}</h3>
-                                            <p class="card-text">${i.content}</p>
+                                            <p class="card-text">
+                                                <c:choose>
+                                                <c:when test="${fn:length(i.content) gt 31}">
+                                                    <c:out value="${fn:substring(i.content, 0, 30)}"/>....<br>
+                                                    <i class="fas fa-angle-double-right">read more</i>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <c:out value="${i.content}"/></p>
+                                            </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +111,15 @@
                                     <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
                                     <p class="card-text">${i.group_name}<br>
                                     <hr>
-                                        ${i.content}
+                                    <c:choose>
+                                        <c:when test="${fn:length(i.content) gt 30}">
+                                            <c:out value="${fn:substring(i.content, 0, 29)}"/>....<br>
+                                            <i class="fas fa-angle-double-right">read more</i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:out value="${i.content}"/></p>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </a>
@@ -119,7 +137,15 @@
                                     <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
                                     <p class="card-text">${i.group_name}<br>
                                     <hr>
-                                        ${i.content}
+                                    <c:choose>
+                                        <c:when test="${fn:length(i.content) gt 30}">
+                                            <c:out value="${fn:substring(i.content, 0, 29)}"/>....<br>
+                                            <i class="fas fa-angle-double-right">read more</i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:out value="${i.content}"/></p>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </a>
