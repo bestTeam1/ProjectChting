@@ -18,21 +18,23 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <!-- Start Banner Hero -->
-<div id="work_banner" class="banner-wrapper bg-light w-100 py-5">
-    <div class="banner-vertical-center-work container text-light d-flex justify-content-center align-items-center py-5 p-0">
-        <div class="banner-content col-lg-8 col-12 m-lg-auto text-center">
-            <h1 class="banner-heading h2 display-3 pb-5 semi-bold-600 typo-space-line-center">
-                이미 모임장으로 속해있는 모임이 있습니다.
-            </h1>
-            <h4 class="h5 pb-2 regular-400">
-                모임장으로는 1개의 모임에서만 활동이 가능합니다.<br>
-                모임 생성을 위해서는 모임을 해산하거나 모임장 권한 위임 후에 생성이 가능합니다. </h4>
-            <button onclick="location.href='groupJoin.do?userid=${sessionScope.get("userData").userid}'" class="btn rounded-pill btn-secondary text-light px-4 light-300">
-                모임 관리 페이지로 이동
-            </button>
+<section class="my-xxl-5 py-xxl-3" style="height: 1000px;">
+    <div id="work_banner" class="banner-wrapper bg-light w-100 py-5 d-flex flex-column justify-content-center">
+        <div class="banner-vertical-center-work container text-light d-flex justify-content-center align-items-center py-5 p-0">
+            <div class="banner-content col-lg-8 col-12 m-lg-auto text-center">
+                <h1 class="banner-heading h2 display-3 pb-5 semi-bold-600">
+                    이미 모임장으로 속해있는 모임이 있습니다.
+                </h1>
+                <h4 class="h5 pb-2 regular-400">
+                    모임장으로는 1개의 모임에서만 활동이 가능합니다.<br>
+                    모임 생성을 위해서는 모임을 해산하거나 모임장 권한 위임 후에 생성이 가능합니다. </h4>
+                <button onclick="location.href='groupJoin.do?userid=${sessionScope.get("userData").userid}'" class="btn rounded-pill btn-secondary text-light px-4 light-300">
+                    모임 관리 페이지로 이동
+                </button>
+            </div>
         </div>
     </div>
-</div>
+</section>
 <!-- End Banner Hero -->
 <!-- Start Banner Hero -->
 <section class="bg-light">
