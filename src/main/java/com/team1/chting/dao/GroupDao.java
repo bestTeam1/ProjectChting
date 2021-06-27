@@ -3,11 +3,7 @@ package com.team1.chting.dao;
 import com.team1.chting.dto.*;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
-import com.team1.chting.utils.Criteria;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.parameters.P;
 
-import java.util.Map;
 import java.util.List;
 
 public interface GroupDao {

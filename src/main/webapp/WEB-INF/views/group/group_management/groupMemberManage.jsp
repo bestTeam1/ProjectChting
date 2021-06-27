@@ -240,17 +240,6 @@
                                 }
                                 tableNum++;
                             });
-                            /*
-                            $('#memberList').prepend(
-                                '<tr style="background-color:lightgrey">'
-                                + '<th style="text-align: center">이름</th>'
-                                + '<th style="text-align: center">소개</th>'
-                                + '<th style="text-align: center">성별</th>'
-                                + '<th style="text-align: center">선택</th>'
-                                + '</tr>'
-                            );
-
-                             */
                         },
                         error : function(request, status, error) {
                             console.log(error)
