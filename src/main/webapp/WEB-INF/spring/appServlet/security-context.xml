@@ -62,7 +62,7 @@
 		<form-login authentication-success-handler-ref="successHandler" />
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
-					  authentication-success-handler-ref="successHandler" />
+					  authentication-success-handler-ref="successHandler" login-page="/login.do" />
 
 		<logout logout-url="/logout" logout-success-url="/index.do" invalidate-session="true" delete-cookies="JSESSIONID"/>
 		<csrf disabled="true" />

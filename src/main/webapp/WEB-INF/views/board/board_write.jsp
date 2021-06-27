@@ -22,6 +22,52 @@
 <jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
 
+<script type="text/javascript">
+    function confirm() {
+        // e.preventDefault
+        var post_catename = $("#post_catename").val();
+        var subject = $("#subject").val().trim();
+        var content = $("#content").val().trim();
+
+
+        if (post_catename == "default") {
+            Swal.fire({
+                text: '카테고리를 선택해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (subject == "") {
+            Swal.fire({
+                text: '제목을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (!(1 < subject.length <= 20)) {
+            Swal.fire({
+                text: '제목은 2~20 자로 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (content == "") {
+            Swal.fire({
+                text: '내용을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (!(1 < content.length <= 2000)) {
+            Swal.fire({
+                text: '내용은 2~2000 자로 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        }
+        var form = document.createElement("form")
+
+        $('#form').submit();
+    }
+
+</script>
+
 <section class="container" style="min-height: 700px;">
     <div class="row justify-content-center pb-4">
         <div class="col-lg-8 mt-3">
@@ -127,7 +173,6 @@
             });
             return;
         } else {
-            console.log("이건됨");
             write.submit();
         }
     });

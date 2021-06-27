@@ -2361,6 +2361,18 @@ fieldset:disabled a.btn {
   border-color: #4e73df;
 }
 
+.btn-accept {
+  color: #A0A0FF;
+  background-color:#A0A0FF;
+  border-color: #A0A0FF;
+}
+
+.btn-cancel {
+  color: #aaaaaa;
+  background-color:#aaaaaa;
+  border-color: #aaaaaa;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #2e59d9;
@@ -9593,15 +9605,64 @@ button.bg-dark:focus {
 }
 
 .text-kakao {
-  color: #FAE100
+  color: #FAE100 !important;
 }
 
 .text-google {
-  color: #E13E2A
+  color: #E13E2A !important;
 }
 
 .text-github {
-  color: #24292E
+  color: #24292E !important;
+}
+
+.text-outdoor {
+  color: #68B9C2 !important;
+}
+.text-sports {
+  color: #E13E2A !important;
+}
+.text-book {
+  color: #6F452D !important;
+}
+.text-language {
+  color: #2DAF5E !important;
+}
+.text-culture {
+  color: #E6C834 !important;
+}
+.text-music {
+  color: #6A40FF !important;
+}
+.text-crafting {
+  color: #00FE00 !important;
+}
+.text-dance {
+  color: #E4584D !important;
+}
+.text-voluntary {
+  color: #F7F7F7 !important;
+}
+.text-social {
+  color: #002B68 !important;
+}
+.text-car {
+  color: #9F0B32 !important;
+}
+.text-picture {
+  color: #F4E18B !important;
+}
+.text-game {
+  color: #6D6E75 !important;
+}
+.text-cook {
+  color: #D3A188 !important;
+}
+.text-pet {
+  color: #E5BF95 !important;
+}
+.text-etc {
+  color: #000000 !important;
 }
 
 .text-primary {

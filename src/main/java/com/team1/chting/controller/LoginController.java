@@ -69,11 +69,16 @@ public class LoginController {
             int result = loginService.signUpReg(signUpDto, request, interest);
             emailService.sendMail(signUpDto.getEmail(), signUpDto.getNickname());
             System.out.println(result);
-            return new ResponseEntity<String>("회원가입이 완료되었습니다. 다시 로그인 해주세요.", HttpStatus.OK);
+            return new ResponseEntity<String>(request.getContextPath(), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("error : " + e.getMessage());
             return new ResponseEntity<String>("SignUp Failure", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(value = "signIn.do")
+    public String loginPage(Model model) {
+        return "sign/login";
     }
 
 }

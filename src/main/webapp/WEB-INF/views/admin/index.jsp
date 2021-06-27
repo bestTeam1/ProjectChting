@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- KakaoMap API -->
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@properties['kakaoapi.key']"/>&libraries=services"></script>
+
 
     <title>관리자</title>
 
@@ -20,7 +23,7 @@
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <jsp:include page="/WEB-INF/views/include/adminSidebar.jsp" />
+        <jsp:include page="/WEB-INF/views/include/adminSidebar.jsp"/>
     </ul>
     <!-- End of Sidebar -->
 
@@ -47,8 +50,9 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">대시보드</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <a href="${pageContext.request.contextPath}/index.do"
+                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <i class="fas fa-arrow-alt-circle-left"></i> chting으로 돌아가기 </a>
                 </div>
 
                 <!-- Content Row -->
@@ -60,8 +64,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            회원</div>
-                                        <div id="totalUser"  class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            회원
+                                        </div>
+                                        <div id="totalUser" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -77,8 +82,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            모임</div>
-                                        <div id="totalGroup"  class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            모임
+                                        </div>
+                                        <div id="totalGroup" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -94,8 +100,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            모임 이벤트</div>
-                                        <div id="totalEvent"  class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            모임 이벤트
+                                        </div>
+                                        <div id="totalEvent" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -112,7 +119,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            가장 인기있는 관심사</div>
+                                            가장 인기있는 관심사
+                                        </div>
                                         <div id="totalInterest" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                     </div>
                                     <div class="col-auto">
@@ -202,6 +210,118 @@
                     </div>
                 </div>
 
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">회원들의 모임</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body" id = "map" style="height: 380px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">관심사 별 가입자 수</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="chartGroupTypes"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-outdoor"></i> 아웃도어
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-sports"></i> 운동/스포츠
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-book"></i> 인문학/책/글
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-language"></i> 외국/언어
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-culture"></i> 문화/공연/축제
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-music"></i> 음악/악기
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-crafting"></i> 공예/만들기
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-dance"></i> 댄스/무용
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-voluntary"></i> 봉사활동
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-social"></i> 사교/인맥
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-car"></i> 차/오토바이
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-picture"></i> 사진/영상
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-game"></i> 게임/오락
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-cook"></i> 요리/제조
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-pet"></i> 반려동물
+                                        </span>
+                                        <span class="mr-2">
+                                                <i class="fas fa-circle text-etc"></i> 자유주제
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- /.container-fluid -->
 
@@ -229,26 +349,6 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 </body>
 
@@ -257,42 +357,52 @@
 <script>
 
 
-    $(document).ready(function (){
+    $(document).ready(function () {
         // 대시보드 상단 정보
         $.ajax({
-            url : "${pageContext.request.contextPath}/dashboardInfo.do",
-            dataType : "json",
-            data : {
+            url: "${pageContext.request.contextPath}/dashboardInfo.do",
+            dataType: "json",
+            data: {
                 //null
             },
-            success : function(data){
-                console.log(data);
+            success: function (data) {
                 $('#totalUser').text(data.totalUser);
                 $('#totalGroup').text(data.totalGroup);
                 $('#totalEvent').text(data.totalEvent);
 
                 $('#totalInterest').text(data.topInterest);
 
-                console.log(data.totalGroup);
 
-               // $('#totalUser').val(data.totalUser);
+                // $('#totalUser').val(data.totalUser);
             }
         });
 
 
         // 총 유저수
         $.ajax({
-            url : "${pageContext.request.contextPath}/chartRecentUser.do",
-            dataType : "json",
-            data : {
+            url: "${pageContext.request.contextPath}/chartRecentUser.do",
+            dataType: "json",
+            data: {
                 //null
             },
-            success : function(data){
+            success: function (data) {
+                var recentDate = Array();
+                let today = new Date();
+                for (var i = 6; i >= 0 ; i--) {
+                    let year = today.getFullYear(); // 년도
+                    let month = today.getMonth() + 1;  // 월
+                    let date = today.getDate() - i;  // 날짜
+
+                    recentDate.push(year + '/' + month + '/' + date);
+                }
+                console.log(recentDate)
+
+
                 var ctx = $('#chartTotalUsers');
                 var totalUsersChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: Object.keys(data),
+                        labels: recentDate,
                         datasets: [{
                             label: '가입자 수',
                             data: Object.values(data),
@@ -337,8 +447,8 @@
                                     maxTicksLimit: 5,
                                     padding: 10,
                                     // Include a dollar sign in the ticks
-                                    callback: function(value, index, values) {
-                                        return number_format(value) ;
+                                    callback: function (value, index, values) {
+                                        return number_format(value);
                                     }
                                 },
                                 gridLines: {
@@ -368,7 +478,7 @@
                             mode: 'index',
                             caretPadding: 10,
                             callbacks: {
-                                label: function(tooltipItem, chart) {
+                                label: function (tooltipItem, chart) {
                                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
                                     return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + '명';
                                 }
@@ -377,18 +487,18 @@
                     }
                 });
             },
-            error : function(request, status, error) {
+            error: function (request, status, error) {
                 console.log(error)
             }
         });
         // 총 유저수
         $.ajax({
-            url : "${pageContext.request.contextPath}/chartJoinType.do",
-            dataType : "json",
-            data : {
+            url: "${pageContext.request.contextPath}/chartJoinType.do",
+            dataType: "json",
+            data: {
                 //null
             },
-            success : function(data){
+            success: function (data) {
                 var ctx = $('#joinType');
                 var joinTypeChart = new Chart(ctx, {
                     type: 'doughnut',
@@ -420,18 +530,18 @@
                     },
                 });
             },
-            error : function(request, status, error) {
+            error: function (request, status, error) {
                 console.log(error)
             }
         });
         // 총 유저수
         $.ajax({
-            url : "${pageContext.request.contextPath}/chartJoinType.do",
-            dataType : "json",
-            data : {
+            url: "${pageContext.request.contextPath}/chartJoinType.do",
+            dataType: "json",
+            data: {
                 //null
             },
-            success : function(data){
+            success: function (data) {
 
                 var ctx = $('#joinType');
                 var joinTypeChart = new Chart(ctx, {
@@ -464,14 +574,104 @@
                     },
                 });
             },
-            error : function(request, status, error) {
+            error: function (request, status, error) {
                 console.log(error)
             }
         });
+        //관심사별 가입자수
+        $.ajax({
+            url: "${pageContext.request.contextPath}/chartGroupTypes.do",
+            dataType: "json",
+            data: {
+                //null
+            },
+            success: function (data) {
+
+                var ctx = $('#chartGroupTypes');
+                var joinTypeChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ["아웃도어/여행", "운동/스포츠", "인문학/책/글", "외국/언어", "문화/공연/축제", "음악/악기", "공예/만들기", "댄스/무용", "봉사활동", "사교/인맥", "차/오토바이", "사진/영상",
+                            "게임/오락", "요리/제조", "반려동물", "자유주제"],
+                        datasets: [{
+                            data: Object.values(data),
+                            backgroundColor: ['#68B9C2', '#E13E2A', '#6F452D', '#2DAF5E', 'E6C834', '#6A40FF', '#00FE00', '#E4584D', '#F7F7F7',
+                                '#002B68', '#9F0B32', '#F4E18B', '#6D6E75', '#D3A188', '#E5BF95', '#000000'  ],  //차트컬러
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                        }],
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        cutoutPercentage: 80,
+                    },
+                });
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+
+        //카카오맵 모임 마커
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(36.40436593241122, 127.9021009673735), // 지도의 중심좌표
+                level: 13 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/chartSchedule.do",
+            dataType: "json",
+            data: {
+                //null
+            },
+            async : false,
+            success: function (data) {
+
+                // 마커 이미지의 이미지 주소입니다
+                var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+                for (var i = 0; i < data.length; i ++) {
+
+                    // 마커 이미지의 이미지 크기 입니다
+                    var imageSize = new kakao.maps.Size(20, 34);
+
+                    // 마커 이미지를 생성합니다
+                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                    var dataPosition = new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord);
+
+                    // 마커를 생성합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: dataPosition, // 마커를 표시할 위치
+                        title : data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image : markerImage // 마커 이미지
+                    })
+                }
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+
 
 
     });
-
 
 
 </script>
