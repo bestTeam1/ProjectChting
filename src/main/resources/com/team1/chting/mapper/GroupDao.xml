@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.GroupDao">
 
-    <select id="checkMember" resultType="int">
+    <select id="checkMember" resultType="com.team1.chting.dto.GroupUserRoleDto">
         select group_role_no from group_user_role where userid = #{userid} and group_no = #{group_no}
     </select>
 

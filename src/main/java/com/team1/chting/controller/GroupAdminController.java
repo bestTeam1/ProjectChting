@@ -40,6 +40,8 @@ public class GroupAdminController {
         }
         String userid = sessionDto.getUserid();
 
+
+
         //로그인한 유저가 속해있는
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
