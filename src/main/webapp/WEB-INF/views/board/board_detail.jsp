@@ -68,10 +68,11 @@
                 </div>
             </section>
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+
     </div>
 </div>
 </div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 </body>
 <script type="text/javascript">
     let userid = '${sessionScope.get("userData").userid}';
