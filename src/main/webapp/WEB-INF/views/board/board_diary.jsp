@@ -519,8 +519,8 @@
                 text: '일정을 취소하시겠습니까??',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#A0A0FF',
+                cancelButtonColor: '#aaaaaa',
                 confirmButtonText: '네',
                 cancelButtonText: '아니오'
             }).then((result) => {

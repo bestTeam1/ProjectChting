@@ -20,6 +20,8 @@ public interface GroupDao {
     public void wirte(GroupDto gdto);
     public List<GroupDto> listAll();
 
+    //모임원인지 체크
+    public int checkMember(@Param("group_no") String group_no, @Param("userid") String userid);
 
     //비회원 -> 랜덤모임 10개
     public List<GroupDto> randomGroup();
