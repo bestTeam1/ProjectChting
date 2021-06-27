@@ -13,8 +13,7 @@
 
             <div class="col-lg-3 col-12 align-left">
                 <a class="navbar-brand" href="index.html">
-                    <i class='bx bx-buildings bx-sm text-light'></i>
-                    <span class="text-light h5">Purple</span> <span class="text-light h5 semi-bold-600">Buzz</span>
+                    <p class="text-light h3 text-wrap">Chting</p>
                 </a>
                 <p class="text-light my-lg-4 my-2">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -114,7 +113,7 @@
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                      href="mailto:info@company.com">info@company.com</a>
+                                                                      href="mailto:info@company.com">team1bit196@gmail.com</a>
                     </li>
                 </ul>
             </div>

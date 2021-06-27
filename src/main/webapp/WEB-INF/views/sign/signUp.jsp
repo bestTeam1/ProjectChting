@@ -360,7 +360,7 @@
                 timer: 5000,
             }).then(() => {
                 location.href = '${pageContext.request.contextPath}/logout';
-            });
+            })
         });
 
         $('#signUpFrm').validate({
@@ -389,7 +389,7 @@
                             timer: 5000
                         }).then(() => {
                             location.href = "${pageContext.request.contextPath}/logout";
-                        });
+                        })
                     },
                     error: function () {
                         Swal.fire({
@@ -399,7 +399,7 @@
                             timer: 3000
                         }).then(() => {
                             location.reload();
-                        });
+                        })
                     }
                 });
             }

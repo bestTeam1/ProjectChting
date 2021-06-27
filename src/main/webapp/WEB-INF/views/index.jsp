@@ -89,15 +89,15 @@
 </section>
 
 <!-- Start Choice -->
-<section class="why-us banner-bg bg-light py-lg-5 mt-xxl-5">
+<section class="why-us banner-bg bg-light py-lg-3 my-xxl-5">
     <div class="container my-4">
         <div class="row">
             <div class="banner-img col-lg-5">
                 <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
             </div>
-            <div class="banner-content col-lg-7 align-self-end">
-                <h2 class="h2 pb-3" style="text-shadow: 2px 2px 4px gray">Chting! 다양한 취미, 새로운 사람들</h2>
-                <p class="text-muted pb-5 light-300">
+            <div class="banner-content col-lg-7 mt-3 align-self-end">
+                <h2 class="h2 mt-5" style="text-shadow: 2px 2px 4px gray">Chting! 다양한 취미, 새로운 사람들</h2>
+                <p class="text-muted pb-4 light-300">
                 <h3 style="color: #6266ea">당신의 취미를 공유해보세요.</h3>
                 <strong style="color: #acabfe">나의 취미를, 당신의 취미를</strong>
                 <p><strong>모임장</strong>이 되어서 당신의 취미를 공유하고 한층 더 즐거운 당신의 취미를 즐기세요<br>
@@ -198,51 +198,7 @@
     </div>
 </section>
 <!-- End Feature Work -->
-        <!-- Start slider -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"></li>
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <!-- Start Pricing Horizontal -->
-                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg"> <!-- image -->
-                            <h5 class="h5 semi-bold-600 pb-4 light-300">Free</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <i class="display-1 bx bx-package pt-4"></i>
-                            <h5 class="h5 semi-bold-600 pb-4 light-300">Standard</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <i class="display-1 bx bx-package pt-4"></i>
-                            <h5 class="h5 semi-bold-600 pb-4 light-300">Enterprise</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                <i class='bx bx-chevron-left'></i>
-                <span class="visually-hidden">Previous</span>
-            </a>
-            <a class="carousel-control-next text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                <i class='bx bx-chevron-right'></i>
-                <span class="visually-hidden">Next</span>
-            </a>
-        </div>
-    </div>
-</section>
+
 
 <!-- Start Service -->
 <section class="service-wrapper py-3">
