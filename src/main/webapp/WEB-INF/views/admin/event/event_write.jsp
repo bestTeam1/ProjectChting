@@ -100,8 +100,8 @@
             text: "이벤트를 등록하시겠습니까?",
             icon: '확인',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#A0A0FF',
+            cancelButtonColor: '#aaaaaa',
             cancelButtonText: '취소',
             confirmButtonText: '이벤트를 등록합니다'
         }).then((result) => {
