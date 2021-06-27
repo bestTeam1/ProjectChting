@@ -17,8 +17,6 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <div class="container-fluid px-md-3 py-md-3" id="loginBody">
-    <section class="container text-center px-md-5 py-md-5 my-xxl-5 mx-xxl-auto">
-    </section>
 
     <section class="container text-center my-xxl-5 mx-xxl-auto">
         <div class="row text-center px-md-3 py-md-3 my-xxl-auto">
@@ -29,7 +27,7 @@
 
                 <div class="col-6 my-xxl-5 mx-xxl-5 border border-1" style="background-color: lavender; border-radius: 25px;">
                     <div class="text-center img-fluid" style="margin-top: 20px">
-                        <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg" width="500px" class="rounded" alt="...">
+                        <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg" style="margin-top: 50px;" width="500px" class="rounded" alt="...">
                     </div>
                     <div class="row d-flex text-center py-xxl-5">
                         <h1 class="h2 text-secondary light-300 mt-3">모임이 없습니다!</h1>
