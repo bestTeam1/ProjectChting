@@ -16,8 +16,7 @@
                     <p class="text-light h3 text-wrap">Chting</p>
                 </a>
                 <p class="text-light my-lg-4 my-2">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut.
+
                 </p>
                 <ul class="list-inline footer-icons light-300">
                     <li class="list-inline-item m-0">
@@ -64,10 +63,6 @@
                                                                            href="work.html">Work</a>
                     </li>
                     <li class="pb-2">
-                        <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a
-                            class="text-decoration-none text-light py-1" href="pricing.html">Price</a>
-                    </li>
-                    <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
                                                                            href="contact.html">Contact</a>
                     </li>
@@ -92,14 +87,6 @@
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
                                                                            href="#">Social Media</a>
-                    </li>
-                    <li class="pb-2">
-                        <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="#">Digital Solution</a>
-                    </li>
-                    <li class="pb-2">
-                        <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="#">Graphic</a>
                     </li>
                 </ul>
             </div>
@@ -126,7 +113,7 @@
             <div class="row pt-2">
                 <div class="col-lg-6 col-sm-12">
                     <p class="text-lg-start text-center text-light light-300">
-                        © Copyright 2021 Purple Buzz Company. All Rights Reserved.
+                        © Copyright 2021 Chting. All Rights Reserved.
                     </p>
                 </div>
                 <div class="col-lg-6 col-sm-12">
