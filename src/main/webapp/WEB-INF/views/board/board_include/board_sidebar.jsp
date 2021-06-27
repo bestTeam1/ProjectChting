@@ -14,11 +14,35 @@
         <a href="${pageContext.request.contextPath}/board_list.do?group_no=${group_no}">게시판</a>
         <a href="${pageContext.request.contextPath}/board_diary.do?group_no=${group_no}">일정</a>
         <a href="${pageContext.request.contextPath}/board_chatting.do?group_no=${group_no}">채팅</a>
-        <a href="${pageContext.request.contextPath}/groupJoin.do?userid=${sessionScope.get('userData').userid}">모임관리</a>
     </div><br>
 
 </section>
 <script>
+    window.onload = function(){
+        var userid = '${sessionScope.get("userData").userid}';
+        let authority_ = '';
+
+        if (${not empty pageContext.request.userPrincipal}) {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/side/authority",
+                data: {
+                    userid: userid,
+                    group_no: "${group_no}"
+                },
+                type: "get",
+                success: function (response_) {
+                    authority_ = response_;
+                    if (authority_ == '1') {
+                        let str = "<a href='${pageContext.request.contextPath}/groupJoin.do?userid=" + userid + "'>모임관리</a>";
+                        $('#mySidenav').append(str);
+                    }
+                }, error: function(Http, status, error) {
+                    console.log("Http : " + Http + ", status : " + status + ", error : " + error);
+                }
+            });
+        }
+    }
+
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }

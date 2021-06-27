@@ -80,13 +80,12 @@
     </style>
     <title>Calendar</title>
 </head>
-
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
+<jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
 <div id="wrapper">
     <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-            <jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
+    <div id="main" class="row my-md-2 d-flex justify-content-center">
+        <div class="inner col-10">
 
             <!-- Banner -->
             <section style="position: relative">
@@ -171,9 +170,9 @@
             </section>
             <div id="footerDiv"></div>
         </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
 </div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 </body>
 <script>
     var calendarModal = new bootstrap.Modal(document.getElementById('exampleModal'))
