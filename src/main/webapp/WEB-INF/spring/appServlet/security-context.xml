@@ -53,11 +53,11 @@
 		<intercept-url pattern="/login**" access="authenticated"/>
 		<intercept-url pattern="/board_main.do" access="permitAll()"/>
 		<intercept-url pattern="/signUp.do" access="hasAuthority('ROLE_GUEST')"/>
-<!--		<intercept-url pattern="/board**" access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"/>-->
-<!--		<intercept-url pattern="/group**" access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"/>-->
-<!--		<intercept-url pattern="/my**" access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"/>-->
-<!--		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>-->
-<!--		<intercept-url pattern="/chart**" access="hasAuthority('ROLE_ADMIN')"/>-->
+		<intercept-url pattern="/board**" access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"/>
+		<intercept-url pattern="/group**" access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"/>
+		<intercept-url pattern="/my**" access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')"/>
+		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
+		<intercept-url pattern="/chart**" access="hasAuthority('ROLE_ADMIN')"/>
 
 		<form-login authentication-success-handler-ref="successHandler" />
 
