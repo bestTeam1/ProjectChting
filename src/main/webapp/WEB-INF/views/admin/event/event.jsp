@@ -89,6 +89,10 @@
                 <h1 class="h3 mb-2 text-gray-800">모임관리</h1>
                 <p class="mb-4">Chting에 등록되어있는 모임들을 관리하세요</p>
 
+                <div class="btn-toolbar" style="margin-bottom: 30px">
+                    <button type="button" class="btn btn-primary m-auto" id="diarySubmit" onclick="location.href = 'write.do?type=event'">이벤트 등록</button>
+                </div>
+
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -209,6 +213,7 @@
                 </div>
             </div>
 
+            <div class="btn-toolbar"></div>
         </div>
         <!-- End of Main Content -->
 

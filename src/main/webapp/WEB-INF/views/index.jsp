@@ -148,7 +148,7 @@
         <!-- Start slider -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"></li>
                 <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
                 <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
             </ol>
@@ -157,7 +157,7 @@
                     <!-- Start Pricing Horizontal -->
                     <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
                         <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <i class="display-1 bx bx-package pt-4"></i>
+                            <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg"> <!-- image -->
                             <h5 class="h5 semi-bold-600 pb-4 light-300">Free</h5>
                         </div>
                     </div>
