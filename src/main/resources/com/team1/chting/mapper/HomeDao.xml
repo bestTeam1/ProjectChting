@@ -4,11 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.HomeDao">
 
+    <select id="getEventList" resultType="com.team1.chting.dto.EventDto">
+        select subject, startdate, enddate, event_img from event where enabled = 1
+    </select>
+
     <select id="getNewGroupList" resultType="com.team1.chting.dto.GroupDto">
         select group_no, group_name, group_img, catename, area_name, content
         from group_info
-            left join area a on group_info.area_code = a.area_code
-            left join interest_category ic on group_info.catecode = ic.catecode
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
         where enabled = 1
         order by opendate desc limit 8
     </select>
