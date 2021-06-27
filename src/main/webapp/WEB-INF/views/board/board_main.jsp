@@ -47,7 +47,7 @@
                 <c:choose>
                     <c:when test="${empty group.group_img}">
                         <img class="img-fluid border rounded"
-                             src="./assets/img/work-slide-02.jpg"
+                             src="./assets/img/work-slide-05.jpg"
                              style="height: 500px;" alt="Card image cap">
                     </c:when>
                     <c:otherwise>

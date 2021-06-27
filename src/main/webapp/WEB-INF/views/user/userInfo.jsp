@@ -28,17 +28,17 @@
                     <c:when test="${fn:startsWith(imgSrc, 'http')}">
                         <img class="team-member-img img-fluid rounded-circle p-4"
                              style="width: 300px; height: 300px"
-                             src="${userInfoBasic.profile_img}" alt="Card image">
+                             src="${userInfoBasic.profile_img}">
                     </c:when>
                     <c:when test="${fn:contains(imgSrc, userid)}">
                         <img class="team-member-img img-fluid rounded-circle p-4"
                              style="width: 300px; height: 300px"
-                             src="./upload/profileimg/${userInfoBasic.profile_img}" alt="Card image">
+                             src="./upload/profileimg/${userInfoBasic.profile_img}">
                     </c:when>
                     <c:otherwise>
                         <img class="team-member-img img-fluid rounded-circle p-4" id="preview"
                              style="width: 300px; height: 300px"
-                             src="./assets/img/team-02.jpg" alt="프로필 이미지">
+                             src="./assets/img/work-slide-06-small.jpg">
                     </c:otherwise>
                 </c:choose>
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">

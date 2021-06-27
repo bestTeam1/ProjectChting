@@ -36,8 +36,8 @@
                                 </c:when>
                                 <c:otherwise>
                                     <img class="img-fluid border rounded" id="preview" name="fileName"
-                                         src="./assets/img/team-02.jpg"
-                                         style="width:200px; height:200px; margin-bottom: 10px;">
+                                         src="./assets/img/recent-work-03.jpg"
+                                         style="width:300px; height:200px; margin-bottom: 10px;">
                                 </c:otherwise>
                             </c:choose>
                             <div class="input-group">
