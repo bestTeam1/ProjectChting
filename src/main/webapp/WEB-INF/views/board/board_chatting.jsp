@@ -400,6 +400,13 @@
     }
 
     $('#button-send').on("click", function (e) {
+        if($('#msg').val() == "") {
+            Swal.fire({
+                title: '오류',
+                text : '전송할 값을 입력해주세요!'
+            });
+            return;
+        }
         sendMessage();
         $('#msg').val('');
     });

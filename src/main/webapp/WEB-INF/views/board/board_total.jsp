@@ -3,7 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
-
+<head>
+    <style>
+        .redStyle {
+            color: red;
+        }
+    </style>
+</head>
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -51,6 +57,7 @@
                                 <div class="recent-work-vertical card-img-overlay d-flex">
                                     <c:if test="${i.group_no == adminGroup.group_no}">
                                         <i class="fas fa-crown"></i>
+                                        <div style="margin-left : 270px" id="icon-${i.group_no}"></div>
                                     </c:if>
                                     <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
                                         <div class="recent-work-content text-start mb-3 ml-3 text-dark">
@@ -162,6 +169,7 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script>
     var length = ${length};
     var html = '<div class="col-md-4 mb-3">'
@@ -186,7 +194,49 @@
                 html + html + html
             );
         }
-    })
+    });
+
+    $.ajax({
+        url: "side/groupList/" + "${sessionScope.get("userData").userid}",
+        data: {},
+        dataType: "json",
+        type: "get",
+        success: function (response) {
+            response.forEach(group => {
+                var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting?group_no=' + group.group_no);
+                sock.onmessage = onMessage;
+                sock.onclose = onClose;
+                sock.onopen = onOpen;
+
+                function onMessage(msg) {
+                    var data = msg.data;
+                    var json = JSON.parse(data);
+                    let sessionId = json.userid;
+                    let group_no = json.group_no;
+                    console.log(sessionId);
+                    console.log(group_no);
+                    if ($('#icon-' + group_no).html() == "" && group.group_no == group_no) {
+                        $('#icon-' + group_no).append("<img src='./upload/chting/chatting_alarm.png'>");
+                    }
+                }
+
+                function onClose(evt) {
+
+                }
+
+                function onOpen(evt) {
+
+                }
+
+                function sendMessage() {
+
+                }
+            })
+        },
+        error: function (htx, status, error) {
+            console.log(htx + "," + status + "," + error);
+        }
+    });
 
 </script>
 
