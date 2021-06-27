@@ -49,7 +49,7 @@ public class GroupAdminController {
             return "error/HasNoGroupError"; //모임장없음 에러페이지로 이동
         }
         List<UserDto> groupJoinRequest = groupAdminService.getGroupJoinRequest(groupNo);
-        model.addAttribute("groupNo", groupNo);
+        model.addAttribute("group_no", groupNo);
         model.addAttribute("groupJoinRequest", groupJoinRequest);
 
         return "group/group_management/groupJoin";
