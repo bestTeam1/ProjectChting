@@ -41,7 +41,7 @@
                                 <img class="recent-work-img card-img img-responsive"
                                 <c:choose>
                                 <c:when test="${empty i.group_img}">
-                                     src="./assets/img/recent-work-03.jpg"
+                                     src="./assets/img/work-slide-05-small.jpg"
                                 </c:when>
                                 <c:otherwise>
                                      src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}"

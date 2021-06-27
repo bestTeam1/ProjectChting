@@ -1,17 +1,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset=UTF-8">
-    <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+<html lang="ko">
 
-    <title>내가 가입한 모임 - 상세보기</title>
-</head>
-<body class="is-preload">
+<body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
@@ -23,16 +17,15 @@
 <section class="container" style="min-height: 700px;">
     <div class="row justify-content-center pb-4">
         <div class="col-lg-8 mt-3">
-            <form id="write" method="post" action='${pageContext.request.contextPath}/board_writeOk.do' enctype="multipart/form-data">
+            <form id="write" method="post" action='board_writeOk.do' enctype="multipart/form-data">
                 <%-- 카테고리 셀렉트  --%>
-                <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
+                <select id="post_catename" name="post_catecode" class="form-select" style="width: 170px; float: right">
                     <option value="default" selected hidden>==카테고리==</option>
                     <option value="A004">자유글</option>
                     <option value="A003">정모후기</option>
                     <option value="A002">가입인사</option>
                     <option value="A001">공지사항</option>
                 </select>
-                <br><br><br><br>
 
                 <table>
                     <%--  <div>작성자<input type="text" name="writer" value="${modifyId}" readonly="readonly"></div>--%>
@@ -49,16 +42,13 @@
                                                                   onblur="this.placeholder = '2~2000자 이내로 입력해주세요 :)'"></textarea>
                     </div>
                 </table>
-                <br><br>
-                <%--                            <div><label class="form-label" for="customFile">첨부파일</label>--%>
-                <%--                                <input type="file" class="form-control" id="customFile" name="file"/></div>--%>
+
 
                 <!-- 파일 선택 -->
                 <label class="form-label" for="fileName">첨부파일</label>
                 <input type="file" class="form-control" id="fileName" name="uploadFile"/>
 
-                <%--                <input type="file" id="fileName" name="uploadFile" class="fileName">--%>
-                <br><br>
+
 
 
                 <input type="hidden" name="group_no" value="${group_no}">
@@ -100,30 +90,35 @@
             Swal.fire({
                 text: '카테고리를 선택해주세요.',
                 icon: 'warning',
+                confirmButtonColor: '#A0A0FF'
             });
             return;
         } else if (subject == "") {
             Swal.fire({
                 text: '제목을 입력해주세요.',
                 icon: 'warning',
+                confirmButtonColor: '#A0A0FF'
             });
             return;
         } else if (!(1 < subject.length <= 20)) {
             Swal.fire({
                 text: '제목은 2~20 자로 입력해주세요.',
                 icon: 'warning',
+                confirmButtonColor: '#A0A0FF'
             });
             return;
         } else if (content == "") {
             Swal.fire({
                 text: '내용을 입력해주세요.',
                 icon: 'warning',
+                confirmButtonColor: '#A0A0FF'
             });
             return;
         } else if (!(1 < content.length <= 2000)) {
             Swal.fire({
                 text: '내용은 2~2000 자로 입력해주세요.',
                 icon: 'warning',
+                confirmButtonColor: '#A0A0FF'
             });
             return;
         } else {
