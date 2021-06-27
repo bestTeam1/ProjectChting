@@ -23,7 +23,6 @@
 	</form>
 </header>
 <script type="text/javascript">
-
 	//로그인체크 (백단에서 못막았을 경우)
 	$(function(){
 		var check = '${sessionScope.get("userData").userid}';
@@ -36,6 +35,4 @@
 			})
 		}
 	});
-
-
 </script>
