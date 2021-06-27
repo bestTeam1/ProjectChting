@@ -1,6 +1,10 @@
 package com.team1.chting.controller;
 
-import com.team1.chting.dto.*;
+import com.team1.chting.dto.GroupDto;
+import com.team1.chting.dto.PostDto;
+import com.team1.chting.dto.PostReplyDto;
+import com.team1.chting.dto.SessionDto;
+import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
@@ -110,7 +114,7 @@ public class GroupUserController {
         model.addAttribute("group_no", group_no);
         return "board/board_main";
     }
-
+    
     // 게시물 리스트
     @RequestMapping(value = "board_list.do", method = RequestMethod.GET)
     public String postList(@RequestParam("group_no") String group_no, HttpServletRequest request , AdminCriteria cri, Model model) throws Exception {
