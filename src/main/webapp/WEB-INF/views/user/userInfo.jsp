@@ -124,6 +124,7 @@
 <script>
     //값이 1이면 모임장 권한을 가진 모임이 있음
     let userGroupRole = "${userInfo.userInfoBasic.cnt}";
+    let userid = "${pageContext.request.userPrincipal.name}";
 
     $(function () {
         $("#delacount").click(function () {

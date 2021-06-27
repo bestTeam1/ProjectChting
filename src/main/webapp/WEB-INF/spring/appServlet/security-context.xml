@@ -59,10 +59,10 @@
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
 		<intercept-url pattern="/chart**" access="hasAuthority('ROLE_ADMIN')"/>
 
-		<form-login authentication-success-handler-ref="successHandler" />
+		<form-login login-page="/signIn.do" authentication-success-handler-ref="successHandler" />
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
-					  authentication-success-handler-ref="successHandler" login-page="/login.do" />
+					  authentication-success-handler-ref="successHandler" login-page="/signIn.do" />
 
 		<logout logout-url="/logout" logout-success-url="/index.do" invalidate-session="true" delete-cookies="JSESSIONID"/>
 		<csrf disabled="true" />
