@@ -39,6 +39,8 @@ public interface GroupDao {
     // 게시글 작성
     public void insert(PostDto postDto);
 
+    //게시글 작성 파일 따로 업데이트
+    public void insertFile(@Param("file") String file, @Param("post_no") String post_no);
     // 게시글 상세보기
     // PostDto
     public PostDto read(@Param("post_no")int post_no);
