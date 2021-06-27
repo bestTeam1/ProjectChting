@@ -22,56 +22,10 @@
 <jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
 
-<script type="text/javascript">
-    function confirm() {
-        // e.preventDefault
-        var post_catename = $("#post_catename").val();
-        var subject = $("#subject").val().trim();
-        var content = $("#content").val().trim();
-
-
-        if (post_catename == "default") {
-            Swal.fire({
-                text: '카테고리를 선택해주세요.',
-                icon: 'warning',
-            });
-            return;
-        } else if (subject == "") {
-            Swal.fire({
-                text: '제목을 입력해주세요.',
-                icon: 'warning',
-            });
-            return;
-        } else if (!(1 < subject.length <= 20)) {
-            Swal.fire({
-                text: '제목은 2~20 자로 입력해주세요.',
-                icon: 'warning',
-            });
-            return;
-        } else if (content == "") {
-            Swal.fire({
-                text: '내용을 입력해주세요.',
-                icon: 'warning',
-            });
-            return;
-        } else if (!(1 < content.length <= 2000)) {
-            Swal.fire({
-                text: '내용은 2~2000 자로 입력해주세요.',
-                icon: 'warning',
-            });
-            return;
-        }
-        var form = document.createElement("form")
-
-        $('#form').submit();
-    }
-
-</script>
-
 <section class="container" style="min-height: 700px;">
     <div class="row justify-content-center pb-4">
         <div class="col-lg-8 mt-3">
-            <form id="form" method="post" action='${pageContext.request.contextPath}/board_writeOk.do' enctype="multipart/form-data">
+            <form id="write" method="post" action='${pageContext.request.contextPath}/board_writeOk.do' enctype="multipart/form-data">
                 <%-- 카테고리 셀렉트  --%>
                 <select id="post_catename" name="post_catecode" style="width: 170px; float: right">
                     <option value="default" selected hidden>==카테고리==</option>
@@ -110,7 +64,7 @@
 
                 <div style="display: flex; justify-content: center">
                     <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                           onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           id="submit" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
                             onclick="location.href='board_list.do?group_no=${group_no}'">목록
                     </button>
@@ -130,5 +84,54 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 </body>
+<script type="text/javascript">
+    let write = document.querySelector('#write');
+    console.log(write.html());
+
+    $('#submit').on('click', (event) => {
+        event.preventDefault();
+
+        var post_catename = $("#post_catename").val();
+        var subject = $("#subject").val().trim();
+        var content = $("#content").val().trim();
+
+
+        if (post_catename == "default") {
+            Swal.fire({
+                text: '카테고리를 선택해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (subject == "") {
+            Swal.fire({
+                text: '제목을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (!(1 < subject.length <= 20)) {
+            Swal.fire({
+                text: '제목은 2~20 자로 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (content == "") {
+            Swal.fire({
+                text: '내용을 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else if (!(1 < content.length <= 2000)) {
+            Swal.fire({
+                text: '내용은 2~2000 자로 입력해주세요.',
+                icon: 'warning',
+            });
+            return;
+        } else {
+            console.log("이건됨");
+            write.submit();
+        }
+    });
+
+</script>
 </html>
 
