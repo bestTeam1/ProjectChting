@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.acl.Group;
 import java.util.List;
 
 @Controller
@@ -45,7 +44,7 @@ public class GroupAdminController {
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
         if(groupNo == null) { //모임장으로 속해있는 모임이 없다면?
-            return "group/group_error/HasNoGroupError"; //모임장없음 에러페이지로 이동
+            return "error/HasNoGroupError"; //모임장없음 에러페이지로 이동
         }
         List<UserDto> groupJoinRequest = groupAdminService.getGroupJoinRequest(groupNo);
         model.addAttribute("groupNo", groupNo);
@@ -100,7 +99,7 @@ public class GroupAdminController {
         String groupNo = groupDto.getGroup_no();
 
         if(groupNo == null) { //페이지 이동 시도시 모임장으로 속한 모임이 없다면 모임장없음 에러페이지로 이동
-            return "group/group_error/HasNoGroupError";
+            return "error/HasNoGroupError";
         }
 
         //모임 이름 가져오기 위한 groupDto
@@ -117,8 +116,8 @@ public class GroupAdminController {
       만든이 : 이승준
       작성일 : 2021-06-11
      */
-    @RequestMapping(value = "groupDisbandOk.do", method = RequestMethod.POST)
-    public String groupDisbandOk(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "groupDisbandOk.do", method = RequestMethod.GET)
+    public String groupDisbandOk(HttpServletRequest request) {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
@@ -132,7 +131,6 @@ public class GroupAdminController {
         String groupNo = groupDto.getGroup_no();
 
         groupAdminService.groupDisbandOk(groupNo);
-        System.out.println("모임해산ok??");
 
         return "index";
     }
