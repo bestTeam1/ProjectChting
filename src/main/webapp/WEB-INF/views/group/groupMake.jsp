@@ -43,14 +43,14 @@
                             <div class="form-floating mb-4">
                                 <c:choose>
                                     <c:when test="${not empty group_img}">
-                                        <img class="img-fluid border rounded"
-                                             id="preview" src="${group_img}"
-                                             style="width:200px; height:200px; margin-bottom: 10px;">
+                                        <img class="img-fluid border rounded" id="preview"
+                                             src="${group_img}"
+                                             style="width:300px; height:200px; margin-bottom: 10px;">
                                     </c:when>
                                     <c:otherwise>
-                                        <img class="img-fluid border rounded"
-                                             id="preview"
-                                             style="width:200px; height:200px; margin-bottom: 10px;">
+                                        <img class="img-fluid border rounded" id="preview"
+                                             src="./assets/img/recent-work-03.jpg"
+                                             style="width:300px; height:200px; margin-bottom: 10px;">
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="input-group">
@@ -143,7 +143,7 @@
                         <p>지역</p>
                     </div>
                     <div class="pricing-list-body col-md-5 align-items-center py-5">
-                        <select name="area_code" id="area_code" style="width: 30%; float:left;">
+                        <select name="area_code" id="area_code" class="form-select" style="width: 30%; float:left;">
                             <option value="" selected disabled hidden>=== 선택 ===</option>
                             <c:forEach items="${areaList}" var="area">
                                 <option value="${area.area_code}">${area.area_code} ${area.area_name}</option>
