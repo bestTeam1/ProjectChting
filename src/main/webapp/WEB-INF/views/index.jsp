@@ -133,11 +133,70 @@
             <div class="col-lg-8 col-12 m-lg-auto text-center">
                 <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="shareBtn" value="Chting 공유하기">
             </div>
-            <a href="http://localhost:8090/chting_war_exploded/oauth2/authorization/google-login">로그인테스트</a>
         </div>
     </div>
 </section>
 <!-- End Feature Work -->
+<hr>
+<!-- Start Pricing Horizontal Section -->
+<section class="bg-light pt-sm-0 py-5">
+    <div class="container py-5">
+
+        <h1 class="h2 semi-bold-600 text-center mt-2">Chting 이벤트</h1>
+        <p class="text-center pb-5 light-300">현재 진행중인 이벤트 입니다~!</p>
+
+        <!-- Start slider -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- Start Pricing Horizontal -->
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Free</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Standard</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Enterprise</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                <i class='bx bx-chevron-left'></i>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                <i class='bx bx-chevron-right'></i>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+    </div>
+</section>
+
 
 
 <!-- Start Service -->
