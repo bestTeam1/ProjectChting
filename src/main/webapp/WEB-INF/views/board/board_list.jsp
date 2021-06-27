@@ -15,25 +15,37 @@
 <section class="container" style="min-height: 700px;">
     <div class="row justify-content-center pb-4">
         <div class="col-lg-8 mt-3">
-            <table class="table table-hover">
-                <thead class="table-right">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="table-secondary">
                 <tr>
-                    <th>No.</th>
-                    <th>이름</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성일</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">카테고리</th>
+                    <th class="text-center">제목</th>
+                    <th class="text-center">작성자</th>
+                    <th class="text-center">작성일</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="plist" items="${plist}">
                     <tr>
-                        <td>${plist.post_no}</td>
-                        <td>${plist.nickname}</td>
-                        <td>${plist.post_catename}</td>
-                        <td><a href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
-                        </td>
-                        <td>${plist.writedate}</td>
+                        <td class="text-center">${plist.post_no}</td>
+                        <td class="text-center">${plist.post_catename}</td>
+                        <c:choose>
+                            <c:when test="${plist.post_catecode == 'A001'}">
+                                <td class="text-center">
+                                    <a style="color: blueviolet; text-decoration:none;"
+                                       href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td class="text-center text-secondary">
+                                    <a style="text-decoration:none;"
+                                       href='<c:url value='board_detail.do?post_no=${plist.post_no}'/>'>${plist.subject}</a>
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
+                        <td class="text-center">${plist.nickname}</td>
+                        <td class="text-center">${plist.writedate}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -127,7 +139,7 @@
     <br>
     <div style="text-align: center">
         <input type="button" onclick="location.href = 'board_write.do?group_no=${group_no}'"
-               class="btn btn-primary rounded-pill btn-block shadow px-4 py-2" value="글쓰기" >
+               class="btn btn-primary rounded-pill btn-block shadow px-4 py-2" value="글쓰기">
     </div>
 </section>
 
