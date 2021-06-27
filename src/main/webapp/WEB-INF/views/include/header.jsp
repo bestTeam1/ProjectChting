@@ -94,8 +94,3 @@
 		</div>
 	</div>
 </nav>
-<div class="text-sm-center" style="font-size: 12px;">
-	<a>$ {sessionScope.get("userData").userid} : ${sessionScope.get("userData").userid}</a>&emsp;|&emsp;
-	<a>$ {sessionScope.get("userData").userrole} : ${sessionScope.get("userData").userrole}</a>&emsp;|&emsp;
-	<a href="${pageContext.request.contextPath}/signIn.do" class="bx bx-door-open border border-success">로그인</a>
-</div>
