@@ -211,7 +211,20 @@ public class GroupUserController {
 
     // 일정
     @RequestMapping(value = "board_diary.do", method = RequestMethod.GET)
-    public String groupDiary(@RequestParam("group_no") String group_no, Model model) {
+    public String groupDiary(@RequestParam("group_no") String group_no, HttpServletRequest request, Model model) {
+
+        //로그인한 세션의 userid
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
+        //모임원인지 체크, true = 모임원
+        boolean check = groupservice.checkMember(group_no, userid);
+
+        if(check == false) {
+            return "error/hasNoRoleError";
+        }
+
 
         model.addAttribute("group_no", group_no);
 
@@ -220,7 +233,21 @@ public class GroupUserController {
 
     // 채팅
     @RequestMapping(value = "board_chatting.do", method = RequestMethod.GET)
-    public String groupChatting(@RequestParam("group_no") String group_no, Model model) {
+    public String groupChatting(@RequestParam("group_no") String group_no, HttpServletRequest request, Model model) {
+
+        //로그인한 세션의 userid
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String useridChk = sessionDto.getUserid();
+
+        //모임원인지 체크, true = 모임원
+        boolean check = groupservice.checkMember(group_no, useridChk);
+
+        if(check == false) {
+            return "error/hasNoRoleError";
+        }
+
+
         String group_name = groupservice.groupByGroup_no(group_no).getGroup_name();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userid = userService.selectNickname(authentication.getName());
