@@ -76,8 +76,7 @@
                     title: '모임 해산',
                     text : '모임이 해산되었습니다!'
                 }).then(() => {
-                    console.log("hi")
-                    $("#groupDisbandOk").submit();
+                    location.href="groupDisbandOk.do";
                 })
             }
         })
