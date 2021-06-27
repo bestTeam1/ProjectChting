@@ -65,18 +65,6 @@
 <!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
-    //로그인체크 (백단에서 못막았을 경우)
-    $(function () {
-        var check = '${sessionScope.get("userData").userid}';
-        if (check == null || check == "" || check == undefined) {
-            Swal.fire({
-                title: '오류',
-                text: '로그인을 해주세요!!'
-            }).then(() => {
-                history.go(-1);
-            })
-        }
-    });
 
     //Table에 회원정보 넣기
     $(document).ready(function () {
@@ -124,7 +112,7 @@
             Swal.fire({
                 title: '가입 승인',
                 text: "가입을 승인하시겠습니까?",
-                icon: '경고',
+                icon: 'danger',
                 showCancelButton: true,
                 confirmButtonColor: '#A0A0FF',
                 cancelButtonColor: '#aaaaaa',
@@ -137,7 +125,7 @@
                         dataType: "json",
                         data: {
                             requestList: requests,
-                            groupNo: '${groupNo}'
+                            groupNo: '${group_no}'
                         },
                         success: function (data) {
                             $('#joinRequestList').children().remove();
