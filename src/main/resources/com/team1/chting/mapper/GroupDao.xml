@@ -55,19 +55,16 @@
     </select>
 
     <!--  삭제하기  -->
-    <delete id="delete" parameterType="int">
-        delete
-        from post_group
-        where post_no = #{post_no}
-    </delete>
+<!--    <delete id="delete" parameterType="int">-->
+<!--        delete-->
+<!--        from post_group-->
+<!--        where post_no = #{post_no}-->
+<!--    </delete>-->
 
-<!--    <update id="delete" parameterType="int">-->
-<!--        update post_group set enabled = 0 where post_no = #{post_no}-->
-<!--    </update>-->
+    <update id="delete">
+        update post_group set enabled = 0 where post_no = #{post_no}
+    </update>
 
-<!--    <update id="delete">-->
-<!--        update post_group set enabled = 0 where ${group_no} = #{post_no}-->
-<!--    </update>-->
 
     <!--  수정하기  -->
     <update id="update" parameterType="com.team1.chting.dto.PostDto">
