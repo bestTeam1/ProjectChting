@@ -29,9 +29,19 @@
 
     <!--  글쓰기  -->
     <insert id="insert" parameterType="com.team1.chting.dto.PostDto">
-        insert into post_group(group_no, userid, post_catecode, subject, content, file, enabled)
-        values (#{group_no}, #{userid}, #{post_catecode}, #{subject}, #{content}, #{file},'1')
+        insert into post_group(group_no, userid, post_catecode, subject, content, enabled)
+        values (#{group_no}, #{userid}, #{post_catecode}, #{subject}, #{content},'1')
+        <selectKey keyProperty="post_no" resultType="Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
+
+    <!-- 글쓰기 파일따로  업데이트 -->
+    <update id="insertFile">
+        update post_group
+        set file = #{file}
+        where post_no = #{post_no}
+    </update>
 
     <!-- 상세보기 -->
     <select id="read" parameterType="int" resultType="com.team1.chting.dto.PostDto">

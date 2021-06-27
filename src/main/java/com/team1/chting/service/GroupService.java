@@ -74,8 +74,11 @@ public int pageCount()throws Exception{
 
     // 게시판 글쓰기
     public void insert(PostDto postDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
+        GroupDao dao = sqlsession.getMapper(GroupDao.class);
+        dao.insert(postDto);
         if (file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
+            fileName = postDto.getPost_no() + "." + fileName.split("\\.")[1].toLowerCase();;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/boardimg");
             String fpath = path + File.separator + fileName;
 
@@ -84,10 +87,9 @@ public int pageCount()throws Exception{
                 fs.write(file.getBytes());
                 fs.close();
             }
-            postDto.setFile(fileName);
+            dao.insertFile(fileName, postDto.getPost_no() + "");
+
         }
-        GroupDao dao = sqlsession.getMapper(GroupDao.class);
-        dao.insert(postDto);
     }
 
     // 게시판 상세보기
