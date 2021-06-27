@@ -13,7 +13,7 @@
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
-        where pg.group_no = #{groupNo}
+        where pg.enabled = 1 and pg.group_no = #{groupNo}
         order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc limit ${page}, 10
     </select>
 
@@ -23,12 +23,12 @@
         from post_group pg
                  left join post_category pc on pg.post_catecode = pc.post_catecode
                  left join user_info ui on pg.userid = ui.userid
-        where pg.group_no = #{groupNo}
+        where pg.enabled = 1 and pg.group_no = #{groupNo}
         order by decode (pg.post_catecode = 'A001', 1), pg.writedate desc limit #{pageStart},#{pageSize}
     </select>
 
     <select id="pageCountPost" resultType="int">
-        select count(*) from post_group where group_no = #{group_no}
+        select count(*) from post_group where enabled = 1 and group_no = #{group_no}
     </select>
 
     <!--  글쓰기  -->
