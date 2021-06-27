@@ -69,7 +69,7 @@
                                   style="resize: none; width: 800px; height: 100px; "
                                   placeholder="100자 이내로 입력해 주세요."><c:out value="${userInfoBasic.content}"/></textarea>
                                 <label for="content">100자 이내로 입력해 주세요.</label>
-                                <p align="left" id="groupNameKeyUp"></p>
+                                <p align="left" id="contentKeyUp"></p>
 
                             </div>
                         </ul>
@@ -179,7 +179,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </form>
 </section>
@@ -224,6 +223,25 @@
                 $("#area2 option:eq(0)").prop("selected", true);
             }
         });
+
+        //회원 소개글 keyUP
+        $('#content').keyup(function () {
+            let inputLength = $(this).val().length; //입력한 글자 수
+            let remain = 100 - inputLength; //100자에서 남은 글자수
+
+            $('#contentKeyUp').html(inputLength + '/100');
+
+            if (inputLength >= 1 && inputLength <= 90) {
+                $(this).css('color', 'grey');
+            } else if (inputLength >= 91 && inputLength <= 100) {
+                $(this).css('color', 'red');
+            } else if (remain < 1) {
+                Swal.fire({
+                    text: '소개 글은 100자 이내로 입력해 주세요!',
+                    confirmButtonColor: '#A0A0FF'
+                });
+            }
+        })
     });
 
     //Form 전송
