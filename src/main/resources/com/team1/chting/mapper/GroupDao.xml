@@ -49,8 +49,9 @@
 
     <!-- 상세보기 -->
     <select id="read" parameterType="int" resultType="com.team1.chting.dto.PostDto">
-        select *
-        from post_group
+        select pg.*, pc.post_catename
+        from post_group pg
+                 join post_category pc on pg.post_catecode = pc.post_catecode
         where post_no = #{post_no}
     </select>
 
