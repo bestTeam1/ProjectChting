@@ -2,36 +2,27 @@ package com.team1.chting.controller;
 
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.PostDto;
-import com.team1.chting.dto.PostReplyDto;
 import com.team1.chting.dto.SessionDto;
+import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
 import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.PageMaker;
-import org.apache.commons.io.FilenameUtils;
 
 import com.team1.chting.service.UserService;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.w3c.dom.html.HTMLModElement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class GroupUserController {
@@ -94,9 +85,17 @@ public class GroupUserController {
     public String groupMain(@RequestParam("group_no") String group_no, Model model, HttpServletRequest request) {
         GroupDto dto = groupservice.groupByGroup_no(group_no);
 
-//        if (dto.getGroup_img() == null) {
-//            dto.setGroup_img("default.jpg");
-//        }
+        //로그인한 세션의 userid
+        HttpSession session = request.getSession();
+        SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
+        String userid = sessionDto.getUserid();
+
+        //모임장으로 있는 모임의 모임번호 가져오기
+        GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
+        String groupNo = groupAdminDto.getGroup_no();
+
+        GroupDto groupDto = userService.getAdminGroup(groupNo);
+        model.addAttribute("adminGroup", groupDto);
 
         model.addAttribute("group", dto);
 
@@ -144,6 +143,10 @@ public class GroupUserController {
     public String groupWrite(String group_no, Model model) {
         // public String groupWrite(PostDto postDto, @RequestParam("group_no") String group_no, Model model){
         // model.addAttribute("postDto", postDto);
+
+        List<PostCategoryDto> postCategoryList = groupservice.getPostCategory();
+        model.addAttribute("postCategory",postCategoryList);
+
         model.addAttribute("group_no", group_no);
         return "board/board_write";
     }
