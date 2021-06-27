@@ -20,6 +20,8 @@ public interface GroupDao {
     public void wirte(GroupDto gdto);
     public List<GroupDto> listAll();
 
+    //모임원인지 체크
+    public int checkMember(@Param("group_no") String group_no, @Param("userid") String userid);
 
     //비회원 -> 랜덤모임 10개
     public List<GroupDto> randomGroup();
@@ -39,6 +41,8 @@ public interface GroupDao {
     // 게시글 작성
     public void insert(PostDto postDto);
 
+    //게시글 작성 파일 따로 업데이트
+    public void insertFile(@Param("file") String file, @Param("post_no") String post_no);
     // 게시글 상세보기
     // PostDto
     public PostDto read(@Param("post_no")int post_no);
