@@ -23,6 +23,19 @@ public class GroupService {
     private SqlSession sqlsession;
 
 
+public boolean checkMember(String group_no, String userid) {
+    GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+    int result = groupDao.checkMember(group_no, userid);
+
+    //조회결과있으면 모임원or모임장
+    if(result > 0) {
+        return true;
+    } else { //아니면 false
+        return false;
+    }
+
+}
+
     /*
       게시판CRUD
       작성자 : 현상진

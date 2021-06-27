@@ -101,7 +101,7 @@
                                     <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
                                     <p class="card-text">${i.group_name}<br>
                                     <hr>
-                                        ${i.content}</p>
+                                        ${i.content}
                                 </div>
                             </div>
                         </a>
@@ -119,7 +119,7 @@
                                     <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
                                     <p class="card-text">${i.group_name}<br>
                                     <hr>
-                                        ${i.content}</p>
+                                        ${i.content}
                                 </div>
                             </div>
                         </a>
