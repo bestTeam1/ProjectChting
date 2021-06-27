@@ -272,14 +272,16 @@
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: '확인',
+            confirmButtonColor: '#A0A0FF',
             cancelButtonText: '취소',
-            reverseButtons: true
+            cancelButtonColor: '#aaaaaa'
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
                     title: '모임 생성 완료!',
                     text: '모임 관리 페이지로 이동합니다.',
-                    confirmButtonText: '확인'
+                    confirmButtonText: '확인',
+                    confirmButtonColor: '#A0A0FF'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#groupMakeFrm').submit();
