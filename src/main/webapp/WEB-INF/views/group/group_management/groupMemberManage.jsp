@@ -38,7 +38,7 @@
     </table>
 </section>
 
-<input id="groupNo" type="hidden" value="${groupNo}">
+<input id="groupNo" type="hidden" value="${group_no}">
 <input id="userid" type="hidden" value="${userid}">
 
 <div class="col-lg-8 col-12 m-lg-auto text-center">
