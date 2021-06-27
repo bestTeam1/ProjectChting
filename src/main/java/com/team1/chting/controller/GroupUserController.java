@@ -94,13 +94,17 @@ public class GroupUserController {
     public String groupMain(@RequestParam("group_no") String group_no, Model model, HttpServletRequest request) {
         GroupDto dto = groupservice.groupByGroup_no(group_no);
 
+        String userid = "";
+
         //로그인한 세션의 userid
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
         if(sessionDto == null) {// 비로그인유저
-            return "board/board_main";
+            userid = "AnonymousNonLoginUser";
+        } else {
+            userid = sessionDto.getUserid();
         }
-        String userid = sessionDto.getUserid();
+
 
         //모임장으로 있는 모임의 모임번호 가져오기
         GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
