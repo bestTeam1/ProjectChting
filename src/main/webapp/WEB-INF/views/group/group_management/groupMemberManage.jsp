@@ -18,7 +18,9 @@
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-<jsp:include page="/WEB-INF/views/include/groupAdminSidebar.jsp"/>
+<!-- Close Header / <head> -->
+
+<jsp:include page="/WEB-INF/views/group/group_management/groupAdminNavbar.jsp"/>
 <!-- Close Header / <head> -->
 <section class="bg-light py-5 ">
     <table class="table w-75 text-center m-auto">

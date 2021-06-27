@@ -6,8 +6,9 @@
 
 <body>
 <!-- Header / <head> -->
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
+<jsp:include page="/WEB-INF/views/group/group_management/groupAdminNavbar.jsp"/>
 
 <!-- Start Feature Work -->
 <section class="bg-light py-5">

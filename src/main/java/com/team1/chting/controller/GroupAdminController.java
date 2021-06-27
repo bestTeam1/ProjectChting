@@ -74,7 +74,7 @@ public class GroupAdminController {
         String groupNo = adminGroup.getGroup_no();
         List<UserDto> groupMemberList = groupAdminService.getGroupMemberList(userid);
 
-        model.addAttribute("groupNo", groupNo);
+        model.addAttribute("group_no", groupNo);
         model.addAttribute("userid", userid);
         model.addAttribute("groupMemberList", groupMemberList);
 
@@ -107,6 +107,7 @@ public class GroupAdminController {
         //모임 이름 가져오기 위한 groupDto
         groupDto = groupAdminService.getAdminGroupName(groupNo);
 
+        model.addAttribute("group_no", groupNo);
         model.addAttribute("groupName", groupDto.getGroup_name());
         model.addAttribute("userid", userid);
 
