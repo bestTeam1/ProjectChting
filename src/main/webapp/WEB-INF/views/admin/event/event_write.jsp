@@ -1,133 +1,133 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!DOCTYPE html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>글쓰기</title>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
-    <title>내가 가입한 모임 - 게시판</title>
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-</head>
-<body class="is-preload">
-<!-- Wrapper -->
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        .row {
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: calc(var(--bs-gutter-y) * -1);
+            margin-right: calc(var(--bs-gutter-x) / -2);
+            margin-left: calc(var(--bs-gutter-x) / -2);
+        }
+
+        .justify-content-center {
+            -webkit-box-pack: center !important;
+            -ms-flex-pack: center !important;
+            justify-content: center !important;
+        }
+
+        .btn-toolbar {
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+        }
+
+        .row > * {
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 100%;
+            padding-right: calc(var(--bs-gutter-x) / 2);
+            padding-left: calc(var(--bs-gutter-x) / 2);
+            margin-top: var(--bs-gutter-y);
+        }
+
+
+    </style>
+    <title>관리자</title>
+
+
+<body id="page-top">
+<!-- Page Wrapper -->
 <div id="wrapper">
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
-            <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-            <!-- Banner -->
-            <section>
-                <div class="content">
-                    <header>
-                        <%--action='<c:url value='/board/board_insert.do'/>'--%>
-                        <form id="form" method="post" action='${pageContext.request.contextPath}/admin/eventWriteOk.do' enctype="multipart/form-data">
-                            <!-- userid와 eventNo 들고감 -->
-                            <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}" >
-                            <input type="hidden" name="event_no" value="${eventNo}">
-                            <%-- 카테고리 셀렉트  --%>
-                            <br><br>
-                            <h1>이벤트</h1>
-                            <div>제목<input type="text" id="subject" name="subject"
-                                          placeholder="2~20자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
-                                          onblur="this.placeholder = '2~20자 이내로 입력해주세요 :)'"></div>
-                            <br><br>
-                            <h3>이벤트 기간</h3>
-                            <input type="date" id="startdate" name="startdate"> ~
-                            <input type="date" id="enddate"   name="enddate">
-                            <br><br>
-                            <div>내용<textarea rows="5" cols="13" id="content" name="content" style="resize: none"
-                                             placeholder="2~2000자 이내로 입력해주세요 :)" onfocus="this.placeholder = ''"
-                                             onblur="this.placeholder = '2~2000자 이내로 입력해주세요 :)'"></textarea>
-                            </div>
-                            <br><br>
-                            <br><br>
-                            <input type="file" id="fileName" name="uploadFile" class="fileName">
-                            <div style="display: flex; justify-content: center">
 
-                                <input type="button" onclick="confirm()" value="완료"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="button" onclick="location.href='${pageContext.request.contextPath}/admin/adminEvent.do'">목록</button>
-                            </div>
-                        </form>
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <jsp:include page="/WEB-INF/views/include/adminSidebar.jsp"/>
+    </ul>
 
-                    </header>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+
+
+        <!-- End of Main Content-->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
                 </div>
-            </section>
+            </div>
+        </footer>
+        <!-- End of Footer -->
 
-
-        </div>
-        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
     </div>
-    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
-<script type="text/javascript">
 
-    function confirm() {
+</head>
 
-        var subject = $("#subject").val().trim();
-        var content = $("#content").val().trim();
-        var startdate = $("#startdate").val();
-        var enddate = $("#enddate").val();
-
-        console.log(startdate);
-        console.log(enddate);
-
-        if (subject == "") {
-            Swal.fire('제목을 입력해주세요')
-            return;
-        } else if (content == "") {
-            Swal.fire('내용을 입력해주세요')
-            return;
-        } else if (startdate == "") {
-            Swal.fire('이벤트 시작날짜를 입력해주세요')
-            return;
-        } else if (enddate == "") {
-            Swal.fire('이벤트 종료날짜를 입력해주세요')
-            return;
-        } else if (startdate >= enddate) {
-            Swal.fire('이벤트 날짜를 확인해주세요! 이벤트 종료일이 시작일보다 빠릅니다')
-            return;
-        }
-
-        Swal.fire({
-            title: '이벤트 작성',
-            text: "이벤트를 등록하시겠습니까?",
-            icon: '확인',
-            showCancelButton: true,
-            confirmButtonColor: '#A0A0FF',
-            cancelButtonColor: '#aaaaaa',
-            cancelButtonText: '취소',
-            confirmButtonText: '이벤트를 등록합니다'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: '등록 성공!',
-                    text: '이벤트를 등록했습니다!'
-                }).then((result) => {
-                    $('#form').submit();
-                })
-            }
-        })
-    }
-
-    //이벤트 시작일 default 현재날짜로 넣어두기
-    Date.prototype.toDateInputValue = (function () {
-        var local = new Date(this);
-        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-        return local.toJSON().slice(0, 10);
-    });
-
-    //이벤트 시작일 default 현재날짜로 넣어두기
-    $(document).ready(function () {
-        $('#startdate').val(new Date().toDateInputValue());
-        $('#enddate').attr("min",$('#startdate').val());
-    });
+<script>
+    //모임관리가져오기
 
 </script>
+
+
 </html>
