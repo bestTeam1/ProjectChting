@@ -1,14 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset=UTF-8">
-    <script src="${pageContext.request.contextPath}/assets/js/jquery.min.js"></script>
+<html lang="ko">
 
-    <title>내가 가입한 모임 - 상세보기</title>
-</head>
-<body class="is-preload">
+<body>
+<!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Start Board SideBar -->
 <jsp:include page="board_include/board_sidebar.jsp" />
