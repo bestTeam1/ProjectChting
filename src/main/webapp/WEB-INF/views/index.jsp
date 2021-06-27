@@ -45,37 +45,36 @@
         <!-- Start slider -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+                <c:forEach varStatus="status" items="${eventList}">
+                    <c:choose>
+                        <c:when test="${status.index eq 0}">
+                            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}"></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
             </ol>
             <div class="carousel-inner">
+                <c:forEach var="i" varStatus="status" items="${eventList}">
+                <c:choose>
+                <c:when test="${status.index eq 0}">
                 <div class="carousel-item active">
-                    <!-- Start Pricing Horizontal -->
-                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <i class="display-1 bx bx-package pt-4"></i>
-                            <h5 class="h5 semi-bold-600 pb-4 light-300"></h5>
+                    </c:when>
+                    <c:otherwise>
+                    <div class="carousel-item">
+                        </c:otherwise>
+                        </c:choose>
+                        <!-- Start Pricing Horizontal -->
+                        <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                            <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                                <i class="display-1 bx bx-package pt-4"></i>
+                                <h5 class="h5 semi-bold-600 pb-4 light-300">${i.subject}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <i class="display-1 bx bx-package pt-4"></i>
-                            <h5 class="h5 semi-bold-600 pb-4 light-300">Standard</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                            <i class="display-1 bx bx-package pt-4"></i>
-                            <h5 class="h5 semi-bold-600 pb-4 light-300">Enterprise</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </c:forEach>
             <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
                 <i class='bx bx-lg bx-chevron-left px-5'></i>
                 <span class="visually-hidden">Previous</span>
@@ -244,7 +243,8 @@
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
                             <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
-                            <p class="card-text">${i.group_name}<br><hr>${i.content}</p>
+                            <p class="card-text">${i.group_name}<br><hr>${i.content}
+                            </p>
                         </div>
                     </div>
                 </a>
@@ -257,7 +257,8 @@
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
                             <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
-                            <p class="card-text">${i.group_name}<br><hr>${i.content}</p>
+                            <p class="card-text">${i.group_name}<br><hr>${i.content}
+                            </p>
                         </div>
                     </div>
                 </a>
