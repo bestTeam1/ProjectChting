@@ -10,7 +10,7 @@
 <!-- Close Header / <head> -->
 <!-- Start Banner Hero -->
 <div class="banner-wrapper bg-light">
-    <div id="index_banner" class="banner-vertical-center-index container-fluid pt-5 my-lg-5">
+    <div id="index_banner" class="banner-vertical-center-index container-fluid pt-5 my-lg-3">
         <div id="main_inner">
             <div id="main_item" class="my-lg-5">
                 <div class="py-5 row d-flex align-items-center">
@@ -36,17 +36,74 @@
     </div>
 </div>
 <!-- End Banner Hero -->
+
+<!-- Start Pricing Horizontal Section -->
+<section class="bg-light pt-sm-0 py-3">
+    <div class="container-fluid py-4">
+        <h1 class="h2 semi-bold-600 text-center my-lg-5">Chting 이벤트! &#127881;</h1>
+
+        <!-- Start slider -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- Start Pricing Horizontal -->
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Free</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Standard</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Enterprise</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                <i class='bx bx-lg bx-chevron-left px-5'></i>
+                <span class="visually-hidden">Previous</span>
+            </h1>
+            <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                <i class='bx bx-lg bx-chevron-right'></i>
+                <span class="visually-hidden">Next</span>
+            </h1>
+        </div>
+    </div>
+</section>
+
 <!-- Start Choice -->
-<section class="why-us banner-bg bg-light my-lg-5">
+<section class="why-us banner-bg bg-light py-lg-5 mt-xxl-5">
     <div class="container my-4">
         <div class="row">
             <div class="banner-img col-lg-5">
                 <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
             </div>
             <div class="banner-content col-lg-7 align-self-end">
-                <h2 class="h2 pb-3">Chting 에 가입 해보세요!</h2>
+                <h2 class="h2 pb-3" style="text-shadow: 2px 2px 4px gray">Chting! 다양한 취미, 새로운 사람들</h2>
                 <p class="text-muted pb-5 light-300">
-                    You are allowed to download and use this Purple Buzz template for your websites. You are <strong>not allowed</strong> to re-distribute this template ZIP file on other template websites. It is quite easy to simply copy and repost the ZIP file on any <a rel="nofollow" href="https://www.google.com/search?q=free+css" target="_blank">Free CSS collection</a> websites.</p>
+                <h3 style="color: #6266ea">당신의 취미를 공유해보세요.</h3>
+                <strong style="color: #acabfe">나의 취미를, 당신의 취미를</strong>
+                <p><strong>모임장</strong>이 되어서 당신의 취미를 공유하고 한층 더 즐거운 당신의 취미를 즐기세요<br>
+                    <strong>모임원</strong>이 되어서 다른사람들의 취미를 함께 배워보면서 소통해보아요</p>
+
+                </p>
             </div>
         </div>
     </div>
@@ -133,12 +190,55 @@
             <div class="col-lg-8 col-12 m-lg-auto text-center">
                 <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="shareBtn" value="Chting 공유하기">
             </div>
-            <a href="http://localhost:8090/chting_war_exploded/oauth2/authorization/google-login">로그인테스트</a>
         </div>
     </div>
 </section>
 <!-- End Feature Work -->
-
+        <!-- Start slider -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- Start Pricing Horizontal -->
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg"> <!-- image -->
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Free</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Standard</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                            <i class="display-1 bx bx-package pt-4"></i>
+                            <h5 class="h5 semi-bold-600 pb-4 light-300">Enterprise</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                <i class='bx bx-chevron-left'></i>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                <i class='bx bx-chevron-right'></i>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
 
 <!-- Start Service -->
 <section class="service-wrapper py-3">

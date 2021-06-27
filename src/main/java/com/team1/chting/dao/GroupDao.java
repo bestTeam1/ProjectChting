@@ -1,6 +1,7 @@
 package com.team1.chting.dao;
 
 import com.team1.chting.dto.*;
+import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +18,7 @@ public interface GroupDao {
     public List<GroupDto> listAll();
 
     //모임원인지 체크
-    public int checkMember(@Param("group_no") String group_no, @Param("userid") String userid);
+    public GroupUserRoleDto checkMember(@Param("group_no") String group_no, @Param("userid") String userid);
 
     //비회원 -> 랜덤모임 10개
     public List<GroupDto> randomGroup();
@@ -87,4 +88,6 @@ public interface GroupDao {
 
     public int deleteGroupUserRole(GroupUserRoleDto dto);
 
+    //모임 게시판 글 카테고리 가져오기
+    List<PostCategoryDto> selectPostCategory();
 }
