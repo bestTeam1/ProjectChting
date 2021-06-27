@@ -3,6 +3,7 @@ package com.team1.chting.service;
 
 import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dto.*;
+import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ public class GroupService {
     @Autowired
     private SqlSession sqlsession;
 
-
 public boolean checkMember(String group_no, String userid) {
     GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
     GroupUserRoleDto groupUserRoleDto = groupDao.checkMember(group_no, userid);
@@ -34,22 +34,22 @@ public boolean checkMember(String group_no, String userid) {
         return false;
     }
 }
-
     /*
       게시판CRUD
       작성자 : 현상진
       작성일 : 2021-06-18
     */
 
-public List<PostDto> listCriPost(AdminCriteria cri)throws Exception{
-    GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-    return groupDao.listPageCriPost(cri);
-}
+    public List<PostDto> listCriPost(AdminCriteria cri) throws Exception {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.listPageCriPost(cri);
+    }
 
-public int pageCount()throws Exception{
-    GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-    return groupDao.pageCount();
-}
+    public int pageCount() throws Exception {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        return groupDao.pageCount();
+    }
+
     // 내가가입한모임 - 게시글 리스트
 //    public List<PostDto> getPostList(String group_no) {
 //        List<PostDto> postlist = new ArrayList<PostDto>();
@@ -57,11 +57,11 @@ public int pageCount()throws Exception{
 //        postlist = groupDao.getPostList(group_no);
 //        return postlist;
 //    }
-    public List<PostDto> getPostList(String group_no, int page) throws Exception{
-        if(page <= 0){
+    public List<PostDto> getPostList(String group_no, int page) throws Exception {
+        if (page <= 0) {
             page = 1;
         }
-        page = (page -1) * 10;
+        page = (page - 1) * 10;
 
         System.out.println("------------------");
         System.out.println(group_no);
@@ -73,11 +73,11 @@ public int pageCount()throws Exception{
         return postlist;
     }
 
-    public List<PostDto> listPageCriPost(AdminCriteria cri) throws Exception{
+    public List<PostDto> listPageCriPost(AdminCriteria cri) throws Exception {
         return sqlsession.selectList("listPageCriPost", cri);
     }
 
-    public int pageCountPost(String group_no) throws Exception{
+    public int pageCountPost(String group_no) throws Exception {
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         return groupDao.pageCountPost(group_no);
 
@@ -90,7 +90,8 @@ public int pageCount()throws Exception{
         dao.insert(postDto);
         if (file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = postDto.getPost_no() + "." + fileName.split("\\.")[1].toLowerCase();;
+            fileName = postDto.getPost_no() + "." + fileName.split("\\.")[1].toLowerCase();
+            ;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/boardimg");
             String fpath = path + File.separator + fileName;
 
@@ -152,12 +153,12 @@ public int pageCount()throws Exception{
         return list;
     }
 
-        public List<GroupDto> areaGroup (String userid){
-            List<GroupDto> list = new ArrayList<GroupDto>();
-            GroupDao dao = sqlsession.getMapper(GroupDao.class);
-            list = dao.areaGroup(userid);
-            return list;
-        }
+    public List<GroupDto> areaGroup(String userid) {
+        List<GroupDto> list = new ArrayList<GroupDto>();
+        GroupDao dao = sqlsession.getMapper(GroupDao.class);
+        list = dao.areaGroup(userid);
+        return list;
+    }
 
     public List<GroupDto> catecodeGroup(String userid) {
         List<GroupDto> list = new ArrayList<GroupDto>();
@@ -203,11 +204,11 @@ public int pageCount()throws Exception{
         return groupDao.replyDelete(reply_no);
     }
 
-        // 댓글 수정
-        public void replyUpdate (PostReplyDto postReplyDto){
-            GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-            groupDao.replyUpdate(postReplyDto);
-        }
+    // 댓글 수정
+    public void replyUpdate(PostReplyDto postReplyDto) {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        groupDao.replyUpdate(postReplyDto);
+    }
 
 
     /*
@@ -283,7 +284,13 @@ public int pageCount()throws Exception{
     }
 
 
+    public List<PostCategoryDto> getPostCategory() {
 
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        List<PostCategoryDto> postCategoryList = groupDao.selectPostCategory();
+
+        return postCategoryList;
+    }
 }
 
 
