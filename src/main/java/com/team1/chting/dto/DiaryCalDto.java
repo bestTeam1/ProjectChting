@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.sql.Date;
 
-//캘린더 처음로덩시 일정 자동으로 보여줌
+//캘린더 처음로딩시 일정 자동으로 보여줌
 @Data
 public class DiaryCalDto {
 	private String schedule_no;
