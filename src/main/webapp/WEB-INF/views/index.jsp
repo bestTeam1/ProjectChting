@@ -20,6 +20,8 @@
                             <br>새로운 사람들과
                             <br><strong>Chting</strong> 에서 만나보세요!
                         </h1>
+                        <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="${pageContext.request.contextPath}/login" role="button">Chting 시작하기</a>
+                        <br>
                         <p class="banner-body text-muted py-3 mx-0 px-0">
                             취미 + Meeting = Chting
                             <br>관심사에 맞는 모임을 찾고, 새로운 사람들과 만나보세요!<br>
@@ -28,7 +30,6 @@
                             <br>모임 채팅방을 통해 개인 정보 없이 활동하실 수 있습니다. :)
                         </p>
                         <br>
-                        <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="${pageContext.request.contextPath}/login" role="button">Chting 시작하기</a>
                     </div>
                 </div>
             </div>
@@ -173,18 +174,18 @@
 
             <div class="col-lg-6 offset-lg-1 mb-lg-5 align-left">
                 <div class="row">
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-1-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/c1/0a/c10a946a80c5f3107b6f8b51ee4d7bb5a21b2daf1ac66e3764b5aef8a2197498_v1.jpg">
                     </a>
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-2-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/b8/6a/b86a75339b92f85854dc6afcad80dc79289f3a8e58caf8ea73de7a2ab7b862b5_v1.jpg">
                     </a>
                 </div>
                 <div class="row pt-4">
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-3-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/ba/8c/ba8c11b761d1852ba89fc14a2109454cee52ae7f8612ac7935788f6585a20511_v1.jpg">
                     </a>
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-4-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/6c/97/6c97a0c6dd8da0cef7cf1ef605bbf2c4a9722f65f39bbf31bb571d33ee29f9bc_v1.jpg">
                     </a>
                 </div>
@@ -212,7 +213,7 @@
             </div>
         </div>
         <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
-            주로 활동하는 지역과 취미활동을 찾아보세요! <br>Chting에는 1200만명이 넘는 회원들로 이루어진 방대한 커뮤니티를 구축하고 있습니다
+            주로 활동하는 지역과 취미활동을 찾아보세요! <br>Chting에서 자기와 맞는 모임에서 좋은 취미와, 사람들을 만나보세요!
         </p>
     </div>
 
