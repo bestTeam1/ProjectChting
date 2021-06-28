@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ssyy
-  Date: 2021/06/21
-  Time: 11:43 오전
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <body>
 <!-- Header / <head> -->
@@ -14,6 +8,7 @@
 <!-- Close Header / <head> -->
 <!-- Start Work Sigle -->
 <c:set var="userid" value="${sessionScope.get('userData').userid}"/>
+<% pageContext.setAttribute("newLine", "\n"); %>
 
 <!-- Start Board SideBar -->
 <jsp:include page="board_include/board_sidebar.jsp"/>
@@ -69,7 +64,7 @@
             <h5 class="objective-heading h5 mb-3 text-center light-300"><p><i class="fas fa-angle-double-left"></i> 모임
                 소개 <i class="fas fa-angle-double-right"></i></p></h5>
             <h6 class="text-center h6">
-                <pre><c:out value="${group.content}"/></pre>
+                ${fn:replace(group.content, newLine, "<br>")}
             </h6>
         </div>
     </div>

@@ -163,7 +163,8 @@ public class GroupAdminController {
                                 HttpServletRequest request) throws Exception {
 
         String groupNo = groupDto.getGroup_no();
-        System.out.println("groupDto :" +groupDto);
+        //System.out.println("groupDto :" +groupDto);
+
         groupAdminService.updateGroup(groupDto, request);
 
         return "redirect:board_main.do?group_no="+groupNo;

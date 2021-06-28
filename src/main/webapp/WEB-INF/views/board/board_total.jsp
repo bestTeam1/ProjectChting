@@ -14,7 +14,7 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
-
+<% pageContext.setAttribute("newLine", "\n"); %>
 <!-- Start Banner Hero -->
 <section class="bg-light">
     <div class="container py-4">
@@ -66,12 +66,12 @@
                                                 <c:choose>
                                                 <c:when test="${fn:length(i.content) gt 31}">
                                                     <c:out value="${fn:substring(i.content, 0, 30)}"/>....<br>
-                                                    <i class="fas fa-angle-double-right">read more</i>
+                                                <i class="fas fa-angle-double-right">read more</i>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <c:out value="${i.content}"/></p>
-                                            </c:otherwise>
-                                            </c:choose>
+                                                    ${fn:replace(i.content, newLine, "<br>")}
+                                                </c:otherwise>
+                                                </c:choose>
                                         </div>
                                     </div>
                                 </div>
