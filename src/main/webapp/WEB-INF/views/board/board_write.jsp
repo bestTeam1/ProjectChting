@@ -31,7 +31,7 @@
                     <div class="pricing-list-body col-md-5 align-items-center py-5">
                         <select name="post_catecode" id="post_catecode" class="form-select"
                                 style="width: 30%; float:left;">
-                            <option value="" selected disabled hidden>=== 선택 ===</option>
+                            <option value="default" selected disabled hidden>=== 선택 ===</option>
                             <c:forEach items="${postCategory}" var="category">
                                 <option value="${category.post_catecode}">${category.post_catename}</option>
                             </c:forEach>
@@ -172,46 +172,22 @@
     $('#submit').on('click', (event) => {
         event.preventDefault();
 
-        var post_catename = $("#post_catename").val();
-        var subject = $("#subject").val().trim();
-        var content = $("#content").val().trim();
-
-        if (post_catename == "default") {
-            Swal.fire({
-                text: '카테고리를 선택해주세요.',
-                icon: 'warning',
-                confirmButtonColor: '#A0A0FF'
-            });
+        if ($("#post_catecode").val() == null) {
+            Swal.fire('카테고리를 선택해 주세요 !')
             return;
-        } else if (subject == "") {
-            Swal.fire({
-                text: '제목을 입력해주세요.',
-                icon: 'warning',
-                confirmButtonColor: '#A0A0FF'
-            });
+        } else if ($("#subject").val().trim() == "") {
+            Swal.fire('제목을 입력해주세요 !')
             return;
-        } else if (!(1 < subject.length <= 20)) {
-            Swal.fire({
-                text: '제목은 2~20 자로 입력해주세요.',
-                icon: 'warning',
-                confirmButtonColor: '#A0A0FF'
-            });
+        } else if ($('#subject').val().length < 2) {
+            Swal.fire('제목을 최소 2자 이상 입력해 주세요 !')
             return;
-        } else if (content == "") {
-            Swal.fire({
-                text: '내용을 입력해주세요.',
-                icon: 'warning',
-                confirmButtonColor: '#A0A0FF'
-            });
+        } else if ($("#content").val().trim() == "") {
+            Swal.fire('내용을 입력해주세요 !')
             return;
-        } else if (!(1 < content.length <= 2000)) {
-            Swal.fire({
-                text: '내용은 2~2000 자로 입력해주세요.',
-                icon: 'warning',
-                confirmButtonColor: '#A0A0FF'
-            });
+        } else if ($('#content').val().length < 2) {
+            Swal.fire("내용을 최소 2자 이상 입력해 주세요 !")
             return;
-        } else {
+        }  else {
             $('#write').submit();
         }
     });
