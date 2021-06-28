@@ -222,7 +222,7 @@
 <script>
     var length = ${length};
     var html = '<div class="col-md-4 mb-3">'
-        + '<a href="#" class="recent-work card border-0 shadow-lg overflow-hidden">'
+        + '<a href="${pageContext.request.contextPath}/search.do?category=&search=" class="recent-work card border-0 shadow-lg overflow-hidden">'
         + '<img class="recent-work-img card-img" src="./assets/img/recent-work-02.jpg" alt="Card image">'
         + '<div class="recent-work-vertical card-img-overlay d-flex align-items-end">'
         + '<div class="recent-work-content text-start mb-3 ml-3 text-dark">'

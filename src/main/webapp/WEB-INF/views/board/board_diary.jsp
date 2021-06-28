@@ -480,33 +480,45 @@
 
     //일정 만들기 확인 클릭
     $('#diarySubmit').on('click', function (e) {
-        $.ajax({
-            url: "board_diaryOk.do",
-            type: "GET",
-            async: false,
-            data: {
-                group_no: '${group_no}',
-                type: $('#chtingCalType').val(),
-                date: $('#chtingCalDate').val(),
-                subject: $('#chtingSubject').val(),
-                content: $('#chtingContent').val(),
-                location: $('#chtingCalLocation').val(),
-                xcoord: $('#xcoord').val(),
-                ycoord: $('#ycoord').val()
-            },
-            success: function (response) {
-                Swal.fire({
-                    title: '일정',
-                    text: '일정이 추가되었습니다!'
-                }).then((result) => {
-                    //modal팝업 닫기
-                    $('.btn-close').click();
-                })
-            },
-            error: function (Http, status, error) {
-                console.log(error);
-            }
-        });
+        if ($("#chtingSubject").val() == "") {
+            Swal.fire('일정 제목을 입력해주세요 !')
+            return;
+        } else if ($("#chtingContent").val().trim() == "") {
+            Swal.fire('일정 내용을 입력해주세요 !')
+            return;
+        } else if ($('#chtingCalLocation').val() == "") {
+            Swal.fire("일정 위치를 설정해주세요 !")
+            return;
+        } else {
+
+            $.ajax({
+                url: "board_diaryOk.do",
+                type: "GET",
+                async: false,
+                data: {
+                    group_no: '${group_no}',
+                    type: $('#chtingCalType').val(),
+                    date: $('#chtingCalDate').val(),
+                    subject: $('#chtingSubject').val(),
+                    content: $('#chtingContent').val(),
+                    location: $('#chtingCalLocation').val(),
+                    xcoord: $('#xcoord').val(),
+                    ycoord: $('#ycoord').val()
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: '일정',
+                        text: '일정이 추가되었습니다!'
+                    }).then((result) => {
+                        //modal팝업 닫기
+                        $('.btn-close').click();
+                    })
+                },
+                error: function (Http, status, error) {
+                    console.log(error);
+                }
+            });
+        }
     });
 
     //일정 만들기 취소 클릭이벤트
