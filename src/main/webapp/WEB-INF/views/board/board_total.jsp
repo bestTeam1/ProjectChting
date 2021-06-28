@@ -26,7 +26,9 @@
                 </p>
             </div>
             <div class="col-lg-3 col-12 pt-4">
-                <a href="groupMake.do" class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">내 모임 만들러 가기</a>
+                <input type="button" onclick="newGroup()" value="내 모임 만들러 가기"
+                       class="btn btn-primary rounded-pill btn-block shadow px-4 py-2">
+
             </div>
         </div>
     </div>
@@ -225,7 +227,12 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script>
+    //모임 가입 전체 개수
     var length = ${length};
+    //모임장으로 있는 모임 번호
+    var adminGroupNo = "${adminGroup.group_no}";
+
+
     var html = '<div class="col-md-4 mb-3">'
         + '<a href="${pageContext.request.contextPath}/search.do?category=&search=" class="recent-work card border-0 shadow-lg overflow-hidden">'
         + '<img class="recent-work-img card-img" src="./assets/img/recent-work-02.jpg" alt="Card image">'
@@ -291,6 +298,33 @@
             console.log(htx + "," + status + "," + error);
         }
     });
+
+    function newGroup() {
+        console.log(adminGroupNo);
+        console.log(length);
+
+        if(adminGroupNo != "") { //모임장인 모임이 있다면
+            location.href="groupMake.do"; //groupMake.do에서 체크해서 에러페이지 이동
+        }else { //모임장인 모임이 없다면
+            if(length >= 3) { //모임 가입 개수 체크
+                Swal.fire({
+                    title : "모임 가입 개수는 3개로 제한됩니다.",
+                    text : "가입한 모임 탈퇴 후 새로운 모임을 만들 수 있습니다.",
+                    confirmButtonText: '마이페이지로 이동',
+                    confirmButtonColor: '#A0A0FF',
+                    showCancelButton: true,
+                    cancelButtonText: '취소',
+                    cancelButtonColor: '#aaaaaa'
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        location.href="myPage.do";
+                    }
+                })
+            }else {
+                location.href="groupMake.do";
+            }
+        }
+    };
 
 </script>
 

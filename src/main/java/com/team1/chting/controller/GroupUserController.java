@@ -64,9 +64,7 @@ public class GroupUserController {
         //모임장으로 있는 모임의 모임번호 가져오기
         GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
         String groupNo = groupAdminDto.getGroup_no();
-
         GroupDto groupDto = userService.getAdminGroup(groupNo);
-        model.addAttribute("adminGroup", groupDto);
 
         //모임원으로 있는 모임들 가져오기
         List<GroupDto> groupList = userService.getGroupList(userid);
@@ -79,11 +77,12 @@ public class GroupUserController {
         List<GroupDto> newGroupByCate = userService.getNewGroupByCate(userid);
         List<GroupDto> bestGroupByCate = userService.getBestGroupByCate(userid);
 
+        model.addAttribute("adminGroup", groupDto);
         model.addAttribute("eventList", eventList);
-        model.addAttribute("length", length);
         model.addAttribute("groupList", groupList);
         model.addAttribute("newGroupList", newGroupByCate);
         model.addAttribute("bestGroupList", bestGroupByCate);
+        model.addAttribute("length", length);
         model.addAttribute("groupListAll", groupListAll);
 
         return "board/board_total";
@@ -109,20 +108,26 @@ public class GroupUserController {
             userid = sessionDto.getUserid();
         }
 
+        //가입한 모든 모임 가져오기 (모임장,모임원)
+        List<GroupDto> groupListAll = userService.getGroupListAll(userid);
+        int length = groupListAll.size();
 
         //모임장으로 있는 모임의 모임번호 가져오기
         GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
         String groupNo = groupAdminDto.getGroup_no();
 
         GroupDto groupDto = userService.getAdminGroup(groupNo);
-        model.addAttribute("adminGroup", groupDto);
 
-        model.addAttribute("group", dto);
 
         //가입한 회원 수
         int joinUser = groupAdminService.getJoinUser(group_no);
         model.addAttribute("joinUser", joinUser);
         model.addAttribute("group_no", group_no);
+        model.addAttribute("adminGroup", groupDto);
+        model.addAttribute("group", dto);
+        model.addAttribute("length", length);
+        model.addAttribute("groupListAll", groupListAll);
+
         return "board/board_main";
     }
     
