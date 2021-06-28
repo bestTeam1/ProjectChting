@@ -33,10 +33,17 @@ public class HomeController {
 	private ServletContext application;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String home(Model model) {
 		if(application.getAttribute("search_areaList") == null) {
 			application.setAttribute("search_areaList", boardService.getAreaList());
 		}
+		List<EventDto> eventList = homeService.getEventList();
+		List<GroupDto> newGroupList = homeService.getNewGroupList();
+		List<GroupDto> bestGroupList = homeService.getBestGroupList();
+
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("newGroupList", newGroupList);
+		model.addAttribute("bestGroupList", bestGroupList);
 		return "index";
 	}
 
