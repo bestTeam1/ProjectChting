@@ -170,10 +170,10 @@ public class UserService {
     }
 
     /*
-모임장인 모임정보 가져오기
-작성자 : 이승준
-작성일 : 2021-06-21
-*/
+    모임장인 모임정보 가져오기
+    작성자 : 이승준
+    작성일 : 2021-06-21
+    */
     public GroupDto getAdminGroup(String groupNo) {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         GroupDto groupDto = userDao.getAdminGroup(groupNo);

@@ -58,6 +58,7 @@ public class GroupUserController {
         }
         String userid = sessionDto.getUserid();
 
+
         List<EventDto> eventList = homeService.getEventList();
 
         //모임장으로 있는 모임의 모임번호 가져오기
@@ -74,6 +75,7 @@ public class GroupUserController {
         List<GroupDto> groupListAll = userService.getGroupListAll(userid);
         int length = groupListAll.size();
 
+        //카테
         List<GroupDto> newGroupByCate = userService.getNewGroupByCate(userid);
         List<GroupDto> bestGroupByCate = userService.getBestGroupByCate(userid);
 
