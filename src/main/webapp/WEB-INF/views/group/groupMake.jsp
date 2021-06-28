@@ -45,12 +45,12 @@
                                     <c:when test="${not empty group_img}">
                                         <img class="img-fluid border rounded" id="preview"
                                              src="${group_img}"
-                                             style="width:300px; height:200px; margin-bottom: 10px;">
+                                             style="width:250px; height:250px; margin-bottom: 10px;">
                                     </c:when>
                                     <c:otherwise>
                                         <img class="img-fluid border rounded" id="preview"
-                                             src="./assets/img/work-slide-05.jpg"
-                                             style="width:300px; height:200px; margin-bottom: 10px;">
+                                             src="./assets/img/work-slide-05-small.jpg"
+                                             style="width:250px; height:250px; margin-bottom: 10px;">
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="input-group">
