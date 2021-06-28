@@ -32,12 +32,12 @@
                                 <c:when test="${not empty groupInfo.group_img}">
                                     <img class="img-fluid border rounded" id="preview"
                                          src="./upload/groupimg/${groupInfo.group_img}"
-                                         style="width:300px; height:200px; margin-bottom: 10px;">
+                                         style="width:250px; height:250px; margin-bottom: 10px;">
                                 </c:when>
                                 <c:otherwise>
                                     <img class="img-fluid border rounded" id="preview" name="fileName"
-                                         src="./assets/img/work-slide-05.jpg"
-                                         style="width:300px; height:200px; margin-bottom: 10px;">
+                                         src="./assets/img/work-slide-05-small.jpg"
+                                         style="width:250px; height:250px; margin-bottom: 10px;">
                                 </c:otherwise>
                             </c:choose>
                             <div class="input-group">
@@ -89,8 +89,7 @@
                         <div class="form-floating mb-4">
                         <textarea name="content" id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: 800px; height: 300px; "
-                                  placeholder="10 ~ 1000자 이내로 입력해 주세요."><c:out value="${groupInfo.content}"/>
-                        </textarea>
+                                  placeholder="10 ~ 1000자 이내로 입력해 주세요."><c:out value="${groupInfo.content}"/></textarea>
                             <label for="content">10 ~ 1000자 이내로 입력해 주세요</label>
                             <p align="left" id="contentKeyUp"></p>
 

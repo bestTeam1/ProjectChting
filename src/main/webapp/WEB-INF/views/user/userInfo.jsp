@@ -18,9 +18,9 @@
         <div class="col-lg-3">
             <h2 class="h2 py-5 typo-space-line">MyPage</h2>
             <%-- 기본 정보 --%>
-            <i class="fas fa-user-circle"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.logintype}"/><br>
-            <i class="fas fa-birthday-cake"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.birth}"/><br>
-            <i class="far fa-envelope"></i>&nbsp;&nbsp;<c:out value="${userInfoBasic.email}"/>
+            <i class="fas fa-user-circle m-1"></i><c:out value="${userInfoBasic.logintype}"/><br>
+            <i class="fas fa-birthday-cake m-1"></i><c:out value="${userInfoBasic.birth}"/><br>
+            <i class="far fa-envelope m-1"></i><c:out value="${userInfoBasic.email}"/>
         </div>
         <div class="col-lg-9 row">
             <%-- 프로필 이미지, 자기소개 --%>
@@ -55,7 +55,7 @@
             <div class="team-member col-md-4">
                 <input type="button" style="" id="updateUser"
                        class="btn rounded-pill px-4 btn-outline-primary light-300" value="회원 정보 수정"
-                       onclick="location.href='userUpdate.do'"/>&nbsp;&nbsp;
+                       onclick="location.href='userUpdate.do'"/>
                 <input type="button" class="btn rounded-pill px-4 btn-outline-primary light-300"
                        value="회원 탈퇴" id="delacount">
             </div>
@@ -72,9 +72,9 @@
                     <hr>
                     <br>
                     <ul class="pricing-table-body text-start text-dark px-4 list-unstyled light-300">
-                        <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<c:out
-                            value="${userInfoBasic.first_area_name}"/>&nbsp;&nbsp;
-                        <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;<c:out
+                        <i class="fas fa-map-marker-alt m-1 mr-2"></i><c:out
+                            value="${userInfoBasic.first_area_name}"/>
+                        <i class="fas fa-map-marker-alt m-1"></i><c:out
                             value="${userInfoBasic.second_area_name}"/>
                     </ul>
                 </div>
@@ -91,7 +91,7 @@
                     <br>
                     <ul class="pricing-table-list text-start text-dark px-4 list-unstyled light-300">
                         <c:forEach var="userInterest" items="${userInfo.userInterest}">
-                            <i class="fas fa-heart"></i>&nbsp;&nbsp;<c:out value="${userInterest.catename}"/><br>
+                            <i class="fas fa-heart m-1"></i><c:out value="${userInterest.catename}"/><br>
                         </c:forEach>
                     </ul>
                 </div>
@@ -108,7 +108,7 @@
                     <br>
                     <ul class="pricing-table-list text-start text-dark px-4 list-unstyled light-300">
                         <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
-                            <i class="fas fa-check"></i>&nbsp;&nbsp;
+                            <i class="fas fa-check m-1"></i>
                             <a href="board_main.do?group_no=${userJoinGroup.group_no}">
                                 <c:out value="${userJoinGroup.group_name}"/></a><br>
                         </c:forEach>

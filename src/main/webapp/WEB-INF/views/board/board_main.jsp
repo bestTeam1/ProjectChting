@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <body>
 <!-- Header / <head> -->
@@ -31,28 +31,28 @@
     </div>
 
     <%-- 대표 사진, 지역, 관심사--%>
-    <div class="row justify-content-center pb-4">
-        <div class="col-lg-8 mt-3">
-            <h6 class="objective-heading h6 mb-1 text-end light-300">
-                <i class="fas fa-map-marker-alt m-3">&nbsp;<c:out value="${group.area_name}"/></i>
-                <i class="fas fa-bookmark m-3">&nbsp;<c:out value="${group.catename}"/></i>
-            </h6>
-            <div id="templatemo-slide-link-target" class="card mb-3">
-                <c:choose>
-                    <c:when test="${empty group.group_img}">
-                        <img class="img-fluid border rounded"
-                             src="./assets/img/work-slide-05.jpg"
-                             style="height: 500px;" alt="Card image cap">
-                    </c:when>
-                    <c:otherwise>
-                        <img class="img-fluid border rounded"
-                             src="./upload/groupimg/${group.group_img}"
-                             style="height: 500px;" alt="Card image cap">
-                    </c:otherwise>
-                </c:choose>
+        <div class="row justify-content-center pb-4">
+            <div class="col-lg-5 mt-3">
+                <h6 class="objective-heading h6 mb-1 text-end light-300">
+                    <i class="fas fa-map-marker-alt m-3">&nbsp;<c:out value="${group.area_name}"/></i>
+                    <i class="fas fa-bookmark m-3">&nbsp;<c:out value="${group.catename}"/></i>
+                </h6>
+                <div id="templatemo-slide-link-target" class="card mb-3">
+                    <c:choose>
+                        <c:when test="${empty group.group_img}">
+                            <img class="img-fluid border rounded"
+                                 src="./assets/img/work-slide-05-small.jpg"
+                                 style="height: 500px;" alt="Card image cap">
+                        </c:when>
+                        <c:otherwise>
+                            <img class="img-fluid border rounded"
+                                 src="./upload/groupimg/${group.group_img}"
+                                 style="height: 500px;" alt="Card image cap">
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
         </div>
-    </div>
 
     <%-- 회원 수, 소개 글--%>
     <div class="row justify-content-center">
