@@ -202,7 +202,6 @@
 </section>
 <!-- End Feature Work -->
 
-
 <!-- Start Service -->
 <section class="service-wrapper py-3">
     <div class="container-fluid pb-3">
@@ -239,7 +238,6 @@
 
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
-
         <c:forEach var="i" items="${bestGroupList}">
             <div class="col-xl-3 col-md-4 col-sm-6 all best project">
                 <a href="board_main.do?group_no=${i.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
@@ -268,13 +266,9 @@
                 </a>
             </div>
         </c:forEach>
-
-
     </div>
 </section>
 <!-- End Service -->
-
-
 
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />
