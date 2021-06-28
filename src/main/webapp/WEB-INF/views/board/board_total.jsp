@@ -14,7 +14,6 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
-<% pageContext.setAttribute("newLine", "\n"); %>
 <!-- Start Banner Hero -->
 <section class="bg-light">
     <div class="container py-4">
@@ -69,7 +68,7 @@
                                                 <i class="fas fa-angle-double-right">read more</i>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    ${fn:replace(i.content, newLine, "<br>")}
+                                                    <c:out value="${i.content}"/>
                                                 </c:otherwise>
                                                 </c:choose>
                                         </div>
