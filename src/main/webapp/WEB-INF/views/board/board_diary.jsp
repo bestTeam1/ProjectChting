@@ -82,7 +82,7 @@
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
-<div id="wrapper">
+<div id="wrapper" class="container-fluid">
     <!-- Main -->
     <div id="main" class="row my-md-2 d-flex justify-content-center">
         <div class="inner col-10">
