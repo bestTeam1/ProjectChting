@@ -190,10 +190,6 @@
                     </a>
                 </div>
             </div>
-            <!-- 공유하기 -->
-            <div class="col-lg-8 col-12 m-lg-auto text-center">
-                <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="shareBtn" value="Chting 공유하기">
-            </div>
         </div>
     </div>
 </section>

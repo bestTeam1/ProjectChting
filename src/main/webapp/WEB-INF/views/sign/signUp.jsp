@@ -110,7 +110,7 @@
 
             <%-- 이름 --%>
             <c:choose>
-                <c:when test="${socialData.nickname == 'emptyData'}">
+                <c:when test="${socialData.nickname == 'github'}">
                     <div class="pricing-list shadow-sm">
                         <div class="row p-4">
                             <div class="pricing-list-icon col-3 d-flex flex-column justify-content-center text-center text-secondary px-lg-5 py-2">
@@ -190,7 +190,7 @@
                     <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1">
                         <div class="px-lg-5 py-2 align-items-center">
                             <textarea name="content" id="contentArea" placeholder="100자 이내로 기입해주세요 :)" maxlength="100"
-                                      required style="width: 100%; height: 120px; resize: none"></textarea>
+                                      required style="width: 100%; height: 120px;"></textarea>
                         </div>
                     </div>
                 </div>
@@ -257,7 +257,7 @@
             <%-- 선호지역 --%>
             <%-- 이메일 --%>
             <c:choose>
-                <c:when test="${socialData.email == 'emptyData'}">
+                <c:when test="${socialData.email == 'github'}">
                     <div class="pricing-list shadow-sm">
                         <div class="row p-4">
                             <div class="pricing-list-icon col-3 d-flex flex-column justify-content-center text-center text-secondary px-lg-5 py-2">
@@ -290,29 +290,10 @@
                                    style="vertical-align: text-top; font-size: 7px; color: red;"></i>
                         </p>
                     </div>
-                    <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1" >
+                    <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1">
                         <div class="px-lg-5 py-5 align-items-center">
-                            <div class="border border-primary p-md-5" style="overflow: scroll; width: 700px;height: 200px;">
-                                여러분을 환영합니다.<br>
-                                다양한 Chting 서비스를 즐겨보세요.<br>
-                                회원으로 가입하시면 Chting 서비스를 보다 편리하게 이용할 수 있습니다.<br>
-                                여러분이 제공한 콘텐츠를 소중히 다룰 것입니다.<br>
-                                여러분의 개인정보를 소중히 보호합니다.<br>
-                                타인의 권리를 존중해 주세요.<br>
-                                Chting 서비스 이용과 관련하여 몇 가지 주의사항이 있습니다.<br>
-                                Chting에서 제공하는 다양한 포인트를 요긴하게 활용해 보세요.<br>
-                                부득이 서비스 이용을 제한할 경우 합리적인 절차를 준수합니다.<br>
-                                Chting의 잘못은 네이버가 책임집니다.<br>
-                                언제든지 Chting 서비스 이용계약을 해지하실 수 있습니다.<br>
-                                주요 사항을 잘 안내하고 여러분의 소중한 의견에 귀 기울이겠습니다.<br>
-                                여러분이 쉽게 알 수 있도록 약관 및 운영정책을 게시하며 사전 공지 후 개정합니다.<br>
-                                <br>
-                                <strong>[부칙]</strong><br>
-                                ① 본 약관은 2021. 06. 30. 부터 적용합니다.<br>
-                                - 본 약관에 대한 저작권은 Chting에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.<br>
-                                위의 약관에 동의합니다.
-
-
+                            <div class="border border-primary p-md-5">
+                                대충 약관내용이라는 내용
                             </div><br>
                             <input type="checkbox" class="form-check-input" id="siterule" name="siterule" value="agree" required>
                             <label for="siterule"> 약관동의 체크 </label>
