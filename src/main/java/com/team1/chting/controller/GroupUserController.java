@@ -1,13 +1,10 @@
 package com.team1.chting.controller;
 
-import com.team1.chting.dto.GroupDto;
-import com.team1.chting.dto.PostDto;
-import com.team1.chting.dto.PostReplyDto;
-import com.team1.chting.dto.SessionDto;
-import com.team1.chting.dto.PostCategoryDto;
+import com.team1.chting.dto.*;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
 
+import com.team1.chting.service.HomeService;
 import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.PageMaker;
 import org.apache.commons.io.FilenameUtils;
@@ -46,6 +43,9 @@ public class GroupUserController {
     @Autowired
     private GroupAdminService groupAdminService;
 
+    @Autowired
+    private HomeService homeService;
+
     // 내 모임 페이지
     @RequestMapping(value = "myGroup.do", method = RequestMethod.GET)
     public String groupMain(HttpServletRequest httpServletRequest, Model model) {
@@ -58,6 +58,7 @@ public class GroupUserController {
         }
         String userid = sessionDto.getUserid();
 
+        List<EventDto> eventList = homeService.getEventList();
 
         //모임장으로 있는 모임의 모임번호 가져오기
         GroupDto groupAdminDto = groupAdminService.getAdminGroup(userid);
@@ -76,6 +77,7 @@ public class GroupUserController {
         List<GroupDto> newGroupByCate = userService.getNewGroupByCate(userid);
         List<GroupDto> bestGroupByCate = userService.getBestGroupByCate(userid);
 
+        model.addAttribute("eventList", eventList);
         model.addAttribute("length", length);
         model.addAttribute("groupList", groupList);
         model.addAttribute("newGroupList", newGroupByCate);
