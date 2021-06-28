@@ -37,7 +37,6 @@
     </div>
 </div>
 <!-- End Banner Hero -->
-
 <!-- Start Pricing Horizontal Section -->
 <section class="bg-light pt-sm-0 py-3">
     <div class="container-fluid py-4">
@@ -69,23 +68,21 @@
                         </c:choose>
                         <!-- Start Pricing Horizontal -->
                         <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                            <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                                <i class="display-1 bx bx-package pt-4"></i>
-                                <h5 class="h5 semi-bold-600 pb-4 light-300">${i.subject}</h5>
-                            </div>
+                            <img src="${pageContext.request.contextPath}/upload/event/${i.file}">
+
                         </div>
                     </div>
                     </c:forEach>
-            <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                <i class='bx bx-lg bx-chevron-left px-5'></i>
-                <span class="visually-hidden">Previous</span>
-            </h1>
-            <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                <i class='bx bx-lg bx-chevron-right'></i>
-                <span class="visually-hidden">Next</span>
-            </h1>
-        </div>
-    </div>
+                    <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                        <i class='bx bx-lg bx-chevron-left px-5'></i>
+                        <span class="visually-hidden">Previous</span>
+                    </h1>
+                    <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                        <i class='bx bx-lg bx-chevron-right'></i>
+                        <span class="visually-hidden">Next</span>
+                    </h1>
+                </div>
+            </div>
 </section>
 
 <!-- Start Choice -->
@@ -189,6 +186,10 @@
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/6c/97/6c97a0c6dd8da0cef7cf1ef605bbf2c4a9722f65f39bbf31bb571d33ee29f9bc_v1.jpg">
                     </a>
                 </div>
+            </div>
+            <!-- 공유하기 -->
+            <div class="col-lg-8 col-12 m-lg-auto text-center">
+                <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="shareBtn" value="Chting 공유하기">
             </div>
         </div>
     </div>
