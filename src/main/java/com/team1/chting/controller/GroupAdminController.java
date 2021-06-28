@@ -135,7 +135,7 @@ public class GroupAdminController {
 
         groupAdminService.groupDisbandOk(groupNo);
 
-        return "index";
+        return "redirect:myGroup.do";
     }
 
     /*
