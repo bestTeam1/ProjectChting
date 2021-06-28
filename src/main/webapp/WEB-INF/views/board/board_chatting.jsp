@@ -289,12 +289,11 @@
 <jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
 <!-- Wrapper -->
-<div id="wrapper">
+<div id="wrapper" class="container-fluid">
 
     <!-- Main -->
     <div class="row justify-content-center pb-4">
         <div class="col-lg-8 mt-3">
-<%--            <jsp:include page="/WEB-INF/views/include/header.jsp"/>--%>
             <!-- Banner -->
             <section class="container" style="min-height: 700px;">
                 <div class="content">
@@ -331,9 +330,7 @@
             </section>
 
         </div>
-<%--        <jsp:include page="/WEB-INF/views/include/footer.jsp"/>--%>
     </div>
-<%--    <jsp:include page="/WEB-INF/views/include/sidebar.jsp"/>--%>
 </div>
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

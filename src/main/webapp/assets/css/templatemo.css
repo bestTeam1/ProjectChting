@@ -158,12 +158,22 @@ p, a {font-weight: 400;}
   width: 8rem;
 }
 .partner-wap {
-  background-color: #7276ec;
+  background-color: lavender;
   transition: 1s;
   cursor: pointer;
+  vertical-align: center;
+  height: 170px;
+  overflow: hidden;
+}
+.partner-wap > img {
+  height: 68%;
+  object-fit: scale-down;
+}
+.partner-wap > .stack {
+  color: gray;
 }
 .partner-wap:hover {
-  background-color: #b1b3f5;
+  background-color: mistyrose;
 }
 .why-us {
   background: rgb(239,239,253);
