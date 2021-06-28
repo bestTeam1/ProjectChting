@@ -9,6 +9,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <!-- Start Service -->
+<% pageContext.setAttribute("newLine", "\n"); %>
 <c:set var="userInfoBasic" value="${userInfo.userInfoBasic}"></c:set>
 <c:set var="imgSrc" value="${userInfoBasic.profile_img}"/>
 <c:set var="userid" value="${userInfoBasic.userid}"/>
@@ -45,7 +46,7 @@
                     <h2 class="h3 text-center"><c:out value="${userInfoBasic.nickname}"/></h2>
                     <br>
                     <i class="fas fa-quote-left"></i>
-                        <pre style="margin:0px;"><c:out value="${userInfoBasic.content}"/></pre>
+                        ${fn:replace(userInfoBasic.content, newLine, "<br>")}
                     <i class="fas fa-quote-right"></i>
                 </ul>
             </div>
@@ -163,10 +164,10 @@
                             },
                             success: function (data) {
                                 Swal.fire({
-                                    title : '탈퇴 완료되었습니다.',
-                                    text:'메인 페이지로 이동합니다.',
+                                    title: '탈퇴 완료되었습니다.',
+                                    text: '메인 페이지로 이동합니다.',
 
-                                    }).then((result) => {
+                                }).then((result) => {
                                     location.href = "${pageContext.request.contextPath}/logout";
                                 })
                             },
