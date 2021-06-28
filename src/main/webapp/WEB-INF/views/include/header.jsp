@@ -51,6 +51,9 @@
 
 		<div class="align-self-center collapse navbar-collapse" id="navbar-toggler-success">
 			<div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
+				<%-- test link --%>
+				<div class="nav px-3"><a href="${pageContext.request.contextPath}/team.do">team.do</a></div>
+				<%-- test link --%>
 				<div id="nav search" style="padding-right: 7%;">
 					<form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
 						<div class="input-group input-group-navbar justify-content-center">
