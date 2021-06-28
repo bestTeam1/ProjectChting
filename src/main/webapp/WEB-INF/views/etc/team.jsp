@@ -387,7 +387,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card partner-wap px-4 py-3 d-flex flex-column justify-content-lg-between">
-                        <img src="${pageContext.request.contextPath}/assets/img/stack_googleDrive.png" alt="stack_logo">
+                        <img src="${pageContext.request.contextPath}/assets/img/stack_googleDrive.png" alt="stack_logo" class="pb-4">
                         <div class="stack pe-4">
                             <ul style="list-style: none;">
                                 <li>Team Collaboration Tool</li>
