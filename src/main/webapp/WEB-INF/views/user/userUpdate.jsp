@@ -14,10 +14,12 @@
     <form id="userUpdateFrm" method="POST" action='userUpdate.do' enctype="multipart/form-data">
         <c:set var="userInfoBasic" value="${userInfo.userInfoBasic}"></c:set>
         <c:set var="imgSrc" value="${userInfoBasic.profile_img}"/>
+        <% pageContext.setAttribute("newLine", "\n"); %>
         <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
         <input type="hidden" name="first_area" value="">
         <input type="hidden" name="second_area" value="">
         <input type="hidden" name="profile_img" value="${userInfoBasic.profile_img}">
+        <input type="hidden" name="content" value="">
 
         <div class="service-wrapper py-3">
             <%-- 프로필 사진 --%>
@@ -65,9 +67,10 @@
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
-                        <textarea name="content" id="content" class="form-control form-control-lg light-300"
+                        <textarea id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: 800px; height: 100px; "
-                                  placeholder="100자 이내로 입력해 주세요."><c:out value="${userInfoBasic.content}"/></textarea>
+                                  placeholder="100자 이내로 입력해 주세요."><c:out value="${fn:replace(userInfoBasic.content, '<br>',newLine)}"/>
+                        </textarea>
                                 <label for="content">100자 이내로 입력해 주세요.</label>
                                 <p align="left" id="contentKeyUp"></p>
 
@@ -246,12 +249,16 @@
 
     //Form 전송
     function confirm() {
-
         let area1Arr = $("#area1 option:selected").text().split(" ");
         let area2Arr = $("#area2 option:selected").text().split(" ");
         let area1 = area1Arr[0]; //선호지역1 지역코드
         let area2 = area2Arr[0]; //선호지역2 지역코드
         let def = '==='; //셀렉트박스 디폴트값
+
+        let content = $('#content').val().replace(/(\n|\r\n)/g, '<br>');
+
+        //input hidden값으로 보내서 form으로 같이 전송
+        $('input[name=content]').attr('value', content);
 
         //지역 에러메시지
         if (area1 === def) {
