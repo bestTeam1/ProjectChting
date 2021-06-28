@@ -83,7 +83,9 @@
         </div>
         <div class="col-lg-3">
             <h4 class="h4 py-5 typo-space-line"><i class="bx bxs-group"></i>&nbsp;추천 모임</h4>
+            <p>회원님의 지역과 관심사에 맞는 모임</p>
         </div>
+
         <div class="service-tag py-5 bg-secondary">
             <div class="col-md-12">
                 <ul class="nav d-flex justify-content-center">

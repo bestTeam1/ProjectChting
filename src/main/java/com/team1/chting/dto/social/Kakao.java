@@ -33,7 +33,7 @@ public class Kakao extends SocialData {
                     String properties_next = Iter_propertiesSet.next();
                     if(properties_next.equals("nickname")) {
                         this.nickname = properties.get(properties_next).toString();
-                    }else if(properties_next.equals("thumbnail_image")) {
+                    }else if(properties_next.equals("profile_image")) {
                         this.profile_img = properties.get(properties_next).toString();
                     }
                 }
@@ -48,6 +48,9 @@ public class Kakao extends SocialData {
                     }
                 }
             }
+        }
+        if(this.email == null || this.email.equals("null")) {
+            this.email = "emptyData";
         }
         this.logintype = registrationId.substring(0, registrationId.lastIndexOf("-"));
     }
