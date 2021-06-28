@@ -110,7 +110,7 @@
 
             <%-- 이름 --%>
             <c:choose>
-                <c:when test="${socialData.nickname == 'github'}">
+                <c:when test="${socialData.nickname == 'emptyData'}">
                     <div class="pricing-list shadow-sm">
                         <div class="row p-4">
                             <div class="pricing-list-icon col-3 d-flex flex-column justify-content-center text-center text-secondary px-lg-5 py-2">
@@ -257,7 +257,7 @@
             <%-- 선호지역 --%>
             <%-- 이메일 --%>
             <c:choose>
-                <c:when test="${socialData.email == 'github'}">
+                <c:when test="${socialData.email == 'emptyData'}">
                     <div class="pricing-list shadow-sm">
                         <div class="row p-4">
                             <div class="pricing-list-icon col-3 d-flex flex-column justify-content-center text-center text-secondary px-lg-5 py-2">
