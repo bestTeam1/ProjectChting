@@ -20,6 +20,7 @@
                             <br>새로운 사람들과
                             <br><strong>Chting</strong> 에서 만나보세요!
                         </h1>
+                        <br>
                         <p class="banner-body text-muted py-3 mx-0 px-0">
                             취미 + Meeting = Chting
                             <br>관심사에 맞는 모임을 찾고, 새로운 사람들과 만나보세요!<br>
@@ -173,18 +174,18 @@
 
             <div class="col-lg-6 offset-lg-1 mb-lg-5 align-left">
                 <div class="row">
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-1-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/c1/0a/c10a946a80c5f3107b6f8b51ee4d7bb5a21b2daf1ac66e3764b5aef8a2197498_v1.jpg">
                     </a>
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-2-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/b8/6a/b86a75339b92f85854dc6afcad80dc79289f3a8e58caf8ea73de7a2ab7b862b5_v1.jpg">
                     </a>
                 </div>
                 <div class="row pt-4">
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-3-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/ba/8c/ba8c11b761d1852ba89fc14a2109454cee52ae7f8612ac7935788f6585a20511_v1.jpg">
                     </a>
-                    <a class="col" data-type="image" data-fslightbox="gallery" href="./assets/img/feature-work-4-large.jpg">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="https://cdn.notefolio.net/img/6c/97/6c97a0c6dd8da0cef7cf1ef605bbf2c4a9722f65f39bbf31bb571d33ee29f9bc_v1.jpg">
                     </a>
                 </div>
@@ -197,7 +198,6 @@
     </div>
 </section>
 <!-- End Feature Work -->
-
 
 <!-- Start Service -->
 <section class="service-wrapper py-3">
@@ -212,7 +212,7 @@
             </div>
         </div>
         <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
-            주로 활동하는 지역과 취미활동을 찾아보세요! <br>Chting에는 1200만명이 넘는 회원들로 이루어진 방대한 커뮤니티를 구축하고 있습니다
+            주로 활동하는 지역과 취미활동을 찾아보세요! <br>Chting에서 자기와 맞는 모임에서 좋은 취미와, 사람들을 만나보세요!
         </p>
     </div>
 
@@ -235,7 +235,6 @@
 
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
-
         <c:forEach var="i" items="${bestGroupList}">
             <div class="col-xl-3 col-md-4 col-sm-6 all best project">
                 <a href="board_main.do?group_no=${i.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
@@ -264,13 +263,9 @@
                 </a>
             </div>
         </c:forEach>
-
-
     </div>
 </section>
 <!-- End Service -->
-
-
 
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp" />

@@ -77,7 +77,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "signIn.do")
-    public String loginPage(Model model) {
+    public String loginPage() {
         return "sign/login";
     }
 
