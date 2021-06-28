@@ -35,7 +35,7 @@ public class GroupController {
       작성일 : 2021-06-18
     */
     @RequestMapping(value = "groupMake.do", method = RequestMethod.GET)
-    public String groupMakeTest(Model model, HttpServletRequest request) {
+    public String groupMake(Model model, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
@@ -74,7 +74,6 @@ public class GroupController {
                               String groupNo,
                               HttpServletRequest request) throws Exception {
 
-        //System.out.println(groupDto);
         String userid = groupDto.getUserid();
         groupService.groupMake(groupDto, request, groupNo);
 
