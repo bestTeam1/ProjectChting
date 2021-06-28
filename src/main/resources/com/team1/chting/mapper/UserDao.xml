@@ -84,32 +84,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <!-- 유저의 지역과 카테고리에 맞는 NEW 모임 리스트 -->
     <select id="getNewGroupByCate" resultType="com.team1.chting.dto.GroupDto">
-        select distinct group_name, group_img, gi.content, area_name, gi.group_no, catename
-        from user_info u
-                 join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
-                 left join (select distinct ui.userid, gi.group_no
-                            from user_interest ui
-                                     join group_info gi on ui.catecode = gi.catecode
-        )uint on gi.group_no = uint.group_no
-                 left join area a on gi.area_code = a.area_code
-                 left join interest_category ic on gi.catecode = ic.catecode
-        where gi.enabled = 1 and u.userid = #{userid}
-        order by gi.opendate desc limit 8
+        with temp as (
+            select gi.group_no, gi.group_name, gi.group_img, gi.content, ic.catename, a.area_name, gi.opendate
+            from user_info u
+                     join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
+                     join interest_category ic on gi.catecode = ic.catecode
+                     join area a on gi.area_code = a.area_code
+            where u.userid = #{userid} and gi.enabled = 1
+            union
+            select gi.group_no, gi.group_name, gi.group_img, gi.content, ic.catename, a.area_name, gi.opendate
+            from user_interest ui
+                     join group_info gi on ui.catecode = gi.catecode
+                     join interest_category ic on gi.catecode = ic.catecode
+                     join area a on gi.area_code = a.area_code
+            where ui.userid = #{userid} and gi.enabled = 1)
+        select * from temp
+        order by opendate desc limit 8
     </select>
     <!-- 유저의 지역과 카테고리에 맞는 BEST 모임 리스트 -->
     <select id="getBestGroupByCate" resultType="com.team1.chting.dto.GroupDto">
-        select distinct group_name, group_img, gi.content, area_name, gi.group_no, catename
-        from user_info u
-                 join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
-                 left join (select distinct ui.userid, gi.group_no
-                            from user_interest ui
-                                     join group_info gi on ui.catecode = gi.catecode
-        )uint on gi.group_no = uint.group_no
-
-                 left join area a on gi.area_code = a.area_code
-                 left join interest_category ic on gi.catecode = ic.catecode
-                 left join (select group_no, count(post_no)as cnt from post_group)pg on gi.group_no = pg.group_no
-        where gi.enabled = 1 and u.userid = #{userid}
+        with temp as (
+            select gi.group_no, gi.group_name, gi.group_img, gi.content, ic.catename, a.area_name, gi.opendate
+            from user_info u
+                     join group_info gi on u.first_area = gi.area_code or u.second_area = gi.area_code
+                     join interest_category ic on gi.catecode = ic.catecode
+                     join area a on gi.area_code = a.area_code
+            where u.userid = #{userid} and gi.enabled = 1
+            union
+            select gi.group_no, gi.group_name, gi.group_img, gi.content, ic.catename, a.area_name, gi.opendate
+            from user_interest ui
+                     join group_info gi on ui.catecode = gi.catecode
+                     join interest_category ic on gi.catecode = ic.catecode
+                     join area a on gi.area_code = a.area_code
+            where ui.userid = #{userid} and gi.enabled = 1)
+        select *
+        from temp
+                 left join (select group_no, count(post_no)as cnt from post_group group by group_no)pg on temp.group_no = pg.group_no
         order by pg.cnt desc limit 8
     </select>
 
