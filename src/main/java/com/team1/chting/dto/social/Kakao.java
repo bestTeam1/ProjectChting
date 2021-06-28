@@ -44,7 +44,11 @@ public class Kakao extends SocialData {
                 while (Iter_account.hasNext()) {
                     String account_next = Iter_account.next();
                     if(account_next.equals("email")) {
-                        this.email = account.get(account_next).toString();
+                        if(account.get(account_next) != null){
+                            this.email = account.get(account_next).toString();
+                        }else {
+                            this.email = "emptyData";
+                        }
                     }
                 }
             }
