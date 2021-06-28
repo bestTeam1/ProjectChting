@@ -69,8 +69,7 @@
                             <div class="form-floating mb-4">
                         <textarea id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: 800px; height: 100px; "
-                                  placeholder="100자 이내로 입력해 주세요."><c:out value="${fn:replace(userInfoBasic.content, '<br>',newLine)}"/>
-                        </textarea>
+                                  placeholder="100자 이내로 입력해 주세요."><c:out value="${fn:replace(userInfoBasic.content, '<br>',newLine)}"/></textarea>
                                 <label for="content">100자 이내로 입력해 주세요.</label>
                                 <p align="left" id="contentKeyUp"></p>
 
@@ -162,7 +161,7 @@
                     <div class="pricing-list-body col-md-5 align-items-center py-5" style="padding-left: 0em;">
                         <ul class="pricing-table-list text-start text-dark px-3 list-unstyled light-300">
                             <c:forEach var="userJoinGroup" items="${userInfo.userJoinGroup}">
-                                <i class="fas fa-check"></i>&nbsp;&nbsp;
+                                <i class="fas fa-check m-1"></i>
                                 <a href="board_main.do?group_no=${userJoinGroup.group_no}">
                                     <c:out value="${userJoinGroup.group_name}"/></a><br>
                             </c:forEach>
