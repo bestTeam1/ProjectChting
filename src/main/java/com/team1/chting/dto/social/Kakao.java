@@ -44,14 +44,13 @@ public class Kakao extends SocialData {
                 while (Iter_account.hasNext()) {
                     String account_next = Iter_account.next();
                     if(account_next.equals("email")) {
-                        if(account.get(account_next) != null){
-                            this.email = account.get(account_next).toString();
-                        }else {
-                            this.email = "emptyData";
-                        }
+                        this.email = account.get(account_next).toString();
                     }
                 }
             }
+        }
+        if(this.email == null || this.email.equals("null")) {
+            this.email = "emptyData";
         }
         this.logintype = registrationId.substring(0, registrationId.lastIndexOf("-"));
     }
