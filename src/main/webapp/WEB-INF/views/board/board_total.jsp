@@ -83,7 +83,9 @@
         </div>
         <div class="col-lg-3">
             <h4 class="h4 py-5 typo-space-line"><i class="bx bxs-group"></i>&nbsp;추천 모임</h4>
+            <p>회원님의 지역과 관심사에 맞는 모임</p>
         </div>
+
         <div class="service-tag py-5 bg-secondary">
             <div class="col-md-12">
                 <ul class="nav d-flex justify-content-center">
@@ -160,56 +162,60 @@
                 </c:forEach>
             </div>
         </section>
-            <section class="bg-light pt-sm-0 py-3">
-                <div class="container-fluid py-4">
-                    <h1 class="h2 semi-bold-600 text-center my-lg-5">Chting 이벤트! &#127881;</h1>
+        <section class="bg-light pt-sm-0 py-3">
+            <div class="container-fluid py-4">
+                <h1 class="h2 semi-bold-600 text-center my-lg-5">Chting 이벤트! &#127881;</h1>
 
-                    <!-- Start slider -->
-                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <c:forEach varStatus="status" items="${eventList}">
-                                <c:choose>
-                                    <c:when test="${status.index eq 0}">
-                                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}"></li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                        </ol>
-                        <div class="carousel-inner">
-                            <c:forEach var="i" varStatus="status" items="${eventList}">
+                <!-- Start slider -->
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <c:forEach varStatus="status" items="${eventList}">
                             <c:choose>
-                            <c:when test="${status.index eq 0}">
-                            <div class="carousel-item active">
+                                <c:when test="${status.index eq 0}">
+                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                        class="active"></li>
                                 </c:when>
                                 <c:otherwise>
-                                <div class="carousel-item">
-                                    </c:otherwise>
-                                    </c:choose>
-                                    <!-- Start Pricing Horizontal -->
-                                    <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                                        <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                                            <i class="display-1 bx bx-package pt-4"></i>
-                                            <h5 class="h5 semi-bold-600 pb-4 light-300">${i.subject}</h5>
-                                        </div>
+                                    <li data-bs-target="#carouselExampleIndicators"
+                                        data-bs-slide-to="${status.index}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ol>
+                    <div class="carousel-inner">
+                        <c:forEach var="i" varStatus="status" items="${eventList}">
+                        <c:choose>
+                        <c:when test="${status.index eq 0}">
+                        <div class="carousel-item active">
+                            </c:when>
+                            <c:otherwise>
+                            <div class="carousel-item">
+                                </c:otherwise>
+                                </c:choose>
+                                <!-- Start Pricing Horizontal -->
+                                <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
+                                    <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
+                                        <i class="display-1 bx bx-package pt-4"></i>
+                                        <h5 class="h5 semi-bold-600 pb-4 light-300">${i.subject}</h5>
                                     </div>
                                 </div>
-                                </c:forEach>
-                                <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                                    <i class='bx bx-lg bx-chevron-left px-5'></i>
-                                    <span class="visually-hidden">Previous</span>
-                                </h1>
-                                <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                                    <i class='bx bx-lg bx-chevron-right'></i>
-                                    <span class="visually-hidden">Next</span>
-                                </h1>
                             </div>
+                            </c:forEach>
+                            <h1 class="carousel-control-prev h1 text-primary text-decoration-none"
+                                href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                <i class='bx bx-lg bx-chevron-left px-5'></i>
+                                <span class="visually-hidden">Previous</span>
+                            </h1>
+                            <h1 class="carousel-control-next h1 text-primary text-decoration-none"
+                                href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                <i class='bx bx-lg bx-chevron-right'></i>
+                                <span class="visually-hidden">Next</span>
+                            </h1>
                         </div>
-            </section>
+                    </div>
+        </section>
 
-            <!-- End Service -->
+        <!-- End Service -->
     </div>
 </section>
 <!-- End Recent Work -->
