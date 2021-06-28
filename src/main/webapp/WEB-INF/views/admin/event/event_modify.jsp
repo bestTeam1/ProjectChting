@@ -83,11 +83,11 @@
         <!-- Main Content -->
         <!-- Start Service -->
         <section class="container my-lg-5">
-            <form id="write" method="post" action='${pageContext.request.contextPath}/admin/eventWriteOk.do'
+            <form id="write" method="post" action='${pageContext.request.contextPath}/admin/adminEventModifyOk.do'
                   enctype="multipart/form-data">
                 <!-- userid와 eventNo 들고감 -->
                 <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
-                <input type="hidden" name="event_no" value="${eventNo}">
+                <input type="hidden" name="event_no" value="${event.event_no}">
                 <div class="service-wrapper py-3">
                     <input type="date" id="startdate" name="startdate" value="${event.startdate}"> ~
                     <input type="date" id="enddate" name="enddate" value="${event.enddate}" >
@@ -103,7 +103,7 @@
                                 <ul class="list-unstyled text-center light-300">
                                     <div class="form-floating mb-4">
                         <textarea name="subject" id="subject" class="form-control form-control-lg light-300"
-                                  style="resize: none; width: 800px; height: 80px; ">${event.content}</textarea>
+                                  style="resize: none; width: 800px; height: 80px; ">${event.subject}</textarea>
 
                                         <p align="left" id="subjectKeyUp"></p>
 
@@ -222,6 +222,11 @@
 </head>
 
 <script type="text/javascript">
+
+    $('#submit').click(function (){
+       $('#write').submit();
+    });
+
     //오늘날짜
     Date.prototype.toDateInputValue = (function () {
         var local = new Date(this);
