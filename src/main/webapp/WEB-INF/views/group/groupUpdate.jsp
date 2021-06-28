@@ -12,11 +12,13 @@
 <!-- Start Service -->
 <section class="container my-lg-5">
     <form id="groupUpdateFrm" method="POST" action='groupUpdate.do' enctype="multipart/form-data">
+        <% pageContext.setAttribute("newLine", "\n"); %>
         <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
         <input type="hidden" name="catecode" id="catecode" value="${groupInfo.catecode}">
         <input type="hidden" name="area_code" value="">
         <input type="hidden" name="group_no" value="${groupInfo.group_no}">
         <input type="hidden" name="group_img" value="${groupInfo.group_img}">
+        <input type="hidden" name="content" value="">
 
         <%-- 모임 대표 사진 --%>
         <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
@@ -36,7 +38,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <img class="img-fluid border rounded" id="preview" name="fileName"
-                                         src="./assets/img/recent-work-03.jpg"
+                                         src="./assets/img/work-slide-05.jpg"
                                          style="width:300px; height:200px; margin-bottom: 10px;">
                                 </c:otherwise>
                             </c:choose>
@@ -87,9 +89,10 @@
                 <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
                     <ul class="list-unstyled text-center light-300">
                         <div class="form-floating mb-4">
-                        <textarea name="content" id="content" class="form-control form-control-lg light-300"
+                        <textarea id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: 800px; height: 300px; "
-                                  placeholder="10 ~ 1000자 이내로 입력해 주세요."><c:out value="${groupInfo.content}"/></textarea>
+                                  placeholder="10 ~ 1000자 이내로 입력해 주세요."><c:out value="${fn:replace(groupInfo.content, '<br>',newLine)}"/>
+                        </textarea>
                             <label for="content">10 ~ 1000자 이내로 입력해 주세요</label>
                             <p align="left" id="contentKeyUp"></p>
 
@@ -160,6 +163,7 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 <script>
+
     $(function () {
 
         //모임 대표 이미지 프리뷰
@@ -233,7 +237,12 @@
         let areaArr = $("#area option:selected").text().split(" ");
         let area = areaArr[0];
 
+        let content = $('#content').val().replace(/(\n|\r\n)/g, '<br>');
+
+        //input hidden값으로 보내서 form으로 같이 전송
+        $('input[name=content]').attr('value', content);
         $('input[name=area_code]').attr('value', area);
+
 
         Swal.fire({
             title: '모임 정보를 수정하시겠습니까?',

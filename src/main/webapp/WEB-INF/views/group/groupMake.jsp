@@ -29,6 +29,7 @@
         <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
         <input type="hidden" name="catecode" id="catecode" value="">
         <input type="hidden" name="groupNo" value="${groupNo}">
+        <input type="hidden" name="content" value="">
 
         <div class="service-wrapper py-3">
             <%-- 모임 대표 사진 --%>
@@ -49,7 +50,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <img class="img-fluid border rounded" id="preview"
-                                             src="./assets/img/recent-work-03.jpg"
+                                             src="./assets/img/work-slide-05.jpg"
                                              style="width:300px; height:200px; margin-bottom: 10px;">
                                     </c:otherwise>
                                 </c:choose>
@@ -101,7 +102,7 @@
                     <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
-                        <textarea name="content" id="content" class="form-control form-control-lg light-300"
+                        <textarea id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: 800px; height: 300px;"
                                   placeholder="10 ~ 1000자 이내로 입력해 주세요."></textarea>
                                 <label for="content">10 ~ 1000자 이내로 입력해 주세요.</label>
@@ -246,6 +247,11 @@
     //Form 전송
     function confirm() {
         console.log($('#interest').val());
+
+        let content = $('#content').val().replace(/(\n|\r\n)/g, '<br>');
+
+        //input hidden값으로 보내서 form으로 같이 전송
+        $('input[name=content]').attr('value', content);
 
         if ($('#group_name').val().trim() == '') {
             Swal.fire('모임 이름을 입력해 주세요 !')
