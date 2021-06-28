@@ -184,7 +184,5 @@
             $(this).addClass("shadow");
             return false;
         });
-
-
     });
 </script>
