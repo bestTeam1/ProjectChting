@@ -5,7 +5,7 @@
 <mapper namespace="com.team1.chting.dao.HomeDao">
 
     <select id="getEventList" resultType="com.team1.chting.dto.EventDto">
-        select subject, startdate, enddate, event_img from event where enabled = 1
+        select subject, startdate, enddate, file from event where enabled = 1
     </select>
 
     <select id="getNewGroupList" resultType="com.team1.chting.dto.GroupDto">
