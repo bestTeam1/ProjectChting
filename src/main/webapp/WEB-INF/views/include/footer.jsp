@@ -52,19 +52,19 @@
                 <ul class="list-unstyled text-light light-300">
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light"
-                                                                           href="index.html">Home</a>
+                                                                           href="index.do">Home</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="about.html">About Us</a>
+                                                                           href="#">About Us</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="work.html">Work</a>
+                                                                           href="index.do">Work</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="contact.html">Contact</a>
+                                                                           href="search.do?category=&search=">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -74,19 +74,15 @@
                 <ul class="list-unstyled text-light light-300">
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="#">Branding</a>
+                                                                           href="#">개인정보처리방침</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="#">Business</a>
+                                                                           href="#">이메일무단수집거부</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="#">Marketing</a>
-                    </li>
-                    <li class="pb-2">
-                        <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1"
-                                                                           href="#">Social Media</a>
+                                                                           href="#">책임의 한계와 법적고지</a>
                     </li>
                 </ul>
             </div>
@@ -118,8 +114,8 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <p class="text-lg-end text-center text-light light-300">
-                        Designed by <a rel="sponsored" class="text-decoration-none text-light"
-                                       href="https://templatemo.com/" target="_blank"><strong>TemplateMo</strong></a>
+                        조선제1조 <a rel="sponsored" class="text-decoration-none text-light"
+                                       href="index.do" target="_blank"><strong></strong></a>
                     </p>
                 </div>
             </div>
