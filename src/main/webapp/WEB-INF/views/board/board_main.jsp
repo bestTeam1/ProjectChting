@@ -20,10 +20,10 @@
             <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line mb-4">
                 <c:choose>
                     <c:when test="${group.group_no == adminGroup.group_no}">
-                        <i class="fas fa-crown"></i>&nbsp;<c:out value="${group.group_name}"/>
+                        <i class="fas fa-crown m-1"></i><c:out value="${group.group_name}"/>
                     </c:when>
                     <c:otherwise>
-                        <i class="fas fa-user"></i></i>&nbsp;<c:out value="${group.group_name}"/>
+                        <i class="fas fa-user m-1"></i></i><c:out value="${group.group_name}"/>
                     </c:otherwise>
                 </c:choose>
             </h2>
@@ -34,8 +34,8 @@
         <div class="row justify-content-center pb-4">
             <div class="col-lg-5 mt-3">
                 <h6 class="objective-heading h6 mb-1 text-end light-300">
-                    <i class="fas fa-map-marker-alt m-3">&nbsp;<c:out value="${group.area_name}"/></i>
-                    <i class="fas fa-bookmark m-3">&nbsp;<c:out value="${group.catename}"/></i>
+                    <i class="fas fa-map-marker-alt m-3"><c:out value="${group.area_name}"/></i>
+                    <i class="fas fa-bookmark m-3"><c:out value="${group.catename}"/></i>
                 </h6>
                 <div id="templatemo-slide-link-target" class="card mb-3">
                     <c:choose>
@@ -86,6 +86,8 @@
 
     });
 
+    var length = ${length}; //모임 가입 전체 개수
+
     var buttonArea = $('#buttonArea');
     var userid = '${sessionScope.get("userData").userid}';
     var authority = '';
@@ -117,54 +119,74 @@
 
 
     function join() {
-        if (userid == '') {
+
+        console.log(length);
+
+        if(length >= 3) { //모임 가입 개수 체크
             Swal.fire({
-                title: "비로그인 유저입니다.",
-                text: "로그인 후 가입을 진행해 주세요.",
-                icon: "error",
-                buttons: '확인',
-                confirmButtonColor: '#A0A0FF'
-            }).then((value) => {
-                if (value) {
-                    location.href = 'login';
+                title : "모임 가입 개수는 3개로 제한됩니다.",
+                text : "가입한 모임 탈퇴 후 새로운 모임에 가입할 수 있습니다.",
+                confirmButtonText: '마이페이지로 이동',
+                confirmButtonColor: '#A0A0FF',
+                showCancelButton: true,
+                cancelButtonText: '취소',
+                cancelButtonColor: '#aaaaaa'
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    location.href="myPage.do";
                 }
-            });
-        } else {
-            let json = {"userid": userid, "group_no": '${group.group_no}'}
-            $.ajax({
-                url: "group/insert",
-                dataType: "text",
-                type: "POST",
-                data: JSON.stringify(json),
-                contentType: "application/json; charset=UTF-8",
-                success: function (response) {
-                    if (response == "success") {
+            })
+        }else {
+            if (userid == '') {
+                Swal.fire({
+                    title: "비로그인 유저입니다.",
+                    text: "로그인 후 가입을 진행해 주세요.",
+                    icon: "error",
+                    buttons: '확인',
+                    confirmButtonColor: '#A0A0FF'
+                }).then((value) => {
+                    if (value) {
+                        location.href = 'login';
+                    }
+                });
+            } else {
+                let json = {"userid": userid, "group_no": '${group.group_no}'}
+                $.ajax({
+                    url: "group/insert",
+                    dataType: "text",
+                    type: "POST",
+                    data: JSON.stringify(json),
+                    contentType: "application/json; charset=UTF-8",
+                    success: function (response) {
+                        if (response == "success") {
+                            Swal.fire({
+                                title: "모임 가입신청이 완료되었습니다.",
+                                text: "모임장이 신청을 수락할 때까지 기다려주세요!",
+                                confirmButtonColor: '#A0A0FF',
+                                response
+                            });
+                        } else if (response == "warning") {
+                            Swal.fire({
+                                title: "이미 모임 가입신청이 되어있습니다.",
+                                text: "모임장이 신청을 수락할 때까지 기다려주세요!",
+                                confirmButtonColor: '#A0A0FF',
+                                response
+                            });
+                        }
+                    },
+                    error: function (Http, status, error) {
+                        console.log("Http : " + Http + ", status : " + status + ", error : " + error);
                         Swal.fire({
-                            title: "모임 가입신청이 완료되었습니다.",
-                            text: "모임장이 신청을 수락할 때까지 기다려주세요!",
+                            title: "모임 가입신청에 실패했습니다.",
+                            text: "모임 가입신청을 다시 확인해주세요.",
                             confirmButtonColor: '#A0A0FF',
-                            response
-                        });
-                    } else if (response == "warning") {
-                        Swal.fire({
-                            title: "이미 모임 가입신청이 되어있습니다.",
-                            text: "모임장이 신청을 수락할 때까지 기다려주세요!",
-                            confirmButtonColor: '#A0A0FF',
-                            response
+                            error
                         });
                     }
-                },
-                error: function (Http, status, error) {
-                    console.log("Http : " + Http + ", status : " + status + ", error : " + error);
-                    Swal.fire({
-                        title: "모임 가입신청에 실패했습니다.",
-                        text: "모임 가입신청을 다시 확인해주세요.",
-                        confirmButtonColor: '#A0A0FF',
-                        error
-                    });
-                }
-            });
+                });
+            }
         }
+
     }
 
     function out() {
