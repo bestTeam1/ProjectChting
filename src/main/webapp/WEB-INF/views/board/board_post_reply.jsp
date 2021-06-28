@@ -47,6 +47,10 @@
      * 댓글 등록하기(Ajax)
      */
     function replyWrite() {
+        if($('#content').val() == "") {
+            Swal.fire('내용을 입력해주세요 !')
+            return;
+        }
         let json = {"post_no": '${plist.post_no}', "userid": userid, "content": $('#content').val()};
         $.ajax({
             url: 'board_replyWrite.do',
