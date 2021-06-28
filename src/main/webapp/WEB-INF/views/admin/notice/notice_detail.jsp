@@ -103,6 +103,7 @@
                             </ul>
                             <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                                 <br>
+                                <img src="${pageContext.request.contextPath}/upload/notice/${detail.file}"/>
                                 <h2>${detail.content}</h2>
 
                                 <div style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 25px;">
@@ -116,7 +117,7 @@
                                                 id="delete">삭제
                                         </button> &nbsp;
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                         &nbsp;
+                                        &nbsp;
                                     </c:if>
                                     <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
                                             id="back">목록

@@ -111,43 +111,43 @@
                             </ul>
                             <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
 
-                            <section>
-                                <p>이벤트 시작일 : <c:out value="${event.startdate}"/></p>
-                                <p>이벤트 종료일 : <c:out value="${event.enddate}"/></p>
-                            </section>
-                            <br>
-                            <c:if test="${!empty event.file}">
-                                <div class="content align-center">
-                                    <img id="preview" src="../upload/event/${event.file}"
-                                         width="300">
-                                </div>
-                            </c:if>
-
+                                <section>
+                                    <p>이벤트 시작일 : <c:out value="${event.startdate}"/></p>
+                                    <p>이벤트 종료일 : <c:out value="${event.enddate}"/></p>
+                                </section>
+                                <br>
+                                <c:if test="${!empty event.file}">
+                                    <div class="content align-center">
+                                        <img id="preview" src="../upload/event/${event.file}"
+                                             width="300">
+                                    </div>
+                                </c:if>
+                                <img src="${pageContext.request.contextPath}/upload/notice/${detail.file}"/>
                                 <h2>${event.content}</h2>
 
-                            <div style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 25px;">
-                                <c:if test='${sessionScope.get("userData").userrole.equals("ROLE_ADMIN")}'>
+                                <div style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 25px;">
+                                    <c:if test='${sessionScope.get("userData").userrole.equals("ROLE_ADMIN")}'>
 
+                                        <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                                id="modify">수정
+                                        </button> &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                                id="end">종료
+                                        </button> &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                                id="disabled">취소
+                                        </button> &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                    </c:if>
                                     <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                                            id="modify">수정
-                                    </button> &nbsp;
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                                            id="end">종료
-                                    </button> &nbsp;
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                                            id="disabled">취소
-                                    </button> &nbsp;
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                </c:if>
-                                <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
-                                        id="back">목록
-                                </button>
-                            </div>
-                            <br><br>
-                            <div style="text-align: center">
-                            </div>
+                                            id="back">목록
+                                    </button>
+                                </div>
+                                <br><br>
+                                <div style="text-align: center">
+                                </div>
                             </ul>
                         </header>
                     </div>
