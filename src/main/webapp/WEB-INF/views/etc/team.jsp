@@ -20,10 +20,10 @@
         <div class="container">
             <div class="row d-flex align-items-center py-3">
                 <div class="col-lg-6 text-start">
-                    <h1 class="h2 py-5 text-primary typo-space-line">About Us</h1>
+                    <h1 class="h2 py-5 text-primary typo-space-line">소개 합니다!</h1>
                     <p class="light-300">
-                        Vector illustration credit goes to <a rel="nofollow" href="http://freepik.com/" target="_blank">FreePik</a>
-                        website. Purple Buzz is provided by TemplateMo. Lorem ipsum dolor sit amet, consectetur.
+                        저희 Chting사이트는 서로의 <a rel="nofollow" target="_blank">취미를 공유하고 만남을 가지며</a><br>
+                        지루한 일상속에서 뜻깊은 생활을 보내는 사이트입니다.
                     </p>
                 </div>
                 <div class="col-lg-6">
@@ -38,10 +38,9 @@
     <section class="container py-5">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
-                <h2 class="h2 py-5 typo-space-line">Our Team</h2>
+                <h2 class="h2 py-5 typo-space-line">팀 소개</h2>
                 <p class="text-muted light-300">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    저희 팀을 소개합니다.
                 </p>
             </div>
         </div>
@@ -52,8 +51,8 @@
                     <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-01.jpg"
                          alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>김수연</li>
-                        <li>Business Development</li>
+                        <li><strong>김수연</strong></li>
+                        <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
                     </ul>
                     <div class="creative-progress col-md-auto pt-5 px-3">
                         <div class="row mt-4 mt-sm-2">
@@ -89,8 +88,8 @@
                     <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-02.jpg"
                          alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>박주현</li>
-                        <li>Media Development</li>
+                        <li><strong>박주현</strong></li>
+                        <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
                     </ul>
                     <div class="creative-progress col-md-auto pt-5 px-3">
                         <div class="row mt-4 mt-sm-2">
@@ -126,8 +125,8 @@
                     <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-03.jpg"
                          alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>이승준</li>
-                        <li>Developer</li>
+                        <li><strong>이승준</strong></li>
+                        <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
                     </ul>
                     <div class="creative-progress col-md-auto pt-5 px-3">
                         <div class="row mt-4 mt-sm-2">
@@ -167,31 +166,32 @@
         <div class="pt-5 pb-3 d-lg-flex justify-content-lg-center gx-5">
             <div class="row col-lg-10">
                 <div class="team-member col-md-4">
-                    <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-01.jpg"
+                    <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/1111.jpg"
                          alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>현상진</li>
-                        <li>Business Development</li>
+                        <li><strong>현상진</strong></li>
+                        <i class="fas fa-quote-left"></i> 좋은사람들과 작업하니 너무 행복합니다<i class="fas fa-quote-right"></i>
                     </ul>
 
                     <div class="creative-progress col-md-auto pt-5 px-3">
                         <div class="row mt-4 mt-sm-2">
                             <div class="col-6">
-                                <h4 class="h5">Development</h4>
+                                <h4 class="h5">
+                                    Development</h4>
                             </div>
-                            <div class="col-6 text-right">66%</div>
+                            <div class="col-6 text-right">50%</div>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="row mt-4 mt-sm-2">
                             <div class="col-6">
                                 <h4 class="h5">Design</h4>
                             </div>
-                            <div class="col-6 text-right">90%</div>
+                            <div class="col-6 text-right">70%</div>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="row mt-4 mt-sm-2">
                             <div class="col-6">
@@ -209,8 +209,8 @@
                     <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-02.jpg"
                          alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>김영허</li>
-                        <li>Media Development</li>
+                        <li><strong>김영허</strong></li>
+                        <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
                     </ul>
                     <div class="creative-progress col-md-auto pt-5 px-3">
                         <div class="row mt-4 mt-sm-2">
@@ -246,8 +246,8 @@
                     <img class="team-member-img img-fluid rounded-circle p-4" src="./assets/img/team-03.jpg"
                          alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>김명환</li>
-                        <li>Developer</li>
+                        <li><strong>김명환</strong></li>
+                        <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
                     </ul>
                     <div class="creative-progress col-md-auto pt-5 px-3">
                         <div class="row mt-4 mt-sm-2">
