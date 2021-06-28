@@ -26,13 +26,13 @@ public class Github extends SocialData{
                 if(userData.get(next) != null) {
                     this.nickname = userData.get(next).toString();
                 }else {
-                    this.nickname = "github";
+                    this.nickname = "emptyData";
                 }
             }else if(next.equals("email")) {
                 if(userData.get(next) != null) {
                     this.email = userData.get(next).toString();
                 }else {
-                    this.email = "github";
+                    this.email = "emptyData";
                 }
             }else if(next.equals("avatar_url")) {
                 this.profile_img = userData.get(next).toString();

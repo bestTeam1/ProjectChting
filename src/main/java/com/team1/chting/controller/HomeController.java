@@ -32,6 +32,7 @@ public class HomeController {
 	@Autowired
 	private ServletContext application;
 
+	//비로그인 메인
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		if(application.getAttribute("search_areaList") == null) {
@@ -47,6 +48,7 @@ public class HomeController {
 		return "index";
 	}
 
+	//비로그인 메인
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String index(Model model) {
 		if(application.getAttribute("search_areaList") == null) {
