@@ -42,5 +42,5 @@
         <websocket:sockjs></websocket:sockjs>
     </websocket:handlers>
 
-    <util:properties id = "properties" location="classpath:properties/Api.properties, classpath*:properties/Social.properties" />
+    <util:properties id = "properties" location="classpath:properties/Api.properties" />
 </beans>

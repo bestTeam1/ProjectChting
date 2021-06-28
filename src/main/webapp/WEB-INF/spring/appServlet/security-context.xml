@@ -59,7 +59,7 @@
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
 		<intercept-url pattern="/chart**" access="hasAuthority('ROLE_ADMIN')"/>
 
-		<form-login login-page="/signIn.do" authentication-success-handler-ref="successHandler" />
+		<form-login authentication-success-handler-ref="successHandler" />
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
 					  authentication-success-handler-ref="successHandler" login-page="/signIn.do" />
@@ -83,7 +83,6 @@
 
 	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
 	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
-	<b:bean id="failureHandler" class="com.team1.chting.security.CustomAuthenticationFailureHandler" />
 
 	<client-registrations>
 		<client-registration registration-id="google-login"
