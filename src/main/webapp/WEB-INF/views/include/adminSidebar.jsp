@@ -39,7 +39,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class=""></i>
         </div>
-        <div class="sidebar-brand-text mx-3"><img src="${pageContext.request.contextPath}/assets/img/demo_logo1.png"
+        <div class="sidebar-brand-text mx-3"><img src="${pageContext.request.contextPath}/assets/img/admin_logo.png"
                                                   width="100%" height="100%"></div>
     </a>
 
