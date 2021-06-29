@@ -1,11 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ssyy
-  Date: 2021/06/18
-  Time: 5:08 오후
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style>
+    @font-face {
+        font-family: 'nanum';
+        src: url("${pageContext.request.contextPath}/assets/fonts/NanumbarunGothic.otf")format('opentype');
+    }
+</style>
 <!-- Start Footer -->
 <footer class="bg-secondary pt-4">
     <div class="container">
