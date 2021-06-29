@@ -173,12 +173,10 @@
                         <c:forEach varStatus="status" items="${eventList}">
                             <c:choose>
                                 <c:when test="${status.index eq 0}">
-                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                        class="active"></li>
+                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li data-bs-target="#carouselExampleIndicators"
-                                        data-bs-slide-to="${status.index}"></li>
+                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}"></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -195,25 +193,22 @@
                                 </c:choose>
                                 <!-- Start Pricing Horizontal -->
                                 <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                                    <div class="pricing-horizontal-icon col-md-12 text-center bg-secondary text-light py-4">
-                                        <i class="display-1 bx bx-package pt-4"></i>
-                                        <h5 class="h5 semi-bold-600 pb-4 light-300">${i.subject}</h5>
-                                    </div>
+                                    <img src="${pageContext.request.contextPath}/upload/event/${i.file}">
+
                                 </div>
                             </div>
                             </c:forEach>
-                            <h1 class="carousel-control-prev h1 text-primary text-decoration-none"
-                                href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                            <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
                                 <i class='bx bx-lg bx-chevron-left px-5'></i>
                                 <span class="visually-hidden">Previous</span>
                             </h1>
-                            <h1 class="carousel-control-next h1 text-primary text-decoration-none"
-                                href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                            <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
                                 <i class='bx bx-lg bx-chevron-right'></i>
                                 <span class="visually-hidden">Next</span>
                             </h1>
                         </div>
                     </div>
+
         </section>
 
         <!-- End Service -->
