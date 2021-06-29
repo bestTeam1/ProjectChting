@@ -15,7 +15,6 @@
  			https://www.springframework.org/schema/mvc/spring-mvc.xsd
  			http://www.springframework.org/schema/util
  			https://www.springframework.org/schema/util/spring-util.xsd">
-
 	<!--
 	>>form-login 속성 정의하기
 	login-page : login form 페이지 URL
@@ -59,15 +58,15 @@
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
 		<intercept-url pattern="/chart**" access="hasAuthority('ROLE_ADMIN')"/>
 
-		<form-login authentication-success-handler-ref="successHandler" />
+		<form-login login-page="/signIn.do" authentication-success-handler-ref="successHandler" />
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
 					  authentication-success-handler-ref="successHandler" login-page="/signIn.do" />
 
 		<logout logout-url="/logout" logout-success-url="/index.do" invalidate-session="true" delete-cookies="JSESSIONID"/>
 		<csrf disabled="true" />
-		<session-management invalid-session-url="/index.do?session=expiredORinvalid" session-authentication-error-url="/2" >
-			<concurrency-control max-sessions="1" expired-url="/33"/>
+		<session-management invalid-session-url="/index.do?invalid">
+			<concurrency-control max-sessions="1" expired-url="/33" />
 		</session-management>
 	</http>
 
