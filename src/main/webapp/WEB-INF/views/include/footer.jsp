@@ -1,9 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
     @font-face {
-        font-family: 'nanum';
-        src: url("${pageContext.request.contextPath}/assets/fonts/NanumbarunGothic.otf")format('opentype');
+        font-family: Chting;
+        src: url("${pageContext.request.contextPath}/assets/fonts/NanumBarunGothic.otf") format("opentype");
     }
+
+    * :not("fas"){
+        font-family: "Chting" !important;
+    }
+
+
 </style>
 <!-- Start Footer -->
 <footer class="bg-secondary pt-4">

@@ -26,7 +26,7 @@
                             <br>관심사에 맞는 모임을 찾고, 새로운 사람들과 만나보세요!<br>
                             <br>모임 멤버들만의 공간에서
                             <br>모임 일정을 통해 만남을 만들 수 있고,
-                            <br>모임 채팅방을 통해 개인 정보 없이 활동하실 수 있습니다. :)
+                            <br>모임 채팅방을 통해 활동하실 수 있습니다. :)
                         </p>
                         <br>
                         <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="${pageContext.request.contextPath}/login" role="button">Chting 시작하기</a>
@@ -40,7 +40,7 @@
 <!-- Start Pricing Horizontal Section -->
 <section class="bg-light pt-sm-0 py-3">
     <div class="container-fluid py-4">
-        <h1 class="h2 semi-bold-600 text-center my-lg-5">Chting 이벤트! &#127881;</h1>
+        <h1 class="h2 semi-bold-600 text-center my-lg-5 event">Chting Event! &#127881;</h1>
 
         <!-- Start slider -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -93,12 +93,12 @@
                 <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
             </div>
             <div class="banner-content col-lg-7 mt-3 align-self-end">
-                <h2 class="h2 mt-5" style="text-shadow: 2px 2px 4px gray">Chting! 다양한 취미, 새로운 사람들</h2>
+                <h2 class="h2 mt-5" style="text-shadow: 2px 2px 4px gray"><img src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" width="30%" height="30%" style="margin-left: -20px; margin-bottom: -20px;"></h2>
                 <p class="text-muted pb-4 light-300">
                 <h3 style="color: #6266ea">당신의 취미를 공유해보세요.</h3>
-                <strong style="color: #acabfe">나의 취미를, 당신의 취미를</strong>
-                <p><strong>모임장</strong>이 되어서 당신의 취미를 공유하고 한층 더 즐거운 당신의 취미를 즐기세요<br>
-                    <strong>모임원</strong>이 되어서 다른사람들의 취미를 함께 배워보면서 소통해보아요</p>
+                <strong style="color: #acabfe">나의 취미, 당신의 취미</strong>
+                <p><strong>모임장</strong>이 되어 취미를 공유하고 한층 더 즐거운 모임을 즐기세요<br>
+                    <strong>모임원</strong>이 되어 다른사람들과 함께 소통해보세요</p>
 
                 </p>
             </div>
@@ -114,23 +114,23 @@
 
             <div class="objective col-lg-4">
                 <div class="objective-icon card m-auto py-4 mb-2 mb-sm-4 bg-secondary shadow-lg">
-                    <i class="far fa-handshake text-light fa-4x"></i>
+                    <i class="display-4 bx bxs-group text-light"></i>
                 </div>
-                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 함께!</h2>
+                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 함께</h2>
                 <p class="light-300">
-                    친구, 가족, 동료 등 함께 하 싶은 사람과<br>
-                    우리만의 공간을 만들어요.
+                    친구, 가족, 동료 등 함께 하고 싶은 사람과<br>
+                    우리만의 공간을 만들어요
                 </p>
             </div>
 
             <div class="objective col-lg-4 mt-sm-0 mt-4">
                 <div class="objective-icon card m-auto py-4 mb-2 mb-sm-4 bg-secondary shadow-lg">
-                    <i class="fas fa-users text-light fa-4x"></i>
+                    <i class="display-4 bx bxs-chat text-light"></i>
                 </div>
-                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 모임!</h2>
+                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 모임</h2>
                 <p class="light-300">
                     일정으로 모임장소를 정하고, 게시판과 채팅으로<br>
-                    다양한 이야기들도 공유해요.
+                    다양한 이야기를 만들어요
                 </p>
             </div>
 
@@ -138,10 +138,10 @@
                 <div class="objective-icon card m-auto py-4 mb-2 mb-sm-4 bg-secondary shadow-lg">
                     <i class="display-4 bx bxs-select-multiple text-light"></i>
                 </div>
-                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 목표!</h2>
+                <h2 class="objective-heading h3 mb-2 mb-sm-4 light-300">우리 목표</h2>
                 <p class="light-300">
-                    지루하고 뻔한 일상에서, 새롭고 낯선 사람들과<br>
-                    좋은 추억과 알찬 시간을 보내요.
+                    지루한 일상에서 벗어나, 새롭고 낯선 사람들과<br>
+                    좋은 인연과 알찬 시간을 보내세요
                 </p>
             </div>
 
@@ -160,12 +160,12 @@
                 <p class="feature-work-body text-muted light-300">
                     자신이 <strong>모임장</strong>이 되어서 취미를 공유하고<br>
                     모임 일정을 통해 즐거운 만남과, 모임 게시판, 모임 채팅을 활용하여<br>
-                    다양한 이야기와 자신의 취미를 이야기해보세요.
+                    다양한 이야기와 취미활동을 공유하세요.
                 </p>
+                <br>
                 <p class="feature-work-footer text-muted light-300">
-                    취미가 없고 지루한 일상이 더이상 싫다면 <strong>모임원</strong>이 되어서<br>
-                    다른 사람들의 취미를 배우고, 흥미를 붙여서 지루한 일상을 모임원들과 함꼐<br>
-                    날리도록 하세요.
+                    취미가 없고 지루한 일상이 싫다면 추천을 통해 모임을 가입하세요<br>
+                    다른 사람들과 새로운 취미를 찾고, 즐거운 모임으로 새로운 세상을 찾아요
                 </p>
             </div>
 
@@ -209,7 +209,7 @@
             </div>
         </div>
         <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
-            주로 활동하는 지역과 취미활동을 찾아보세요! <br>Chting에서 자기와 맞는 모임에서 좋은 취미와, 사람들을 만나보세요!
+            Chting에서 활동하고 있는 모임을 추천합니다 <br>Chting 모임에서 지역별, 관심사별 모임에 가입하세요!
         </p>
     </div>
 
