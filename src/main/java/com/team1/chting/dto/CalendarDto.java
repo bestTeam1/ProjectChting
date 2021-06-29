@@ -1,7 +1,6 @@
 package com.team1.chting.dto;
 
 import java.util.Date;
-
 import lombok.Data;
 
 //일정

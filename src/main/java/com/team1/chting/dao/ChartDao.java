@@ -2,8 +2,6 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.chartdto.*;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.Date;
 import java.util.List;
 
 public interface ChartDao {

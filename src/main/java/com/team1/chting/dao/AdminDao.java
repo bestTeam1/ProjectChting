@@ -3,7 +3,6 @@ package com.team1.chting.dao;
 import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.GroupDto;
 import com.team1.chting.dto.NoticeDto;
-import com.team1.chting.dto.UserDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
 

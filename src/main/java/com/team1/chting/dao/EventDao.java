@@ -1,7 +1,6 @@
 package com.team1.chting.dao;
 
 import com.team1.chting.dto.EventDto;
-
 import java.util.List;
 
 public interface EventDao {

@@ -1,17 +1,14 @@
 package com.team1.chting.service;
 
 import com.team1.chting.dao.AdminDao;
-import com.team1.chting.dao.BoardDao;
 import com.team1.chting.dto.*;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 

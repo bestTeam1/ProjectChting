@@ -2,7 +2,6 @@ package com.team1.chting.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.io.Serializable;

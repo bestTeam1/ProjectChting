@@ -2,7 +2,6 @@ package com.team1.chting.service;
 
 import com.team1.chting.dao.InterestCategoryDao;
 import com.team1.chting.dao.LoginDao;
-import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.InterestCategoryDto;
 import com.team1.chting.dto.LoginDto;
 import com.team1.chting.dto.SignUpDto;
@@ -11,13 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

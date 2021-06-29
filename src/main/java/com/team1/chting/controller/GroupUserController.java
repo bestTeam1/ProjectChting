@@ -3,33 +3,20 @@ package com.team1.chting.controller;
 import com.team1.chting.dto.*;
 import com.team1.chting.service.GroupAdminService;
 import com.team1.chting.service.GroupService;
-
 import com.team1.chting.service.HomeService;
 import com.team1.chting.utils.AdminCriteria;
 import com.team1.chting.utils.PageMaker;
-import org.apache.commons.io.FilenameUtils;
-
 import com.team1.chting.service.UserService;
-
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.w3c.dom.html.HTMLModElement;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class GroupUserController {
