@@ -1,6 +1,5 @@
 package com.team1.chting.service;
 
-import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dao.InterestCategoryDao;
 import com.team1.chting.dao.UserDao;
 import com.team1.chting.dto.GroupDto;
@@ -9,16 +8,13 @@ import com.team1.chting.dto.MyPageInfo;
 import com.team1.chting.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class UserService {

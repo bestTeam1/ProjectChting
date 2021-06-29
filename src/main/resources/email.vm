@@ -115,7 +115,6 @@
 										<tbody>
 										<tr>
 											<td style='width:230px;'>
-												<a href='# Logo Url' target='_blank'>
 													<img src='http://drive.google.com/uc?export=view&id=13AuXXID9tey74RPto774NUcQDoRTh1Pq' width="500px" height="180px"/><br>												</a>
 											</td>
 										</tr>
@@ -181,7 +180,7 @@
 							<tr>
 								<td align='center' style='font-size:0px;padding:10px 25px;word-break:break-word;'>
 									<div style='color:#30373b;font-family:Open Sans, Arial, sans-serif;font-size:15px;font-weight:bold;line-height:18px;text-align:center;'>
-										환영합니다! ${userid} 님
+										환영합니다!
 									</div>
 								</td>
 							</tr>
@@ -256,7 +255,7 @@
 									<table border='0' cellpadding='0' cellspacing='0' role='presentation' style='border-collapse:separate;line-height:100%;width:210px;'>
 										<tr>
 											<td align='center' bgcolor='' role='presentation' style='background-color:#9600ff;border:none;border-radius:3px;cursor:auto;height:25px;padding:10px 25px;' valign='middle'>
-												<a href='#' style='background:#9600ff;color:#ffffff;font-family:Open Sans, Arial, sans-serif;font-size:17px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:uppercase;' target='_blank'>
+												<a href='http://localhost:8090/chting_war_exploded/myGroup.do' style='background:#9600ff;color:#ffffff;font-family:Open Sans, Arial, sans-serif;font-size:17px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:uppercase;' target='_blank'>
 													모임 탐색하기
 												</a>
 											</td>

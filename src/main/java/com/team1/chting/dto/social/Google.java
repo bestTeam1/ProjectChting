@@ -1,8 +1,6 @@
 package com.team1.chting.dto.social;
 
 import lombok.Data;
-import lombok.ToString;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;

@@ -4,7 +4,6 @@ import com.team1.chting.dto.*;
 import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 public interface GroupDao {

@@ -1,19 +1,12 @@
 package com.team1.chting.service;
 
-
-import com.team1.chting.dao.BoardDao;
-import com.team1.chting.dao.GroupDao;
 import com.team1.chting.dao.HomeDao;
 import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.GroupDto;
-import com.team1.chting.dto.PostDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class HomeService {

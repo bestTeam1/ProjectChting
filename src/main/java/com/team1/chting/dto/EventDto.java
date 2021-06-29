@@ -1,7 +1,6 @@
 package com.team1.chting.dto;
 
 import java.sql.Date;
-
 import lombok.Data;
 
 //이벤트

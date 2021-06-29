@@ -1,7 +1,6 @@
 package com.team1.chting.dto;
-import lombok.Data;
 
-import java.util.List;
+import lombok.Data;
 
 //관심사 카테고리
 @Data
