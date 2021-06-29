@@ -122,7 +122,7 @@
                             </div>
                             <div class="pricing-list-body col-6 align-items-center px-lg-5 border-start border-1">
                                 <div class="px-lg-5 py-5 align-items-center">
-                                    <input type="text" class="form-control" placeholder="Username" minlength="2"
+                                    <input type="text" name="nickname" class="form-control" placeholder="Username" minlength="2"
                                            maxlength="10" required>
                                 </div>
                             </div>
