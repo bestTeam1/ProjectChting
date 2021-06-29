@@ -18,14 +18,15 @@
     </select>
 
     <select id="getBestGroupList" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, group_name, group_img, catename, area_name, gi.content, count(post_group.group_no) as posts
+        select gi.group_no, group_name, group_img, catename, area_name, gi.content
         from post_group
                  left join post_category pc on post_group.post_catecode = pc.post_catecode
                  left join group_info gi on post_group.group_no = gi.group_no
                  left join area a on gi.area_code = a.area_code
                  left join interest_category ic on gi.catecode = ic.catecode
+        where gi.group_no is not null
         group by gi.group_no
-        order by posts DESC limit 8
+        order by count(post_group.group_no) DESC limit 8
     </select>
 
 

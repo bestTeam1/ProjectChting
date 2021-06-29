@@ -58,6 +58,10 @@ public class HomeController {
 		List<GroupDto> newGroupList = homeService.getNewGroupList();
 		List<GroupDto> bestGroupList = homeService.getBestGroupList();
 
+		System.out.println("-----------------------------");
+		System.out.println(bestGroupList);
+		System.out.println("-----------------------------");
+
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("newGroupList", newGroupList);
 		model.addAttribute("bestGroupList", bestGroupList);
