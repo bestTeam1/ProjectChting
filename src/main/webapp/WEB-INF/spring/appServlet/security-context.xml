@@ -65,8 +65,8 @@
 
 		<logout logout-url="/logout" logout-success-url="/index.do" invalidate-session="true" delete-cookies="JSESSIONID"/>
 		<csrf disabled="true" />
-		<session-management invalid-session-url="/index.do?invalid">
-			<concurrency-control max-sessions="1" expired-url="/33" />
+		<session-management invalid-session-url="/index.do?invalid" session-authentication-error-url="/index.do?sa-error" >
+			<concurrency-control max-sessions="1" expired-url="/index.do?expired"/>
 		</session-management>
 	</http>
 
