@@ -40,7 +40,7 @@
 		</se:authorize>
 		<se:authorize access="hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
 			<a class="navbar_logo" href="${pageContext.request.contextPath}/myGroup.do">
-				<img class="${pageContext.request.contextPath}/assets/img/demo_logo1.png" alt="logo">
+				<img class="logo_img" src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" alt="logo">
 			</a>
 		</se:authorize>
 		<button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
