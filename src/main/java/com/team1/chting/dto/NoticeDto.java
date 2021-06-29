@@ -1,7 +1,6 @@
 package com.team1.chting.dto;
 
 import java.util.Date;
-
 import lombok.Data;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 

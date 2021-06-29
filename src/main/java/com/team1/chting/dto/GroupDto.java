@@ -1,11 +1,7 @@
 package com.team1.chting.dto;
 
 import java.sql.Date;
-
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.jackson.Jacksonized;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 //모임
