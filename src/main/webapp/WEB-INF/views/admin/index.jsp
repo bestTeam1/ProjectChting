@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- KakaoMap API -->
     <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@properties['kakaoapi.key']"/>&libraries=services"></script>
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<spring:eval expression="@properties['kakaoapi.key']"/>&libraries=services&libraries=clusterer"></script>
 
 
     <title>관리자</title>
@@ -193,7 +193,7 @@
                                 <h6 class="m-0 font-weight-bold text-primary">회원들의 모임</h6>
                             </div>
                             <!-- Card Body -->
-                            <div class="card-body" id = "map" style="height: 380px;">
+                            <div class="card-body" id="map" style="height: 380px;">
                             </div>
                         </div>
                     </div>
@@ -215,49 +215,49 @@
                                         <span class="mr-2">
                                             <i class="fas fa-circle text-outdoor"></i> 아웃도어
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-sports"></i> 운동/스포츠
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-book"></i> 인문학/책/글
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-language"></i> 외국/언어
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-culture"></i> 문화/공연/축제
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-music"></i> 음악/악기
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-crafting"></i> 공예/만들기
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-dance"></i> 댄스/무용
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-voluntary"></i> 봉사활동
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-social"></i> 사교/인맥
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-car"></i> 차/오토바이
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-picture"></i> 사진/영상
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-game"></i> 게임/오락
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-cook"></i> 요리/제조
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-pet"></i> 반려동물
                                         </span>
-                                        <span class="mr-2">
+                                    <span class="mr-2">
                                                 <i class="fas fa-circle text-etc"></i> 자유주제
                                         </span>
                                 </div>
@@ -332,7 +332,7 @@
             success: function (data) {
                 var recentDate = Array();
                 let today = new Date();
-                for (var i = 6; i >= 0 ; i--) {
+                for (var i = 6; i >= 0; i--) {
                     let year = today.getFullYear(); // 년도
                     let month = today.getMonth() + 1;  // 월
                     let date = today.getDate() - i;  // 날짜
@@ -540,7 +540,7 @@
                         datasets: [{
                             data: Object.values(data),
                             backgroundColor: ['#68B9C2', '#E13E2A', '#6F452D', '#2DAF5E', 'E6C834', '#6A40FF', '#00FE00', '#E4584D', '#F7F7F7',
-                                '#002B68', '#9F0B32', '#F4E18B', '#6D6E75', '#D3A188', '#E5BF95', '#000000'  ],  //차트컬러
+                                '#002B68', '#9F0B32', '#F4E18B', '#6D6E75', '#D3A188', '#E5BF95', '#000000'],  //차트컬러
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
                         }],
                     },
@@ -574,8 +574,53 @@
                 center: new kakao.maps.LatLng(36.40436593241122, 127.9021009673735), // 지도의 중심좌표
                 level: 13 // 지도의 확대 레벨
             };
+        /*
 
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+                function chartSchedule() {
+                    $.ajax({
+                        url: "
+        ${pageContext.request.contextPath}/chartSchedule.do",
+                dataType: "json",
+                data: {
+                    //null
+                },
+                async: false,
+                success: function (data) {
+
+                    $('#map').empty();
+
+                    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+
+                    // 마커 이미지의 이미지 주소입니다
+                    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        // 마커 이미지의 이미지 크기 입니다
+                        var imageSize = new kakao.maps.Size(20, 34);
+
+                        // 마커 이미지를 생성합니다
+                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                        var dataPosition = new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord);
+
+                        // 마커를 생성합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map, // 마커를 표시할 지도
+                            position: dataPosition, // 마커를 표시할 위치
+                            title: data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                            image: markerImage // 마커 이미지
+                        })
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(error)
+                }
+            });
+        }
+*/
+
 
         $.ajax({
             url: "${pageContext.request.contextPath}/chartSchedule.do",
@@ -583,37 +628,57 @@
             data: {
                 //null
             },
-            async : false,
+            async: false,
             success: function (data) {
+                $('#map').empty();
 
-                // 마커 이미지의 이미지 주소입니다
-                var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+                    center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+                    level : 14 // 지도의 확대 레벨
+                });
 
-                for (var i = 0; i < data.length; i ++) {
+                var clusterer = new kakao.maps.MarkerClusterer({
+                    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+                    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+                    minLevel: 10, // 클러스터 할 최소 지도 레벨
+                    disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
+                });
 
-                    // 마커 이미지의 이미지 크기 입니다
-                    var imageSize = new kakao.maps.Size(20, 34);
+                var dataPosition = null;
 
-                    // 마커 이미지를 생성합니다
-                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-                    var dataPosition = new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord);
+                    dataPosition = new kakao.maps.LatLng(data[0].ycoord, data[0].xcoord);
 
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map, // 마커를 표시할 지도
-                        position: dataPosition, // 마커를 표시할 위치
-                        title : data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                        image : markerImage // 마커 이미지
-                    })
-                }
+                    console.log(dataPosition);
+
+
+                var markers = $(data).map(function (i) {
+                        return new kakao.maps.Marker({
+                            position : new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord)
+                        });
+                    });
+
+                    clusterer.addMarkers(markers);
+
+                    console.log(markers);
+
+                kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+
+                    // 현재 지도 레벨에서 1레벨 확대한 레벨
+                    var level = map.getLevel()-1;
+
+                    // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+                    map.setLevel(level, {anchor: cluster.getCenter()});
+                });
+
+
+
+
             },
             error: function (request, status, error) {
                 console.log(error)
             }
         });
-
-
 
     });
 
