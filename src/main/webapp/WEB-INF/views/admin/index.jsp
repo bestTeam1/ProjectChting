@@ -191,6 +191,18 @@
                             <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">회원들의 모임</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">지도 방식</div>
+                                        <a class="dropdown-item" onclick="chartSchedule()">마크별로 보기</a>
+                                        <a class="dropdown-item" onclick="chartCluster()">클러스터로 보기</a>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body" id="map" style="height: 380px;">
@@ -300,7 +312,6 @@
 
 <script>
 
-
     $(document).ready(function () {
         // 대시보드 상단 정보
         $.ajax({
@@ -339,14 +350,13 @@
 
                     recentDate.push(year + '/' + month + '/' + date);
                 }
-                console.log(recentDate)
 
 
                 var ctx = $('#chartTotalUsers');
                 var totalUsersChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: recentDate,
+                        labels: ['2021-06-25','2021-06-26','2021-06-27','2021-06-28','2021-06-29','2021-06-30','2021-07-01'],
                         datasets: [{
                             label: '가입자 수',
                             data: Object.values(data),
@@ -567,60 +577,11 @@
                 console.log(error)
             }
         });
+        chartSchedule();
 
-        //카카오맵 모임 마커
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-            mapOption = {
-                center: new kakao.maps.LatLng(36.40436593241122, 127.9021009673735), // 지도의 중심좌표
-                level: 13 // 지도의 확대 레벨
-            };
-        /*
-
-                function chartSchedule() {
-                    $.ajax({
-                        url: "
-        ${pageContext.request.contextPath}/chartSchedule.do",
-                dataType: "json",
-                data: {
-                    //null
-                },
-                async: false,
-                success: function (data) {
-
-                    $('#map').empty();
-
-                    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-
-                    // 마커 이미지의 이미지 주소입니다
-                    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-                    for (var i = 0; i < data.length; i++) {
-
-                        // 마커 이미지의 이미지 크기 입니다
-                        var imageSize = new kakao.maps.Size(20, 34);
-
-                        // 마커 이미지를 생성합니다
-                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-                        var dataPosition = new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord);
-
-                        // 마커를 생성합니다
-                        var marker = new kakao.maps.Marker({
-                            map: map, // 마커를 표시할 지도
-                            position: dataPosition, // 마커를 표시할 위치
-                            title: data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                            image: markerImage // 마커 이미지
-                        })
-                    }
-                },
-                error: function (request, status, error) {
-                    console.log(error)
-                }
-            });
-        }
-*/
-
+    });
+    //카카오맵 모임 클러스터
+    function chartCluster() {
 
         $.ajax({
             url: "${pageContext.request.contextPath}/chartSchedule.do",
@@ -631,6 +592,7 @@
             async: false,
             success: function (data) {
                 $('#map').empty();
+
 
                 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
                     center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
@@ -647,20 +609,20 @@
                 var dataPosition = null;
 
 
-                    dataPosition = new kakao.maps.LatLng(data[0].ycoord, data[0].xcoord);
+                dataPosition = new kakao.maps.LatLng(data[0].ycoord, data[0].xcoord);
 
-                    console.log(dataPosition);
+                console.log(dataPosition);
 
 
                 var markers = $(data).map(function (i) {
-                        return new kakao.maps.Marker({
-                            position : new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord)
-                        });
+                    return new kakao.maps.Marker({
+                        position : new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord)
                     });
+                });
 
-                    clusterer.addMarkers(markers);
+                clusterer.addMarkers(markers);
 
-                    console.log(markers);
+                console.log(markers);
 
                 kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
 
@@ -679,9 +641,47 @@
                 console.log(error)
             }
         });
+    }
 
-    });
+    //카카오맵 모임 마커
+    function chartSchedule() {
 
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+                level: 14 // 지도의 확대 레벨
+            };
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        $.ajax({
+            url: "${pageContext.request.contextPath}/chartSchedule.do",
+            dataType: "json",
+            data: {
+                //null
+            },
+            async : false,
+            success: function (data) {
+                // 마커 이미지의 이미지 주소입니다
+                var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                for (var i = 0; i < data.length; i ++) {
+                    // 마커 이미지의 이미지 크기 입니다
+                    var imageSize = new kakao.maps.Size(20, 34);
+                    // 마커 이미지를 생성합니다
+                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+                    var dataPosition = new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord);
+                    // 마커를 생성합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: dataPosition, // 마커를 표시할 위치
+                        title : data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image : markerImage // 마커 이미지
+                    })
+                }
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+    }
 
 </script>
 

@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<style>
+    @font-face {
+        font-family: Chting;
+        src: url("${pageContext.request.contextPath}/assets/fonts/NanumBarunGothic.otf") format("opentype");
+    }
 
+    * :not("fas"){
+        font-family: "Chting" !important;
+    }
+
+
+</style>
 
 <!-- Bootstrap core JavaScript-->
 <script src="${pageContext.request.contextPath}/assets/dashboard/vendor/jquery/jquery.min.js"></script>
