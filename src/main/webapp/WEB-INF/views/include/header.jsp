@@ -32,7 +32,7 @@
 </head>
 <!-- Header -->
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
-	<div class="container d-flex justify-content-between align-items-center">
+	<div class="container d-flex justify-content-between align-items-center" id="logoBox">
 		<se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
 			<a class="navbar_logo" href="${pageContext.request.contextPath}/index.do">
 				<img class="logo_img" src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" alt="logo">
@@ -49,7 +49,7 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="align-self-center collapse navbar-collapse" id="navbar-toggler-success">
+		<div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
 			<div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
 				<div id="nav search" style="padding-right: 7%;">
 					<form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">

@@ -50,11 +50,14 @@ p, a {font-weight: 400;}
 /* Main Nav */
 #main_nav .nav-item .nav-link:hover {color: #fff;}
 
+.navbar_logo {
+  max-width: 20vh;
+}
+
 .navbar_logo .logo_img {
   object-fit: scale-down;
   padding: 2%;
-  width: 40%;
-  height: 50%;
+  max-width: inherit;
 }
 
 #searchValue {
@@ -67,10 +70,14 @@ p, a {font-weight: 400;}
 
 /* header 62  */
 @media screen and (max-width: 991px) {
+
+  .navbar_logo {
+    max-width: 20vh;
+  }
+
   .navbar_logo .logo_img {
     object-fit: scale-down;
-    width: 20%;
-    height: 50%;
+    max-width: inherit;
   }
 
   #searchValue {
@@ -80,8 +87,6 @@ p, a {font-weight: 400;}
   .form-inline {
     width: inherit;
   }
-
-
 }
 
 /* Home 76 */
