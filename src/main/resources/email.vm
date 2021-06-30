@@ -20,7 +20,7 @@
 	<style type="text/css">
 		@media only screen and (max-width:480px) {
 			@-ms-viewport {width: 320px;}
-			@viewport {	width: 320px; }
+			@viewport {   width: 320px; }
 		}
 	</style>
 	<!--<![endif]-->
@@ -114,8 +114,8 @@
 									<table border='0' cellpadding='0' cellspacing='0' role='presentation' style='border-collapse:collapse;border-spacing:0px;'>
 										<tbody>
 										<tr>
-											<td style='width:230px;'>
-													<img src='http://drive.google.com/uc?export=view&id=13AuXXID9tey74RPto774NUcQDoRTh1Pq' width="500px" height="180px"/><br>												</a>
+											<td style='align:center'>
+												<a><img src='https://drive.google.com/uc?export=download&id=1OF0osEDbIC-1qfJXXkqndc-Dh49kcR6Y' width="550px" height="140px"/><br></a>
 											</td>
 										</tr>
 										</tbody>
@@ -180,7 +180,7 @@
 							<tr>
 								<td align='center' style='font-size:0px;padding:10px 25px;word-break:break-word;'>
 									<div style='color:#30373b;font-family:Open Sans, Arial, sans-serif;font-size:15px;font-weight:bold;line-height:18px;text-align:center;'>
-										환영합니다!
+										<h3>환영합니다!</h3>
 									</div>
 								</td>
 							</tr>
@@ -276,66 +276,6 @@
 	<!--[if mso | IE]>
 	</td></tr></table>
 	<![endif]-->
-	<table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='background:#30373b;background-color:#30373b;width:100%;'>
-		<tbody>
-		<tr>
-			<td>
-				<div style='margin:0px auto;max-width:600px;'>
-					<table align='center' border='0' cellpadding='0' cellspacing='0' role='presentation' style='width:100%;'>
-						<tbody>
-						<tr>
-							<td style='direction:ltr;font-size:0px;padding:2px;text-align:center;vertical-align:top;'>
-								<!--[if mso | IE]>
-								<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;">
-								<![endif]-->
-								<div class='dys-column-per-100 outlook-group-fix' style='direction:ltr;display:inline-block;font-size:13px;text-align:left;vertical-align:top;width:100%;'>
-									<table border='0' cellpadding='0' cellspacing='0' role='presentation' width='100%'>
-										<tbody>
-										<tr>
-											<td style='padding:10px;vertical-align:top;'>
-
-														</td>
-													</tr>
-													<!-- End Social Icons -->
-													<!-- Footer Content -->
-													<tr>
-														<td align='center' style='font-size:0px;padding:5px;word-break:break-word;'>
-															<div style='color:#848789;font-family:Open Sans, Arial, sans-serif;font-size:12px;line-height:18px;text-align:center;text-transform:uppercase;'>
-																©2021 Chting. All Rights Reserved.
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td align='center' style='font-size:0px;padding:5px;word-break:break-word;'>
-															<div style='color:#848789;font-family:Open Sans, Arial, sans-serif;font-size:12px;line-height:18px;text-align:center;text-transform:uppercase;'>
-																If you do not wish to receive any further emails from us, please
-																<span style='text-decoration:underline;'>
-                                            <a href='#' style='text-decoration:underline; color:#848789;' target='_blank'>
-                                              unsubscribe
-                                            </a>
-                                          </span>
-															</div>
-														</td>
-													</tr>
-													<!-- End Footer Content -->
-												</table>
-											</td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
-								<!--[if mso | IE]>
-								</td></tr></table>
-								<![endif]-->
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</td>
-		</tr>
-		</tbody>
-	</table>
 </div>
 </body>
 </html>
