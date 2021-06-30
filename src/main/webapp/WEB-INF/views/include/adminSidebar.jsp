@@ -61,13 +61,6 @@
         Chting board
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/admin/adminNotice.do">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>공지사항</span></a>
-    </li>
-
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/adminEvent.do">
