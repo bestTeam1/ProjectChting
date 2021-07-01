@@ -240,13 +240,13 @@
             showCancelButton: true,
             confirmButtonColor: '#A0A0FF',
             cancelButtonColor: '#aaaaaa',
-            cancelButtonText : '취소',
+            cancelButtonText: '취소',
             confirmButtonText: '공지사항을 등록합니다'
-        }).then ((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
                     title: '등록 성공!',
-                    text : '공지사항을 등록했습니다!'
+                    text: '공지사항을 등록했습니다!'
                 }).then((result) => {
                     $('#write').submit();
                 })

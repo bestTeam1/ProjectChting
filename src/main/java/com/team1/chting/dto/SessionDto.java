@@ -1,6 +1,7 @@
 package com.team1.chting.dto;
 
 import lombok.Data;
+
 import java.io.Serializable;
 
 @Data

@@ -5,6 +5,7 @@ import com.team1.chting.dto.chartdto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -24,7 +25,7 @@ public class ChartService {
     public ChartRecentUserDto getRecentUser() {
         ChartDao chartDao = sqlSession.getMapper(ChartDao.class);
 
-        SimpleDateFormat today = new SimpleDateFormat( "yyyy-MM-dd");
+        SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
 
         Date time = new Date();
 
@@ -39,6 +40,7 @@ public class ChartService {
         return chartDao.getChartJoinType();
 
     }
+
     //차트데이터 회원가입 유형 데이터 가져오기
     public ChartMainDto getChartMainDto() {
         ChartDao chartDao = sqlSession.getMapper(ChartDao.class);
@@ -53,12 +55,14 @@ public class ChartService {
         return chartMainDto;
 
     }
+
     //모임 관심사별 회원수
     public ChartInterestDto getChartGroupTypes() {
         ChartDao chartDao = sqlSession.getMapper(ChartDao.class);
 
         return chartDao.getChartGroupTypes();
     }
+
     //모임 일정 위치 데이터
     public List<ChartScheduleDto> getChartSchedule() {
         ChartDao chartDao = sqlSession.getMapper(ChartDao.class);

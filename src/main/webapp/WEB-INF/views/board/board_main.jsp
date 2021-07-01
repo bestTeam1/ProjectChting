@@ -31,28 +31,28 @@
     </div>
 
     <%-- 대표 사진, 지역, 관심사--%>
-        <div class="row justify-content-center pb-4">
-            <div class="col-lg-5 mt-3">
-                <h6 class="objective-heading h6 mb-1 text-end light-300">
-                    <i class="fas fa-map-marker-alt m-3"><c:out value="${group.area_name}"/></i>
-                    <i class="fas fa-bookmark m-3"><c:out value="${group.catename}"/></i>
-                </h6>
-                <div id="templatemo-slide-link-target" class="card mb-3">
-                    <c:choose>
-                        <c:when test="${empty group.group_img}">
-                            <img class="img-fluid border rounded"
-                                 src="./assets/img/work-slide-05-small.jpg"
-                                 style="height: 500px;" alt="Card image cap">
-                        </c:when>
-                        <c:otherwise>
-                            <img class="img-fluid border rounded"
-                                 src="./upload/groupimg/${group.group_img}"
-                                 style="height: 500px;" alt="Card image cap">
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+    <div class="row justify-content-center pb-4">
+        <div class="col-lg-5 mt-3">
+            <h6 class="objective-heading h6 mb-1 text-end light-300">
+                <i class="fas fa-map-marker-alt m-3"><c:out value="${group.area_name}"/></i>
+                <i class="fas fa-bookmark m-3"><c:out value="${group.catename}"/></i>
+            </h6>
+            <div id="templatemo-slide-link-target" class="card mb-3">
+                <c:choose>
+                    <c:when test="${empty group.group_img}">
+                        <img class="img-fluid border rounded"
+                             src="./assets/img/work-slide-05-small.jpg"
+                             style="height: 500px;" alt="Card image cap">
+                    </c:when>
+                    <c:otherwise>
+                        <img class="img-fluid border rounded"
+                             src="./upload/groupimg/${group.group_img}"
+                             style="height: 500px;" alt="Card image cap">
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
+    </div>
 
     <%-- 회원 수, 소개 글--%>
     <div class="row justify-content-center">
@@ -122,21 +122,21 @@
 
         console.log(length);
 
-        if(length >= 3) { //모임 가입 개수 체크
+        if (length >= 3) { //모임 가입 개수 체크
             Swal.fire({
-                title : "모임 가입 개수는 3개로 제한됩니다.",
-                text : "가입한 모임 탈퇴 후 새로운 모임에 가입할 수 있습니다.",
+                title: "모임 가입 개수는 3개로 제한됩니다.",
+                text: "가입한 모임 탈퇴 후 새로운 모임에 가입할 수 있습니다.",
                 confirmButtonText: '마이페이지로 이동',
                 confirmButtonColor: '#A0A0FF',
                 showCancelButton: true,
                 cancelButtonText: '취소',
                 cancelButtonColor: '#aaaaaa'
             }).then((result) => {
-                if(result.isConfirmed) {
-                    location.href="myPage.do";
+                if (result.isConfirmed) {
+                    location.href = "myPage.do";
                 }
             })
-        }else {
+        } else {
             if (userid == '') {
                 Swal.fire({
                     title: "비로그인 유저입니다.",

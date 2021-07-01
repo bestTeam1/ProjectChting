@@ -125,20 +125,27 @@
                                 <div style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 25px;">
                                     <c:if test='${sessionScope.get("userData").userrole.equals("ROLE_ADMIN")}'>
 
-                                        <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                        <button type="button"
+                                                class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
                                                 id="modify">수정
-                                        </button> &nbsp;
+                                        </button>
+                                        &nbsp;
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                        <button type="button"
+                                                class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
                                                 id="end">종료
-                                        </button> &nbsp;
+                                        </button>
+                                        &nbsp;
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                        <button type="button"
+                                                class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
                                                 id="disabled">취소
-                                        </button> &nbsp;
+                                        </button>
+                                        &nbsp;
                                         &nbsp; &nbsp; &nbsp; &nbsp;
                                     </c:if>
-                                    <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                                    <button type="button"
+                                            class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
                                             id="back">목록
                                     </button>
                                 </div>

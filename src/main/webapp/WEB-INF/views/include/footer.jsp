@@ -5,7 +5,7 @@
         src: url("${pageContext.request.contextPath}/assets/fonts/NanumBarunGothic.otf") format("opentype");
     }
 
-    * :not("fas"){
+    * :not("fas") {
         font-family: "Chting" !important;
     }
 
@@ -93,7 +93,7 @@
                 <ul class="list-unstyled text-light light-300">
                     <li class="pb-2">
                         <i class='fa fa-github fa-xs'></i> <a class="text-decoration-none text-light py-1"
-                                                                      href="https://github.com/bestTeam1/ProjectChting">github/bestTeam1/ProjectChting</a>
+                                                              href="https://github.com/bestTeam1/ProjectChting">github/bestTeam1/ProjectChting</a>
                     </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1"
@@ -116,7 +116,7 @@
                 <div class="col-lg-6 col-sm-12">
                     <p class="text-lg-end text-center text-light light-300">
                         조선제1조 <a rel="sponsored" class="text-decoration-none text-light"
-                                       href="index.do" target="_blank"><strong></strong></a>
+                                 href="index.do" target="_blank"><strong></strong></a>
                     </p>
                 </div>
             </div>

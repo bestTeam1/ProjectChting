@@ -323,7 +323,7 @@
                                                 </div>--%>
                         <ol id="chattingArea" class="chat">
                         </ol>
-                         <input class="textarea" type="text" placeholder="" id="msg"/>
+                        <input class="textarea" type="text" placeholder="" id="msg"/>
                         <button class="btn btn-secondary text-white" type="button" id="button-send">전송</button>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
         var message = null;
         var date = null;
         var group_no = null;
-        var messageType= null;
+        var messageType = null;
 
         var json = JSON.parse(data);
         console.log(json);
@@ -361,46 +361,51 @@
         group_no = json.group_no;
         messageType = json.messageType;
 
-        if('${group_no}' == group_no) {
-            if(messageType == 'chat') {
+        if ('${group_no}' == group_no) {
+            if (messageType == 'chat') {
                 if (sessionId == cur_session) {
                     var str = "<li class='self'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time></div></li>";
-                    $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
+                    $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight});
 
                 } else {
                     var str = "<li class='other'><div class='msg'><p><b>" + sessionId + "</b></p><p>" + message + "</p><time>" + date + "</time> </div> </li>";
-                    $("#chattingArea").append(str).stop().animate({scrollTop: $('#chattingArea')[0].scrollHeight });
+                    $("#chattingArea").append(str).stop().animate({scrollTop: $('#chattingArea')[0].scrollHeight});
 
                 }
-            } else if(messageType == 'enter') {
-                var str = "<div style='text-align:center;background-color:#6266ea; color:whitesmoke'>"  + sessionId + " 님이 입장하셨습니다."  + "</div>";
-                $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
+            } else if (messageType == 'enter') {
+                var str = "<div style='text-align:center;background-color:#6266ea; color:whitesmoke'>" + sessionId + " 님이 입장하셨습니다." + "</div>";
+                $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight});
 
-            } else if(messageType == 'leave') {
-                var str = "<div style='text-align:center;background-color:#6266ea; color:whitesmoke'>"  + sessionId + " 님이 퇴장하셨습니다."  + "</div>";
-                $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight });
+            } else if (messageType == 'leave') {
+                var str = "<div style='text-align:center;background-color:#6266ea; color:whitesmoke'>" + sessionId + " 님이 퇴장하셨습니다." + "</div>";
+                $("#chattingArea").append(str).animate({scrollTop: $('#chattingArea')[0].scrollHeight});
 
             }
         }
     }
 
     function onClose(evt) {
-        sock.send(JSON.stringify({message : '', messageType : 'leave', userid : '${userid}', group_no : '${group_no}'}));
+        sock.send(JSON.stringify({message: '', messageType: 'leave', userid: '${userid}', group_no: '${group_no}'}));
     }
 
     function onOpen(evt) {
-        sock.send(JSON.stringify({message : '', messageType : 'enter', userid : '${userid}', group_no : '${group_no}'}));
+        sock.send(JSON.stringify({message: '', messageType: 'enter', userid: '${userid}', group_no: '${group_no}'}));
     }
 
     function sendMessage() {
-        sock.send(JSON.stringify({message : $('#msg').val(), messageType : 'chat', userid : '${userid}', group_no : '${group_no}'}));
+        sock.send(JSON.stringify({
+            message: $('#msg').val(),
+            messageType: 'chat',
+            userid: '${userid}',
+            group_no: '${group_no}'
+        }));
     }
 
     $('#button-send').on("click", function (e) {
-        if($('#msg').val() == "") {
+        if ($('#msg').val() == "") {
             Swal.fire({
                 title: '오류',
-                text : '전송할 값을 입력해주세요!'
+                text: '전송할 값을 입력해주세요!'
             });
             return;
         }

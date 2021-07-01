@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -34,7 +35,7 @@ public class BoardRestController {
       만든이 : 이승준
       작성일 : 2021-06-23
      */
-    @RequestMapping(value="board_diaryOk.do", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "board_diaryOk.do", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> searchGroup(@RequestParam("group_no") String group_no,
                                               @RequestParam("type") String type,
                                               @RequestParam("date") String date,
@@ -42,7 +43,7 @@ public class BoardRestController {
                                               @RequestParam("location") String location,
                                               @RequestParam("subject") String subject,
                                               @RequestParam("xcoord") Double xcoord,
-                                              @RequestParam("ycoord") Double ycoord     ){
+                                              @RequestParam("ycoord") Double ycoord) {
         //받아온 String date를 sql.date 에 맞게 변환
         Date dateFormat = Date.valueOf(date);
 
@@ -57,25 +58,26 @@ public class BoardRestController {
         diaryDto.setXcoord(xcoord);
         diaryDto.setYcoord(ycoord);
 
-        System.out.println(diaryDto);
+        //System.out.println(diaryDto);
 
         int result = boardService.insertDiary(diaryDto);
 
-        if (result==0) {
-            System.out.println("board_diaryOk error. result is 0");
+        if (result == 0) {
+            //System.out.println("board_diaryOk error. result is 0");
             return new ResponseEntity<String>("false", HttpStatus.BAD_GATEWAY);
         } else {
-            System.out.println("board_diaryOk success. result is 1");
+            //System.out.println("board_diaryOk success. result is 1");
             return new ResponseEntity<String>("true", HttpStatus.OK);
         }
     }
+
     /*
       모임일정로드
       만든이 : 이승준
       작성일 : 2021-06-23
      */
-    @RequestMapping(value="board_diaryEvents.do", method= RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<String> diaryEvents(@RequestParam("group_no") String group_no){
+    @RequestMapping(value = "board_diaryEvents.do", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<String> diaryEvents(@RequestParam("group_no") String group_no) {
         List<DiaryCalDto> diaryList = boardService.getDiaryList(group_no);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -88,7 +90,7 @@ public class BoardRestController {
 
         try {
             String diaryListJson = objmap.writeValueAsString(diaryList);
-            System.out.println(diaryListJson);
+            //System.out.println(diaryListJson);
             return new ResponseEntity<String>(diaryListJson, HttpStatus.OK);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -96,19 +98,20 @@ public class BoardRestController {
 
         return new ResponseEntity<String>("false", HttpStatus.BAD_GATEWAY);
     }
+
     /*
     모임 일정 상세보기
     작성자 : 이승준
     2021-06-24
     */
-    @RequestMapping(value="board_diary_detail.do", method= RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "board_diary_detail.do", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<String> diaryDetail(@RequestParam("group_no") String group_no,
-                                              @RequestParam("schedule_no") String schedule_no){
+                                              @RequestParam("schedule_no") String schedule_no) {
 
         //가져온 그룹넘버와 스케줄번호로 조회
         DiaryDto diaryDto = boardService.getDiaryDetail(group_no, schedule_no);
 
-        System.out.println(diaryDto);
+        //System.out.println(diaryDto);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         diaryDto.setCalDate(format.format(diaryDto.getStartdate()));
@@ -130,7 +133,7 @@ public class BoardRestController {
     작성자 : 이승준
     2021-06-24
     */
-    @RequestMapping(value="board_diary_delete.do", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "board_diary_delete.do", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> diaryDelete(@RequestParam("group_no") String group_no,
                                               @RequestParam("schedule_no") String schedule_no) {
 
@@ -149,7 +152,7 @@ public class BoardRestController {
     작성자 : 이승준
     2021-06-24
     */
-    @RequestMapping(value="board_diary_modify.do", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "board_diary_modify.do", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> diaryDelete(@RequestParam("group_no") String group_no,
                                               @RequestParam("modifyDate") String modifyDate,
                                               @RequestParam("schedule_no") String schedule_no) {
@@ -167,7 +170,7 @@ public class BoardRestController {
 
     // 글 삭제하기
     @RequestMapping(value = "board_delete.do", method = RequestMethod.GET)
-    public ResponseEntity<String> delete(@RequestParam("post_no") String post_no, String page, Model model){
+    public ResponseEntity<String> delete(@RequestParam("post_no") String post_no, String page, Model model) {
         groupService.delete(Integer.parseInt(post_no));
         return new ResponseEntity<String>("", HttpStatus.OK);
     }
@@ -179,10 +182,10 @@ public class BoardRestController {
     */
     // 댓글목록
     @RequestMapping(value = "board_replyList.do", method = RequestMethod.GET)
-    public List<PostReplyDto> reply_List(@RequestParam String post_no){
+    public List<PostReplyDto> reply_List(@RequestParam String post_no) {
         List<PostReplyDto> list = groupService.getReply(Integer.parseInt(post_no));
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for(PostReplyDto dto : list) {
+        for (PostReplyDto dto : list) {
             dto.setFormatdate(format.format(dto.getWritedate()));
             dto.setUserid(userService.selectNickname(dto.getUserid()));
         }
@@ -191,12 +194,12 @@ public class BoardRestController {
 
     //댓글등록
     @RequestMapping(value = "board_replyWrite.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-    public ResponseEntity<String> replyInsert(@RequestBody PostReplyDto postReplyDto){
-        System.out.println(postReplyDto.toString());
+    public ResponseEntity<String> replyInsert(@RequestBody PostReplyDto postReplyDto) {
+        //System.out.println(postReplyDto.toString());
         try {
             groupService.replyWrite(postReplyDto);
             return new ResponseEntity<String>("", HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<String>("", HttpStatus.BAD_REQUEST);
         }
@@ -204,14 +207,14 @@ public class BoardRestController {
 
     // 댓글삭제
     @RequestMapping(value = "board_replyDelete.do", method = RequestMethod.GET)
-    public ResponseEntity<String> replyDel(@RequestParam("reply_no")String reply_no){
+    public ResponseEntity<String> replyDel(@RequestParam("reply_no") String reply_no) {
         groupService.replyDelete(Integer.parseInt(reply_no));
 
         ResponseEntity<String> entity = null;
         try {
             groupService.replyDelete(Integer.parseInt(reply_no));
             entity = new ResponseEntity<String>("success", HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -220,12 +223,12 @@ public class BoardRestController {
 
     // 댓글수정
     @RequestMapping(value = "board_replyUpdate.do", method = RequestMethod.POST)
-    public ResponseEntity<String> replyModify(PostReplyDto postReplyDto){
+    public ResponseEntity<String> replyModify(PostReplyDto postReplyDto) {
         ResponseEntity<String> entity = null;
         try {
             groupService.replyUpdate(postReplyDto);
             entity = new ResponseEntity<String>("success", HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class SearchController {
       수정 기록 1 : 김수연 > 디자인 개선으로 인하여
      */
 
-    @RequestMapping(value="search.do", method= RequestMethod.GET)
+    @RequestMapping(value = "search.do", method = RequestMethod.GET)
     public String search(@RequestParam("category") String category,
                          @RequestParam("search") String search,
                          @RequestParam(value = "page", defaultValue = "1", required = false) String page,
@@ -35,7 +36,7 @@ public class SearchController {
                          HttpServletRequest request) {
         cri.resetPageSize(6);
         cri.setPage(Integer.parseInt(page));
-        String search_link = request.getContextPath()+request.getServletPath()+"?category="+category+"&search="+search;
+        String search_link = request.getContextPath() + request.getServletPath() + "?category=" + category + "&search=" + search;
         String search_result = "";
 
         List<GroupDto> list = boardService.getGroupListBySearch(category, search, cri);
@@ -52,7 +53,7 @@ public class SearchController {
         }
 
         model.addAttribute("search_category", category);
-        model.addAttribute("search_keyword",search);
+        model.addAttribute("search_keyword", search);
         model.addAttribute("search_result", search_result);
         model.addAttribute("search_link", search_link);
         model.addAttribute("pm", pm);

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -74,9 +75,9 @@ public class UserService {
         int result = userDao.deleteAcount(userid);
 
         if (result > 0) {
-            System.out.println("회원 탈퇴 성공");
-        }else {
-            System.out.println("회원 탈퇴 실패");
+            //System.out.println("회원 탈퇴 성공");
+        } else {
+            //System.out.println("회원 탈퇴 실패");
         }
     }
 
@@ -106,7 +107,7 @@ public class UserService {
         try {
             categoryDao.deleteInterestCategory(userid);
             categoryDao.insertInterestCategory(list);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(" [!] User InterestCategory Transaction Error :: " + e.getMessage());
             throw e;
         }
@@ -118,18 +119,18 @@ public class UserService {
     작성자 : 박주현
     작성일 : 2021-06-16
     */
-    public void updateUser(UserDto userDto, HttpServletRequest request) throws Exception  {
+    public void updateUser(UserDto userDto, HttpServletRequest request) throws Exception {
 
-        if(userDto.getFileName() != null) {
+        if (userDto.getFileName() != null) {
             CommonsMultipartFile file = userDto.getFileName();
-            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            if (file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
                 //프로필이미지 이름 = userid.확장자
                 fileName = userDto.getUserid() + "." + fileName.split("\\.")[1].toLowerCase();
                 String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
                 String fpath = path + File.separator + fileName;
 
-                if(!fileName.equals("")) {
+                if (!fileName.equals("")) {
                     FileOutputStream fs = new FileOutputStream(fpath);
                     fs.write(file.getBytes());
                     fs.close();
@@ -176,6 +177,7 @@ public class UserService {
 
         return groupDto;
     }
+
     /*
     모임원으로 있는 모임정보 가져오기
     작성자 : 이승준
@@ -193,7 +195,7 @@ public class UserService {
     작성자 : 이승준
     작성일 : 2021-06-22
     */
-    public List<GroupDto> getNewGroupByCate(String userid){
+    public List<GroupDto> getNewGroupByCate(String userid) {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<GroupDto> getNewGroupByCate = userDao.getNewGroupByCate(userid);
 
@@ -206,7 +208,7 @@ public class UserService {
     작성자 : 이승준
     작성일 : 2021-06-22
     */
-    public List<GroupDto> getBestGroupByCate(String userid){
+    public List<GroupDto> getBestGroupByCate(String userid) {
         UserDao userDao = sqlsession.getMapper(UserDao.class);
         List<GroupDto> getBestGroupByCate = userDao.getBestGroupByCate(userid);
 

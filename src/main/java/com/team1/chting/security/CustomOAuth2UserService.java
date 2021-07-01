@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         LoginDto loginDto = loginService.isUser(oAuth2User.getName());
 
         String resultRole = null;
-        if(loginDto == null) {
+        if (loginDto == null) {
             resultRole = "ROLE_GUEST";
         } else {
             resultRole = loginDto.getRole();

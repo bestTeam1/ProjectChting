@@ -58,7 +58,7 @@ public class AdminController {
     @RequestMapping(value = "adminNoticeDetail.do", method = RequestMethod.GET)
     public String adminNoticeDetail(String noticeNo, String page, Model model) {
 
-        if(page == null) {
+        if (page == null) {
             page = "1";
         }
 
@@ -76,10 +76,10 @@ public class AdminController {
       작성일 : 2021-06-16
      */
     @RequestMapping(value = "adminDeleteBoard.do", method = RequestMethod.GET)
-    public String adminBoardDelete(String type ,String num, String page, Model model) {
-        System.out.println("받아온값 type , num : " + type + "/" + num);
+    public String adminBoardDelete(String type, String num, String page, Model model) {
+        //System.out.println("받아온값 type , num : " + type + "/" + num);
         adminService.adminDeleteBoard(type, num);
-        String url = "admin"+type +".do?page=" + page;
+        String url = "admin" + type + ".do?page=" + page;
 
         return "redirect:" + url;
     }
@@ -111,7 +111,7 @@ public class AdminController {
     public String adminEventDetail(String eventNo, String page, Model model) throws Exception {
         EventDto eventDto = adminService.getEventDetail(eventNo);
 
-        if(page == null) {
+        if (page == null) {
             page = "1";
         }
 
@@ -120,6 +120,7 @@ public class AdminController {
 
         return "admin/event/event_detail";
     }
+
     /*
       사이트 이벤트 취소
       만든이 : 이승준
@@ -129,11 +130,11 @@ public class AdminController {
     public String adminEventDisabled(String eventNo, String page, Model model) {
         int result = adminService.adminEventDisabled(eventNo);
 
-        if(result == 0) {
-            System.out.println("이벤트 취소 실패");
+        if (result == 0) {
+            //System.out.println("이벤트 취소 실패");
         }
 
-        return "redirect:/admin/adminEvent.do?page="+page;
+        return "redirect:/admin/adminEvent.do?page=" + page;
     }
 
     /*
@@ -177,7 +178,7 @@ public class AdminController {
     */
 
     @RequestMapping(value = "adminGroupManagement.do", method = RequestMethod.GET)
-    public String adminGroupManagement(AdminCriteria cri, Model model)  throws Exception {
+    public String adminGroupManagement(AdminCriteria cri, Model model) throws Exception {
         model.addAttribute("groupList", adminService.listCriGroup(cri));
 
         PageMaker pm = new PageMaker();
@@ -210,7 +211,7 @@ public class AdminController {
         작성일 : 2021-06-17
     */
     @RequestMapping(value = "write.do", method = RequestMethod.GET)
-    public String write(String type, Model model){
+    public String write(String type, Model model) {
 
         //타입에 맞게 글쓰기 페이지 지정
         if (type.equals("notice")) {
@@ -227,7 +228,7 @@ public class AdminController {
             return "admin/event/event_write";
 
         } else {
-            System.out.println("write type error!");
+            //System.out.println("write type error!");
             return null;
         }
     }
@@ -303,7 +304,7 @@ public class AdminController {
         boolean isModified = adminService.adminNoticeModifyOk(subject, content, noticeNo);
 
         if (isModified != true) {
-            System.out.println("공지사항 수정 실패");
+            //System.out.println("공지사항 수정 실패");
         }
 
         return "redirect:/admin/adminNoticeDetail.do?page=" + page + "&noticeNo=" + noticeNo;
@@ -319,7 +320,7 @@ public class AdminController {
                                      HttpServletRequest httpServletRequest,
                                      @RequestParam("uploadFile") CommonsMultipartFile file,
                                      Model model) throws Exception {
-        System.out.println(eventDto);
+        //System.out.println(eventDto);
         String page = httpServletRequest.getParameter("page");
         adminService.eventModify(eventDto, httpServletRequest, file); //파일업로드 포함한 글쓰기
 

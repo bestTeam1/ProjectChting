@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.apache.velocity.app.VelocityEngine;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
@@ -44,9 +45,9 @@ public class EmailService {
 
             // 이메일 보내기
             mailSender.send(msg);
-            System.out.println("메일 전송 성공");
-        } catch(Exception e) {
-            System.out.println("메일 전송 실패");
+            //System.out.println("메일 전송 성공");
+        } catch (Exception e) {
+            //System.out.println("메일 전송 실패");
             System.out.println(e.getMessage());
         }
     }
