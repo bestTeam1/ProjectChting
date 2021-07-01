@@ -52,37 +52,37 @@
                      alt="Card image">
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <li><strong>김수연</strong></li>
-                    <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i> 안되면 되게 하라 <i class="fas fa-quote-right"></i>
                 </ul>
                 <div class="creative-progress col-md-auto pt-5 px-3">
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
                             <h4 class="h5">Development</h4>
                         </div>
-                        <div class="col-6 text-right">66%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Design</h4>
+                            <h4 class="h5">Dream</h4>
                         </div>
-                        <div class="col-6 text-right">90%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Marketing</h4>
+                            <h4 class="h5">Drink</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -92,37 +92,37 @@
                      alt="Card image">
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <li><strong>박주현</strong></li>
-                    <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i> 차가운 도시같은 여자.. 그게 제 매력인데요? <i class="fas fa-quote-right"></i>
                 </ul>
                 <div class="creative-progress col-md-auto pt-5 px-3">
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
                             <h4 class="h5">Development</h4>
                         </div>
-                        <div class="col-6 text-right">66%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="66"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Design</h4>
+                            <h4 class="h5">Dream</h4>
                         </div>
-                        <div class="col-6 text-right">90%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="90"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Marketing</h4>
+                            <h4 class="h5">Drink</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="74"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -132,37 +132,37 @@
                      alt="Card image">
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <li><strong>이승준</strong></li>
-                    <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i> 수료해도 끝이 아닙니다, 자주 다시 만나요 <i class="fas fa-quote-right"></i>
                 </ul>
                 <div class="creative-progress col-md-auto pt-5 px-3">
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
                             <h4 class="h5">Development</h4>
                         </div>
-                        <div class="col-6 text-right">66%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="66"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Design</h4>
+                            <h4 class="h5">Dream</h4>
                         </div>
-                        <div class="col-6 text-right">90%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="90"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Marketing</h4>
+                            <h4 class="h5">Drink</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="74"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                      alt="Card image">
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <li><strong>현상진</strong></li>
-                    <i class="fas fa-quote-left"></i> 좋은사람들과 작업하니 너무 행복합니다<i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i> 멋쟁이 상진, 기억해주세요!😘 <i class="fas fa-quote-right"></i>
                 </ul>
 
                 <div class="creative-progress col-md-auto pt-5 px-3">
@@ -188,30 +188,30 @@
                             <h4 class="h5">
                                 Development</h4>
                         </div>
-                        <div class="col-6 text-right">50%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="50"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Design</h4>
+                            <h4 class="h5">Dream</h4>
                         </div>
-                        <div class="col-6 text-right">70%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="70"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Marketing</h4>
+                            <h4 class="h5">Drink</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="74"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
                      alt="Card image">
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <li><strong>김영허</strong></li>
-                    <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i> 돈까스를 사랑합니다 <i class="fas fa-quote-right"></i>
                 </ul>
                 <div class="creative-progress col-md-auto pt-5 px-3">
                     <div class="row mt-4 mt-sm-2">
@@ -232,27 +232,27 @@
                         <div class="col-6 text-right">66%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="66"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Design</h4>
+                            <h4 class="h5">Dream</h4>
                         </div>
-                        <div class="col-6 text-right">90%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="90"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Marketing</h4>
+                            <h4 class="h5">Drink</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="74"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -262,37 +262,37 @@
                      alt="Card image">
                 <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
                     <li><strong>김명환</strong></li>
-                    <i class="fas fa-quote-left"></i> 자신을 소개해주세요 <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-quote-left"></i> 모르나요? 모르면 맞아야죠. <i class="fas fa-quote-right"></i>
                 </ul>
                 <div class="creative-progress col-md-auto pt-5 px-3">
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
                             <h4 class="h5">Development</h4>
                         </div>
-                        <div class="col-6 text-right">66%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="66"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Design</h4>
+                            <h4 class="h5">Dream</h4>
                         </div>
-                        <div class="col-6 text-right">90%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="90"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
-                            <h4 class="h5">Marketing</h4>
+                            <h4 class="h5">Drink</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">100%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74"
+                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="74"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
@@ -302,6 +302,48 @@
 
 </section>
 <!-- End Team Member -->
+
+<%--
+<section class="bg-light py-5">
+    <div class="feature-work container my-4">
+        <div class="row d-flex d-flex align-items-center">
+            <div class="col-lg-5">
+                <h3 class="feature-work-title h4 text-muted light-300">단체사진</h3>
+                <h1 class="feature-work-heading h2 py-3 semi-bold-600">...</h1>
+                <p class="feature-work-body text-muted light-300">
+                    자신이 <strong>모임장</strong>이 되어서 취미를 공유하고<br>
+                    모임 일정을 통해 즐거운 만남과, 모임 게시판, 모임 채팅을 활용하여<br>
+                    다양한 이야기와 취미활동을 공유하세요.
+                </p>
+            </div>
+
+            <div class="col-lg-6 offset-lg-1 mb-lg-5 align-left">
+                <div class="row">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
+                        <img class="img-fluid"
+                             src="./upload/chting/team/DiningTogether02.jpg">
+                    </a>
+                    <a class="col" data-type="image" data-fslightbox="gallery">
+                        <img class="img-fluid"
+                             src="./upload/chting/team/DiningTogether03.jpg">
+                    </a>
+                </div>
+                <div class="row pt-4">
+                    <a class="col" data-type="image" data-fslightbox="gallery">
+                        <img class="img-fluid"
+                             src="./upload/chting/team/DiningTogether05.jpg">
+                    </a>
+                    <a class="col" data-type="image" data-fslightbox="gallery">
+                        <img class="img-fluid"
+                             src="./upload/chting/team/DiningTogether07.jpg">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+--%>
+
 <div class="w-100 py-3"></div>
 
 <!-- Start Our Partner -->
