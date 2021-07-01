@@ -26,14 +26,18 @@
                 <div class="col-3"></div>
 
 
-                <div class="col-6 my-xxl-5 mx-xxl-5 border border-1" style="background-color: lavender; border-radius: 25px;">
+                <div class="col-6 my-xxl-5 mx-xxl-5 border border-1"
+                     style="background-color: lavender; border-radius: 25px;">
                     <div class="row d-flex text-center py-xxl-5">
                         <h2 class="h2 text-secondary light-300 mt-3">Social Login</h2>
                     </div>
                     <div class="social row d-flex align-items-center justify-content-center py-xxl-5 mb-3">
-                        <a href="${pageContext.request.contextPath}/oauth2/authorization/google-login" class="link google" target="_parent"><span class="fa fa-google"></span></a>
-                        <a href="${pageContext.request.contextPath}/oauth2/authorization/kakao-login" class="link kakao" target="_parent"><span class="fas fa-comment"></span></a>
-                        <a href="${pageContext.request.contextPath}/oauth2/authorization/github-login" class="link github" target="_parent"><span class="fa fa-github"></span></a>
+                        <a href="${pageContext.request.contextPath}/oauth2/authorization/google-login"
+                           class="link google" target="_parent"><span class="fa fa-google"></span></a>
+                        <a href="${pageContext.request.contextPath}/oauth2/authorization/kakao-login" class="link kakao"
+                           target="_parent"><span class="fas fa-comment"></span></a>
+                        <a href="${pageContext.request.contextPath}/oauth2/authorization/github-login"
+                           class="link github" target="_parent"><span class="fa fa-github"></span></a>
                     </div>
                 </div>
 

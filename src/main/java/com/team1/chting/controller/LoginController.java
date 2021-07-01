@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -48,7 +49,7 @@ public class LoginController {
         Map<String, Object> userData = token.getPrincipal().getAttributes();
 
         SocialData socialData = SocialDataFactory.getSocialData(userData, token.getAuthorizedClientRegistrationId());
-        System.out.println(socialData.toString());
+        //System.out.println(socialData.toString());
 
         model.addAttribute("socialData", socialData);
         model.addAttribute("areaList", loginService.getAreaList());
@@ -60,14 +61,14 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = "signUp.do", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity<String> signUpReg(SignUpDto signUpDto,
-                                    @RequestParam(value = "interest", defaultValue = "P") List<String> interest,
-                                    @RequestParam(value = "siterule") String siterule,
-                                    HttpServletRequest request) {
+                                            @RequestParam(value = "interest", defaultValue = "P") List<String> interest,
+                                            @RequestParam(value = "siterule") String siterule,
+                                            HttpServletRequest request) {
 
         try {
             int result = loginService.signUpReg(signUpDto, request, interest);
             emailService.sendMail(signUpDto.getEmail(), signUpDto.getNickname());
-            System.out.println(result);
+            //System.out.println(result);
             return new ResponseEntity<String>(request.getContextPath(), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("error : " + e.getMessage());

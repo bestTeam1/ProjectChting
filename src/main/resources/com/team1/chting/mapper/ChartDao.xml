@@ -77,11 +77,14 @@
                COUNT(CASE WHEN catecode = "N" and enabled = 1 THEN 1 END) AS cook,
                COUNT(CASE WHEN catecode = "O" and enabled = 1 THEN 1 END) AS pet,
                COUNT(CASE WHEN catecode = "P" and enabled = 1 THEN 1 END) AS etc
-        from user_info left join user_interest ui on user_info.userid = ui.userid
+        from user_info left join user_interest ui
+        on user_info.userid = ui.userid
     </select>
 
     <select id="getChartSchedule" resultType="com.team1.chting.dto.chartdto.ChartScheduleDto">
-        select group_name as title, xcoord, ycoord from group_schedule left join group_info gi on gi.group_no = group_schedule.group_no;
+        select group_name as title, xcoord, ycoord
+        from group_schedule
+                 left join group_info gi on gi.group_no = group_schedule.group_no;
     </select>
 
 

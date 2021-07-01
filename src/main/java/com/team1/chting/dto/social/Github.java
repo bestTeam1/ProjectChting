@@ -1,12 +1,13 @@
 package com.team1.chting.dto.social;
 
 import lombok.Data;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 @Data
-public class Github extends SocialData{
+public class Github extends SocialData {
 
     private String userid;
     private String nickname;
@@ -19,21 +20,21 @@ public class Github extends SocialData{
         Iterator<String> Iter_userDataSet = userDataSet.iterator();
         while (Iter_userDataSet.hasNext()) {
             String next = Iter_userDataSet.next();
-            if(next.equals("id")) {
+            if (next.equals("id")) {
                 this.userid = userData.get(next).toString();
-            }else if(next.equals("name")) {
-                if(userData.get(next) != null) {
+            } else if (next.equals("name")) {
+                if (userData.get(next) != null) {
                     this.nickname = userData.get(next).toString();
-                }else {
+                } else {
                     this.nickname = "emptyData";
                 }
-            }else if(next.equals("email")) {
-                if(userData.get(next) != null) {
+            } else if (next.equals("email")) {
+                if (userData.get(next) != null) {
                     this.email = userData.get(next).toString();
-                }else {
+                } else {
                     this.email = "emptyData";
                 }
-            }else if(next.equals("avatar_url")) {
+            } else if (next.equals("avatar_url")) {
                 this.profile_img = userData.get(next).toString();
             }
         }

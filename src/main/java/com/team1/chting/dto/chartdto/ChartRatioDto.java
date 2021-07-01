@@ -5,6 +5,6 @@ import lombok.Data;
 //차트데이터 성비 Dto
 @Data
 public class ChartRatioDto {
-	private int male;
-	private int female;
+    private int male;
+    private int female;
 }

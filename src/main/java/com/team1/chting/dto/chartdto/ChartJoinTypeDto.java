@@ -5,7 +5,7 @@ import lombok.Data;
 //차트데이터 가입유형 Dto
 @Data
 public class ChartJoinTypeDto {
-	private int kakao;
-	private int google;
-	private int github;
+    private int kakao;
+    private int google;
+    private int github;
 }
