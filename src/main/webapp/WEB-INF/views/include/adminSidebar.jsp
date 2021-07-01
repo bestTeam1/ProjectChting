@@ -6,7 +6,7 @@
         src: url("${pageContext.request.contextPath}/assets/fonts/NanumBarunGothic.otf") format("opentype");
     }
 
-    * :not("fas"){
+    * :not("fas") {
         font-family: "Chting" !important;
     }
 
@@ -31,8 +31,6 @@
 <script src="${pageContext.request.contextPath}/assets/dashboard/s/demo/chart-pie-demo.js"></script>
 
 
-
-
 <!-- Custom fonts for this template-->
 <link href="${pageContext.request.contextPath}/assets/dashboard/vendor/fontawesome-free/css/all.min.css"
       rel="stylesheet" type="text/css">
@@ -46,7 +44,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/adminIndex.do">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+       href="${pageContext.request.contextPath}/admin/adminIndex.do">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class=""></i>
         </div>

@@ -122,7 +122,8 @@
                             </div>
                             <div class="pricing-list-body col-6 align-items-center px-lg-5 border-start border-1">
                                 <div class="px-lg-5 py-5 align-items-center">
-                                    <input type="text" name="nickname" class="form-control" placeholder="Username" minlength="2"
+                                    <input type="text" name="nickname" class="form-control" placeholder="Username"
+                                           minlength="2"
                                            maxlength="10" required>
                                 </div>
                             </div>
@@ -290,9 +291,10 @@
                                    style="vertical-align: text-top; font-size: 7px; color: red;"></i>
                         </p>
                     </div>
-                    <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1" >
+                    <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1">
                         <div class="px-lg-5 py-5 align-items-center">
-                            <div class="border border-primary p-md-5" style="overflow: scroll; width: 650px;height: 200px;">
+                            <div class="border border-primary p-md-5"
+                                 style="overflow: scroll; width: 650px;height: 200px;">
                                 여러분을 환영합니다.<br>
                                 다양한 Chting 서비스를 즐겨보세요.<br>
                                 회원으로 가입하시면 Chting 서비스를 보다 편리하게 이용할 수 있습니다.<br>
@@ -311,8 +313,10 @@
                                 ① 본 약관은 2021. 06. 30. 부터 적용합니다.<br>
                                 - 본 약관에 대한 저작권은 Chting에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.<br>
                                 위의 약관에 동의합니다.
-                            </div><br>
-                            <input type="checkbox" class="form-check-input" id="siterule" name="siterule" value="agree" required>
+                            </div>
+                            <br>
+                            <input type="checkbox" class="form-check-input" id="siterule" name="siterule" value="agree"
+                                   required>
                             <label for="siterule"> 약관동의 체크 </label>
                         </div>
                     </div>
@@ -351,7 +355,7 @@
         $('.select2').select2({
             placeholder: '',
             maximumSelectionSize: 3,
-            addClass : 'input-large',
+            addClass: 'input-large',
         });
         //프로필 이미지 프리뷰
         var file = document.querySelector('#fileName');
@@ -365,7 +369,7 @@
                 document.querySelector('#preview').src = reader.result;
             };
         };
-        $('#signCancel').click(function(){
+        $('#signCancel').click(function () {
             Swal.fire({
                 title: '회원가입을 취소합니다',
                 text: '다음에 다시 만나요ㅠ',
@@ -376,7 +380,7 @@
             })
         });
         $('#signUpFrm').validate({
-            submitHandler : function(){
+            submitHandler: function () {
                 $('#contentArea').val($('#contentArea').val().replace(/(\n|\r\n)/g, '<br>'));
                 var frm = $('#signUpFrm')[0];
                 var data = new FormData(frm);
@@ -414,6 +418,7 @@
             }
         });
     });
+
     function areaOverlapCheck() {
         $('#first_area').on('change', function () {
             if ($('#first_area').val() === $('#second_area').val()) {

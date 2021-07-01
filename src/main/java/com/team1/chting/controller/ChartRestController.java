@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.*;
 
 
@@ -34,7 +35,7 @@ public class ChartRestController {
         try {
             String result = objmap.writeValueAsString(chartRatioDto);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
         }
@@ -56,7 +57,7 @@ public class ChartRestController {
         try {
             String result = objmap.writeValueAsString(chartRecentUserDto);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
         }
@@ -78,7 +79,7 @@ public class ChartRestController {
         try {
             String result = objmap.writeValueAsString(chartJoinType);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
         }
@@ -100,7 +101,7 @@ public class ChartRestController {
         try {
             String result = objmap.writeValueAsString(chartMainDto);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
         }
@@ -117,19 +118,20 @@ public class ChartRestController {
 
         ChartInterestDto chart = chartService.getChartGroupTypes();
 
-        System.out.println(chart);
+        //System.out.println(chart);
 
         ObjectMapper objmap = new ObjectMapper();
 
         try {
             String result = objmap.writeValueAsString(chart);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
         }
 
     }
+
     /*
     작성자 : 이승준
     작성일 : 2021-06-26
@@ -145,7 +147,7 @@ public class ChartRestController {
         try {
             String result = objmap.writeValueAsString(chart);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<String>("", HttpStatus.BAD_GATEWAY);
         }

@@ -249,7 +249,7 @@
     });
 
 
-    function checkEmpty () {
+    function checkEmpty() {
 
     }
 

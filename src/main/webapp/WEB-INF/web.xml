@@ -68,15 +68,14 @@
 	</filter>
 
 	<!-- 에러 페이지 (404, 500) -->
-	<!--<error-page>
+	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404error.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
 		<location>/error/500error.jsp</location>
-	</error-page>-->
-
+	</error-page>
 
 	<!-- Spring security 설정  -->
 	<filter>

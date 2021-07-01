@@ -24,9 +24,10 @@
 
 <!-- Start Service -->
 <section class="container my-lg-5">
-    <form id="form" method="post" action='${pageContext.request.contextPath}/board_update.do' enctype="multipart/form-data">
-                        <input type="hidden" name="post_no" value="${plist.post_no}">
-                        <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
+    <form id="form" method="post" action='${pageContext.request.contextPath}/board_update.do'
+          enctype="multipart/form-data">
+        <input type="hidden" name="post_no" value="${plist.post_no}">
+        <input type="hidden" name="userid" value="${sessionScope.get("userData").userid}">
         <div class="service-wrapper py-3">
 
             <%-- 카테고리 선택 --%>
@@ -39,11 +40,12 @@
                     <div class="pricing-list-body col-md-5 align-items-center py-5">
                         <select name="post_catecode" id="post_catename" class="form-select"
                                 style="width: 30%; float:left;">
-                             <option value="A004">자유글</option>--%>
-                              <option value="A003">정모후기</option>
-                              <option value="A002">가입인사</option>
-                              <option value="A001">공지사항</option>
-                            </select>
+                            <option value="A004">자유글</option>
+                            --%>
+                            <option value="A003">정모후기</option>
+                            <option value="A002">가입인사</option>
+                            <option value="A001">공지사항</option>
+                        </select>
 
                     </div>
                     <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
@@ -122,10 +124,11 @@
         </div>
     </form>
     <div style="display: flex; justify-content: center">
-        <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5" style="margin-right: 10px;"
+        <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5"
+               style="margin-right: 10px;"
                id="submit" onclick="confirm()" value="완료"/>
         <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5"
-                onclick="goList()" >목록
+                onclick="goList()">목록
         </button>
     </div>
 </section>

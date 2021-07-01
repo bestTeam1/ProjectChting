@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team1.chting.dao.LoginDao">
 
     <resultMap id="areaList" type="java.util.Map">
-        <id column="area_code" property="code" />
-        <id column="area_name" property="name" />
+        <id column="area_code" property="code"/>
+        <id column="area_name" property="name"/>
     </resultMap>
 
     <resultMap id="tempInterestList" type="java.util.Map">
-        <id column="catecode" property="code" />
-        <id column="catename" property="name" />
+        <id column="catecode" property="code"/>
+        <id column="catename" property="name"/>
     </resultMap>
 
     <select id="isUser" parameterType="String" resultType="com.team1.chting.dto.LoginDto">
         select ui.userid as 'userid', ui.enabled as 'enabled', ur.user_role_name as 'role'
-        from user_info ui left join user_role ur on ui.userid = ur.userid
-        where ui.enabled = 1 and ui.userid= #{userid}
+        from user_info ui
+                 left join user_role ur on ui.userid = ur.userid
+        where ui.enabled = 1
+          and ui.userid = #{userid}
     </select>
 
     <select id="getAreaList" resultMap="areaList">
-        select area_code, area_name from area
+        select area_code, area_name
+        from area
     </select>
 
     <select id="tempInterestList" resultMap="tempInterestList">
-        select catecode, catename from interest_category
+        select catecode, catename
+        from interest_category
     </select>
-    
+
     <insert id="insertUser" parameterType="com.team1.chting.dto.SignUpDto">
-        insert into user_info (userid, nickname, gender, birth, profile_img, email, content, first_area, second_area, enabled, logintype)
-        values (#{userid}, #{nickname}, #{gender}, #{birth}, #{profile_img}, #{email}, #{content}, #{first_area}, #{second_area}, 1, #{logintype})
+        insert into user_info (userid, nickname, gender, birth, profile_img, email, content, first_area, second_area,
+                               enabled, logintype)
+        values (#{userid}, #{nickname}, #{gender}, #{birth}, #{profile_img}, #{email}, #{content}, #{first_area},
+                #{second_area}, 1, #{logintype})
     </insert>
 
 </mapper>

@@ -5,6 +5,6 @@ import lombok.Data;
 //지역
 @Data
 public class AreaDto {
-	private String area_code;
-	private String area_name;
+    private String area_code;
+    private String area_name;
 }

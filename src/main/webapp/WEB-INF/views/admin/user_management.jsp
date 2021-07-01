@@ -107,7 +107,9 @@
                                     <tr>
                                         <td>${i.userid}</td>
                                         <td>${i.gender}</td>
-                                        <td><a href="${pageContext.request.contextPath}/userPage.do?userid=${i.userid}">${i.nickname}</a></td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/userPage.do?userid=${i.userid}">${i.nickname}</a>
+                                        </td>
                                         <td>${i.email}</td>
                                         <td>${i.first_area_name}</td>
                                         <td>${i.second_area_name}</td>
@@ -134,7 +136,8 @@
                         <c:otherwise>
                             <div class="btn-group me-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary text-white"
-                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?page=${pm.cri.page-1}'">Previous
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?page=${pm.cri.page-1}'">
+                                    Previous
                                 </button>
                             </div>
                         </c:otherwise>
@@ -188,7 +191,8 @@
                         <c:when test="${pm.cri.page < pm.endPage}">
                             <div class="btn-group" role="group" aria-label="Third group">
                                 <button type="button" class="btn btn-secondary text-white"
-                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?&page=${pm.cri.page+1}'">Next
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminUserManagement.do?&page=${pm.cri.page+1}'">
+                                    Next
                                 </button>
                             </div>
                         </c:when>
