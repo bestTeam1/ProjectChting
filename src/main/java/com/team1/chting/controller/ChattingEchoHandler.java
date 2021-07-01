@@ -29,7 +29,7 @@ public class ChattingEchoHandler extends TextWebSocketHandler {
         String userid = userService.selectNickname(session.getPrincipal().getName());
         groupChattingList.put((String) session.getAttributes().get("group_no"), userid);
         sessionList.add(session);
-        log.info(userid + "님이 입장하셨습니다");
+        //log.info(userid + "님이 입장하셨습니다");
     }
 
     @Override
@@ -55,6 +55,6 @@ public class ChattingEchoHandler extends TextWebSocketHandler {
         String userid = userService.selectNickname(session.getPrincipal().getName());
         groupChattingList.remove((String) session.getAttributes().get("group_no"), userid);
         sessionList.remove(session);
-        log.info(userid + "님이 퇴장하셨습니다");
+        //log.info(userid + "님이 퇴장하셨습니다");
     }
 }
