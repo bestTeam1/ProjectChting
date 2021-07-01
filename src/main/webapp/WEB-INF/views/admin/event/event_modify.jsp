@@ -90,7 +90,7 @@
                 <input type="hidden" name="event_no" value="${event.event_no}">
                 <div class="service-wrapper py-3">
                     <input type="date" id="startdate" name="startdate" value="${event.startdate}"> ~
-                    <input type="date" id="enddate" name="enddate" value="${event.enddate}" >
+                    <input type="date" id="enddate" name="enddate" value="${event.enddate}">
 
                     <%-- 제목 --%>
                     <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
@@ -160,9 +160,9 @@
                     </div>
                 </div>
 
-                <input type="hidden" value="${event.event_no}" name="event_no" >
+                <input type="hidden" value="${event.event_no}" name="event_no">
                 <input type="hidden" id="currentDate" name="currentDate">
-                <input type="hidden" value="${page}" name="page" >
+                <input type="hidden" value="${page}" name="page">
             </form>
             <div style="display: flex; justify-content: center">
                 <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5"
@@ -223,8 +223,8 @@
 
 <script type="text/javascript">
 
-    $('#submit').click(function (){
-       $('#write').submit();
+    $('#submit').click(function () {
+        $('#write').submit();
     });
 
     //오늘날짜
@@ -237,11 +237,11 @@
     //오늘날짜
     $(document).ready(function () {
         $('#currentDate').val(new Date().toDateInputValue());
-        $('#enddate').attr("min",$('#startdate').val());
+        $('#enddate').attr("min", $('#startdate').val());
     });
 
-    $('#back').click(()=>{
-        window.location.href='${pageContext.request.contextPath}/admin/adminEvent.do?page=${page}';
+    $('#back').click(() => {
+        window.location.href = '${pageContext.request.contextPath}/admin/adminEvent.do?page=${page}';
     });
 </script>
 

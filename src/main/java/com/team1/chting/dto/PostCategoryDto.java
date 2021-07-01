@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PostCategoryDto {
-	private String post_catecode;
-	private String post_catename;
+    private String post_catecode;
+    private String post_catename;
 
 }

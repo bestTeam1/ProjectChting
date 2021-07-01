@@ -13,7 +13,9 @@ public class PageMaker {
     //화면에 보여지는 페이지블럭의 수
     private int displayPageNum = 10;
 
-    public PageMaker() {}
+    public PageMaker() {
+    }
+
     public PageMaker(int totalCount, int startPage, int endPage, boolean prev, boolean next, AdminCriteria cri,
                      int displayPageNum) {
         super();
@@ -37,12 +39,12 @@ public class PageMaker {
     }
 
     private void calcDate() {
-        endPage = (int) (Math.ceil(cri.getPage()/(double)displayPageNum) * displayPageNum);
-        startPage = (endPage - displayPageNum) +1;
-        int tempEndPage = (int) (Math.ceil(totalCount/(double)cri.getPageSize()));
-        if(endPage > tempEndPage) endPage = tempEndPage;
-        prev = (startPage == 1? false:true);
-        next = (endPage * cri.getPageSize() >= totalCount? false:true);
+        endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+        startPage = (endPage - displayPageNum) + 1;
+        int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPageSize()));
+        if (endPage > tempEndPage) endPage = tempEndPage;
+        prev = (startPage == 1 ? false : true);
+        next = (endPage * cri.getPageSize() >= totalCount ? false : true);
     }
 
     public int getStartPage() {

@@ -4,15 +4,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no" />
+          content="width=device-width, initial-scale=1, user-scalable=no"/>
     <!-- jquery -->
 
-<html lang="ko">
-<head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-</head>
+    <html lang="ko">
+    <head>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    </head>
 <body>
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
@@ -28,7 +28,8 @@
                 <h4 class="h5 pb-2 regular-400">
                     모임장으로는 1개의 모임에서만 활동이 가능합니다.<br>
                     모임 생성을 위해서는 모임을 해산하거나 모임장 권한 위임 후에 생성이 가능합니다. </h4>
-                <button onclick="location.href='groupJoin.do?userid=${sessionScope.get("userData").userid}'" class="btn rounded-pill btn-secondary text-light px-4 light-300">
+                <button onclick="location.href='groupJoin.do?userid=${sessionScope.get("userData").userid}'"
+                        class="btn rounded-pill btn-secondary text-light px-4 light-300">
                     모임 관리 페이지로 이동
                 </button>
             </div>

@@ -3,6 +3,7 @@ package com.team1.chting.controller;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import com.team1.chting.dto.*;
 import com.team1.chting.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,7 @@ public class UserController {
     public String updateUser(UserDto userDto,
                              HttpServletRequest request) throws Exception {
 
-        System.out.println("userDto : " + userDto);
+        //System.out.println("userDto : " + userDto);
         String userid = userDto.getUserid();
         userService.updateUser(userDto, request);
 

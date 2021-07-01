@@ -173,10 +173,12 @@
                         <c:forEach varStatus="status" items="${eventList}">
                             <c:choose>
                                 <c:when test="${status.index eq 0}">
-                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                        class="active"></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}"></li>
+                                    <li data-bs-target="#carouselExampleIndicators"
+                                        data-bs-slide-to="${status.index}"></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -198,11 +200,13 @@
                                 </div>
                             </div>
                             </c:forEach>
-                            <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                            <h1 class="carousel-control-prev h1 text-primary text-decoration-none"
+                                href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
                                 <i class='bx bx-lg bx-chevron-left px-5'></i>
                                 <span class="visually-hidden">Previous</span>
                             </h1>
-                            <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                            <h1 class="carousel-control-next h1 text-primary text-decoration-none"
+                                href="#carouselExampleIndicators" role="button" data-bs-slide="next">
                                 <i class='bx bx-lg bx-chevron-right'></i>
                                 <span class="visually-hidden">Next</span>
                             </h1>
@@ -298,25 +302,25 @@
         console.log(adminGroupNo);
         console.log(length);
 
-        if(adminGroupNo != "") { //모임장인 모임이 있다면
-            location.href="groupMake.do"; //groupMake.do에서 체크해서 에러페이지 이동
-        }else { //모임장인 모임이 없다면
-            if(length >= 3) { //모임 가입 개수 체크
+        if (adminGroupNo != "") { //모임장인 모임이 있다면
+            location.href = "groupMake.do"; //groupMake.do에서 체크해서 에러페이지 이동
+        } else { //모임장인 모임이 없다면
+            if (length >= 3) { //모임 가입 개수 체크
                 Swal.fire({
-                    title : "모임 가입 개수는 3개로 제한됩니다.",
-                    text : "가입한 모임 탈퇴 후 새로운 모임을 만들 수 있습니다.",
+                    title: "모임 가입 개수는 3개로 제한됩니다.",
+                    text: "가입한 모임 탈퇴 후 새로운 모임을 만들 수 있습니다.",
                     confirmButtonText: '마이페이지로 이동',
                     confirmButtonColor: '#A0A0FF',
                     showCancelButton: true,
                     cancelButtonText: '취소',
                     cancelButtonColor: '#aaaaaa'
                 }).then((result) => {
-                    if(result.isConfirmed) {
-                        location.href="myPage.do";
+                    if (result.isConfirmed) {
+                        location.href = "myPage.do";
                     }
                 })
-            }else {
-                location.href="groupMake.do";
+            } else {
+                location.href = "groupMake.do";
             }
         }
     };

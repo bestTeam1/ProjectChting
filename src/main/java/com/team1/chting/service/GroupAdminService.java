@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,7 +30,7 @@ public class GroupAdminService {
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
         GroupDto group = groupAdminDao.getAdminGroup(userid);
 
-        if(group == null) { //모임장인 모임이 없으면??
+        if (group == null) { //모임장인 모임이 없으면??
             return new GroupDto(); // 빈 GroupDto 리턴
         }
         return group;
@@ -71,9 +72,9 @@ public class GroupAdminService {
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
 
         try {
-            for(int i = 0; i < requestList.size(); i++) {
-                groupAdminDao.acceptMember(requestList.get(i),groupNo);
-                groupAdminDao.deleteRequest(requestList.get(i),groupNo);
+            for (int i = 0; i < requestList.size(); i++) {
+                groupAdminDao.acceptMember(requestList.get(i), groupNo);
+                groupAdminDao.deleteRequest(requestList.get(i), groupNo);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,6 +83,7 @@ public class GroupAdminService {
 
         return true;
     }
+
     /*
     모임가입 거절
     작성자 : 이승준
@@ -91,8 +93,8 @@ public class GroupAdminService {
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
 
         try {
-            for(int i = 0; i < requestList.size(); i++) {
-                groupAdminDao.deleteRequest(requestList.get(i),groupNo);
+            for (int i = 0; i < requestList.size(); i++) {
+                groupAdminDao.deleteRequest(requestList.get(i), groupNo);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,8 +113,8 @@ public class GroupAdminService {
         GroupAdminDao groupAdminDao = sqlsession.getMapper(GroupAdminDao.class);
 
         try {
-            for(int i = 0; i < banishList.size(); i++) {
-                groupAdminDao.banishMembers(banishList.get(i),groupNo);
+            for (int i = 0; i < banishList.size(); i++) {
+                groupAdminDao.banishMembers(banishList.get(i), groupNo);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +133,6 @@ public class GroupAdminService {
     }
 
 
-
     /*
     모임장 위임시 이미 모임장으로 있는 모임이 있는지 체크
     작성자 : 이승준
@@ -142,10 +143,10 @@ public class GroupAdminService {
         List<UserDto> checkList = groupAdminDao.duplicateGroupAdminCheck(userid);
 
 
-        for(UserDto dto :checkList) {
+        for (UserDto dto : checkList) {
             //그룹권한중에 1(Admin)인것이 있으면
-            if(dto.getGroup_role_no() == 1){
-                System.out.println("it's true!!!!!!!!");
+            if (dto.getGroup_role_no() == 1) {
+                //System.out.println("it's true!!!!!!!!");
                 return true;
             }
         }
@@ -199,7 +200,7 @@ public class GroupAdminService {
             CommonsMultipartFile file = groupDto.getFileName();
             if (file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
-                System.out.println(fileName);
+                //System.out.println(fileName);
                 fileName = groupDto.getGroup_no() + "." + fileName.split("\\.")[1].toLowerCase(); //프로필이미지 이름 = group_name
                 String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
                 String fpath = path + File.separator + fileName;

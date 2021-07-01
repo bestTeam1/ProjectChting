@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +39,7 @@ public class AdminService {
     //공지페이징
     public List<NoticeDto> listPageNotice(int page) throws Exception {
         //page가 0인경우 1로 바꿔서 처리
-        if(page <= 0) {
+        if (page <= 0) {
             page = 1;
         }
         page = (page - 1) * 10;
@@ -57,7 +58,6 @@ public class AdminService {
 
         return sqlsession.selectOne("pageCountNotice");
     }
-
 
 
     //페이지처리한 글 목록
@@ -87,7 +87,7 @@ public class AdminService {
     //유저 페이징
     public List<NoticeDto> listPageUser(int page) throws Exception {
         //page가 0인경우 1로 바꿔서 처리
-        if(page <= 0) {
+        if (page <= 0) {
             page = 1;
         }
         page = (page - 1) * 10;
@@ -105,6 +105,7 @@ public class AdminService {
 
         return sqlsession.selectOne("pageCountEvent");
     }
+
     //DB테이블에 있는 모든 유저수 계산 후 리턴
     public int pageCountUser() throws Exception {
 
@@ -120,15 +121,16 @@ public class AdminService {
     public void noticeWrite(NoticeDto noticeDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         //if(noticeDto.getFile() != null) {
         //CommonsMultipartFile file = noticeDto.getFileName();
-        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+        if (file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1].toLowerCase();;
+            fileName = noticeDto.getNotice_no() + "." + fileName.split("\\.")[1].toLowerCase();
+            ;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/notice");
             String fpath = path + File.separator + fileName;
 
-            System.out.println("fpath : " + fpath);
+            //System.out.println("fpath : " + fpath);
 
-            if(!fileName.equals("")) {
+            if (!fileName.equals("")) {
                 FileOutputStream fs = new FileOutputStream(fpath);
                 fs.write(file.getBytes());
                 fs.close();
@@ -140,22 +142,24 @@ public class AdminService {
         int result = adminDao.noticeWrite(noticeDto);
 
         if (result < 1) {
-            System.out.println("db write error on write()");
+            //System.out.println("db write error on write()");
         }
     }
+
     //이벤트 글쓰기
     public void eventWrite(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
         //if(noticeDto.getFile() != null) {
         //CommonsMultipartFile file = noticeDto.getFileName();
-        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+        if (file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1].toLowerCase();;
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1].toLowerCase();
+            ;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
             String fpath = path + File.separator + fileName;
 
-            System.out.println("fpath : " + fpath);
+            //System.out.println("fpath : " + fpath);
 
-            if(!fileName.equals("")) {
+            if (!fileName.equals("")) {
                 FileOutputStream fs = new FileOutputStream(fpath);
                 fs.write(file.getBytes());
                 fs.close();
@@ -168,20 +172,22 @@ public class AdminService {
         int result = adminDao.eventWrite(eventDto);
 
         if (result < 1) {
-            System.out.println("db write error on write()");
+            //System.out.println("db write error on write()");
         }
     }
+
     //이벤트 수정
     public void eventModify(EventDto eventDto, HttpServletRequest httpServletRequest, CommonsMultipartFile file) throws Exception {
-        if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+        if (file != null && file.getSize() > 0 && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
-            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1].toLowerCase();;
+            fileName = eventDto.getEvent_no() + "." + fileName.split("\\.")[1].toLowerCase();
+            ;
             String path = httpServletRequest.getSession().getServletContext().getRealPath("/upload/event");
             String fpath = path + File.separator + fileName;
 
-            System.out.println("fpath : " + fpath);
+            //System.out.println("fpath : " + fpath);
 
-            if(!fileName.equals("")) {
+            if (!fileName.equals("")) {
                 FileOutputStream fs = new FileOutputStream(fpath);
                 fs.write(file.getBytes());
                 fs.close();
@@ -194,12 +200,11 @@ public class AdminService {
         int result = adminDao.eventModify(eventDto);
 
         if (result < 1) {
-            System.out.println("db write error on write()");
+            //System.out.println("db write error on write()");
         }
 
 
     }
-
 
 
     //공지사항 삭제하기
@@ -227,6 +232,7 @@ public class AdminService {
 
         return eventDto;
     }
+
     //이벤트 취소
     public int adminEventDisabled(String eventNo) {
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
@@ -239,14 +245,16 @@ public class AdminService {
     public boolean adminNoticeModifyOk(String subject, String content, String noticeNo) {
 
         AdminDao adminDao = sqlsession.getMapper(AdminDao.class);
-        int isModified =  adminDao.adminNoticeModifyOk(subject, content, noticeNo);
+        int isModified = adminDao.adminNoticeModifyOk(subject, content, noticeNo);
 
         if (isModified == 0) {
-            System.out.println("isModified == 0 , Modify failed error");
+            //System.out.println("isModified == 0 , Modify failed error");
             return false;
         } else if (isModified == 1) {
             return true;
-        } else { return false; }
+        } else {
+            return false;
+        }
     }
 
     //게시글 작성에 쓰일 번호

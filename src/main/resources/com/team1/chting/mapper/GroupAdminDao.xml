@@ -6,67 +6,107 @@
 
     <!-- 모임장으로 속해있는 모임 번호와 이름 -->
     <select id="getAdminGroup" resultType="com.team1.chting.dto.GroupDto">
-        select group_no from user_info left join group_user_role gur on user_info.userid = gur.userid
-                                       left join group_role gr on gur.group_role_no = gr.group_role_no
-        where gur.group_role_no = 1 and user_info.userid = #{userid};
+        select group_no
+        from user_info
+                 left join group_user_role gur on user_info.userid = gur.userid
+                 left join group_role gr on gur.group_role_no = gr.group_role_no
+        where gur.group_role_no = 1
+          and user_info.userid = #{userid};
     </select>
 
     <!-- 모임 가입신청 리스트 -->
     <select id="getGroupJoinRequest" resultType="com.team1.chting.dto.UserDto">
-        select gjr.userid, nickname, gender, content, joindate from user_info
-                                                              left join group_join_request gjr on user_info.userid = gjr.userid
-        where group_no = #{groupNo} and enabled = 1;
+        select gjr.userid, nickname, gender, content, joindate
+        from user_info
+                 left join group_join_request gjr on user_info.userid = gjr.userid
+        where group_no = #{groupNo}
+          and enabled = 1;
     </select>
 
     <!-- 모임 가입승인 -->
     <insert id="acceptMember">
-        insert into group_user_role (userid, group_no, group_role_no) values ("${requestId}", "${groupNo}", "2")
+        insert into group_user_role (userid, group_no, group_role_no)
+        values ("${requestId}", "${groupNo}", "2")
     </insert>
 
     <!-- 모임 가입신청 삭제 -->
     <delete id="deleteRequest">
-        delete from group_join_request where userid = "${requestId}" and group_no = "${groupNo}"
+        delete
+        from group_join_request
+        where userid = "${requestId}"
+          and group_no = "${groupNo}"
     </delete>
 
     <!-- userid가 모임장으로 속한 그룹의 멤버리스트 -->
     <select id="getGroupMemberList" resultType="com.team1.chting.dto.UserDto">
-        select gur.userid, nickname, gender, content, gur.group_role_no from user_info left join group_user_role gur on user_info.userid = gur.userid
-                                                                                       left join group_role gr on gur.group_role_no = gr.group_role_no
-        where group_no = (select group_no from user_info left outer join group_user_role gur
-                                                                         on user_info.userid = gur.userid
-                          where gur.userid = "${userid}" and group_role_no = 1) and enabled = 1
+        select gur.userid, nickname, gender, content, gur.group_role_no
+        from user_info
+                 left join group_user_role gur on user_info.userid = gur.userid
+                 left join group_role gr on gur.group_role_no = gr.group_role_no
+        where group_no = (select group_no
+                          from user_info
+                                   left outer join group_user_role gur
+                                                   on user_info.userid = gur.userid
+                          where gur.userid = "${userid}"
+                            and group_role_no = 1)
+          and enabled = 1
     </select>
     <!-- 멤버 추방 -->
     <delete id="banishMembers">
-        delete from group_user_role where userid = "${requestId}" and group_no = "${groupNo}"
+        delete
+        from group_user_role
+        where userid = "${requestId}"
+          and group_no = "${groupNo}"
     </delete>
 
     <!-- 모임장 위임 -->
     <update id="succeedGroupAdmin">
-        UPDATE group_user_role SET group_role_no = "1" where group_no = "${groupNo}" and userid = "${requestUserid}";
-        UPDATE group_user_role SET group_role_no = "2" where group_no = "${groupNo}" and userid = "${adminUserid}";
+        UPDATE group_user_role
+        SET group_role_no = "1"
+        where group_no = "${groupNo}"
+          and userid = "${requestUserid}";
+        UPDATE group_user_role
+        SET group_role_no = "2"
+        where group_no = "${groupNo}"
+          and userid = "${adminUserid}";
     </update>
 
     <!-- 모임장 위임시 이미 모임장인 모임이 있는지 체크 -->
     <select id="duplicateGroupAdminCheck" resultType="com.team1.chting.dto.UserDto">
-        select group_role_no from group_user_role where userid = "${userid}"
+        select group_role_no
+        from group_user_role
+        where userid = "${userid}"
     </select>
     <!-- 자신이 모임장으로 있는 모임의 이름 -->
     <select id="getAdminGroupName" resultType="com.team1.chting.dto.GroupDto">
-        select group_name from group_info where group_no = "${groupNo}"
+        select group_name
+        from group_info
+        where group_no = "${groupNo}"
     </select>
 
     <!-- 자신이 모임장으로 있는 모임 해산 -->
     <delete id="groupDisbandMembers">
-        delete from group_user_role where group_no = "${groupNo}"
+        delete
+        from group_user_role
+        where group_no = "${groupNo}"
     </delete>
     <update id="groupDisbandEnabled">
-        UPDATE group_info SET enabled = 0 where group_no = "${groupNo}"
+        UPDATE group_info
+        SET enabled = 0
+        where group_no = "${groupNo}"
     </update>
 
     <!-- 모임 정보 가져오기 -->
     <select id="selectGroupInfo" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, gi.userid, gi.group_name, gi.content, gi.group_img, gi.area_code, a.area_name, gi.catecode, ic.catename
+        select gi.group_no,
+               gi.userid,
+               gi.group_name,
+               gi.content,
+               gi.group_img,
+               gi.area_code,
+               a.area_name,
+               gi.catecode,
+               ic.catename
         from group_info gi
                  join interest_category ic on gi.catecode = ic.catecode
                  join area a on gi.area_code = a.area_code
@@ -76,7 +116,11 @@
     <!-- 모임 정보 수정 -->
     <update id="updateGroup">
         update group_info
-        set group_name = #{group_name}, content = #{content}, area_code = #{area_code}, catecode = #{catecode}, group_img = #{group_img}
+        set group_name = #{group_name},
+            content    = #{content},
+            area_code  = #{area_code},
+            catecode   = #{catecode},
+            group_img  = #{group_img}
         where group_no = #{group_no}
     </update>
 
@@ -84,11 +128,12 @@
     <select id="selectJoinUser" resultType="int">
         select count(*)as user
         from group_user_role gur
-        join group_info gi on gur.group_no = gi.group_no
-        join user_info ui on gi.userid = ui.userid
+            join group_info gi
+        on gur.group_no = gi.group_no
+            join user_info ui on gi.userid = ui.userid
         where gi.enabled = 1
-        and ui.enabled = 1
-        and gi.group_no = #{groupNo}
+          and ui.enabled = 1
+          and gi.group_no = #{groupNo}
     </select>
 
 

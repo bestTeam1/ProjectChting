@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class GroupController {
         String beforeGroupNo = groupDto.getGroup_no();
 
         //직전에 생성된 모임 번호에 +1
-        String tmpNo1 = beforeGroupNo.substring(0,1); //B
-        int tmpNo2 = Integer.parseInt(beforeGroupNo.substring(1))+1; //0000+1
+        String tmpNo1 = beforeGroupNo.substring(0, 1); //B
+        int tmpNo2 = Integer.parseInt(beforeGroupNo.substring(1)) + 1; //0000+1
         String tmpNo3 = String.format("%05d", tmpNo2);
         String groupNo = tmpNo1.concat(tmpNo3);
 
@@ -76,7 +77,7 @@ public class GroupController {
         String userid = groupDto.getUserid();
         groupService.groupMake(groupDto, request, groupNo);
 
-        return "redirect:/groupJoin.do?userid="+userid;
+        return "redirect:/groupJoin.do?userid=" + userid;
     }
 
     /*
