@@ -28,14 +28,15 @@
 
             <div class="col-lg-6 offset-lg-1 mb-lg-5 align-left">
                 <div class="row">
-                    <a class="col" data-type="image" data-fslightbox="gallery" >
+                    <a class="col" data-type="image" data-fslightbox="gallery">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/upload/chting/disband.png">
                     </a>
                 </div>
             </div>
             <!-- 공유하기 -->
             <div class="col-lg-8 col-12 m-lg-auto text-center">
-                <input type="button" class="banner-button btn rounded-pill btn-danger text-white btn-lg px-4 mt-lg-5 " id="disband" value="모임 해산하기">
+                <input type="button" class="banner-button btn rounded-pill btn-danger text-white btn-lg px-4 mt-lg-5 "
+                       id="disband" value="모임 해산하기">
             </div>
         </div>
     </div>
@@ -43,17 +44,17 @@
 <!-- End Feature Work -->
 
 <!-- Start Footer / Script -->
-<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
     //로그인체크 (백단에서 못막았을 경우)
-    $(function(){
+    $(function () {
         var check = '${sessionScope.get("userData").userid}';
-        if( check == null || check =="" || check == undefined ) {
+        if (check == null || check == "" || check == undefined) {
             Swal.fire({
                 title: '오류',
-                text : '로그인을 해주세요!!'
+                text: '로그인을 해주세요!!'
             }).then(() => {
                 history.go(-1);
             })
@@ -70,14 +71,14 @@
             confirmButtonColor: '#e74a3b',
             cancelButtonColor: '#aaaaaa',
             confirmButtonText: '모임을 해산하겠습니다',
-            cancelButtonText : '취소'
-        }).then ((result) => {
+            cancelButtonText: '취소'
+        }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
                     title: '모임 해산',
-                    text : '모임이 해산되었습니다!'
+                    text: '모임이 해산되었습니다!'
                 }).then(() => {
-                    location.href="groupDisbandOk.do";
+                    location.href = "groupDisbandOk.do";
                 })
             }
         })

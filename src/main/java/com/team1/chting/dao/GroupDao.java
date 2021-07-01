@@ -4,6 +4,7 @@ import com.team1.chting.dto.*;
 import com.team1.chting.dto.PostCategoryDto;
 import com.team1.chting.utils.AdminCriteria;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface GroupDao {
@@ -14,6 +15,7 @@ public interface GroupDao {
     // 게시글 전체 목록
 
     public void wirte(GroupDto gdto);
+
     public List<GroupDto> listAll();
 
     //모임원인지 체크
@@ -39,9 +41,10 @@ public interface GroupDao {
 
     //게시글 작성 파일 따로 업데이트
     public void insertFile(@Param("file") String file, @Param("post_no") String post_no);
+
     // 게시글 상세보기
     // PostDto
-    public PostDto read(@Param("post_no")int post_no);
+    public PostDto read(@Param("post_no") int post_no);
 
     // 게시글 수정
     public int update(PostDto postDto);
@@ -52,17 +55,18 @@ public interface GroupDao {
 
 
     // 게시글 전체 목록
-    public List<PostDto> getPostList(@Param("group_no") String group_no, @Param("page") int page)throws Exception;
+    public List<PostDto> getPostList(@Param("group_no") String group_no, @Param("page") int page) throws Exception;
 
     public List<PostDto> listPageCriPost(AdminCriteria cri) throws Exception;
 
 
-    public int pageCount()throws Exception;
+    public int pageCount() throws Exception;
 
     public int pageCountPost(@Param("group_no") String group_no) throws Exception;
 
     // 댓글목록
-   public List<PostReplyDto> getReply(int post_no);
+    public List<PostReplyDto> getReply(int post_no);
+
     // 댓글입력
     public int replyWrite(PostReplyDto postReplyDto);
 

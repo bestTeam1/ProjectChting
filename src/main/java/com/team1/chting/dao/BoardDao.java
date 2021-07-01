@@ -22,7 +22,7 @@ public interface BoardDao {
 
     //모임검색
     public List<GroupDto> getGroupListBySearch(@Param("category") String category, @Param("search") String search,
-                                               @Param("pageStart") int pageStart, @Param("pageSize")int pageSize);
+                                               @Param("pageStart") int pageStart, @Param("pageSize") int pageSize);
 
     //모임검색 토탈 개수 getGroupListBySearchTotalCount
     public int getGroupListBySearchTotalCount(@Param("category") String category, @Param("search") String search);
@@ -37,11 +37,11 @@ public interface BoardDao {
     public List<DiaryCalDto> getDiaryList(@Param("group_no") String group_no);
 
     //일정 상세보기
-    public DiaryDto getDiaryDetail(@Param("group_no")String group_no, @Param("schedule_no") String schedule_no);
+    public DiaryDto getDiaryDetail(@Param("group_no") String group_no, @Param("schedule_no") String schedule_no);
 
     //일정 삭제하기
-    public void deleteDiary(@Param("group_no")String group_no, @Param("schedule_no") String schedule_no);
+    public void deleteDiary(@Param("group_no") String group_no, @Param("schedule_no") String schedule_no);
 
     //일정 수정하기
-    public void modifyDiary(@Param("group_no")String group_no, @Param("schedule_no") String schedule_no, @Param("modifyDate") String modifyDate);
+    public void modifyDiary(@Param("group_no") String group_no, @Param("schedule_no") String schedule_no, @Param("modifyDate") String modifyDate);
 }

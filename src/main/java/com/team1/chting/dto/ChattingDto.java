@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class ChattingDto {
-	private String group_no;
-	private String userid;
-	private String message;
-	private String writeDate;
-	private String messageType;
+    private String group_no;
+    private String userid;
+    private String message;
+    private String writeDate;
+    private String messageType;
 }

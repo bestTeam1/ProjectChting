@@ -113,7 +113,8 @@
         </div>
     </form>
     <div style="display: flex; justify-content: center">
-        <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5" style="margin-right: 10px;"
+        <input type="submit" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5"
+               style="margin-right: 10px;"
                id="submit" value="완료"/>
         <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5"
                 onclick="location.href='board_list.do?group_no=${group_no}'">목록
@@ -145,7 +146,8 @@
                     text: '게시글 제목은 20자 이내로 입력해 주세요!',
                     confirmButtonColor: '#A0A0FF'
                 });
-            };
+            }
+            ;
         });
 
         //글 내용 keyUP
@@ -164,7 +166,8 @@
                     text: '글 내용은 2000자 이내로 입력해 주세요!',
                     confirmButtonColor: '#A0A0FF'
                 });
-            };
+            }
+            ;
         });
 
     });
@@ -187,7 +190,7 @@
         } else if ($('#content').val().length < 2) {
             Swal.fire("내용을 최소 2자 이상 입력해 주세요 !")
             return;
-        }  else {
+        } else {
             $('#write').submit();
         }
     });

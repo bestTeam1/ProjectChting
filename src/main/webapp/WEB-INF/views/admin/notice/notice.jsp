@@ -90,7 +90,9 @@
                 <p class="mb-4">Chting에 등록되어있는 공지사항을 관리하세요</p>
 
                 <div class="btn-toolbar" style="margin-bottom: 30px">
-                    <button type="button" class="btn btn-primary m-auto" id="diarySubmit" onclick="location.href = 'write.do?type=notice'">공지사항 등록</button>
+                    <button type="button" class="btn btn-primary m-auto" id="diarySubmit"
+                            onclick="location.href = 'write.do?type=notice'">공지사항 등록
+                    </button>
                 </div>
 
                 <div class="card shadow mb-4">
@@ -109,8 +111,10 @@
                                     <tr>
                                         <td>${i.notice_no}</td>
                                         <td>${i.nickname}</td>
-                                        <td><a href="${pageContext.request.contextPath}/admin/adminNoticeDetail.do?noticeNo=${i.notice_no}&page=${pm.cri.page}">${i.subject}</a></td>
-                                        <td><fmt:formatDate value="${i.writedate}" pattern="yyyy-MM-dd (E) HH:mm" /></td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/admin/adminNoticeDetail.do?noticeNo=${i.notice_no}&page=${pm.cri.page}">${i.subject}</a>
+                                        </td>
+                                        <td><fmt:formatDate value="${i.writedate}" pattern="yyyy-MM-dd (E) HH:mm"/></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -133,7 +137,8 @@
                         <c:otherwise>
                             <div class="btn-group me-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary text-white"
-                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminNotice.do?page=${pm.cri.page-1}'">Previous
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminNotice.do?page=${pm.cri.page-1}'">
+                                    Previous
                                 </button>
                             </div>
                         </c:otherwise>
@@ -187,7 +192,8 @@
                         <c:when test="${pm.cri.page < pm.endPage}">
                             <div class="btn-group" role="group" aria-label="Third group">
                                 <button type="button" class="btn btn-secondary text-white"
-                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminNotice.do?&page=${pm.cri.page+1}'">Next
+                                        onclick="location.href='${pageContext.request.contextPath}/admin/adminNotice.do?&page=${pm.cri.page+1}'">
+                                    Next
                                 </button>
                             </div>
                         </c:when>

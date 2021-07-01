@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -40,7 +41,7 @@ public class GroupUserController {
         //로그인한 세션의 userid
         HttpSession session = httpServletRequest.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        if(sessionDto == null) {// 비로그인유저
+        if (sessionDto == null) {// 비로그인유저
             return "sign/login";
         }
         String userid = sessionDto.getUserid();
@@ -89,7 +90,7 @@ public class GroupUserController {
         //로그인한 세션의 userid
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        if(sessionDto == null) {// 비로그인유저
+        if (sessionDto == null) {// 비로그인유저
             userid = "AnonymousNonLoginUser";
         } else {
             userid = sessionDto.getUserid();
@@ -117,10 +118,10 @@ public class GroupUserController {
 
         return "board/board_main";
     }
-    
+
     // 게시물 리스트
     @RequestMapping(value = "board_list.do", method = RequestMethod.GET)
-    public String postList(@RequestParam("group_no") String group_no, HttpServletRequest request , AdminCriteria cri, Model model) throws Exception {
+    public String postList(@RequestParam("group_no") String group_no, HttpServletRequest request, AdminCriteria cri, Model model) throws Exception {
 
         //로그인한 세션의 userid
         HttpSession session = request.getSession();
@@ -130,7 +131,7 @@ public class GroupUserController {
         //모임원인지 체크, true = 모임원
         boolean check = groupservice.checkMember(group_no, userid);
 
-        if(check == false) {
+        if (check == false) {
             return "error/hasNoRoleError";
         }
 
@@ -157,7 +158,7 @@ public class GroupUserController {
         // model.addAttribute("postDto", postDto);
 
         List<PostCategoryDto> postCategoryList = groupservice.getPostCategory();
-        model.addAttribute("postCategory",postCategoryList);
+        model.addAttribute("postCategory", postCategoryList);
 
         model.addAttribute("group_no", group_no);
         return "board/board_write";
@@ -215,7 +216,7 @@ public class GroupUserController {
         boolean u = groupservice.updateOk(postDto, file, httpServletRequest);
 
         if (u != true) {
-            System.out.println("게시판 수정 실패");
+            //System.out.println("게시판 수정 실패");
         }
 
         return "redirect:board_detail.do?post_no=" + postDto.getPost_no() + "&userid=" + postDto.getUserid();
@@ -233,7 +234,7 @@ public class GroupUserController {
         //모임원인지 체크, true = 모임원
         boolean check = groupservice.checkMember(group_no, userid);
 
-        if(check == false) {
+        if (check == false) {
             return "error/hasNoRoleError";
         }
 
@@ -255,7 +256,7 @@ public class GroupUserController {
         //모임원인지 체크, true = 모임원
         boolean check = groupservice.checkMember(group_no, useridChk);
 
-        if(check == false) {
+        if (check == false) {
             return "error/hasNoRoleError";
         }
 

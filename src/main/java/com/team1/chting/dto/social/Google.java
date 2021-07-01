@@ -1,6 +1,7 @@
 package com.team1.chting.dto.social;
 
 import lombok.Data;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -19,13 +20,13 @@ public class Google extends SocialData {
         Iterator<String> Iter_userDataSet = userDataSet.iterator();
         while (Iter_userDataSet.hasNext()) {
             String next = Iter_userDataSet.next();
-            if(next.equals("sub")) {
+            if (next.equals("sub")) {
                 this.userid = userData.get(next).toString();
-            }else if(next.equals("name")) {
+            } else if (next.equals("name")) {
                 this.nickname = userData.get(next).toString();
-            }else if(next.equals("email")) {
+            } else if (next.equals("email")) {
                 this.email = userData.get(next).toString();
-            }else if(next.equals("picture")) {
+            } else if (next.equals("picture")) {
                 this.profile_img = userData.get(next).toString();
             }
         }

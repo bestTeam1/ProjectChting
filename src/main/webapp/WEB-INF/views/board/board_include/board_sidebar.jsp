@@ -14,11 +14,12 @@
         <a href="${pageContext.request.contextPath}/board_list.do?group_no=${group_no}">게시판</a>
         <a href="${pageContext.request.contextPath}/board_diary.do?group_no=${group_no}">일정</a>
         <a href="${pageContext.request.contextPath}/board_chatting.do?group_no=${group_no}">채팅</a>
-    </div><br>
+    </div>
+    <br>
 
 </section>
 <script>
-    window.onload = function(){
+    window.onload = function () {
         var userid = '${sessionScope.get("userData").userid}';
         let authority_ = '';
 
@@ -36,7 +37,7 @@
                         let str = "<a href='${pageContext.request.contextPath}/groupJoin.do?userid=" + userid + "'>모임관리</a>";
                         $('#mySidenav').append(str);
                     }
-                }, error: function(Http, status, error) {
+                }, error: function (Http, status, error) {
                     console.log("Http : " + Http + ", status : " + status + ", error : " + error);
                 }
             });

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,16 +54,16 @@ public class LoginService {
     public int signUpReg(SignUpDto signUpDto, HttpServletRequest request, List<String> interest) throws Exception {
         int result1 = 0;
         int result2 = 0;
-        if(signUpDto.getFileName() != null) {
+        if (signUpDto.getFileName() != null) {
             CommonsMultipartFile file = signUpDto.getFileName();
-            if(file != null && file.getSize() > 0 && !file.isEmpty()) {
+            if (file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
                 //프로필이미지 이름 = userid.확장자
                 fileName = signUpDto.getUserid() + "." + fileName.split("\\.")[1].toLowerCase();
                 String path = request.getSession().getServletContext().getRealPath("/upload/profileimg");
                 String fpath = path + File.separator + fileName;
 
-                if(!fileName.equals("")) {
+                if (!fileName.equals("")) {
                     FileOutputStream fs = new FileOutputStream(fpath);
                     fs.write(file.getBytes());
                     fs.close();
@@ -71,7 +72,7 @@ public class LoginService {
             }
         }
         List<InterestCategoryDto> list = new ArrayList<>();
-        for(String inter : interest) {
+        for (String inter : interest) {
             InterestCategoryDto interestCategoryDto = new InterestCategoryDto();
             interestCategoryDto.setCatecode(inter);
             interestCategoryDto.setUserid(signUpDto.getUserid());
@@ -83,7 +84,7 @@ public class LoginService {
         try {
             result1 = loginDao.insertUser(signUpDto);
             result2 = interestDao.insertInterestCategory(list);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(" [!] Transaction Error :: " + e.getMessage());
             throw e;
         }

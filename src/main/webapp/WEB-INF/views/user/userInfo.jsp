@@ -46,7 +46,7 @@
                     <h2 class="h3 text-center"><c:out value="${userInfoBasic.nickname}"/></h2>
                     <br>
                     <i class="fas fa-quote-left"></i>
-                        ${fn:replace(userInfoBasic.content, newLine, "<br>")}
+                    ${fn:replace(userInfoBasic.content, newLine, "<br>")}
                     <i class="fas fa-quote-right"></i>
                 </ul>
             </div>
