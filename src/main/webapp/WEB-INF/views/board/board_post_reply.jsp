@@ -22,14 +22,14 @@
                            id="submit" onclick="replyWrite()" value="댓글등록"/>
 
 
-                <div id="commentList">
+                    <div id="commentList">
 
-                </div>
-                <b3 id="cCnt"></b3>
+                    </div>
+                    <b3 id="cCnt"></b3>
 
-                <div class="text" id="text">
+                    <div class="text" id="text">
 
-                </div>
+                    </div>
 
                 </div>
             </div>
@@ -47,7 +47,7 @@
      * 댓글 등록하기(Ajax)
      */
     function replyWrite() {
-        if($('#content').val() == "") {
+        if ($('#content').val() == "") {
             Swal.fire('내용을 입력해주세요 !')
             return;
         }

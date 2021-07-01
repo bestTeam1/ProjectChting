@@ -13,7 +13,7 @@ public class TestDto implements Serializable {
     private Properties properties;
     private String user_role_name;
 
-    public String getProfile_img(){
+    public String getProfile_img() {
         return properties.profile_image;
     }
 

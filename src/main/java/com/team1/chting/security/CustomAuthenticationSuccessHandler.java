@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,15 +36,15 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        System.out.println("getName" + authentication.getName());
 //        System.out.println("getCredentials" + authentication.getCredentials());
 //        System.out.println("toString :: " + authentication.getAuthorities().toString());
-        System.out.println((authentication.getPrincipal().getClass()));
+        //System.out.println((authentication.getPrincipal().getClass()));
         String redirectURL = "/myGroup.do";
         Collection<? extends GrantedAuthority> authList = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> authList_iterator = authList.iterator();
         while (authList_iterator.hasNext()) {
             GrantedAuthority authority = authList_iterator.next();
-            if(authority.getAuthority().equals("ROLE_GUEST") || authority.getAuthority().equals("GUEST")) {
+            if (authority.getAuthority().equals("ROLE_GUEST") || authority.getAuthority().equals("GUEST")) {
                 redirectURL = "/signUp.do";
-            }else {
+            } else {
                 LoginDto loginDto = loginService.isUser(authentication.getName());
                 httpServletRequest.getSession().setAttribute("userData", new SessionDto(loginDto));
             }

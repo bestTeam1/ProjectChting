@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,17 +23,17 @@ public class GroupService {
     @Autowired
     private SqlSession sqlsession;
 
-public boolean checkMember(String group_no, String userid) {
-    GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
-    GroupUserRoleDto groupUserRoleDto = groupDao.checkMember(group_no, userid);
+    public boolean checkMember(String group_no, String userid) {
+        GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
+        GroupUserRoleDto groupUserRoleDto = groupDao.checkMember(group_no, userid);
 
-    try {
-        String hasRole = groupUserRoleDto.getGroup_no(); //null이 있으면 예외발생
-        return true;
-    } catch (Exception e) {
-        return false;
+        try {
+            String hasRole = groupUserRoleDto.getGroup_no(); //null이 있으면 예외발생
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-}
     /*
       게시판CRUD
       작성자 : 현상진
@@ -62,9 +63,9 @@ public boolean checkMember(String group_no, String userid) {
         }
         page = (page - 1) * 10;
 
-        System.out.println("------------------");
-        System.out.println(group_no);
-        System.out.println(page);
+        //System.out.println("------------------");
+        //System.out.println(group_no);
+        //System.out.println(page);
 
         List<PostDto> postlist = new ArrayList<PostDto>();
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
@@ -127,7 +128,7 @@ public boolean checkMember(String group_no, String userid) {
             }
             dto.setFile(fileName);
         }
-        System.out.println(dto.toString());
+        //System.out.println(dto.toString());
 
         GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
         int u = groupDao.update(dto);
@@ -220,7 +221,7 @@ public boolean checkMember(String group_no, String userid) {
             CommonsMultipartFile file = groupDto.getFileName();
             if (file != null && file.getSize() > 0 && !file.isEmpty()) {
                 String fileName = file.getOriginalFilename();
-                System.out.println(fileName);
+                //System.out.println(fileName);
                 fileName = groupNo + "." + fileName.split("\\.")[1].toLowerCase(); //프로필이미지 이름 = group_name
                 String path = request.getSession().getServletContext().getRealPath("/upload/groupimg");
                 String fpath = path + File.separator + fileName;
@@ -262,14 +263,14 @@ public boolean checkMember(String group_no, String userid) {
         try {
             GroupDao groupDao = sqlsession.getMapper(GroupDao.class);
             result = groupDao.insertGroupJoinRequest(dto);
-            System.out.println(result);
+            //System.out.println(result);
             return result;
         } catch (DataIntegrityViolationException e) {
             result = -1;
             System.out.println(e.getMessage());
             return result;
         } catch (Exception e) {
-            System.out.println(result);
+            //System.out.println(result);
             return result;
         }
     }

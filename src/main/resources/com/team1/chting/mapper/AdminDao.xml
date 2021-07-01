@@ -6,7 +6,8 @@
     <!-- 페이지 정보를 10개씩 가져오기 -->
     <select id="listPageNotice" resultType="com.team1.chting.dto.NoticeDto">
         select notice_no, ui.userid, subject, writedate, nickname, file
-        from notice left join user_info ui on notice.userid = ui.userid
+        from notice
+                 left join user_info ui on notice.userid = ui.userid
         where notice.enabled = 1
         order by notice_no desc, writedate desc limit ${page}, 10
     </select>
@@ -14,112 +15,171 @@
     <!-- 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriNotice" resultType="com.team1.chting.dto.NoticeDto">
         select notice_no, ui.userid, subject, writedate, nickname, file
-        from notice left join user_info ui on notice.userid = ui.userid
+        from notice
+                 left join user_info ui on notice.userid = ui.userid
         where notice.enabled = 1
         order by notice_no desc, writedate desc
-            limit #{pageStart},#{pageSize}
+            limit #{pageStart}, #{pageSize}
     </select>
 
 
     <select id="pageCountNotice" resultType="int">
-        select count(*) from notice where enabled = 1
+        select count(*)
+        from notice
+        where enabled = 1
     </select>
 
     <select id="getNoticeDetail" resultType="com.team1.chting.dto.NoticeDto">
-        select notice_no, userid, subject, content, file, writedate from notice where notice_no = #{noticeNo}
+        select notice_no, userid, subject, content, file, writedate
+        from notice
+        where notice_no = #{noticeNo}
     </select>
 
     <select id="getEventDetail" resultType="com.team1.chting.dto.EventDto">
-        select event_no, subject, content, startdate, enddate, writedate, file, event_img, enabled
-        from event where event_no = #{eventNo}
+        select event_no,
+               subject,
+               content,
+               startdate,
+               enddate,
+               writedate,
+               file,
+               event_img,
+               enabled
+        from event
+        where event_no = #{eventNo}
     </select>
 
     <!-- 게시판 글 enabled = 0  -->
     <update id="adminDeleteBoard">
-        update ${type} set enabled = 0 where ${type}_no = #{num}
+        update ${type}
+        set enabled = 0
+        where ${type}_no = #{num}
     </update>
 
     <!-- 이벤트 취소 enabled = -1 -->
     <update id="adminEventDisabled">
-        update event set enabled = -1 where event_no = ${eventNo}
+        update event
+        set enabled = -1
+        where event_no = ${eventNo}
     </update>
 
     <!-- 공지사항 수정 -->
     <update id="adminNoticeModifyOk">
-        update notice set subject = "${subject}", content = "${content}" where notice_no = #{noticeNo}
+        update notice
+        set subject = "${subject}",
+            content = "${content}"
+        where notice_no = #{noticeNo}
     </update>
 
     <!-- 회원 정보를 10개씩 가져오기 -->
     <select id="listPageUser" resultType="com.team1.chting.dto.UserDto">
-        select userid, gender, nickname, email, a.area_name as first_area_name, a2.area_name as second_area_name,
-               enabled, joindate from user_info
-                                          left join area a on user_info.first_area = a.area_code
-                                          left join area a2 on user_info.second_area = a2.area_code
+        select userid,
+               gender,
+               nickname,
+               email,
+               a.area_name  as first_area_name,
+               a2.area_name as second_area_name,
+               enabled,
+               joindate
+        from user_info
+                 left join area a on user_info.first_area = a.area_code
+                 left join area a2 on user_info.second_area = a2.area_code
         order by joindate desc limit ${page}, 10
     </select>
 
     <!-- 이벤트 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriEvent" resultType="com.team1.chting.dto.EventDto">
-        select event_no, subject, startdate, enddate, writedate, file, event_img, enabled
-        from event where enabled >= 0 order by event_no desc, enabled desc limit #{pageStart},#{pageSize}
+        select event_no,
+               subject,
+               startdate,
+               enddate,
+               writedate,
+               file,
+               event_img,
+               enabled
+        from event
+        where enabled >= 0
+        order by event_no desc, enabled desc limit #{pageStart}, #{pageSize}
     </select>
 
     <!-- 회원 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriUser" resultType="com.team1.chting.dto.UserDto">
-        select userid, gender, nickname, email, a.area_name as first_area_name, a2.area_name as second_area_name,
-               enabled, joindate from user_info
-                                          left join area a on user_info.first_area = a.area_code
-                                          left join area a2 on user_info.second_area = a2.area_code
-        order by joindate desc limit #{pageStart},#{pageSize}
+        select userid,
+               gender,
+               nickname,
+               email,
+               a.area_name  as first_area_name,
+               a2.area_name as second_area_name,
+               enabled,
+               joindate
+        from user_info
+                 left join area a on user_info.first_area = a.area_code
+                 left join area a2 on user_info.second_area = a2.area_code
+        order by joindate desc limit #{pageStart}, #{pageSize}
     </select>
 
     <!-- 모임 페이지 정보를 지정한 크기만큼 가져오기 -->
     <select id="listPageCriGroup" resultType="com.team1.chting.dto.GroupDto">
-        select group_no, group_name, group_img, area_name, catename, opendate, enabled,
-               (select count (*) from group_user_role where group_info.group_no = group_user_role.group_no) as join_user
-        from group_info left join area a on group_info.area_code = a.area_code
-                        left join interest_category ic on group_info.catecode = ic.catecode
-        order by opendate desc limit #{pageStart},#{pageSize}
+        select group_no,
+               group_name,
+               group_img,
+               area_name,
+               catename,
+               opendate,
+               enabled,
+               (select count(*) from group_user_role where group_info.group_no = group_user_role.group_no) as join_user
+        from group_info
+                 left join area a on group_info.area_code = a.area_code
+                 left join interest_category ic on group_info.catecode = ic.catecode
+        order by opendate desc limit #{pageStart}, #{pageSize}
     </select>
 
     <!-- 이벤트 row 갯수 -->
     <select id="pageCountEvent" resultType="int">
-        select count(*) from event where enabled >= 0
+        select count(*)
+        from event
+        where enabled >= 0
     </select>
 
     <!-- 회원 row 갯수 -->
     <select id="pageCountUser" resultType="int">
-        select count(*) from user_info
+        select count(*)
+        from user_info
     </select>
 
     <!-- 모임 row 갯수 -->
     <select id="pageCountGroup" resultType="int">
-        select count(*) from group_info
+        select count(*)
+        from group_info
     </select>
 
     <!-- 공지사항 글쓰기 -->
     <insert id="noticeWrite" parameterType="com.team1.chting.dto.NoticeDto">
-        insert into notice (userid, subject, content, file, enabled) VALUES ('${userid}','${subject}','${content}','${file}', '1')
+        insert into notice (userid, subject, content, file, enabled)
+        VALUES ('${userid}', '${subject}', '${content}', '${file}', '1')
     </insert>
 
     <!-- 이벤트 글쓰기 -->
     <insert id="eventWrite" parameterType="com.team1.chting.dto.EventDto">
-        insert into event (userid, subject, content, startdate, enddate, file, enabled) VALUES ('${userid}','${subject}','${content}', '${startdate}','${enddate}', '${file}', '1')
+        insert into event (userid, subject, content, startdate, enddate, file, enabled)
+        VALUES ('${userid}', '${subject}', '${content}', '${startdate}', '${enddate}', '${file}', '1')
     </insert>
 
     <!-- 이벤트 수정 -->
     <update id="eventModify" parameterType="com.team1.chting.dto.EventDto">
-        update event set subject = "${subject}", content = "${content}", startdate = "${startdate}", enddate = "${enddate}", file = "${file}",
+        update event set subject = "${subject}", content = "${content}", startdate = "${startdate}", enddate =
+        "${enddate}", file = "${file}",
         <choose>
-            <when test='enddate > currentDate'> enabled = 1 </when>
-            <otherwise> enabled = 0</otherwise>
+            <when test='enddate > currentDate'>enabled = 1</when>
+            <otherwise>enabled = 0</otherwise>
         </choose>
         where event_no = #{event_no}
     </update>
 
     <!-- 최신 글번호 가져오기 -->
     <select id="getWriteNo" resultType="int">
-        select max(${type}_no) from ${type};
+        select max(${type}_ no)
+        from ${type};
     </select>
 
 </mapper>

@@ -6,7 +6,7 @@
 
 <body>
 <!-- Header / <head> -->
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <!-- Start Banner Hero -->
 <div class="banner-wrapper bg-light">
@@ -29,7 +29,8 @@
                             <br>모임 채팅방을 통해 활동하실 수 있습니다. :)
                         </p>
                         <br>
-                        <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="${pageContext.request.contextPath}/login" role="button">Chting 시작하기</a>
+                        <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4"
+                           href="${pageContext.request.contextPath}/login" role="button">Chting 시작하기</a>
                     </div>
                 </div>
             </div>
@@ -73,11 +74,13 @@
                         </div>
                     </div>
                     </c:forEach>
-                    <h1 class="carousel-control-prev h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                    <h1 class="carousel-control-prev h1 text-primary text-decoration-none"
+                        href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
                         <i class='bx bx-lg bx-chevron-left px-5'></i>
                         <span class="visually-hidden">Previous</span>
                     </h1>
-                    <h1 class="carousel-control-next h1 text-primary text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                    <h1 class="carousel-control-next h1 text-primary text-decoration-none"
+                        href="#carouselExampleIndicators" role="button" data-bs-slide="next">
                         <i class='bx bx-lg bx-chevron-right'></i>
                         <span class="visually-hidden">Next</span>
                     </h1>
@@ -93,7 +96,9 @@
                 <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
             </div>
             <div class="banner-content col-lg-7 mt-3 align-self-end">
-                <h2 class="h2 mt-5" style="text-shadow: 2px 2px 4px gray"><img src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" width="30%" height="30%" style="margin-left: -20px; margin-bottom: -20px;"></h2>
+                <h2 class="h2 mt-5" style="text-shadow: 2px 2px 4px gray"><img
+                        src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" width="30%" height="30%"
+                        style="margin-left: -20px; margin-bottom: -20px;"></h2>
                 <p class="text-muted pb-4 light-300">
                 <h3 style="color: #6266ea">당신의 취미를 공유해보세요.</h3>
                 <strong style="color: #acabfe">나의 취미, 당신의 취미</strong>
@@ -172,24 +177,29 @@
             <div class="col-lg-6 offset-lg-1 mb-lg-5 align-left">
                 <div class="row">
                     <a class="col" data-type="image" data-fslightbox="gallery">
-                        <img class="img-fluid" src="https://cdn.notefolio.net/img/c1/0a/c10a946a80c5f3107b6f8b51ee4d7bb5a21b2daf1ac66e3764b5aef8a2197498_v1.jpg">
+                        <img class="img-fluid"
+                             src="https://cdn.notefolio.net/img/c1/0a/c10a946a80c5f3107b6f8b51ee4d7bb5a21b2daf1ac66e3764b5aef8a2197498_v1.jpg">
                     </a>
                     <a class="col" data-type="image" data-fslightbox="gallery">
-                        <img class="img-fluid" src="https://cdn.notefolio.net/img/b8/6a/b86a75339b92f85854dc6afcad80dc79289f3a8e58caf8ea73de7a2ab7b862b5_v1.jpg">
+                        <img class="img-fluid"
+                             src="https://cdn.notefolio.net/img/b8/6a/b86a75339b92f85854dc6afcad80dc79289f3a8e58caf8ea73de7a2ab7b862b5_v1.jpg">
                     </a>
                 </div>
                 <div class="row pt-4">
                     <a class="col" data-type="image" data-fslightbox="gallery">
-                        <img class="img-fluid" src="https://cdn.notefolio.net/img/ba/8c/ba8c11b761d1852ba89fc14a2109454cee52ae7f8612ac7935788f6585a20511_v1.jpg">
+                        <img class="img-fluid"
+                             src="https://cdn.notefolio.net/img/ba/8c/ba8c11b761d1852ba89fc14a2109454cee52ae7f8612ac7935788f6585a20511_v1.jpg">
                     </a>
                     <a class="col" data-type="image" data-fslightbox="gallery">
-                        <img class="img-fluid" src="https://cdn.notefolio.net/img/6c/97/6c97a0c6dd8da0cef7cf1ef605bbf2c4a9722f65f39bbf31bb571d33ee29f9bc_v1.jpg">
+                        <img class="img-fluid"
+                             src="https://cdn.notefolio.net/img/6c/97/6c97a0c6dd8da0cef7cf1ef605bbf2c4a9722f65f39bbf31bb571d33ee29f9bc_v1.jpg">
                     </a>
                 </div>
             </div>
             <!-- 공유하기 -->
             <div class="col-lg-8 col-12 m-lg-auto text-center">
-                <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5" id="shareBtn" value="Chting 공유하기">
+                <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+                       id="shareBtn" value="Chting 공유하기">
             </div>
         </div>
     </div>
@@ -217,13 +227,16 @@
         <div class="col-md-12">
             <ul class="nav d-flex justify-content-center">
                 <li class="nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" href="#" data-filter=".project">ALL</a>
+                    <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300"
+                       href="#" data-filter=".project">ALL</a>
                 </li>
                 <li class="filter-btn nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".new">New</a>
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#"
+                       data-filter=".new">New</a>
                 </li>
                 <li class="filter-btn nav-item mx-lg-4">
-                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".best">Best</a>
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#"
+                       data-filter=".best">Best</a>
                 </li>
             </ul>
         </div>
@@ -234,12 +247,16 @@
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
         <c:forEach var="i" items="${bestGroupList}">
             <div class="col-xl-3 col-md-4 col-sm-6 all best project">
-                <a href="board_main.do?group_no=${i.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                    <img class="service card-img" src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}" alt="Card image">
+                <a href="board_main.do?group_no=${i.group_no}"
+                   class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <img class="service card-img"
+                         src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}" alt="Card image">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
                             <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
-                            <p class="card-text">${i.group_name}<br><hr>${i.content}
+                            <p class="card-text">${i.group_name}<br>
+                            <hr>
+                                ${i.content}
                             </p>
                         </div>
                     </div>
@@ -248,12 +265,16 @@
         </c:forEach>
         <c:forEach var="i" items="${newGroupList}">
             <div class="col-xl-3 col-md-4 col-sm-6 all new project">
-                <a href="board_main.do?group_no=${i.group_no}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                    <img class="service card-img" src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}" alt="Card image">
+                <a href="board_main.do?group_no=${i.group_no}"
+                   class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <img class="service card-img"
+                         src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}" alt="Card image">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
                             <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300"> ${i.area_name} | ${i.catename} </span>
-                            <p class="card-text">${i.group_name}<br><hr>${i.content}
+                            <p class="card-text">${i.group_name}<br>
+                            <hr>
+                                ${i.content}
                             </p>
                         </div>
                     </div>
@@ -265,7 +286,7 @@
 <!-- End Service -->
 
 <!-- Start Footer / Script -->
-<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 </body>
 

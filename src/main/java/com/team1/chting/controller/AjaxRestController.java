@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class AjaxRestController {
     private UserService userService;
 
     //노출여부가 활성화된 이벤트
-    @RequestMapping(value="/main/event", method=RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/main/event", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<String> enabledEvent() {
         List<EventDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
@@ -41,15 +42,15 @@ public class AjaxRestController {
             list = eventService.enabledEvent();
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
         }
     }
 
     //공지사항 2개
-    @RequestMapping(value="/main/notice", method=RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> recentlyNotice(){
+    @RequestMapping(value = "/main/notice", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> recentlyNotice() {
         List<NoticeDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
@@ -57,44 +58,44 @@ public class AjaxRestController {
             list = noticeService.recentlyNotice();
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
         }
     }
 
     //비로그인 -> 랜덤모임 10개
-    @RequestMapping(value="/main/nologin", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> randomGroup(){
+    @RequestMapping(value = "/main/nologin", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> randomGroup() {
         List<GroupDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
         try {
             list = groupService.randomGroup();
-            for(GroupDto dto : list) {
-                if(dto.getGroup_img() == null) {
+            for (GroupDto dto : list) {
+                if (dto.getGroup_img() == null) {
                     dto.setGroup_img("default.jpg");
                 }
             }
             result = objmap.writeValueAsString(list);
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
         }
     }
 
     //로그인 -> 지역모임 5개
-    @RequestMapping(value="/main/loginedArea/{userid}", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> areaGroup(@PathVariable String userid){
+    @RequestMapping(value = "/main/loginedArea/{userid}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> areaGroup(@PathVariable String userid) {
         List<GroupDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
         UserDto userDto = userService.selectAreacode(userid);
         String result = "";
         try {
             list = groupService.areaGroup(userid);
-            for(GroupDto dto : list) {
-                if(dto.getGroup_img() == null) {
+            for (GroupDto dto : list) {
+                if (dto.getGroup_img() == null) {
                     dto.setGroup_img("default.jpg");
                 }
             }
@@ -107,15 +108,15 @@ public class AjaxRestController {
     }
 
     //로그인 -> 관심사모임 5개
-    @RequestMapping(value="/main/loginedCatecode/{userid}", method= RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> catecodeGroup(@PathVariable String userid){
+    @RequestMapping(value = "/main/loginedCatecode/{userid}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> catecodeGroup(@PathVariable String userid) {
         List<GroupDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
         try {
             list = groupService.catecodeGroup(userid);
-            for(GroupDto dto : list) {
-                if(dto.getGroup_img() == null) {
+            for (GroupDto dto : list) {
+                if (dto.getGroup_img() == null) {
                     dto.setGroup_img("default.jpg");
                 }
             }
@@ -128,8 +129,8 @@ public class AjaxRestController {
     }
 
     //사이드바, 로그인유저 -> 자신이 속한 그룹리스트
-    @RequestMapping(value="/side/groupList/{userid}", method=RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> userGroupList(@PathVariable String userid){
+    @RequestMapping(value = "/side/groupList/{userid}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<String> userGroupList(@PathVariable String userid) {
         List<GroupDto> list = null;
         ObjectMapper objmap = new ObjectMapper();
         String result = "";
@@ -170,11 +171,11 @@ public class AjaxRestController {
 
     @RequestMapping(value = "/group/insert", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     public ResponseEntity<String> insertGroupJoinRequest(@RequestBody JoinRequestDto dto) {
-        System.out.println(dto.toString());
+        //System.out.println(dto.toString());
         int result = groupService.insertGroupJoinRequest(dto);
-        if(result > 0) {
+        if (result > 0) {
             return new ResponseEntity<String>("success", HttpStatus.OK);
-        } else if(result == -1) {
+        } else if (result == -1) {
             return new ResponseEntity<String>("warning", HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("error", HttpStatus.BAD_REQUEST);
@@ -185,7 +186,7 @@ public class AjaxRestController {
     public ResponseEntity<String> deleteGroupUserRole(@RequestBody GroupUserRoleDto dto) {
         int result = groupService.deleteGroupUserRole(dto);
 
-        if(result > 0) {
+        if (result > 0) {
             return new ResponseEntity<String>("success", HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("error", HttpStatus.BAD_REQUEST);

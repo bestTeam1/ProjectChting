@@ -2,6 +2,7 @@ package com.team1.chting.dao;
 
 import com.team1.chting.dto.EventDto;
 import com.team1.chting.dto.GroupDto;
+
 import java.util.List;
 
 public interface HomeDao {

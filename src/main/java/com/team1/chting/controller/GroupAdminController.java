@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -34,17 +35,16 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        if(sessionDto == null) {// 비로그인유저
+        if (sessionDto == null) {// 비로그인유저
             return "sign/login";
         }
         String userid = sessionDto.getUserid();
 
 
-
         //로그인한 유저가 속해있는
         GroupDto adminGroup = groupAdminService.getAdminGroup(userid);
         String groupNo = adminGroup.getGroup_no();
-        if(groupNo == null) { //모임장으로 속해있는 모임이 없다면?
+        if (groupNo == null) { //모임장으로 속해있는 모임이 없다면?
             return "error/HasNoGroupError"; //모임장없음 에러페이지로 이동
         }
         List<UserDto> groupJoinRequest = groupAdminService.getGroupJoinRequest(groupNo);
@@ -64,7 +64,7 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        if(sessionDto == null) {// 비로그인유저
+        if (sessionDto == null) {// 비로그인유저
             return "sign/login";
         }
         String userid = sessionDto.getUserid();
@@ -90,7 +90,7 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        if(sessionDto == null) {// 비로그인유저
+        if (sessionDto == null) {// 비로그인유저
             return "sign/login";
         }
         String userid = sessionDto.getUserid();
@@ -99,7 +99,7 @@ public class GroupAdminController {
         GroupDto groupDto = groupAdminService.getAdminGroup(userid);
         String groupNo = groupDto.getGroup_no();
 
-        if(groupNo == null) { //페이지 이동 시도시 모임장으로 속한 모임이 없다면 모임장없음 에러페이지로 이동
+        if (groupNo == null) { //페이지 이동 시도시 모임장으로 속한 모임이 없다면 모임장없음 에러페이지로 이동
             return "error/HasNoGroupError";
         }
 
@@ -123,7 +123,7 @@ public class GroupAdminController {
 
         HttpSession session = request.getSession();
         SessionDto sessionDto = (SessionDto) session.getAttribute("userData");
-        if(sessionDto == null) {// 비로그인유저
+        if (sessionDto == null) {// 비로그인유저
             return "sign/login";
         }
         String userid = sessionDto.getUserid();
@@ -166,6 +166,6 @@ public class GroupAdminController {
 
         groupAdminService.updateGroup(groupDto, request);
 
-        return "redirect:board_main.do?group_no="+groupNo;
+        return "redirect:board_main.do?group_no=" + groupNo;
     }
 }

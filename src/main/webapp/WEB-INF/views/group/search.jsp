@@ -77,17 +77,17 @@
             <!-- 시작숫자 종료숫자 조건 -->
             <c:choose>
                 <c:when test="${pm.endPage <= pm.displayPageNum}">
-                    <c:set var="pageStartNumber" value="${pm.startPage}" />
-                    <c:set var="pageEndNumber" value="${pm.endPage}" />
+                    <c:set var="pageStartNumber" value="${pm.startPage}"/>
+                    <c:set var="pageEndNumber" value="${pm.endPage}"/>
                 </c:when>
                 <c:otherwise>
-                    <c:set var="pageStartNumber" value="${(pm.cri.page / pm.displayPageNum) + 1}" />
+                    <c:set var="pageStartNumber" value="${(pm.cri.page / pm.displayPageNum) + 1}"/>
                     <c:choose>
                         <c:when test="${pm.endPage < ((pm.cri.page / pm.displayPageNum) + 10)}">
-                            <c:set var="pageEndNumber" value="${pm.endPage}" />
+                            <c:set var="pageEndNumber" value="${pm.endPage}"/>
                         </c:when>
                         <c:otherwise>
-                            <c:set var="pageEndNumber" value="${((pm.cri.page / pm.displayPageNum) + 10)}" />
+                            <c:set var="pageEndNumber" value="${((pm.cri.page / pm.displayPageNum) + 10)}"/>
                         </c:otherwise>
                     </c:choose>
                 </c:otherwise>
@@ -109,9 +109,9 @@
                 </c:choose>
             </c:forEach>
             <c:if test="${pm.endPage == 0}">
-                    <div class="btn-group me-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-light" disabled>&#9825;</button>
-                    </div>
+                <div class="btn-group me-2" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-light" disabled>&#9825;</button>
+                </div>
             </c:if>
             <!-- 페이지 버튼 -->
 
@@ -151,23 +151,23 @@
         resultList.forEach(result => {
             let groupimg = "${pageContext.request.contextPath}" + "/upload/groupimg/" + result.group_img;
             $.ajax({
-                url : groupimg,
-                async : false,
-                success : function(){
+                url: groupimg,
+                async: false,
+                success: function () {
                     print(result, groupimg);
                 },
-                error : function(){
+                error: function () {
                     groupimg = 'https://wiki.dave.eu/images/4/47/Placeholder.png';
                     print(result, groupimg);
                 }
             });
         });
 
-        if(resultList.length > 3) {
+        if (resultList.length > 3) {
             $('#resultList').css({
                 "min-height": "1200px"
             });
-        } else if(resultList.length < 4 && resultList.length != 0) {
+        } else if (resultList.length < 4 && resultList.length != 0) {
             $('#resultList').css({
                 "min-height": "600px"
             });

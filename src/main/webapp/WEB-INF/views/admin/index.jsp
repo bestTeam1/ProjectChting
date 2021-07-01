@@ -356,7 +356,7 @@
                 var totalUsersChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: ['2021-06-25','2021-06-26','2021-06-27','2021-06-28','2021-06-29','2021-06-30','2021-07-01'],
+                        labels: ['2021-06-25', '2021-06-26', '2021-06-27', '2021-06-28', '2021-06-29', '2021-06-30', '2021-07-01'],
                         datasets: [{
                             label: '가입자 수',
                             data: Object.values(data),
@@ -580,6 +580,7 @@
         chartSchedule();
 
     });
+
     //카카오맵 모임 클러스터
     function chartCluster() {
 
@@ -595,8 +596,8 @@
 
 
                 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-                    center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
-                    level : 14 // 지도의 확대 레벨
+                    center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+                    level: 14 // 지도의 확대 레벨
                 });
 
                 var clusterer = new kakao.maps.MarkerClusterer({
@@ -616,7 +617,7 @@
 
                 var markers = $(data).map(function (i) {
                     return new kakao.maps.Marker({
-                        position : new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord)
+                        position: new kakao.maps.LatLng(data[i].ycoord, data[i].xcoord)
                     });
                 });
 
@@ -624,16 +625,14 @@
 
                 console.log(markers);
 
-                kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+                kakao.maps.event.addListener(clusterer, 'clusterclick', function (cluster) {
 
                     // 현재 지도 레벨에서 1레벨 확대한 레벨
-                    var level = map.getLevel()-1;
+                    var level = map.getLevel() - 1;
 
                     // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
                     map.setLevel(level, {anchor: cluster.getCenter()});
                 });
-
-
 
 
             },
@@ -658,11 +657,11 @@
             data: {
                 //null
             },
-            async : false,
+            async: false,
             success: function (data) {
                 // 마커 이미지의 이미지 주소입니다
                 var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-                for (var i = 0; i < data.length; i ++) {
+                for (var i = 0; i < data.length; i++) {
                     // 마커 이미지의 이미지 크기 입니다
                     var imageSize = new kakao.maps.Size(20, 34);
                     // 마커 이미지를 생성합니다
@@ -672,8 +671,8 @@
                     var marker = new kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
                         position: dataPosition, // 마커를 표시할 위치
-                        title : data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                        image : markerImage // 마커 이미지
+                        title: data[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image: markerImage // 마커 이미지
                     })
                 }
             },

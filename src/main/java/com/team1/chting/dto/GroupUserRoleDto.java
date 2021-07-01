@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class GroupUserRoleDto {
-	private String group_no;
-	private String userid;
-	private int group_role_no;
+    private String group_no;
+    private String userid;
+    private int group_role_no;
 }

@@ -156,7 +156,7 @@
                                 console.log(sessionId);
                                 console.log(group_no);
 
-                                if(userid != '${sessionScope.get("userData").userid}' && group.group_no == group_no) {
+                                if (userid != '${sessionScope.get("userData").userid}' && group.group_no == group_no) {
                                     msgCount++;
                                     $('#chat' + group.group_no).html("채팅 (" + msgCount + ")");
                                     $('#chat' + group.group_no).attr("style", "color:red");

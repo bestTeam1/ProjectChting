@@ -69,7 +69,8 @@
                             <div class="form-floating mb-4">
                         <textarea id="content" class="form-control form-control-lg light-300"
                                   style="resize: none; width: 800px; height: 100px; "
-                                  placeholder="100자 이내로 입력해 주세요."><c:out value="${fn:replace(userInfoBasic.content, '<br>',newLine)}"/></textarea>
+                                  placeholder="100자 이내로 입력해 주세요."><c:out
+                                value="${fn:replace(userInfoBasic.content, '<br>',newLine)}"/></textarea>
                                 <label for="content">100자 이내로 입력해 주세요.</label>
                                 <p align="left" id="contentKeyUp"></p>
 
