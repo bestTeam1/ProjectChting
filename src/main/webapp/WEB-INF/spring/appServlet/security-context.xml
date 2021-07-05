@@ -4,7 +4,6 @@
 		 xmlns="http://www.springframework.org/schema/security"
 		 xmlns:context="http://www.springframework.org/schema/context"
 		 xmlns:mvc="http://www.springframework.org/schema/mvc"
-		 xmlns:util="http://www.springframework.org/schema/util"
 		 xsi:schemaLocation="http://www.springframework.org/schema/security
  			https://www.springframework.org/schema/security/spring-security.xsd
  			http://www.springframework.org/schema/beans
@@ -12,9 +11,7 @@
  			http://www.springframework.org/schema/context
  			https://www.springframework.org/schema/context/spring-context.xsd
  			http://www.springframework.org/schema/mvc
- 			https://www.springframework.org/schema/mvc/spring-mvc.xsd
- 			http://www.springframework.org/schema/util
- 			https://www.springframework.org/schema/util/spring-util.xsd">
+ 			https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!--
 	>>form-login 속성 정의하기
 	login-page : login form 페이지 URL
@@ -61,7 +58,8 @@
 		<form-login login-page="/signIn.do" authentication-success-handler-ref="successHandler" />
 
 		<oauth2-login user-service-ref="customOAuth2UserService"
-					  authentication-success-handler-ref="successHandler" login-page="/signIn.do" />
+					  authentication-success-handler-ref="successHandler" login-page="/signIn.do"
+					  client-registration-repository-ref="customClientRegistrationRepository" />
 
 		<logout logout-url="/logout" logout-success-url="/index.do" invalidate-session="true" delete-cookies="JSESSIONID"/>
 		<csrf disabled="true" />
@@ -82,60 +80,6 @@
 
 	<b:bean id="customOAuth2UserService" class="com.team1.chting.security.CustomOAuth2UserService" />
 	<b:bean id="successHandler" class="com.team1.chting.security.CustomAuthenticationSuccessHandler" />
-
-	<client-registrations>
-		<client-registration registration-id="google-login"
-							 client-id="162635883964-np8pt0krgmagle2cokr83s14ke9ee4mq.apps.googleusercontent.com"
-							 client-secret="u6eqJ9NLyWP3ulxK6BLYdsBq"
-							 client-authentication-method="basic"
-							 authorization-grant-type="authorization_code"
-							 redirect-uri="{baseUrl}/login/oauth2/code/{registrationId}"
-							 scope="profile,email"
-							 client-name="Google"
-							 provider-id="google" />
-
-		<client-registration registration-id="kakao-login"
-							 client-id="b74ea6ac4d206b99a1c236e0f732f202"
-							 client-authentication-method="basic"
-							 authorization-grant-type="authorization_code"
-							 redirect-uri="{baseUrl}/login/oauth2/code/{registrationId}"
-							 client-name="Kakao"
-							 scope=""
-							 provider-id="kakao" />
-
-		<client-registration registration-id="github-login"
-							 client-id="2948216780ba49fadca1"
-							 client-secret="7359f2c6589a89c85b3f08571545152d0578944b"
-							 client-authentication-method="basic"
-							 authorization-grant-type="authorization_code"
-							 redirect-uri="{baseUrl}/login/oauth2/code/{registrationId}"
-							 client-name="Github"
-							 scope=""
-							 provider-id="github" />
-
-		<provider provider-id="google"
-				  authorization-uri="https://accounts.google.com/o/oauth2/v2/auth"
-				  token-uri="https://www.googleapis.com/oauth2/v4/token"
-				  user-info-uri="https://www.googleapis.com/oauth2/v3/userinfo"
-				  user-info-authentication-method="header"
-				  user-info-user-name-attribute="sub"
-				  jwk-set-uri="https://www.googleapis.com/oauth2/v3/certs" />
-
-		<provider provider-id="kakao"
-				  authorization-uri="https://kauth.kakao.com/oauth/authorize"
-				  token-uri="https://kauth.kakao.com/oauth/token"
-				  user-info-uri="https://kapi.kakao.com/v2/user/me"
-				  user-info-authentication-method="header"
-				  user-info-user-name-attribute="id"
-				  jwk-set-uri="https://kapi.kakao.com/v1/user/access_token_info" />
-
-		<provider provider-id="github"
-				  authorization-uri="https://github.com/login/oauth/authorize"
-				  token-uri="https://github.com/login/oauth/access_token"
-				  user-info-uri="https://api.github.com/user"
-				  user-info-authentication-method="header"
-				  user-info-user-name-attribute="id" />
-
-	</client-registrations>
+	<b:bean id="customClientRegistrationRepository" class="com.team1.chting.security.CustomClientRegistrationRepository" />
 
 </b:beans>
