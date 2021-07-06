@@ -59,8 +59,8 @@
                                     <div class="recent-work-vertical card-img-overlay d-flex">
                                         <c:if test="${i.group_no == adminGroup.group_no}">
                                             <i class="fas fa-crown"></i>
-                                            <div style="margin-left : 270px" id="icon-${i.group_no}"></div>
                                         </c:if>
+                                        <div id="icon-${i.group_no}" class="alarmicon ms-auto"></div>
                                         <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
                                             <div class="recent-work-content text-start mb-3 ml-3 text-dark">
                                                 <h3 class="card-title light-300">${i.group_name}</h3>
@@ -292,7 +292,7 @@
                     console.log(sessionId);
                     console.log(group_no);
                     if ($('#icon-' + group_no).html() == "" && group.group_no == group_no) {
-                        $('#icon-' + group_no).append("<img src='./upload/chting/chatting_alarm.png'>");
+                        $('#icon-' + group_no).append("<img class='alarmimg' src='./upload/chting/chatting_alarm.png'>");
                     }
                 }
 
