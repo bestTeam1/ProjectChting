@@ -8,7 +8,7 @@
 	}
 </style>
 <!-- css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.main_del.css" />
 
 <!-- Header -->
 <header id="header">

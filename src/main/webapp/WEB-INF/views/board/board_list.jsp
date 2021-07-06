@@ -12,9 +12,9 @@
 <jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
 
-<section class="container" style="min-height: 700px;">
+<section class="container mt-3" style="min-height: 65vh;">
     <div class="row justify-content-center pb-4">
-        <div class="col-lg-8 mt-3">
+        <div class="col-lg-8 mt-3 ">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="table-secondary">
                 <tr>
@@ -137,7 +137,7 @@
     </div>
 
     <br>
-    <div style="text-align: center">
+    <div class="mb-5" style="text-align: center">
         <input type="button" onclick="location.href = 'board_write.do?group_no=${group_no}'"
                class="btn btn-primary rounded-pill btn-block shadow px-4 py-2" value="글쓰기">
     </div>

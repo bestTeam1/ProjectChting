@@ -35,77 +35,79 @@
 </section>
 <!-- End Banner Hero -->
 <section class="py-5 mb-5">
-    <div class="container">
+    <div class="w-100">
         <%-- 가입한 모임 --%>
-        <div class="row gy-5 g-lg-5 mb-4" id="joinGroupContainer">
-            <h4 class="h4 typo-space-line"><i class="bx bx-user-check"></i>&nbsp;가입한 모임</h4>
-            <c:forEach var="i" items="${groupListAll}">
-                <c:choose>
-                    <c:when test="${not empty i.group_name}">
-                        <div class="col-md-4 mb-3">
-                            <a href="board_main.do?group_no=${i.group_no}"
-                               class="recent-work card border-0 shadow-lg overflow-hidden">
-                                <img class="recent-work-img card-img img-responsive"
-                                <c:choose>
-                                <c:when test="${empty i.group_img}">
-                                     src="./assets/img/work-slide-05-small.jpg"
-                                </c:when>
-                                <c:otherwise>
-                                     src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}"
-                                </c:otherwise>
-                                </c:choose>
-                                     alt="Card image">
-                                <div class="recent-work-vertical card-img-overlay d-flex">
-                                    <c:if test="${i.group_no == adminGroup.group_no}">
-                                        <i class="fas fa-crown"></i>
-                                        <div style="margin-left : 270px" id="icon-${i.group_no}"></div>
-                                    </c:if>
-                                    <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
-                                        <div class="recent-work-content text-start mb-3 ml-3 text-dark">
-                                            <h3 class="card-title light-300">${i.group_name}</h3>
-                                            <p class="card-text">
-                                                <c:choose>
-                                                <c:when test="${fn:length(i.content) gt 31}">
-                                                    <c:out value="${fn:substring(i.content, 0, 30)}"/>....<br>
-                                                <i class="fas fa-angle-double-right">read more</i>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <c:out value="${i.content}"/>
-                                                </c:otherwise>
-                                                </c:choose>
+        <div class="container">
+            <div class="row gy-5 g-lg-5 mb-4" id="joinGroupContainer">
+                <h4 class="h4 typo-space-line"><i class="bx bx-user-check"></i>&nbsp;가입한 모임</h4>
+                <c:forEach var="i" items="${groupListAll}">
+                    <c:choose>
+                        <c:when test="${not empty i.group_name}">
+                            <div class="col-md-4 mb-3">
+                                <a href="board_main.do?group_no=${i.group_no}"
+                                   class="recent-work card border-0 shadow-lg overflow-hidden">
+                                    <img class="recent-work-img card-img img-responsive"
+                                    <c:choose>
+                                    <c:when test="${empty i.group_img}">
+                                         src="./assets/img/work-slide-05-small.jpg"
+                                    </c:when>
+                                    <c:otherwise>
+                                         src="${pageContext.request.contextPath}/upload/groupimg/${i.group_img}"
+                                    </c:otherwise>
+                                    </c:choose>
+                                         alt="Card image">
+                                    <div class="recent-work-vertical card-img-overlay d-flex">
+                                        <c:if test="${i.group_no == adminGroup.group_no}">
+                                            <i class="fas fa-crown"></i>
+                                            <div style="margin-left : 270px" id="icon-${i.group_no}"></div>
+                                        </c:if>
+                                        <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
+                                            <div class="recent-work-content text-start mb-3 ml-3 text-dark">
+                                                <h3 class="card-title light-300">${i.group_name}</h3>
+                                                <p class="card-text">
+                                                    <c:choose>
+                                                    <c:when test="${fn:length(i.content) gt 31}">
+                                                        <c:out value="${fn:substring(i.content, 0, 30)}"/>....<br>
+                                                    <i class="fas fa-angle-double-right">read more</i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:out value="${i.content}"/>
+                                                    </c:otherwise>
+                                                    </c:choose>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    </c:when>
-                </c:choose>
-            </c:forEach>
-        </div>
-        <div class="col-lg-3">
-            <h4 class="h4 py-5 typo-space-line"><i class="bx bxs-group"></i>&nbsp;추천 모임</h4>
-            <p>회원님의 지역과 관심사에 맞는 모임</p>
-        </div>
+                                </a>
+                            </div>
+                        </c:when>
+                    </c:choose>
+                </c:forEach>
+            </div>
 
-        <div class="service-tag py-5 bg-secondary">
-            <div class="col-md-12">
-                <ul class="nav d-flex justify-content-center">
-                    <li class="nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300"
-                           href="#" data-filter=".project">ALL</a>
-                    </li>
-                    <li class="filter-btn nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300"
-                           href="#" data-filter=".new">New</a>
-                    </li>
-                    <li class="filter-btn nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300"
-                           href="#" data-filter=".best">Best</a>
-                    </li>
-                </ul>
+            <div class="col-lg-3">
+                <h4 class="h4 py-5 typo-space-line"><i class="bx bxs-group"></i>&nbsp;추천 모임</h4>
+                <p>회원님의 지역과 관심사에 맞는 모임</p>
+            </div>
+
+            <div class="service-tag py-5 bg-secondary">
+                <div class="col-md-12">
+                    <ul class="nav d-flex justify-content-center">
+                        <li class="nav-item mx-lg-4">
+                            <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300"
+                               href="#" data-filter=".project" id="allclick">ALL</a>
+                        </li>
+                        <li class="filter-btn nav-item mx-lg-4">
+                            <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300"
+                               href="#" data-filter=".new">New</a>
+                        </li>
+                        <li class="filter-btn nav-item mx-lg-4">
+                            <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300"
+                               href="#" data-filter=".best">Best</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-
         <section class="container overflow-hidden py-5">
             <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
 
@@ -163,7 +165,7 @@
                 </c:forEach>
             </div>
         </section>
-        <section class="bg-light pt-sm-0 py-3">
+        <section class="bg-light mt-5 pt-sm-0 py-3">
             <div class="container-fluid py-4">
                 <h1 class="h2 semi-bold-600 text-center my-lg-5">Chting 이벤트! &#127881;</h1>
 
@@ -226,6 +228,20 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script>
+
+    function clickbtn() {
+        $('#allclick').trigger('click');
+    }
+
+    function delayedAlert() {
+        timeoutID = window.setTimeout(clickbtn, 300);
+    }
+
+    $( document ).ready(function() {
+        delayedAlert();
+    });
+
+
     //모임 가입 전체 개수
     var length = ${length};
     //모임장으로 있는 모임 번호
