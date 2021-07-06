@@ -26,12 +26,8 @@
             cursor: grabbing;
         }
 
-        #footerDiv {
-            height: 90%;
-        }
-
         #external-events {
-            padding-top: 2%;
+            padding-top: 1%;
         }
 
         .saveBtn {
@@ -82,13 +78,13 @@
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
-<div id="wrapper" class="container-fluid">
+<div id="wrapper" class="container-fluid mb-5">
     <!-- Main -->
-    <div id="main" class="row my-md-2 d-flex justify-content-center">
-        <div class="inner col-10">
+    <div id="main" class="row my-2 d-flex justify-content-center">
+        <div class="inner col-md-10 col-12">
 
             <!-- Banner -->
-            <section style="position: relative">
+            <section class="row d-flex justify-content-end gy-4 gx-md-4 mb-md-5 mt-md-2">
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -147,9 +143,8 @@
                     </div>
                 </div>
 
-
                 <!-- Calendar -->
-                <div id='external-events' style="width: 15%; float: left; padding-right: 30px; padding-left: 20px;">
+                <div class="col-md-2 col-5" id='external-events'>
                     <p>
                         <strong>일정 생성하기</strong>
                     </p>
@@ -164,11 +159,10 @@
                         <div class='fc-event-main'>언택트</div>
                     </div>
                 </div>
-                <div id='calendar'>
+                <div class="col-md-10 col-auto flex-fill" id='calendar' style="min-width: initial; min-height: 80vh;">
                 </div>
                 <!-- Calendar end -->
             </section>
-            <div id="footerDiv"></div>
         </div>
     </div>
 </div>

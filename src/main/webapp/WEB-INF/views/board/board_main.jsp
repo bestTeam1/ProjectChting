@@ -34,20 +34,20 @@
     <div class="row justify-content-center pb-4">
         <div class="col-lg-5 mt-3">
             <h6 class="objective-heading h6 mb-1 text-end light-300">
-                <i class="fas fa-map-marker-alt m-3"><c:out value="${group.area_name}"/></i>
-                <i class="fas fa-bookmark m-3"><c:out value="${group.catename}"/></i>
+                <i class="fas fa-map-marker-alt m-3"> <c:out value="${group.area_name}"/></i>
+                <i class="fas fa-bookmark m-3"> <c:out value="${group.catename}"/></i>
             </h6>
             <div id="templatemo-slide-link-target" class="card mb-3">
                 <c:choose>
                     <c:when test="${empty group.group_img}">
                         <img class="img-fluid border rounded"
                              src="./assets/img/work-slide-05-small.jpg"
-                             style="height: 500px;" alt="Card image cap">
+                             style="width: border-box;" alt="Card image cap">
                     </c:when>
                     <c:otherwise>
                         <img class="img-fluid border rounded"
                              src="./upload/groupimg/${group.group_img}"
-                             style="height: 500px;" alt="Card image cap">
+                             style="width: border-box;" alt="Card image cap">
                     </c:otherwise>
                 </c:choose>
             </div>
