@@ -16,22 +16,21 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
-<div class="container-fluid px-md-3 py-md-3" id="loginBody">
+<div class="container-fluid mb-5" id="loginBody">
 
-    <section class="container text-center my-xxl-5 mx-xxl-auto">
+    <section class="container text-center my-5 mx-xxl-auto">
         <div class="row text-center px-md-3 py-md-3 my-xxl-auto">
             <div class="col-lg-12 d-flex align-items-center text-center justify-content-center">
 
-                <div class="col-3"></div>
+                <div class="col-md-2"></div>
 
-
-                <div class="col-6 my-xxl-5 mx-xxl-5 border border-1"
+                <div class="col-md-8 m-5 border border-1"
                      style="background-color: lavender; border-radius: 25px;">
-                    <div class="text-center img-fluid" style="margin-top: 20px">
+                    <div class="text-center img-fluid mt-3">
                         <img src="${pageContext.request.contextPath}/upload/chting/groupJoin.jpg"
-                             style="margin-top: 50px;" width="500px" class="rounded" alt="...">
+                             style="margin-top: 50px; width: 50vh;" class="rounded" alt="...">
                     </div>
-                    <div class="row d-flex text-center py-xxl-5">
+                    <div class="row d-flex text-center py-5">
                         <h1 class="h2 text-secondary light-300 mt-3">모임이 없습니다!</h1>
                     </div>
                     <button type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
@@ -41,13 +40,11 @@
                     </div>
                 </div>
 
-                <div class="col-3"></div>
+                <div class="col-md-2"></div>
             </div>
         </div>
     </section>
 
-    <section class="container text-center px-md-5 py-md-5 my-xxl-5 mx-xxl-auto">
-    </section>
 </div>
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

@@ -13,11 +13,14 @@
 <!-- Start Service -->
 <input type="hidden" name="group_no" value="${group_no}">
 <section class="container">
-    <div class="service-wrapper py-3">
+    <div class="service-wrapper py-md-5 py-4">
         <h6 class="text-muted text-end">[${plist.post_catename}]</h6>
         <div class="card text-center" style="margin-bottom: 10px;">
             <div class="card-header">
                 <h5>${plist.subject}</h5>
+            </div>
+            <div class="card-body d-flex justify-content-end">
+                <pre> | ${plist.writedate} | </pre>
             </div>
             <div class="card-body text-muted">
                 <h6>${plist.content}</h6>
@@ -35,7 +38,7 @@
         </div>
 
         <%-- 댓글 --%>
-        <div style="text-align: center">
+        <div class="py-md-5 py-3 my-2" style="text-align: center">
             <jsp:include page="/WEB-INF/views/board/board_post_reply.jsp"/>
         </div>
     </div>

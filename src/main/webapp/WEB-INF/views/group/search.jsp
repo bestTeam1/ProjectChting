@@ -50,7 +50,7 @@
 <!-- Start Our Work -->
 <section class="container py-5">
     <br>
-    <div class="row projects gx-lg-5" id="resultList" style="min-height: min-content;">
+    <div class="row gx-lg-5 py-3 my-3" id="resultList">
     </div>
 
     <!-- 페이징 처리 -->
@@ -163,26 +163,15 @@
             });
         });
 
-        if (resultList.length > 3) {
-            $('#resultList').css({
-                "min-height": "1200px"
-            });
-        } else if (resultList.length < 4 && resultList.length != 0) {
-            $('#resultList').css({
-                "min-height": "600px"
-            });
-        } else {
-            $('#resultList').css({
-                "min-height": "600px"
-            });
-            let templat = `<div class="banner-heading h3 m-lg-auto text-center">` + `<p style="font-size: 300%">&#128546;</p>` + "검색 결과가 없습니다." + `</div>`
+        if (resultList.length === 0) {
+            let templat = `<div class="row py-md-5 my-5"><div class="banner-heading h3 mx-lg-auto text-center py-5 my-5">` + `<p style="font-size: 300%">&#128546;</p>` + "검색 결과가 없습니다." + `</div></div>`
             $('#resultList').append(templat);
         }
 
     });
 
     function print(result, groupimg) {
-        var groupURL = 'http://localhost:8090/chting_war_exploded/board_main.do?group_no=';
+        var groupURL = '${pageContext.request.contextPath}' + '/board_main.do?group_no=';
         var placeholderContent = '소개글이 없습니다.';
 
         if (result.content == null) {
