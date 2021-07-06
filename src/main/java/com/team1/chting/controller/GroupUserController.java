@@ -194,6 +194,7 @@ public class GroupUserController {
 
         model.addAttribute("plist", postDto);
         model.addAttribute("nickname", nickname);
+        model.addAttribute("group_no", postDto.getGroup_no());
 
         return "board/board_detail";
     }
