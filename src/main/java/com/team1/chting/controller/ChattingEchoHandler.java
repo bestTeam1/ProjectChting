@@ -43,9 +43,9 @@ public class ChattingEchoHandler extends TextWebSocketHandler {
 
         String json = mapper.writeValueAsString(dto);
         for (WebSocketSession s : sessionList) {
-            if (userid.equals(groupChattingList.get(dto.getGroup_no()))) {
+//            if (userid.equals(groupChattingList.get(dto.getGroup_no()))) {
                 s.sendMessage(new TextMessage(json));
-            }
+//            }
         }
     }
 
