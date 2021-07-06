@@ -338,7 +338,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script type="text/javascript">
-    var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting?group_no=${group_no}');
+    var sock = new SockJS('${pageContext.request.contextPath}' + '/chatting?group_no=${group_no}');
     sock.onmessage = onMessage;
     sock.onclose = onClose;
     sock.onopen = onOpen;
