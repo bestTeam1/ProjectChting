@@ -18,7 +18,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
 <!-- Start Banner Hero -->
-<section class="my-xxl-5 py-xxl-3" style="height: 1000px;">
+<section class="my-5 py-3" style="height: 100vh;">
     <div id="work_banner" class="banner-wrapper bg-light w-100 py-5 d-flex flex-column justify-content-center">
         <div class="banner-vertical-center-work container text-light d-flex justify-content-center align-items-center py-5 p-0">
             <div class="banner-content col-lg-8 col-12 m-lg-auto text-center">
