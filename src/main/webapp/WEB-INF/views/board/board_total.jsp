@@ -279,7 +279,7 @@
         type: "get",
         success: function (response) {
             response.forEach(group => {
-                var sock = new SockJS('http://localhost:8090/chting_war_exploded/chatting?group_no=' + group.group_no);
+                var sock = new SockJS('${pageContext.request.contextPath}' + '/chatting?group_no=' + group.group_no);
                 sock.onmessage = onMessage;
                 sock.onclose = onClose;
                 sock.onopen = onOpen;
