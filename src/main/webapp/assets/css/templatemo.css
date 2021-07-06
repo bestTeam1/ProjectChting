@@ -98,6 +98,11 @@ p, a {font-weight: 400;}
   width: 100%;
 }
 
+.alarmimg {
+  object-fit: scale-down;
+  max-width: 90vh;
+}
+
 #index_banner #main_item {
   min-height: 60vh;
 }
