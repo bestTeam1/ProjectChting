@@ -16,22 +16,22 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
-<div class="container-fluid px-md-3 py-md-3" id="loginBody">
-    <section class="container text-center px-md-5 py-md-5 my-xxl-5 mx-xxl-auto">
+<div class="container-fluid mb-5" id="loginBody">
+    <section class="container text-center px-md-5 py-md-3 my-xxl-5 mx-xxl-auto">
     </section>
 
-    <section class="container text-center my-xxl-5 mx-xxl-auto">
+    <section class="container text-center my-md-5 mx-xxl-auto">
         <div class="row text-center px-md-3 py-md-3 my-xxl-auto">
             <div class="col-lg-12 d-flex align-items-center text-center justify-content-center">
-                <div class="col-3"></div>
 
+                <div class="col-md-3"></div>
 
-                <div class="col-6 my-xxl-5 mx-xxl-5 border border-1"
+                <div class="col-10 col-md-6 m-5 border border-1"
                      style="background-color: lavender; border-radius: 25px;">
-                    <div class="row d-flex text-center py-xxl-5">
+                    <div class="row d-flex text-center mt-3 py-5">
                         <h2 class="h2 text-secondary light-300 mt-3">Social Login</h2>
                     </div>
-                    <div class="social row d-flex align-items-center justify-content-center py-xxl-5 mb-3">
+                    <div class="social row d-flex align-items-center justify-content-center py-md-5 py-3 mb-3 gy-5">
                         <a href="${pageContext.request.contextPath}/oauth2/authorization/google-login"
                            class="link google" target="_parent"><span class="fa fa-google"></span></a>
                         <a href="${pageContext.request.contextPath}/oauth2/authorization/kakao-login" class="link kakao"
@@ -41,12 +41,12 @@
                     </div>
                 </div>
 
-                <div class="col-3"></div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </section>
 
-    <section class="container text-center px-md-5 py-md-5 my-xxl-5 mx-xxl-auto">
+    <section class="container text-center px-md-5 py-md-3 my-xxl-5 mx-xxl-auto">
     </section>
 </div>
 <!-- Start Footer / Script -->

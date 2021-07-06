@@ -14,7 +14,7 @@
         <div id="main_inner">
             <div id="main_item" class="my-lg-5">
                 <div class="py-5 row d-flex align-items-center">
-                    <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5">
+                    <div class="banner-content col-lg-8 col-8 offset-2 m-md-auto text-left py-md-5 pb-md-5">
                         <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
                             다양한 취미로
                             <br>새로운 사람들과
@@ -39,7 +39,7 @@
 </div>
 <!-- End Banner Hero -->
 <!-- Start Pricing Horizontal Section -->
-<section class="bg-light pt-sm-0 py-3">
+<section class="bg-light pt-sm-0 py-md-3 my-md-2">
     <div class="container-fluid py-4">
         <h1 class="h2 semi-bold-600 text-center my-lg-5 event">Chting Event! &#127881;</h1>
 
@@ -89,14 +89,14 @@
 </section>
 
 <!-- Start Choice -->
-<section class="why-us banner-bg bg-light py-lg-3 my-xxl-5">
-    <div class="container my-4">
+<section class="why-us banner-bg bg-light py-md-1 my-md-5">
+    <div class="container my-5">
         <div class="row">
-            <div class="banner-img col-lg-5">
+            <div class="banner-img col-md-5">
                 <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
             </div>
-            <div class="banner-content col-lg-7 mt-3 align-self-end">
-                <h2 class="h2 mt-5" style="text-shadow: 2px 2px 4px gray"><img
+            <div class="banner-content col-md-7 mt-md-5 align-self-end">
+                <h2 class="h2 mt-md-5"><img
                         src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" width="30%" height="30%"
                         style="margin-left: -20px; margin-bottom: -20px;"></h2>
                 <p class="text-muted pb-4 light-300">
@@ -156,8 +156,8 @@
 <!-- End Aim -->
 
 <!-- Start Feature Work -->
-<section class="bg-light py-5">
-    <div class="feature-work container my-4">
+<section class="bg-light py-3">
+    <div class="feature-work container my-4 pt-4">
         <div class="row d-flex d-flex align-items-center">
             <div class="col-lg-5">
                 <h3 class="feature-work-title h4 text-muted light-300">함께 만나 취미를 공유해요</h3>
@@ -197,8 +197,8 @@
                 </div>
             </div>
             <!-- 공유하기 -->
-            <div class="col-lg-8 col-12 m-lg-auto text-center">
-                <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 mt-lg-5"
+            <div class="col-md-5 col-12 my-4 text-center">
+                <input type="button" class="banner-button btn rounded-pill btn-primary btn-lg px-4 my-md-0"
                        id="shareBtn" value="Chting 공유하기">
             </div>
         </div>
@@ -207,7 +207,7 @@
 <!-- End Feature Work -->
 
 <!-- Start Service -->
-<section class="service-wrapper py-3">
+<section class="service-wrapper py-5">
     <div class="container-fluid pb-3">
         <div class="row">
             <h2 class="h2 text-center col-12 py-5 semi-bold-600">Chting 모임</h2>
@@ -228,7 +228,7 @@
             <ul class="nav d-flex justify-content-center">
                 <li class="nav-item mx-lg-4">
                     <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300"
-                       href="#" data-filter=".project">ALL</a>
+                       href="#" data-filter=".project" id="allclick">ALL</a>
                 </li>
                 <li class="filter-btn nav-item mx-lg-4">
                     <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#"
@@ -289,5 +289,17 @@
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 </body>
+<script>
+    function clickbtn() {
+        $('#allclick').trigger('click');
+    }
 
+    function delayedAlert() {
+        timeoutID = window.setTimeout(clickbtn, 300);
+    }
+
+    $( document ).ready(function() {
+        delayedAlert();
+    });
+</script>
 </html>
