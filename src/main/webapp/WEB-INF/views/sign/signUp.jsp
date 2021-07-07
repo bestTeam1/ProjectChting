@@ -12,27 +12,27 @@
 <!-- DB Object -->
 <c:set var="arealist" value="${requestScope.areaList}"/>
 <c:set var="interestList" value="${requestScope.interestList}"/>
-<section class="bg-light w-100">
+<section class="bg-light">
     <div class="container">
-        <div class="row d-flex align-items-center py-lg-2">
-            <div class="col-lg-6 text-start">
+        <div class="row d-flex align-items-center py-4">
+            <div class="col-md-6 text-start">
                 <h1 class="h2 py-5 text-primary typo-space-line">Chting 회원가입</h1>
-                <p class="light-300">
-                    환영합니다 :D<br> Chting 의 여러 회원님들이 ${socialData.nickname}님을 기다리고 있어요 !
+                <p>
+                    환영합니다 :D<br> Chting 의 여러 회원님들이 <strong>${socialData.nickname}</strong>님을 기다리고 있어요 !
                 </p>
             </div>
-            <div class="col-lg-6 my-lg-2">
-                <img src="${pageContext.request.contextPath}/assets/img/welcome.png" class="my-lg-2"
-                     style="width: 100%;" alt="welcome">
+            <div class="col-md-6 my-3 py-3 col-12">
+                <img src="${pageContext.request.contextPath}/assets/img/welcome.png"
+                     style="object-fit: fill; width: 95%;" alt="welcome">
             </div>
         </div>
     </div>
 </section>
 
-<section class="container my-lg-5">
+<section class="container my-5">
     <c:choose>
         <c:when test="${socialData.loginType == 'google'}">
-            <div class="row h3 light-300 text-primary py-lg-3">
+            <div class="row h3 light-300 text-primary py-3">
                 <div class="col-1"></div>
                 <div class="col-11">
                     <span style="text-decoration-line: underline;">Sign-in with</span> >
@@ -44,7 +44,7 @@
             </div>
         </c:when>
         <c:when test="${socialData.loginType == 'kakao'}">
-            <div class="row h3 light-300 text-primary">
+            <div class="row h3 light-300 text-primary py-3">
                 <div class="col-1"></div>
                 <div class="col-11">
                     <span style="text-decoration-line: underline;">Sign-in with</span> >
@@ -56,7 +56,7 @@
             </div>
         </c:when>
         <c:when test="${socialData.loginType == 'github'}">
-            <div class="row h3 light-300 text-primary">
+            <div class="row h3 light-300 text-primary py-3">
                 <div class="col-1"></div>
                 <div class="col-11 my-md-3">
                     <span style="text-decoration-line: underline;">Sign-in with</span> >
@@ -80,7 +80,7 @@
                         <i class="display-3 bx bx-image-add mt-3"></i>
                         <p>프로필 사진</p>
                     </div>
-                    <div class="pricing-list-body col-7 align-items-center px-lg-5 border-start border-1">
+                    <div class="pricing-list-body col-md-5 col-9 align-items-center px-lg-5 border-start border-1">
                         <div class="px-lg-5 my-sm-2">
                             <div class="list-unstyled text-left">
                                 <c:choose>
@@ -146,7 +146,7 @@
                                style="vertical-align: text-top; font-size: 7px; color: red;"></i>
                         </p>
                     </div>
-                    <div class="pricing-list-body col-4 align-items-center px-lg-5 border-start border-1">
+                    <div class="pricing-list-body col-md-4 col-7 align-items-center px-lg-5 border-start border-1">
                         <div class="px-lg-5 py-5 align-items-center">
                             <input type="date" name="birth" class="form-control form-control-lg" required>
                         </div>
@@ -188,7 +188,7 @@
                                style="vertical-align: text-top; font-size: 7px; color: red;"></i>
                         </p>
                     </div>
-                    <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1">
+                    <div class="pricing-list-body col-md-7 col-8 align-items-center px-lg-5 border-start border-1">
                         <div class="px-lg-5 py-2 align-items-center">
                             <textarea name="content" id="contentArea" placeholder="100자 이내로 기입해주세요 :)" maxlength="100"
                                       required style="width: 100%; height: 120px; resize: none"></textarea>
@@ -291,10 +291,10 @@
                                    style="vertical-align: text-top; font-size: 7px; color: red;"></i>
                         </p>
                     </div>
-                    <div class="pricing-list-body col-9 align-items-center px-lg-5 border-start border-1">
-                        <div class="px-lg-5 py-5 align-items-center">
-                            <div class="border border-primary p-md-5"
-                                 style="overflow: scroll; width: 650px;height: 200px;">
+                    <div class="pricing-list-body col-md-7 col-9 align-items-center px-lg-5 border-start border-1">
+                        <div class="px-lg-5 px-2 py-5 align-items-center">
+                            <div class="border border-primary p-4"
+                                 style="overflow: scroll; width: inherit; height: 200px;">
                                 여러분을 환영합니다.<br>
                                 다양한 Chting 서비스를 즐겨보세요.<br>
                                 회원으로 가입하시면 Chting 서비스를 보다 편리하게 이용할 수 있습니다.<br>
@@ -323,14 +323,15 @@
                 </div>
             </div>
             <%-- 약관동의 --%>
+
             <div class="pricing-list shadow-sm">
-                <div class="row p-5 gx-5">
-                    <div class="pricing-list-icon d-flex justify-content-center text-center text-secondary px-lg-5 py-2 my-4">
-                        <div class="col-md-2 d-flex">
+                <div class="row py-5">
+                    <div class="pricing-list-body d-flex justify-content-center flex-md-row flex-column text-center text-secondary px-5 my-md-3 py-3">
+                        <div class="col-md-4 col-6 py-3 mx-auto ms-md-5 me-md-0">
                             <input type="submit" value="시작하기" id="signUpBtn"
                                    class="btn btn-lg btn-secondary rounded-pill px-5 text-light light-300">
                         </div>
-                        <div class="col-md-2 d-flex">
+                        <div class="col-md-4 col-6 py-3 mx-auto me-md-5 ms-md-0">
                             <input type="button" value="가입취소" id="signCancel"
                                    class="btn btn-lg btn-outline-primary rounded-pill px-5 text-primary light-300">
                         </div>
@@ -340,6 +341,7 @@
         </form>
     </div>
 </section>
+<div class="w-100 py-3 my-md-5"></div>
 
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

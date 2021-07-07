@@ -142,7 +142,6 @@
 <!-- End Footer / Script -->
 </body>
 <script type="text/javascript">
-    var groupURL = 'http://localhost:8090/chting_war_exploded/board_main.do?group_no=';
     $(function () {
         let resultData = '${search_result}';
         let resultList = JSON.parse(resultData);
@@ -157,7 +156,7 @@
                     print(result, groupimg);
                 },
                 error: function () {
-                    groupimg = 'https://wiki.dave.eu/images/4/47/Placeholder.png';
+                    groupimg = "./assets/img/work-slide-05-small.jpg";
                     print(result, groupimg);
                 }
             });
@@ -182,7 +181,7 @@
                 <img class="card-img-top" src="` + groupimg + `" alt="...">
                 <div class="card-body">
                     <h5 class="card-title light-300 text-dark">` + result.group_name + `</h5>
-                    <p class="card-text light-300 text-dark">` + result.content + `</p>
+                    <p class="card-text light-300 text-dark" style="font-size: small;">` + result.content + `</p>
                     <span class="text-decoration-none text-primary light-300">
                               구경하기 <i class='bx bxs-hand-right ms-1'></i>
                           </span>

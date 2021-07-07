@@ -60,8 +60,12 @@ p, a {font-weight: 400;}
   max-width: inherit;
 }
 
+#searchGroup {
+  min-width: 28vh;
+}
+
 #searchValue {
-  width: 220px;
+  width: 22vh;
 }
 
 .navbar > a {
@@ -71,22 +75,23 @@ p, a {font-weight: 400;}
 /* header 62  */
 @media screen and (max-width: 991px) {
 
-  .navbar_logo {
-    max-width: 20vh;
-  }
+  /*.navbar_logo {*/
+  /*  max-width: 17vh;*/
+  /*}*/
 
-  .navbar_logo .logo_img {
-    object-fit: scale-down;
-    max-width: inherit;
-  }
+  /*.navbar_logo .logo_img {*/
+  /*  object-fit: scale-down;*/
+  /*  max-width: inherit;*/
+  /*}*/
 
-  #searchValue {
-    width: min-content;
-  }
+  /*#searchGroup {*/
+  /*  min-width: 28vh;*/
+  /*}*/
 
-  .form-inline {
-    width: inherit;
-  }
+  /*#searchValue {*/
+  /*  min-width: 21vh;*/
+  /*}*/
+
 }
 
 /* Home 76 */

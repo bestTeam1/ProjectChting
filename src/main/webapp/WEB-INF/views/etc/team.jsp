@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row d-flex align-items-center py-3">
             <div class="col-lg-6 text-start">
-                <h1 class="h2 py-5 text-primary typo-space-line">소개 합니다!</h1>
+                <h1 class="h2 py-5 text-primary typo-space-line">About Project</h1>
                 <p class="light-300">
                     저희 Chting사이트는 서로의 <a rel="nofollow" target="_blank">취미를 공유하고 만남을 가지며</a><br>
                     지루한 일상속에서 뜻깊은 생활을 보내는 사이트입니다.
@@ -38,7 +38,7 @@
 <section class="container py-5">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
-            <h2 class="h2 py-5 typo-space-line">팀 소개</h2>
+            <h2 class="h2 py-5 typo-space-line">Team Member</h2>
             <p class="text-muted light-300">
                 저희 팀을 소개합니다.
             </p>
@@ -349,7 +349,7 @@
 <!-- Start Our Partner -->
 <section class="bg-light py-3">
     <div class="container py-5">
-        <h2 class="h2 text-primary light-300 text-center py-5">stack & tool</h2>
+        <h2 class="h2 text-primary light-300 text-center py-5">Stack & Tool</h2>
 
         <div class="row text-center pt-2">
             <div class="col-md-3 mb-3">

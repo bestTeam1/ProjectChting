@@ -16,7 +16,7 @@
 <!-- Close Header / <head> -->
 <!-- Start Banner Hero -->
 <section class="bg-light">
-    <div class="container py-4">
+    <div class="container py-5">
         <div class="row align-items-center justify-content-between">
             <div class="contact-header col-lg-4">
                 <h1 class="h2 pb-3 text-primary">Chting</h1>
@@ -165,9 +165,11 @@
                 </c:forEach>
             </div>
         </section>
-        <section class="bg-light mt-5 pt-sm-0 py-3">
-            <div class="container-fluid py-4">
-                <h1 class="h2 semi-bold-600 text-center my-lg-5">Chting 이벤트! &#127881;</h1>
+
+        <!-- Start Pricing Horizontal Section -->
+        <section class="bg-light pt-sm-0 py-3 my-md-2 px-md-5 mt-md-5">
+            <div class="container-fluid py-4 mx-md-5 px-md-5">
+                <h1 class="h2 semi-bold-600 text-center py-md-3 my-md-5 my-4 event">Chting Event! &#127881;</h1>
 
                 <!-- Start slider -->
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -196,25 +198,28 @@
                                 </c:otherwise>
                                 </c:choose>
                                 <!-- Start Pricing Horizontal -->
-                                <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                                    <img src="${pageContext.request.contextPath}/upload/event/${i.file}">
-
+                                <div class="pricing-horizontal row col-md-10 col-11 d-flex m-auto shadow-sm rounded overflow-hidden bg-white">
+                                    <img src="${pageContext.request.contextPath}/upload/event/${i.file}"
+                                         style="object-fit: inherit;">
                                 </div>
                             </div>
                             </c:forEach>
-                            <h1 class="carousel-control-prev h1 text-primary text-decoration-none"
-                                href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                                <i class='bx bx-lg bx-chevron-left px-5'></i>
+                            <div class="carousel-control-prev h1 text-primary text-decoration-none"
+                                 style="position: absolute; left: 5px;"
+                                 href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                <i class='bx bx-chevron-left pe-5' style="font-size: 200%;"></i>
                                 <span class="visually-hidden">Previous</span>
-                            </h1>
-                            <h1 class="carousel-control-next h1 text-primary text-decoration-none"
-                                href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                                <i class='bx bx-lg bx-chevron-right'></i>
+                            </div>
+                            <div class="carousel-control-next h1 text-primary text-decoration-none"
+                                 style="position: absolute; right: 5px;"
+                                 href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                <i class='bx bx-chevron-right ps-5' style="font-size: 200%;"></i>
                                 <span class="visually-hidden">Next</span>
-                            </h1>
+                            </div>
                         </div>
                     </div>
-
+                </div>
+            </div>
         </section>
 
         <!-- End Service -->
@@ -234,10 +239,10 @@
     }
 
     function delayedAlert() {
-        timeoutID = window.setTimeout(clickbtn, 300);
+        timeoutID = window.setTimeout(clickbtn, 500);
     }
 
-    $( document ).ready(function() {
+    $(document).ready(function () {
         delayedAlert();
     });
 
