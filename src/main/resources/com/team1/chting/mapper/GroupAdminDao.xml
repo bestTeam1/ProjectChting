@@ -39,7 +39,7 @@
 
     <!-- userid가 모임장으로 속한 그룹의 멤버리스트 -->
     <select id="getGroupMemberList" resultType="com.team1.chting.dto.UserDto">
-        select gur.userid, nickname, gender, content, gur.group_role_no
+        select gur.userid, profile_img, nickname, gender, content, gur.group_role_no
         from user_info
                  left join group_user_role gur on user_info.userid = gur.userid
                  left join group_role gr on gur.group_role_no = gr.group_role_no

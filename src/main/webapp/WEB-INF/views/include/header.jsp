@@ -51,9 +51,9 @@
 
         <div class="align-self-center collapse navbar-collapse flex-grow-1" id="navbar-toggler-success">
             <div class="navbar flex-fill mx-xl-5 d-flex justify-content-center">
-                <div id="nav search" style="padding-right: 7%;">
+                <div class="pe-lg-5" id="nav search">
                     <form class="form-inline" action="${pageContext.request.contextPath}/search.do" method="get">
-                        <div class="input-group input-group-navbar justify-content-center">
+                        <div class="input-group input-group-navbar justify-content-center" id="searchGroup">
                             <select name="category" class="form-control form-select-sm search" aria-label="Search"
                                     id="searchSelect">
                                 <option value="">전체</option>
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="navbar align-self-center d-flex justify-content-between">
+            <div class="navbar align-self-center d-flex justify-content-center">
                 <se:authorize access="!hasAnyAuthority('ROLE_USER','ROLE_ADMIN')">
                     <a class="navbar-btn btn btn-primary" href="${pageContext.request.contextPath}/login">Login</a>
                 </se:authorize>

@@ -40,14 +40,14 @@
             <div id="templatemo-slide-link-target" class="card mb-3">
                 <c:choose>
                     <c:when test="${empty group.group_img}">
-                        <img class="img-fluid border rounded"
+                        <img class="border rounded card-img-top"
                              src="./assets/img/work-slide-05-small.jpg"
-                             style="width: border-box;" alt="Card image cap">
+                             style="object-fit: contain; width: content-box;" alt="Card image cap">
                     </c:when>
                     <c:otherwise>
-                        <img class="img-fluid border rounded"
+                        <img class="img-fluid border rounded card-img-top"
                              src="./upload/groupimg/${group.group_img}"
-                             style="width: border-box;" alt="Card image cap">
+                             style="object-fit: contain; width: content-box;" alt="Card image cap">
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -57,9 +57,11 @@
     <%-- 회원 수, 소개 글--%>
     <div class="row justify-content-center">
         <div class="col-lg-8 ml-auto mr-auto pt-3 pb-4">
-            <h2 class="objective-heading h3 mb-2 mb-sm-4 text-center light-300"><a
-                    class="btn btn-outline-primary btn-lg" href="#">회원
-                <i class="bx bx-user bx-lg"></i> : <c:out value="${joinUser}"></c:out> 명</a></h2>
+            <h2 class="objective-heading h3 mb-5 mb-sm-4 text-center light-300">
+                <button type="button" class="btn btn-outline-primary btn-lg my-md-4" data-bs-toggle="modal" id="modalBtn">
+                    회원<i class="bx bx-user bx-lg"></i> : <c:out value="${joinUser}"></c:out> 명
+                </button>
+            </h2>
             <h5 class="objective-heading h5 mb-3 text-center light-300"><p><i class="fas fa-angle-double-left"></i> 모임
                 소개 <i class="fas fa-angle-double-right"></i></p></h5>
             <h6 class="text-center h6">
@@ -77,15 +79,66 @@
 
 </section>
 
+
+<!-- Vertically centered scrollable modal -->
+<div class="modal fade py-5" id="groupMemberListModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"> <strong class="text-primary text-decoration-underline"> ${group.group_name}</strong> <i class="bx bxs-user align-text-bottom"></i> 멤버 리스트</h5>
+                <button type="button" class="btn btn-lg btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-2 my-2 d-flex flex-column align-items-center">
+                <c:forEach items="${groupMemberList}" var="member">
+                    <c:set var="imgSrc" value="${member.profile_img}"/>
+                    <c:set var="memberId" value="${member.userid}"/>
+                    <c:choose>
+                        <c:when test="${memberId.equals(groupLeader)}">
+                            <div class="team-member row d-flex justify-content-center py-2 order-first w-100">
+                        </c:when>
+                        <c:otherwise>
+                            <div class="team-member row d-flex justify-content-center py-2 w-100">
+                        </c:otherwise>
+                    </c:choose>
+                        <div class="col-4 col-md-4 d-flex align-items-center">
+                            <c:choose>
+                                <c:when test="${fn:startsWith(imgSrc, 'http')}">
+                                    <img class="team-member-img img-fluid img-thumbnail rounded-circle p-2" src="${member.profile_img}" alt="profileImage" style="object-fit: cover; max-width: 110px; min-height: 110px;">
+                                </c:when>
+                                <c:when test="${fn:contains(imgSrc, memberId)}">
+                                    <img class="team-member-img img-fluid img-thumbnail rounded-circle p-2" src="./upload/profileimg/${member.profile_img}" alt="profileImage" style="object-fit: cover; max-width: 110px; min-height: 110px;">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="team-member-img img-fluid img-thumbnail rounded-circle p-2" src="./assets/img/work-slide-06-small.jpg" alt="profileImage" style="object-fit: cover; max-width: 110px; min-height: 110px;">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="col-6 col-md-6 text-center">
+                            <c:choose>
+                                <c:when test="${memberId.equals(groupLeader)}">
+                                    <p class="team-member-caption fs-5 py-4 mt-2"><i class="fas fa-crown text-primary"></i> ${member.nickname}</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="team-member-caption fs-5 py-4 mt-2">${member.nickname}</p>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Start Footer / Script -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 <!-- End Footer / Script -->
 <script>
     $(function () {
         openNav();
-
     });
-
+    var modalBtn = $('#modalBtn');
     var length = ${length}; //모임 가입 전체 개수
 
     var buttonArea = $('#buttonArea');
@@ -106,10 +159,13 @@
             if (response == '1') { //모임장유저
                 buttonArea.append("<button onclick='update()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5' style='margin-right: 10px;'> 수정하기</button>");
                 buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
+                modalBtn.attr('data-bs-target', '#groupMemberListModal');
             } else if (response == '2') { //모임원유저
                 buttonArea.append("<button onclick='out()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>탈퇴하기</button>");
+                modalBtn.attr('data-bs-target', '#groupMemberListModal');
             } else { //비로그인유저, 모임미가입유저
                 buttonArea.append("<button onclick='join()' class='banner-button btn rounded-pill btn-primary btn-lg px-4 my-lg-5'>가입하기</button>");
+                modalBtn.attr('onclick', 'memberListAlert()');
             }
         },
         error: function (Http, status, error) {
@@ -117,6 +173,15 @@
         }
     });
 
+    function memberListAlert(){
+        Swal.fire({
+            title: "모임 멤버 리스트",
+            text: "모임 멤버만 확인 할 수 있습니다.",
+            icon: "error",
+            buttons: '확인',
+            confirmButtonColor: '#A0A0FF'
+        })
+    }
 
     function join() {
 
