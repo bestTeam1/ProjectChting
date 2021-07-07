@@ -239,7 +239,7 @@
     }
 
     function delayedAlert() {
-        timeoutID = window.setTimeout(clickbtn, 500);
+        timeoutID = window.setTimeout(clickbtn, 1000);
     }
 
     $(document).ready(function () {
