@@ -298,7 +298,7 @@
     }
 
     function delayedAlert() {
-        window.setTimeout(clickbtn, 1800);
+        window.setTimeout(clickbtn, 3000);
     }
 
     $(document).ready(function () {

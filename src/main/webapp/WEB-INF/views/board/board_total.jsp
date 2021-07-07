@@ -239,7 +239,7 @@
     }
 
     function delayedAlert() {
-        window.setTimeout(clickbtn, 1800);
+        window.setTimeout(clickbtn, 2000);
     }
 
     $(document).ready(function () {
