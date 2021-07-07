@@ -134,7 +134,7 @@
     </select>
 
     <select id="groupByGroup_no" resultType="com.team1.chting.dto.GroupDto">
-        select gi.group_no, gi.group_img, gi.group_name, gi.content, ic.catename, a.area_name
+        select gi.userid, gi.group_no, gi.group_img, gi.group_name, gi.content, ic.catename, a.area_name
         from group_info gi
                  left join interest_category ic on gi.catecode = ic.catecode
                  left join area a on gi.area_code = a.area_code
