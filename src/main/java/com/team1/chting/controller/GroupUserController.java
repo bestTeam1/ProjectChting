@@ -106,6 +106,8 @@ public class GroupUserController {
 
         GroupDto groupDto = userService.getAdminGroup(groupNo);
 
+        String groupLeader = dto.getUserid();
+        List<UserDto> groupMemberList = groupAdminService.getGroupMemberList(groupLeader);
 
         //가입한 회원 수
         int joinUser = groupAdminService.getJoinUser(group_no);
@@ -115,7 +117,8 @@ public class GroupUserController {
         model.addAttribute("group", dto);
         model.addAttribute("length", length);
         model.addAttribute("groupListAll", groupListAll);
-
+        model.addAttribute("groupMemberList", groupMemberList);
+        model.addAttribute("groupLeader", groupLeader);
         return "board/board_main";
     }
 
@@ -206,6 +209,7 @@ public class GroupUserController {
         PostDto postDto = groupservice.read(post_no);
 
         model.addAttribute("plist", postDto);
+        model.addAttribute("group_no", postDto.getGroup_no());
 
         return "board/board_update";
     }

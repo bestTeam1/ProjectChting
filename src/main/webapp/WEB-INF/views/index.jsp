@@ -10,8 +10,8 @@
 <!-- Close Header / <head> -->
 <!-- Start Banner Hero -->
 <div class="banner-wrapper bg-light">
-    <div id="index_banner" class="banner-vertical-center-index container-fluid pt-5 my-lg-3">
-        <div id="main_inner">
+    <div id="index_banner" class="banner-vertical-center-index container-fluid pt-md-5 py-5">
+        <div id="main_inner" class="my-md-3">
             <div id="main_item" class="my-lg-5">
                 <div class="py-5 row d-flex align-items-center">
                     <div class="banner-content col-lg-8 col-8 offset-2 m-md-auto text-left py-md-5 pb-md-5">
@@ -39,9 +39,9 @@
 </div>
 <!-- End Banner Hero -->
 <!-- Start Pricing Horizontal Section -->
-<section class="bg-light pt-sm-0 py-md-3 my-md-2">
-    <div class="container-fluid py-4">
-        <h1 class="h2 semi-bold-600 text-center my-lg-5 event">Chting Event! &#127881;</h1>
+<section class="bg-light pt-sm-0 py-3 my-md-2 px-md-5">
+    <div class="container-fluid py-4 mx-md-5 px-md-5">
+        <h1 class="h2 semi-bold-600 text-center py-md-3 my-md-5 my-4 event">Chting Event! &#127881;</h1>
 
         <!-- Start slider -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -68,36 +68,39 @@
                         </c:otherwise>
                         </c:choose>
                         <!-- Start Pricing Horizontal -->
-                        <div class="pricing-horizontal row col-10 m-auto d-flex shadow-sm rounded overflow-hidden bg-white">
-                            <img src="${pageContext.request.contextPath}/upload/event/${i.file}">
-
+                        <div class="pricing-horizontal row col-md-10 col-11 d-flex m-auto shadow-sm rounded overflow-hidden bg-white">
+                            <img src="${pageContext.request.contextPath}/upload/event/${i.file}"
+                                 style="object-fit: inherit;">
                         </div>
                     </div>
                     </c:forEach>
-                    <h1 class="carousel-control-prev h1 text-primary text-decoration-none"
+                    <div class="carousel-control-prev h1 text-primary text-decoration-none" style="position: absolute; left: 5px;"
                         href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                        <i class='bx bx-lg bx-chevron-left px-5'></i>
+                        <i class='bx bx-chevron-left pe-5' style="font-size: 200%;"></i>
                         <span class="visually-hidden">Previous</span>
-                    </h1>
-                    <h1 class="carousel-control-next h1 text-primary text-decoration-none"
+                    </div>
+                    <div class="carousel-control-next h1 text-primary text-decoration-none" style="position: absolute; right: 5px;"
                         href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                        <i class='bx bx-lg bx-chevron-right'></i>
+                        <i class='bx bx-chevron-right ps-5' style="font-size: 200%;"></i>
                         <span class="visually-hidden">Next</span>
-                    </h1>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
 
 <!-- Start Choice -->
-<section class="why-us banner-bg bg-light py-md-1 my-md-5">
+<section class="why-us banner-bg bg-light py-3 my-3 py-md-3 my-md-5">
     <div class="container my-5">
-        <div class="row">
-            <div class="banner-img col-md-5">
-                <img src="./assets/img/hero_right.png" class="img" style="height: 526px;" alt="">
+        <div class="row my-3">
+            <div class="banner-img col-md-5 pt-3">
+                <img src="./assets/img/hero_right.png" class="img" style="object-fit: contain; height: 526px; width: 100%;" alt="">
             </div>
-            <div class="banner-content col-md-7 mt-md-5 align-self-end">
-                <h2 class="h2 mt-md-5"><img
-                        src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" width="30%" height="30%"
+            <div class="banner-content col-md-7 mt-md-5 align-self-end p-3 ps-5">
+                <div class="w-100 my-md-5 py-md-2"></div>
+                <h2 class="h2 mt-md-5"><img class="img-fluid mt-3"
+                        src="${pageContext.request.contextPath}/assets/img/demo_logo1.png" width="35%" height="35%"
                         style="margin-left: -20px; margin-bottom: -20px;"></h2>
                 <p class="text-muted pb-4 light-300">
                 <h3 style="color: #6266ea">당신의 취미를 공유해보세요.</h3>
@@ -114,7 +117,7 @@
 
 <!-- Start Aim -->
 <section class="banner-bg bg-white py-5">
-    <div class="container my-4">
+    <div class="container my-4 py-md-5">
         <div class="row text-center">
 
             <div class="objective col-lg-4">
@@ -295,10 +298,10 @@
     }
 
     function delayedAlert() {
-        timeoutID = window.setTimeout(clickbtn, 300);
+        timeoutID = window.setTimeout(clickbtn, 500);
     }
 
-    $( document ).ready(function() {
+    $(document).ready(function () {
         delayedAlert();
     });
 </script>
