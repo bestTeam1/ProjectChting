@@ -73,11 +73,11 @@
                         <i class="display-3 bx bx-edit"></i>
                         <p>모임 이름</p>
                     </div>
-                    <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <div class="pricing-list-body col-9 align-items-center pl-3 pt-2 pe-4">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
                         <textarea name="group_name" id="group_name" class="form-control form-control-lg light-300"
-                                  style="resize: none; width: 800px; height: 100px; "
+                                  style="resize: none; width: border-box; height: 100px; "
                                   placeholder="4 ~ 20자 이내로 입력해 주세요."></textarea>
                                 <label for="group_name">4 ~ 20자 이내로 입력해 주세요.</label>
                                 <p align="left" id="groupNameKeyUp"></p>
@@ -98,11 +98,11 @@
                         <p>모임 소개</p>
                     </div>
 
-                    <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                    <div class="pricing-list-body col-9 align-items-center pl-3 pt-2 pe-4">
                         <ul class="list-unstyled text-center light-300">
                             <div class="form-floating mb-4">
                         <textarea name="content" id="content" class="form-control form-control-lg light-300"
-                                  style="resize: none; width: 800px; height: 300px;"
+                                  style="resize: none; width: border-box; height: 300px;"
                                   placeholder="10 ~ 1000자 이내로 입력해 주세요."></textarea>
                                 <label for="content">10 ~ 1000자 이내로 입력해 주세요.</label>
                                 <p align="left" id="contentKeyUp"></p>
@@ -121,7 +121,7 @@
                         <i class="display-3 bx bx-category-alt"></i>
                         <p>관심사</p>
                     </div>
-                    <div class="pricing-list-body col-md-5 align-items-center py-5">
+                    <div class="pricing-list-body col-9 align-items-center py-5">
                         <input type="button" style="" id="interestBtn"
                                class="btn rounded-pill px-4 btn-outline-primary light-300" value="관심사 선택"
                                onclick="window.open('groupCategory.do', '관심사 선택', 'width=600, height=450, left=100, top=50');"/>
@@ -142,8 +142,8 @@
                         <i class="display-3 bx bx-location-plus"></i>
                         <p>지역</p>
                     </div>
-                    <div class="pricing-list-body col-md-5 align-items-center py-5">
-                        <select name="area_code" id="area_code" class="form-select" style="width: 30%; float:left;">
+                    <div class="pricing-list-body col-9 align-items-center py-5">
+                        <select name="area_code" id="area_code" class="form-select" style="width: 15vh; float:left;">
                             <option value="" selected disabled hidden>=== 선택 ===</option>
                             <c:forEach items="${areaList}" var="area">
                                 <option value="${area.area_code}">${area.area_code} ${area.area_name}</option>

@@ -16,12 +16,12 @@
 <!-- Header / <head> -->
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <!-- Close Header / <head> -->
-<div class="container-fluid mb-5" id="loginBody">
-    <section class="container text-center px-md-5 py-md-3 my-xxl-5 mx-xxl-auto">
+<div class="container-fluid mb-4" id="loginBody">
+    <section class="container text-center px-md-5 py-md-5 my-xxl-5 mx-xxl-auto">
     </section>
 
     <section class="container text-center my-md-5 mx-xxl-auto">
-        <div class="row text-center px-md-3 py-md-3 my-xxl-auto">
+        <div class="row text-center px-md-3 py-md-5 my-xxl-auto">
             <div class="col-lg-12 d-flex align-items-center text-center justify-content-center">
 
                 <div class="col-md-3"></div>
@@ -46,7 +46,7 @@
         </div>
     </section>
 
-    <section class="container text-center px-md-5 py-md-3 my-xxl-5 mx-xxl-auto">
+    <section class="container text-center px-md-5 py-md-5 my-xxl-5 mx-xxl-auto">
     </section>
 </div>
 <!-- Start Footer / Script -->

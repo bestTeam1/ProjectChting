@@ -80,11 +80,11 @@
 <jsp:include page="/WEB-INF/views/board/board_include/board_sidebar.jsp"/>
 <div id="wrapper" class="container-fluid mb-5">
     <!-- Main -->
-    <div id="main" class="row my-2 d-flex justify-content-center">
-        <div class="inner col-md-10 col-12">
+    <div id="main" class="row my-2 d-flex justify-content-center pb-5">
+        <div class="inner col-md-8 col-12">
 
             <!-- Banner -->
-            <section class="row d-flex justify-content-end gy-4 gx-md-4 mb-md-5 mt-md-2">
+            <section class="row d-flex justify-content-end gy-4 gx-md-5 mb-md-5 mt-md-2">
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
