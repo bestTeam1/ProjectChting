@@ -298,7 +298,7 @@
     }
 
     function delayedAlert() {
-        timeoutID = window.setTimeout(clickbtn, 1000);
+        window.setTimeout(clickbtn, 1800);
     }
 
     $(document).ready(function () {
