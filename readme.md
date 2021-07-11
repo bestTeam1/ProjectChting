@@ -67,7 +67,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 ![calendar02](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_05_calendar.png)
 ![chatting](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_06_chatting.png)
 ![search](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_07_search.png)
-![admin](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_08_admin.png)
+![admin](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_09_admin.png)
 
 ---
 
