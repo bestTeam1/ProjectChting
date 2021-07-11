@@ -10,6 +10,7 @@ Chting ( 취미 + Meeting )
 Chting은 비트캠프 1조의 파이널 프로젝트로
 2021.05.24 ~ 2021.07.01 총 38일간 설계 및 개발하였으며, 6명의 팀원이 함께 하였습니다.
 
+---
 
 ### 프로젝트 소개
 - Chting(취팅)은 같은 취미를 가진 사람들이 온/오프라인 모임을 가질 수 있는 서비스입니다.
@@ -18,6 +19,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - 모임 멤버들만의 일정 관리 & 채팅이 가능합니다.
 - Admin 페이지에서 차트 데이터 통계를 활용한 사이트 관리가 가능합니다.
 
+---
 
 ### Stack
 ##### @ Front-End
@@ -54,6 +56,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - Github Login API
 - Kakao Map API
 
+---
 
 ### Site Screenshot
 ![main](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_00_main.png)
@@ -66,6 +69,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 ![search](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_07_search.png)
 ![admin](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_08_admin.png)
 
+---
 
 ### Team Member
 - 김수연 : https://github.com/hi-sooyeon
