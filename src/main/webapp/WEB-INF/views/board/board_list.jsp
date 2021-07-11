@@ -12,8 +12,8 @@
 <jsp:include page="board_include/board_sidebar.jsp"/>
 <!-- End Board SideBar -->
 
-<section class="container mt-3" style="min-height: 65vh;">
-    <div class="row justify-content-center pb-4">
+<section class="container my-3" style="height: 80vh;">
+    <div class="row justify-content-center py-5">
         <div class="col-lg-8 mt-3 ">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="table-secondary">
