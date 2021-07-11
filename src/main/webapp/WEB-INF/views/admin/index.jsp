@@ -50,7 +50,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">대시보드</h1>
-                    <a href="${pageContext.request.contextPath}/index.do"
+                    <a href="${pageContext.request.contextPath}/myGroup.do"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                         <i class="fas fa-arrow-alt-circle-left"></i> chting으로 돌아가기 </a>
                 </div>
