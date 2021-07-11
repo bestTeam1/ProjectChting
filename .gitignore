@@ -102,6 +102,8 @@ target/
 .idea/libraries
 src/main/webapp/WEB-INF/classes/
 
+.idea/
+
 ### Java ###
 # Compiled class file
 *.class
