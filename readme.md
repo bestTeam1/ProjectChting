@@ -18,15 +18,14 @@ Chting ( 취미 + Meeting )
 
 <br><br/>
 ## 📖 Summary
-> - #### Introduce Project
+> #### Introduce Project
 >  - [💡 Motivation](#-motivation)  
 >  - [📌 Features](#-features)  
 >  - [🛠 Stack](#-stack)
 >  - [💿 Installation](#-installation)  
 >  - [📸 Site Screenshot](#-site-screenshot)
 >  - [🧑🏻‍💻 Team Member](#-team-member)
-
-
+#
 * * *
 
 # Introduce Project
