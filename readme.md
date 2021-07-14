@@ -10,28 +10,32 @@ Chting
 <br><br/>
 
 ## 🔗 Link
-- **Deploy Site : http://team1.space/chting/**
+- **Deploy Site :** http://team1.space/chting/
   
 
-- **Github Repository : https://github.com/bestTeam1/ProjectChting**
+- **Github Repository :** https://github.com/bestTeam1/ProjectChting
   
 
-- **Presentation (YouTube) : https://www.youtube.com/watch?v=NOA5HjI43z0**
-  <br><br/>
+- **Presentation (YouTube) :** https://www.youtube.com/watch?v=NOA5HjI43z0
+
+<br><br/>
+
 ## 📖 Summary
-> ###Introduce Project  
+> **Introduce Project**  
 > [ 💡 Motivation](#-motivation)  
 > [📌 Features](#-features)  
 > [💿 Installation](#-installation)  
+>
 
 <br><br/>
+
 * * *
-<br><br/>
-
 Introduce Project
----
+===
 Chting은 비트캠프 1조의 파이널 프로젝트로  
 2021.05.24 ~ 2021.07.01 총 38일간 설계 및 개발하였으며, 6명의 팀원이 함께 하였습니다.
+
+<br><br/>
 
 ## 💡 Motivation
 팀원들과의 회의를 통해 취미활동을 할때 어려웠던 점, 아쉬웠던 점들을 개선한 사이트를 만들고자 했습니다.
@@ -42,6 +46,8 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 
 위의 내용을 개선하여 사이트를 만들면 좋겠다는 생각에 Chting 프로젝트를 시작했습니다.
 
+<br><br/>
+
 ## 📌 Features
 - Chting(취팅)은 같은 취미를 가진 사람들이 온/오프라인 모임을 가질 수 있는 서비스입니다.
 - SNS 로그인(Google / Kakao / Github)  으로 이용 가능합니다.
@@ -49,21 +55,27 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - 모임 멤버들만의 일정 관리 & 채팅이 가능합니다.
 - Admin 페이지에서 차트 데이터 통계를 활용한 사이트 관리가 가능합니다.
 
+<br><br/>
+
 ## 💿 Installation
 - 프로젝트 클론
 ~~~ 
 git clone https://github.com/bestTeam1/ProjectChting.git
 ~~~
 
+
+<br><br/>
+
 ## 🛠 Stack
-- ###Front-End
-  - jQuery v.3.4.1
-  - Bootstrap v5.0.0 beta
-  - EL/JSTL
-  - Underscore JS v1.13.1
-  - FullCalendar v5.5.1
-  - Moment JS v2.11.0
-  - Chart JS v2.9.4
+
+##### ✔️ Front-End
+- jQuery v.3.4.1
+- Bootstrap v5.0.0 beta
+- EL/JSTL
+- Underscore JS v1.13.1
+- FullCalendar v5.5.1
+- Moment JS v2.11.0
+- Chart JS v2.9.4
   <br><br/>
 ##### ✔️ Back-End
 - Java v1.8
@@ -77,7 +89,6 @@ git clone https://github.com/bestTeam1/ProjectChting.git
 - JackSon v2.12.3
 - Lombok v1.18.20
   <br><br/>
-
 ##### ✔️ DataBase
 - MariaDB v10.5.10
   <br><br/>
@@ -94,9 +105,8 @@ git clone https://github.com/bestTeam1/ProjectChting.git
 - Kakao Map API
   <br><br/>
 
----
-
-## Site Screenshot
+<br><br/>
+## 📸 Site Screenshot
 ![main](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_00_main.png)
 ![login](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_01_login.png)
 ![mygroup](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_02_mygroup.png)
@@ -107,15 +117,17 @@ git clone https://github.com/bestTeam1/ProjectChting.git
 ![search](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_07_search.png)
 ![admin](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_09_admin.png)
 
----
+<br><br/>
 
-## Team Member
+## 🧑🏻‍💻 Team Member
 - 김수연 : https://github.com/hi-sooyeon
 - 박주현 : https://github.com/joohyun93326
 - 이승준 : https://github.com/Zagg2732
 - 현상진 : https://github.com/HYUNSANGJIN
 - 김영허 : https://github.com/kyi21556
 - 김명환 : https://github.com/K-MyeongHwan
+
+<br><br/>
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
