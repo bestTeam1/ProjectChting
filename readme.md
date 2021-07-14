@@ -1,8 +1,7 @@
-Chting
+---
+Chting ( 취미 + Meeting )
 ===
 * * *
-> **취미 + Meeting = Chting (취팅)**
-
 <br><br/>
 
 [![Demo site](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/assets/img/demo_logo1.png)](http://team1.space/chting/)
@@ -188,3 +187,4 @@ git clone https://github.com/bestTeam1/ProjectChting.git
 
 <br><br/>
 
+---
