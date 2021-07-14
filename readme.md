@@ -35,7 +35,7 @@ Introduce Project
 Chting은 비트캠프 1조의 파이널 프로젝트로  
 2021.05.24 ~ 2021.07.01 총 38일간 설계 및 개발하였으며, 6명의 팀원이 함께 하였습니다.
 <br><br/>
-##💡 Motivation
+## 💡 Motivation
 팀원들과의 회의를 통해 취미활동을 할때 어려웠던 점, 아쉬웠던 점들을 개선한 사이트를 만들고자 했습니다.  
 
 저희가 생각한 기존 취미활동의 문제점은 다음과 같습니다.
@@ -46,7 +46,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 
 위의 내용을 개선하여 사이트를 만들면 좋겠다는 생각에 Chting 프로젝트를 시작했습니다.
 <br><br/>
-##📌 Features
+## 📌 Features
 - Google, Kakao, Github 소셜 로그인
 - 회원/비회원 전용 모임 추천
 - 모임검색
@@ -57,8 +57,8 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - 사이트 통계
 - 사이트 이벤트 관리
 <br><br/>
-##🛠 Stack
-###✔️ Front-End
+## 🛠 Stack
+### ✔️ Front-End
 - jQuery v.3.4.1
 - Bootstrap v5.0.0 beta
 - EL/JSTL
@@ -67,7 +67,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - Moment JS v2.11.0
 - Chart JS v2.9.4
 
-###✔️ Back-End
+### ✔️ Back-End
 - Java v1.8
 - Maven v3.6.3
 - Spring framework v5.3.7
@@ -79,22 +79,22 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - JackSon v2.12.3
 - Lombok v1.18.20
 
-###✔️ DataBase
+### ✔️ DataBase
 - MariaDB v10.5.10
 
-###✔️ Server
+### ✔️ Server
 - Oracle Cloud Compute Instances (CentOS 7)
    - Instance-1 (Tomcat Server)
    - Instance-2 (DB Server)
 - Apache Tomcat v9.0.43
 
-###✔️ Open API
+### ✔️ Open API
 - Google Login API
 - Kakao Login API
 - Github Login API
 - Kakao Map API
 <br><br/>
-##💿 Installation
+## 💿 Installation
 > [info] **Working with Chting (this project) in your IDE**
 ### Steps:
 #### ✔️ Prerequisites
@@ -108,7 +108,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
     - Spring Tools Suite(STS)
     - IntelliJ IDEA
    
-####1️⃣ 프로젝트 클론
+#### 1️⃣ 프로젝트 클론
 ~~~ 
 git clone https://github.com/bestTeam1/ProjectChting.git
 ~~~
@@ -119,14 +119,14 @@ git clone https://github.com/bestTeam1/ProjectChting.git
    2. Maven sources loading  
       ```프로젝트 우클릭 > Run As > Maven install```
       
-####2️⃣ _IntelliJ_ 에서  
+#### 2️⃣ _IntelliJ_ 에서  
    1. clone 한 프로젝트를 open  
       ```File -> Open```
    2. Maven sources loading  
       ```프로젝트 우클릭 > Maven > Generates sources and Update Folders```
       
 ---
-####3️⃣ properties 파일 5개 생성 및 설정
+#### 3️⃣ properties 파일 5개 생성 및 설정
    > 1. src/main/resources/```log4jdbc.log4j2.proterties```
    >   ~~~
    >   log4jdbc.drivers=org.mariadb.jdbc.Driver
@@ -165,9 +165,9 @@ git clone https://github.com/bestTeam1/ProjectChting.git
    >   ~~~
 
 ---
-####4️⃣ STS or IntelliJ > Tomcat Configure 설정 후 > Run
+#### 4️⃣ _STS_ or _IntelliJ_ > Tomcat Configure 설정 후 > Run
 <br><br/>
-##📸 Site Screenshot
+## 📸 Site Screenshot
 ![main](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_00_main.png)
 ![login](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_01_login.png)
 ![mygroup](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_02_mygroup.png)
@@ -177,7 +177,7 @@ git clone https://github.com/bestTeam1/ProjectChting.git
 ![chatting](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_06_chatting.png)
 ![search](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_07_search.png)
 ![admin](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_09_admin.png)
-##🧑🏻‍💻 Team Member
+## 🧑🏻‍💻 Team Member
 - 김수연 : https://github.com/hi-sooyeon
 - 박주현 : https://github.com/joohyun93326
 - 이승준 : https://github.com/Zagg2732
