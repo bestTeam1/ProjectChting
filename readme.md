@@ -183,5 +183,3 @@ git clone https://github.com/bestTeam1/ProjectChting.git
 - 김명환 : https://github.com/K-MyeongHwan
 
 <br><br/>
-
----
