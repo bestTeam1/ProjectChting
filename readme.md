@@ -27,7 +27,7 @@ Chting ( 취미 + Meeting )
 >  - [🧑🏻‍💻 Team Member](#-team-member)
 #
 * * *
-
+#
 # Introduce Project
 Chting은 비트캠프 1조의 파이널 프로젝트로  
 2021.05.24 ~ 2021.07.01 총 38일간 설계 및 개발하였으며, 6명의 팀원이 함께 하였습니다.
@@ -110,13 +110,13 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 git clone https://github.com/bestTeam1/ProjectChting.git
 ~~~
 ---
-#### 2️⃣ _STS_ 에서  
+#### 2️⃣ _STS_ _에서  
    1. clone 한 프로젝트를 import  
       ```File -> Import -> Maven -> Existing Maven project```
    2. Maven sources loading  
       ```프로젝트 우클릭 > Run As > Maven install```
       
-#### 2️⃣ _IntelliJ_ 에서  
+#### 2️⃣ _IntelliJ_ _에서  
    1. clone 한 프로젝트를 open  
       ```File -> Open```
    2. Maven sources loading  
