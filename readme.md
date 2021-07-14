@@ -3,12 +3,13 @@ Chting
 * * *
 > 취미 + Meeting = Chting (취팅)
 
-#
+<br><br/>
 
 [![Demo site](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/assets/img/demo_logo1.png)](http://team1.space/chting/)
 
-#
-### 🔗 Link
+<br><br/>
+
+## 🔗 Link
 - **Deploy Site : http://team1.space/chting/**
   
 
@@ -16,13 +17,17 @@ Chting
   
 
 - **Presentation (YouTube) : https://www.youtube.com/watch?v=NOA5HjI43z0**
-
->> ### Summary
+  <br><br/>
+## 📖 Summary
+> ###Introduce Project  
 > [ 💡 Motivation](#-motivation)  
 > [📌 Features](#-features)  
-> [💿 Installation](#-installation)
+> [💿 Installation](#-installation)  
 
+<br><br/>
 * * *
+<br><br/>
+
 Introduce Project
 ---
 Chting은 비트캠프 1조의 파이널 프로젝트로  
