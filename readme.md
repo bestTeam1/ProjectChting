@@ -28,8 +28,7 @@ Chting ( 취미 + Meeting )
 
 <br><br/>
 * * *
-~~~
-~~~
+* * *
 Introduce Project
 ===
 Chting은 비트캠프 1조의 파이널 프로젝트로  
@@ -95,7 +94,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - Kakao Map API
 <br><br/>
 ## 💿 Installation
-> [info] **Working with Chting (this project) in your IDE**
+> #### ℹ️ Working with Chting (this project) in your IDE
 ### Steps:
 #### ✔️ Prerequisites
 아래의 항목들이 설치되어 있어야 합니다.
@@ -113,7 +112,7 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 git clone https://github.com/bestTeam1/ProjectChting.git
 ~~~
 ---
-####2️⃣ _STS_ 에서  
+#### 2️⃣ _STS_ 에서  
    1. clone 한 프로젝트를 import  
       ```File -> Import -> Maven -> Existing Maven project```
    2. Maven sources loading  
@@ -134,7 +133,7 @@ git clone https://github.com/bestTeam1/ProjectChting.git
    >   log4jdbc.dump.sql.maxlinelength=0
    >   ~~~
 
-   >2. src/main/resources/properties/```Driver.proterties```
+   > 2. src/main/resources/properties/```Driver.proterties```
    >   ~~~
    >   Driver.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
    >   Driver.url=jdbc:log4jdbc:mariadb://<YOUR_DB_IP>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?useUnicode=true&allowMultiQueries=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC
@@ -142,18 +141,18 @@ git clone https://github.com/bestTeam1/ProjectChting.git
    >   Driver.password=<YOUR_DB_PASSWORD>
    >   ~~~
    
-   >3. src/main/resources/properties/```Email.proterties```
+   > 3. src/main/resources/properties/```Email.proterties```
    >   ~~~
    >   Email.email=<YOUR_EMAIL>
    >   Email.password=<YOUR_EMAIL_PASSWORD>
    >   ~~~
 
-   >4. src/main/resources/properties/```Api.proterties```
+   > 4. src/main/resources/properties/```Api.proterties```
    >   ~~~
    >   kakaoapi.key=<YOUR_KAKAO_APP_JAVASCRIPT_KEY>
    >   ~~~
    
-   >5. src/main/resources/properties/```Social.proterties```
+   > 5. src/main/resources/properties/```Social.proterties```
    >   ~~~
    >   google.client-id=<YOUR_GOOGLE_CLIENT_ID>
    >   google.client-secret=<YOUR_GOOGLE_CLIENT_SECRET>
