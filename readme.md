@@ -18,19 +18,18 @@ Chting ( 취미 + Meeting )
 
 <br><br/>
 ## 📖 Summary
-> **Introduce Project**  
-> - [💡 Motivation](#-motivation)  
-> - [📌 Features](#-features)  
-> - [🛠 Stack](#-stack)
-> - [💿 Installation](#-installation)  
-> - [📸 Site Screenshot](#-site-screenshot)
-> - [🧑🏻‍💻 Team Member](#-team-member)
+> - #### Introduce Project
+>  - [💡 Motivation](#-motivation)  
+>  - [📌 Features](#-features)  
+>  - [🛠 Stack](#-stack)
+>  - [💿 Installation](#-installation)  
+>  - [📸 Site Screenshot](#-site-screenshot)
+>  - [🧑🏻‍💻 Team Member](#-team-member)
 
-<br><br/>
+
 * * *
-* * *
-Introduce Project
-===
+
+# Introduce Project
 Chting은 비트캠프 1조의 파이널 프로젝트로  
 2021.05.24 ~ 2021.07.01 총 38일간 설계 및 개발하였으며, 6명의 팀원이 함께 하였습니다.
 <br><br/>
