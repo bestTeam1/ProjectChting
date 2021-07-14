@@ -18,7 +18,7 @@ Chting ( 취미 + Meeting )
 
 <br><br/>
 ## 📖 Summary
-> #### Introduce Project
+> ```Introduce Project```
 >  - [💡 Motivation](#-motivation)  
 >  - [📌 Features](#-features)  
 >  - [🛠 Stack](#-stack)
@@ -124,33 +124,33 @@ git clone https://github.com/bestTeam1/ProjectChting.git
       
 ---
 #### 3️⃣ properties 파일 5개 생성 및 설정
-   > 1. src/main/resources/```log4jdbc.log4j2.proterties```
+   >> 1. src/main/resources/```log4jdbc.log4j2.proterties```
    >   ~~~
    >   log4jdbc.drivers=org.mariadb.jdbc.Driver
    >   log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
    >   log4jdbc.dump.sql.maxlinelength=0
    >   ~~~
-
-   > 2. src/main/resources/properties/```Driver.proterties```
+   #
+   >> 2. src/main/resources/properties/```Driver.proterties```
    >   ~~~
    >   Driver.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
    >   Driver.url=jdbc:log4jdbc:mariadb://<YOUR_DB_IP>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?useUnicode=true&allowMultiQueries=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC
    >   Driver.username=<YOUR_DB_USERNAME>
    >   Driver.password=<YOUR_DB_PASSWORD>
    >   ~~~
-   
-   > 3. src/main/resources/properties/```Email.proterties```
+   #
+   >> 3. src/main/resources/properties/```Email.proterties```
    >   ~~~
    >   Email.email=<YOUR_EMAIL>
    >   Email.password=<YOUR_EMAIL_PASSWORD>
    >   ~~~
-
-   > 4. src/main/resources/properties/```Api.proterties```
+   #
+   >> 4. src/main/resources/properties/```Api.proterties```
    >   ~~~
    >   kakaoapi.key=<YOUR_KAKAO_APP_JAVASCRIPT_KEY>
    >   ~~~
-   
-   > 5. src/main/resources/properties/```Social.proterties```
+   #
+   >> 5. src/main/resources/properties/```Social.proterties```
    >   ~~~
    >   google.client-id=<YOUR_GOOGLE_CLIENT_ID>
    >   google.client-secret=<YOUR_GOOGLE_CLIENT_SECRET>
