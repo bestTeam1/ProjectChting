@@ -1,37 +1,66 @@
-Chting ( 취미 + Meeting )
+Chting
 ===
+* * *
+> 취미 + Meeting = Chting (취팅)
+
+#
+
 [![Demo site](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/assets/img/demo_logo1.png)](http://team1.space/chting/)
 
-(로고 클릭 시 Chting 페이지로 이동 됩니다. > http://team1.space/chting/ )
+#
+### 🔗 Link
+- **Deploy Site : http://team1.space/chting/**
+  
 
+- **Github Repository : https://github.com/bestTeam1/ProjectChting**
+  
+
+- **Presentation (YouTube) : https://www.youtube.com/watch?v=NOA5HjI43z0**
+
+### Summary
+> [ 💡 Motivation](#-motivation)  
+> [📌 Features](#-features)
+> [💿 Installation](#-installation)
+
+* * *
+Introduce Project
 ---
-
-## ProjectChting
-Chting은 비트캠프 1조의 파이널 프로젝트로
+Chting은 비트캠프 1조의 파이널 프로젝트로  
 2021.05.24 ~ 2021.07.01 총 38일간 설계 및 개발하였으며, 6명의 팀원이 함께 하였습니다.
 
----
+## 💡 Motivation
+팀원들과의 회의를 통해 취미활동을 할때 어려웠던 점, 아쉬웠던 점들을 개선한 사이트를 만들고자 했습니다.
+저희가 생각한 기존 취미활동의 문제점은 다음과 같습니다.
+- 모임을 참여하려면 별도의 커뮤니티를 찾아야 한다
+- 여러 모임에 가입하고 싶은 경우 각 커뮤니티 모두 가입해야한다는 번거로움이 있다
+- 지인 등의 소개가 아니라면 일반적인 모임의 존재여부를 알기 힘들고 모임참여가 힘들다
 
-## 프로젝트 소개
+위의 내용을 개선하여 사이트를 만들면 좋겠다는 생각에 Chting 프로젝트를 시작했습니다.
+
+## 📌 Features
 - Chting(취팅)은 같은 취미를 가진 사람들이 온/오프라인 모임을 가질 수 있는 서비스입니다.
 - SNS 로그인(Google / Kakao / Github)  으로 이용 가능합니다.
 - 회원의 관심사와 선호 지역에 맞게 NEW, BEST 모임을 추천해줍니다.
 - 모임 멤버들만의 일정 관리 & 채팅이 가능합니다.
 - Admin 페이지에서 차트 데이터 통계를 활용한 사이트 관리가 가능합니다.
 
----
+## 💿 Installation
+- 프로젝트 클론
+~~~ 
+git clone https://github.com/bestTeam1/ProjectChting.git
+~~~
 
-## Stack
-##### @ Front-End
-- jQuery v.3.4.1
-- Bootstrap v5.0.0 beta
-- EL/JSTL
-- Underscore JS v1.13.1
-- FullCalendar v5.5.1
-- Moment JS v2.11.0
-- Chart JS v2.9.4
-
-##### @ Back-End
+## 🛠 Stack
+- ###Front-End
+  - jQuery v.3.4.1
+  - Bootstrap v5.0.0 beta
+  - EL/JSTL
+  - Underscore JS v1.13.1
+  - FullCalendar v5.5.1
+  - Moment JS v2.11.0
+  - Chart JS v2.9.4
+  <br><br/>
+##### ✔️ Back-End
 - Java v1.8
 - Maven v3.6.3
 - Spring framework v5.3.7
@@ -42,19 +71,23 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
 - Mybatis v3.5.6
 - JackSon v2.12.3
 - Lombok v1.18.20
+  <br><br/>
 
-##### @ DataBase
+##### ✔️ DataBase
 - MariaDB v10.5.10
+  <br><br/>
 
-##### @ Server
+##### ✔️ Server
 - Oracle Cloud Compute Instances (CentOS 7) X 2
 - Apache Tomcat v9.0.43
+  <br><br/>
 
-##### @ Open API
+##### ✔️ Open API
 - Google Login API
 - Kakao Login API
 - Github Login API
 - Kakao Map API
+  <br><br/>
 
 ---
 
