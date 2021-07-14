@@ -17,9 +17,9 @@ Chting
 
 - **Presentation (YouTube) : https://www.youtube.com/watch?v=NOA5HjI43z0**
 
-### Summary
+>> ### Summary
 > [ 💡 Motivation](#-motivation)  
-> [📌 Features](#-features)
+> [📌 Features](#-features)  
 > [💿 Installation](#-installation)
 
 * * *
