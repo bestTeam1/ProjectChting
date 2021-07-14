@@ -29,8 +29,8 @@ Chting
 
 <br><br/>
 * * *
-<br><br/>
-
+~~~
+~~~
 Introduce Project
 ===
 Chting은 비트캠프 1조의 파이널 프로젝트로  
@@ -109,72 +109,64 @@ Chting은 비트캠프 1조의 파이널 프로젝트로
     - Spring Tools Suite(STS)
     - IntelliJ IDEA
    
-1️⃣ 프로젝트 클론
+####1️⃣ 프로젝트 클론
 ~~~ 
 git clone https://github.com/bestTeam1/ProjectChting.git
 ~~~
-
-
-2️⃣ **STS** 에서  
+---
+####2️⃣ _STS_ 에서  
    1. clone 한 프로젝트를 import  
       ```File -> Import -> Maven -> Existing Maven project```
    2. Maven sources loading  
       ```프로젝트 우클릭 > Run As > Maven install```
       
-2️⃣ **IntelliJ** 에서  
+####2️⃣ _IntelliJ_ 에서  
    1. clone 한 프로젝트를 open  
       ```File -> Open```
    2. Maven sources loading  
       ```프로젝트 우클릭 > Maven > Generates sources and Update Folders```
-
-
-3️⃣ properties 파일 5개 생성 및 설정
-   1. src/main/resources/```log4jdbc.log4j2.proterties```
-      ~~~
-      log4jdbc.drivers=org.mariadb.jdbc.Driver
-      log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
-      log4jdbc.dump.sql.maxlinelength=0
-      ~~~
       
-   <hr>
+---
+####3️⃣ properties 파일 5개 생성 및 설정
+   > 1. src/main/resources/```log4jdbc.log4j2.proterties```
+   >   ~~~
+   >   log4jdbc.drivers=org.mariadb.jdbc.Driver
+   >   log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
+   >   log4jdbc.dump.sql.maxlinelength=0
+   >   ~~~
 
-   2. src/main/resources/properties/```Driver.proterties```
-      ~~~
-      Driver.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      Driver.url=jdbc:log4jdbc:mariadb://<YOUR_DB_IP>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?useUnicode=true&allowMultiQueries=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC
-      Driver.username=<YOUR_DB_USERNAME>
-      Driver.password=<YOUR_DB_PASSWORD>
-      ~~~
-      
-   <hr>
+   >2. src/main/resources/properties/```Driver.proterties```
+   >   ~~~
+   >   Driver.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+   >   Driver.url=jdbc:log4jdbc:mariadb://<YOUR_DB_IP>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?useUnicode=true&allowMultiQueries=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC
+   >   Driver.username=<YOUR_DB_USERNAME>
+   >   Driver.password=<YOUR_DB_PASSWORD>
+   >   ~~~
    
-   3. src/main/resources/properties/```Email.proterties```
-      ~~~
-      Email.email=<YOUR_EMAIL>
-      Email.password=<YOUR_EMAIL_PASSWORD>
-      ~~~
+   >3. src/main/resources/properties/```Email.proterties```
+   >   ~~~
+   >   Email.email=<YOUR_EMAIL>
+   >   Email.password=<YOUR_EMAIL_PASSWORD>
+   >   ~~~
 
-   <hr>
-
-   4. src/main/resources/properties/```Api.proterties```
-      ~~~
-      kakaoapi.key=<YOUR_KAKAO_APP_JAVASCRIPT_KEY>
-      ~~~
-      
-   <hr>
+   >4. src/main/resources/properties/```Api.proterties```
+   >   ~~~
+   >   kakaoapi.key=<YOUR_KAKAO_APP_JAVASCRIPT_KEY>
+   >   ~~~
    
-   5. src/main/resources/properties/```Social.proterties```
-      ~~~
-      google.client-id=<YOUR_GOOGLE_CLIENT_ID>
-      google.client-secret=<YOUR_GOOGLE_CLIENT_SECRET>
+   >5. src/main/resources/properties/```Social.proterties```
+   >   ~~~
+   >   google.client-id=<YOUR_GOOGLE_CLIENT_ID>
+   >   google.client-secret=<YOUR_GOOGLE_CLIENT_SECRET>
+   >
+   >   kakao.client-id=<YOUR_KAKAO_CLIENT_ID>
+   >
+   >   github.client-id=<YOUR_GITHUB_CLIENT_ID>
+   >   github.client-secret=<YOUR_GITHUB_CLIENT_SECRET>
+   >   ~~~
 
-      kakao.client-id=<YOUR_KAKAO_CLIENT_ID>
-
-      github.client-id=<YOUR_GITHUB_CLIENT_ID>
-      github.client-secret=<YOUR_GITHUB_CLIENT_SECRET>
-      ~~~
-
-4️⃣ STS or IntelliJ > Tomcat Configure 설정 후 > Run
+---
+####4️⃣ STS or IntelliJ > Tomcat Configure 설정 후 > Run
 <br><br/>
 ##📸 Site Screenshot
 ![main](https://raw.githubusercontent.com/bestTeam1/ProjectChting/master/src/main/webapp/images/chting_00_main.png)
