@@ -8,8 +8,7 @@ Chting ( 취미 + Meeting )
 
 <br><br/>
 ## 🔗 Link
-- **Deploy Site :** http://team1.space/chting/
-  
+- **Deploy Site :** http://team1.space/chting/ &ensp; <img src="https://img.shields.io/website?url=http%3A%2F%2Fteam1.space%2Fchting%2F" />
 
 - **Github Repository :** https://github.com/bestTeam1/ProjectChting
   
